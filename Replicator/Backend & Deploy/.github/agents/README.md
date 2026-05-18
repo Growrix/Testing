@@ -38,9 +38,10 @@ Use this when the output must be planned and assembled against the DS runtime.
 
 ### Meta workflow
 
-`[Meta] System Architect`
+`[Meta] System Builder`
 
-Use this for AUDIT, DESIGN, FIX, SMOKE, DETERMINISM, DOCUMENT, and SPEC_DIFF across the agentic system itself.
+Use this for system design, audit, extension, repair, alignment, and documentation across the agentic system itself.
+For large architecture blueprints, `[Meta] System Builder` now emits module-level readiness buckets: `currently_supported`, `requires_extension`, and `missing_knowledge` before lane handoff.
 
 ---
 
@@ -69,7 +70,7 @@ Use this for AUDIT, DESIGN, FIX, SMOKE, DETERMINISM, DOCUMENT, and SPEC_DIFF acr
 
 ### Meta system
 
-- `[Meta] System Architect`: factory-level system governance and audit
+- `[Meta] System Builder`: generic system design, audit, extension, repair, and alignment
 
 ---
 

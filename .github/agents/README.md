@@ -21,8 +21,16 @@ These are additive agents for the imported backend/deploy workflow. They operate
 
 Use this lane only after a frontend is already complete enough to be imported, attached, continued, and prepared for deployment.
 
+## Meta Lane
+These are system-building agents for the workflow itself:
+- `system-builder.agent.md`
+
+Use this lane when the work is about agent design, lane alignment, governance, supporting files, or system-level drift repair rather than product delivery.
+For large architecture blueprints, this lane now performs module-level readiness classification (`currently_supported`, `requires_extension`, `missing_knowledge`) before any downstream delivery handoff.
+
 ## Safety Rules
 - Keep phase1-3 as the default frontend workflow.
 - Treat phase4-7 as an opt-in continuation lane.
+- Use the meta lane for system structure work before editing delivery lanes directly.
 - Keep backend/deploy artifacts under `Backend & Deploy/` unless the user explicitly asks to promote them into the main root.
 - Do not mutate source frontend projects in place during phase5 import/attach work.
