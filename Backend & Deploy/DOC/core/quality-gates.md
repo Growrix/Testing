@@ -59,6 +59,8 @@ Define non-negotiable acceptance gates that must pass before an agent may mark w
 ## QG12 — VISUAL INTEGRITY + THEME PARITY GATE
 - Required user-facing routes MUST pass screenshot-based verification in both light and dark themes for desktop and mobile breakpoints.
 - Header behavior MUST match planned state transitions (`at top`, `scroll down`, `scroll up`) with no contradictory default state.
+- When a mobile bottom dock or app-like mobile shell is declared, `< lg` must render a compact app bar only (logo, menu toggle, optional theme switcher) rather than the full desktop header cluster.
+- Mobile bottom docks MUST keep visible icon states, readable labels where planned, and safe-area spacing so no content or CTA is obscured.
 - Footer readability and alignment MUST pass in both themes with all interactive elements visibly legible.
 - Any contrast regression on key CTAs/navigation elements is a blocking failure.
 

@@ -77,8 +77,13 @@ Hard rules for any frontend plan produced by this OS. Each constraint has an id,
 **Detection:** Read all page specs; compare hero `Visual contract → desktop composition` declarations across routes; flag any two routes with identical descriptions.
 **Failure:** `BLOCK F15: routes <A> and <B> have identical hero composition — differentiate layout split, media framing, or type hierarchy`.
 
+## F16 — Mobile chrome contract
+**Rule:** If a project declares an app-like mobile shell or a mobile bottom dock, the `< lg` chrome MUST use a compact app bar instead of the full desktop header cluster. The compact app bar may contain only the brand logo, a menu toggle, an optional theme switcher when dual themes exist, and one archetype-approved utility control when explicitly planned. If a bottom dock is declared, it MUST remain the primary mobile route-switching surface and the page wrapper MUST reserve bottom safe-area spacing.
+**Detection:** Inspect planning artifacts and implementation for `< lg` header composition, bottom dock presence, dock entry count, and wrapper spacing. Fail when desktop nav rows/CTA clusters are duplicated on mobile or when docked content overlaps page content.
+**Failure:** `BLOCK F16: mobile chrome violates compact app-bar or bottom-dock contract at <ref>`.
+
 ## Enforcement order
-The `reviewer` evaluates F1..F15 in order. Multiple failures may be reported in a single pass; the pipeline halts on any failure.
+The `reviewer` evaluates F1..F16 in order. Multiple failures may be reported in a single pass; the pipeline halts on any failure.
 
 ## Severity mapping
 - F1, F5, F11: critical — almost always cause hardcoding or visual drift.
@@ -87,6 +92,7 @@ The `reviewer` evaluates F1..F15 in order. Multiple failures may be reported in 
 - F13: critical — single wrapper collapse = all pages look identical.
 - F14: critical — declared motion library unused = broken motion contract.
 - F15: critical — identical route compositions = generic, unprofessional output.
+- F16: critical — mobile shell drift breaks app-like UX and navigation truthfulness.
 - CC1..CC6: critical — planned scope not fully implemented = incomplete frontend delivery.
 
 ## Q-constraints — Quality bar (added in template-collapse fix)

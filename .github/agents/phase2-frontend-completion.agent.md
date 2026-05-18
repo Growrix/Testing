@@ -18,6 +18,7 @@ Your job is to take a screenshot-replicated frontend and turn it into an owned, 
 
 ## Scope of Completion
 - Ownership and rebrand surfaces: site name, logo mark, favicon/app icons, metadata naming, footer legal copy, contact identity, social links, and vendor/demo residue.
+- Mobile shell surfaces: compact mobile app bar, menu drawer trigger/state, optional theme switcher icon, icon-based bottom navigation, and bottom safe-area spacing.
 - Missing pages, depth routes, and downstream flows implied by the UI, such as blog detail pages, product/category pages, case/service detail pages, account/auth routes, search routes, cart/checkout routes, support/help routes, and legal/info routes.
 - Utility-state surfaces in the site chrome: login/register/account/logout, language/currency/country selectors, compare/wishlist/cart/search badges, promo bars, notification bars, and similar selectors or counters.
 - Overlay and transient behavior needed for truthful frontend use: newsletter/auth/search/cart modals or drawers, cookie banners, dropdown menus, delayed-open timing, dismissal persistence, placement, backdrop behavior, and state transitions.
@@ -35,6 +36,9 @@ Your job is to take a screenshot-replicated frontend and turn it into an owned, 
 - Do not leave known broken routes, placeholders, or fake controls unresolved.
 - Do not solve dead-end UI by removing, hiding, minimizing, or downgrading it unless the user explicitly asks.
 - Assume phase-2 is additive-only: preserve visible UI and expand the implementation surface until each visible control has a truthful destination or working state.
+- If the mobile experience is app-like or uses a bottom dock, `< lg` MUST NOT render the full desktop header cluster.
+- In that case, mobile top chrome MUST be limited to logo, menu toggle, and optional theme switcher when dual themes exist.
+- When a mobile dock is used, it MUST be icon-based, fixed on `< lg`, and the page wrapper MUST reserve bottom spacing so content is not hidden behind it.
 - Treat ownership replacement as required scope, not polish.
 - Treat utility selectors, auth entry points, overlays, and transient chrome states as first-class route/state flows.
 - If a backend flow is out of scope, still complete the front-end destination, empty state, success state, or local demo state so the experience is not fake.
@@ -55,6 +59,7 @@ Your job is to take a screenshot-replicated frontend and turn it into an owned, 
 - Build the missing routes and state branches implied by the UI.
 - Add the data models, slugs, selectors, and shared route metadata needed so cards, buttons, and navigation resolve truthfully.
 - Implement utility flows, overlays, empty states, success states, and basic recovery states required for honest frontend behavior.
+- Implement the declared mobile shell contract instead of compressing the desktop header into mobile.
 
 4. Validation gates:
 - Run lint and type/build checks.
@@ -76,6 +81,7 @@ Your job is to take a screenshot-replicated frontend and turn it into an owned, 
 - Every visible interactive surface is accounted for in the route/state coverage matrix and resolved as Complete or intentionally implemented for the scoped frontend experience.
 - Required depth pages and downstream routes are present and navigable.
 - Utility chrome and overlays are front-end-complete for the scoped experience.
+- Mobile shell is truthful and consistent: compact top app bar on `< lg`, no duplicated desktop header cluster, icon-based bottom dock where declared, and safe-area spacing applied.
 - Site identity is owned: site name, favicon/icon, metadata naming, legal footer attribution, and contact identity are replaced with project-owned values.
 - Marketplace/template/demo source mentions are removed or replaced unless explicitly requested.
 - Broken assets/icons are fixed.

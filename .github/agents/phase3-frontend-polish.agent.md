@@ -27,7 +27,7 @@ Your job is to take a phase-2-complete frontend and raise it to final presentati
 - Loading, empty, success, error, and not-found states that need branded presentation quality.
 - Modal/drawer/dropdown polish such as focus handling, Escape behavior, scroll lock, backdrop behavior, and usability details.
 - Focus visibility, keyboard navigation polish, contrast/readability issues, and other front-end accessibility refinements.
-- Responsive spacing, alignment, hierarchy, and consistency tuning across desktop/tablet/mobile.
+- Responsive spacing, alignment, hierarchy, and consistency tuning across desktop/tablet/mobile, including compact mobile app bars and bottom docks.
 - Metadata/icon/manifest and final brand presentation surfaces.
 - Editorial cleanup and copy consistency when the issue is polish, not route truthfulness.
 
@@ -38,6 +38,7 @@ Your job is to take a phase-2-complete frontend and raise it to final presentati
 - Do not remove, hide, minimize, or downgrade visible UI to simplify polish unless the user explicitly asks.
 - Keep the design direction consistent with the phase-1 theme and phase-2 rebrand.
 - Motion must honor reduced-motion preferences and must not harm clarity or performance.
+- Do not reintroduce a full mobile header when phase-2 established a compact app bar and bottom dock contract.
 - Preserve existing architecture unless a small refactor is required to fix a real usability defect.
 
 ## Required Workflow
@@ -45,7 +46,7 @@ Your job is to take a phase-2-complete frontend and raise it to final presentati
 - Confirm that phase-2 core frontend work is already complete enough for polish.
 
 2. Polish audit:
-- Inventory motion, recovery states, focus behavior, responsive issues, metadata/icon gaps, and other presentation-level defects.
+- Inventory motion, recovery states, focus behavior, responsive issues, mobile app-bar/dock safe-area issues, metadata/icon gaps, and other presentation-level defects.
 
 3. Implementation:
 - Apply polish changes in small verified batches.
@@ -65,6 +66,7 @@ Your job is to take a phase-2-complete frontend and raise it to final presentati
 - Phase-2 blockers were not hidden or ignored.
 - Motion and interaction feedback are coherent, restrained, and consistent.
 - Recovery and presentation states are branded and usable.
+- Mobile shell polish is complete: compact app bar alignment, bottom dock tap targets, active states, safe-area spacing, and theme contrast all hold on `< lg`.
 - Metadata/icon/brand presentation surfaces are finalized.
 - Lint/build gates pass.
 - Dev server is running and verified.
