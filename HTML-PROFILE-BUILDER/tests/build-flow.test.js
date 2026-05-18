@@ -4,6 +4,7 @@ import path from 'node:path';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
+import { approveQaDelivery } from '../lib/qa-approval.js';
 import { buildProfile } from '../lib/build-profile.js';
 import { readJsonFile, resolveRootPath } from '../lib/paths.js';
 
@@ -26,4 +27,33 @@ test('buildProfile writes the locked output bundle in mock mode', async () => {
   assert.equal(fs.existsSync(path.join(result.outputDirectory, 'qa-report.md')), true);
   assert.equal(buildResult.status, 'passed');
   assert.equal(buildResult.delivery_class, 'blocked');
+  assert.equal(buildResult.manual_qa_pending, true);
+});
+
+test('approveQaDelivery promotes a successful build to baseline_prototype', async () => {
+  const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'html-profile-builder-approval-'));
+
+  const result = await buildProfile({
+    briefPath: resolveRootPath('tests', 'fixtures', 'sample-cafe-normalized.json'),
+    outputRoot: tempDirectory,
+    useMock: true,
+    modelName: 'mock-local-generator',
+    apiKey: ''
+  });
+
+  const approved = approveQaDelivery({
+    buildResultPath: result.buildResultPath,
+    qaReportPath: result.qaReportPath,
+    approvedBy: 'QA Reviewer',
+    notes: 'Ready for delivery',
+    approvedAt: '2026-05-18T12:00:00.000Z'
+  });
+
+  const report = fs.readFileSync(result.qaReportPath, 'utf8');
+
+  assert.equal(approved.delivery_class, 'baseline_prototype');
+  assert.equal(approved.manual_qa_pending, false);
+  assert.equal(approved.manual_qa.approved_by, 'QA Reviewer');
+  assert.match(report, /Approved by: QA Reviewer/);
+  assert.match(report, /Ready for delivery/);
 });

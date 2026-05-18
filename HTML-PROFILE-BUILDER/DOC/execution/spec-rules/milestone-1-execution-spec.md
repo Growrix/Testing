@@ -23,6 +23,7 @@ From a normalized brief, the system must generate a validated HTML delivery bund
 - The build must stop on missing required brief fields.
 - The build must snapshot the exact input payload used for generation.
 - The validator must compare the brief against the generated HTML for required fields and forbidden hallucinations.
+- The delivery class must remain `blocked` until manual QA is approved and recorded.
 - Optional deploy and QR helpers are non-blocking and must remain outside the critical path.
 
 ## Acceptance Checks
@@ -31,6 +32,7 @@ From a normalized brief, the system must generate a validated HTML delivery bund
 - Artifact bundle is complete for every successful build.
 - `build-result.json` records omitted optional sections instead of inventing them.
 - Manual QA is recorded before a build can be classified above `blocked`.
+- `scripts/approve-qa.js` can promote a successful build to `baseline_prototype` with reviewer evidence.
 
 ## Failure Modes
 - `M1_BRIEF_INVALID`

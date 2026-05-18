@@ -199,6 +199,8 @@ outputs/<clientId>/<revision>/
 `build-result.json` must include:
 - `status`
 - `delivery_class`
+- `manual_qa_pending`
+- `manual_qa`
 - `client_id`
 - `revision`
 - `theme_name`
@@ -224,6 +226,7 @@ Milestone 1 may complete as `baseline_prototype` only when all milestone-1 gates
 | `scripts/form-sync.js` | form export or copied raw JSON | `briefs/ready/<clientId>.json` | Normalizes field names and arrays |
 | `scripts/build.js` | normalized brief + prompt files + theme + env | build bundle under `outputs/<clientId>/<revision>/` | Required milestone-1 script |
 | `scripts/validate-output.js` | built html + normalized brief | validation section inside `build-result.json` and `qa-report.md` | Required milestone-1 proof step |
+| `scripts/approve-qa.js` | successful `build-result.json` + reviewer details | approved `build-result.json` and filled `qa-report.md` | Required to move a build above `blocked` |
 | `scripts/qr-generate.js` | hosted URL | QR PNG | Optional |
 | `scripts/deploy-netlify.js` | built html file + optional token | deploy receipt / URL | Optional and not a milestone-1 blocker |
 
@@ -246,6 +249,11 @@ Milestone 1 is not locked complete unless all of the following pass:
 5. Artifact gate: required files exist in the output bundle.
 6. Manual QA gate: `qa-report.md` is filled and approved.
 7. Local quality gate: isolated-root code passes lint/typecheck/test with zero warnings once implementation exists.
+
+Manual QA approval path:
+- a successful build starts as `delivery_class=blocked`
+- `scripts/approve-qa.js` records reviewer name, approval timestamp, and notes
+- only then may milestone 1 promote the build to `baseline_prototype`
 
 ## 11. Local Agent Surface
 

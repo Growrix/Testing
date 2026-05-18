@@ -7,6 +7,7 @@
     "build": "node scripts/build.js",
     "brief:sync": "node scripts/form-sync.js",
     "validate:output": "node scripts/validate-output.js",
+    "qa:approve": "node scripts/approve-qa.js",
     "qr": "node scripts/qr-generate.js",
     "deploy:record": "node scripts/deploy-netlify.js",
     "lint": "eslint . --max-warnings 0",

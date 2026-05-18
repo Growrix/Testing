@@ -60,6 +60,10 @@ Define the exact input and output contracts for the HTML Profile Builder.
 ### `build-result.json`
 - `status`
 - `delivery_class`
+- `manual_qa_pending`
+- `manual_qa.approved_by`
+- `manual_qa.approved_at`
+- `manual_qa.notes`
 - `client_id`
 - `revision`
 - `theme_name`
@@ -84,6 +88,12 @@ Define the exact input and output contracts for the HTML Profile Builder.
 - Pre-filled checklist path
 - manual approval fields
 - blockers or revision notes
+
+## QA Approval Rules
+- A build may start as `status=passed` while still remaining `delivery_class=blocked`.
+- `delivery_class` may move to `baseline_prototype` only after QA approval is recorded.
+- QA approval must record reviewer name, approval timestamp, and approval notes in both `build-result.json` and `qa-report.md`.
+- Failed builds must not be approvable.
 
 ## Blocking Rules
 - Missing required brief field: block

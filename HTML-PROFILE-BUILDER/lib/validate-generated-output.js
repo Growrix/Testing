@@ -176,6 +176,11 @@ function createBuildResult({ brief, themeName, model, validationResults, buildSt
     status: validationResults.passed ? 'passed' : 'failed',
     delivery_class: 'blocked',
     manual_qa_pending: true,
+    manual_qa: {
+      approved_by: '',
+      approved_at: '',
+      notes: ''
+    },
     client_id: brief.clientId,
     revision: brief.revision,
     theme_name: themeName,

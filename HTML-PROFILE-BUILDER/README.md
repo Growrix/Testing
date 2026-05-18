@@ -35,6 +35,7 @@ npm install
 npm run verify
 node scripts/form-sync.js --input tests/fixtures/sample-cafe-raw.json --output briefs/ready/brew-and-bean.json
 node scripts/build.js --brief briefs/ready/brew-and-bean.json --mock
+node scripts/approve-qa.js --result outputs/brew-and-bean/v1/build-result.json --by "QA Reviewer" --notes "Ready for delivery"
 ```
 
 Use `--mock` for local structural proof without a live Anthropic key. Remove `--mock` for the real provider-backed build path.

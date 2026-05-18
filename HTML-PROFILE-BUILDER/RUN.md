@@ -10,6 +10,7 @@ npm run verify
 node scripts/form-sync.js --input tests/fixtures/sample-cafe-raw.json --output briefs/ready/brew-and-bean.json
 node scripts/build.js --brief briefs/ready/brew-and-bean.json --mock
 node scripts/validate-output.js --brief outputs/brew-and-bean/v1/input-snapshot.json --html outputs/brew-and-bean/v1/profile.html
+node scripts/approve-qa.js --result outputs/brew-and-bean/v1/build-result.json --by "QA Reviewer" --notes "Ready for delivery"
 ```
 
 Optional later commands:
