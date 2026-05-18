@@ -42,6 +42,7 @@ Normal repeatable build order for one business profile:
 3. Use `phase-3-html-profile-builder-developer.agent.md` to run or adjust the actual build workflow.
 4. Run `node scripts/form-sync.js --input <raw-brief.json> --output briefs/ready/<client-id>.json` when your source brief is still in raw intake format.
 5. Run `node scripts/build.js --brief briefs/ready/<client-id>.json` to generate the output bundle.
-6. Open `outputs/<clientId>/<revision>/copilot-handoff.md` only if you want a Copilot refinement pass on the generated `profile.html`.
-7. Run `node scripts/validate-output.js --brief outputs/<clientId>/<revision>/input-snapshot.json --html outputs/<clientId>/<revision>/profile.html`.
-8. Use `phase-4-html-profile-validator.agent.md` for the final readiness check, then run `node scripts/approve-qa.js --result outputs/<clientId>/<revision>/build-result.json --by "QA Reviewer" --notes "Ready for delivery"` when the bundle is approved.
+6. The build will block if the theme roles fail readability contrast or if any required local asset cannot be bundled into the output.
+7. Open `outputs/<clientId>/<revision>/copilot-handoff.md` only if you want a Copilot refinement pass on the generated `profile.html`.
+8. Run `node scripts/validate-output.js --brief outputs/<clientId>/<revision>/input-snapshot.json --html outputs/<clientId>/<revision>/profile.html`.
+9. Use `phase-4-html-profile-validator.agent.md` for the final readiness check, then run `node scripts/approve-qa.js --result outputs/<clientId>/<revision>/build-result.json --by "QA Reviewer" --notes "Ready for delivery"` when the bundle is approved.

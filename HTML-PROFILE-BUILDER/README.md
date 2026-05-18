@@ -29,6 +29,8 @@ Default order:
 ## Locked Milestone Outcome
 Milestone 1 is a deterministic local builder that turns one normalized client brief into one validated HTML delivery bundle with traceable build artifacts.
 
+Successful builds now require readable theme-role contrast and bundled local asset resolution, not only structural HTML validity.
+
 ## Runtime Model
 Milestone 1 does not call an external AI API.
 
@@ -48,3 +50,4 @@ node scripts/approve-qa.js --result outputs/brew-and-bean/v1/build-result.json -
 - Run the tasks from `.vscode/tasks.json` inside `HTML-PROFILE-BUILDER/`.
 - After each build, open `outputs/<clientId>/<revision>/copilot-handoff.md` in VS Code if you want Copilot to do a higher-touch refinement pass on top of the local renderer output.
 - The local renderer produces the first complete HTML file; Copilot can then refine that file inside the editor using the locked brief, theme, and output contract.
+- The build will now fail early if the selected theme produces unreadable role combinations or if the brief references a local asset that does not resolve into the output bundle.

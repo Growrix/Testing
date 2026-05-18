@@ -228,6 +228,12 @@ function generateMockHtml({ brief, theme, themeName }) {
         --color-text: ${theme.colorText};
         --color-muted: ${theme.colorMuted};
         --color-border: ${theme.colorBorder};
+        --color-text-on-primary: ${theme.colorTextOnPrimary};
+        --color-text-on-hero: ${theme.colorTextOnHero};
+        --color-muted-on-hero: ${theme.colorMutedOnHero};
+        --color-hero-chip-bg: ${theme.colorHeroChipBg};
+        --color-hero-chip-text: ${theme.colorHeroChipText};
+        --color-hero-chip-border: ${theme.colorHeroChipBorder};
         --font-heading: '${theme.fontHeading}', serif;
         --font-body: '${theme.fontBody}', sans-serif;
         --radius: ${theme.borderRadius};
@@ -251,7 +257,7 @@ function generateMockHtml({ brief, theme, themeName }) {
 
       .hero {
         background: ${theme.heroGradient};
-        color: #ffffff;
+        color: var(--color-text-on-hero);
         border-radius: calc(var(--radius) * 1.5);
         padding: 24px;
         position: relative;
@@ -280,8 +286,8 @@ function generateMockHtml({ brief, theme, themeName }) {
         height: 64px;
         object-fit: cover;
         border-radius: 18px;
-        border: 1px solid rgba(255,255,255,0.24);
-        background: rgba(255,255,255,0.1);
+        border: 1px solid var(--color-hero-chip-border);
+        background: var(--color-hero-chip-bg);
       }
 
       .status-pill {
@@ -290,7 +296,9 @@ function generateMockHtml({ brief, theme, themeName }) {
         gap: 8px;
         padding: 8px 12px;
         border-radius: 999px;
-        background: rgba(255,255,255,0.14);
+        background: var(--color-hero-chip-bg);
+        color: var(--color-hero-chip-text);
+        border: 1px solid var(--color-hero-chip-border);
         font-size: 13px;
       }
 
@@ -299,7 +307,7 @@ function generateMockHtml({ brief, theme, themeName }) {
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background: #7dffb5;
+        background: var(--color-accent);
       }
 
       h1, h2, h3 {
@@ -308,7 +316,7 @@ function generateMockHtml({ brief, theme, themeName }) {
       }
 
       h1 { margin-top: 20px; font-size: 34px; line-height: 1.05; }
-      .tagline { margin: 12px 0 0; color: rgba(255,255,255,0.8); }
+      .tagline { margin: 12px 0 0; color: var(--color-muted-on-hero); }
       .quick-info, .chip-list, .contact-links {
         list-style: none;
         padding: 0;
@@ -318,9 +326,18 @@ function generateMockHtml({ brief, theme, themeName }) {
         gap: 10px;
       }
 
-      .quick-info li, .chip-list li, .contact-links a {
+      .quick-info li {
+        background: var(--color-hero-chip-bg);
+        border: 1px solid var(--color-hero-chip-border);
+        color: var(--color-hero-chip-text);
+        border-radius: 999px;
+        padding: 10px 14px;
+      }
+
+      .chip-list li, .contact-links a {
         background: var(--color-surface);
         border: 1px solid var(--color-border);
+        color: var(--color-text);
         border-radius: 999px;
         padding: 10px 14px;
       }
@@ -345,6 +362,7 @@ function generateMockHtml({ brief, theme, themeName }) {
       .card {
         background: var(--color-surface);
         border: 1px solid var(--color-border);
+        color: var(--color-text);
         border-radius: var(--radius);
         padding: 16px;
       }
@@ -370,6 +388,7 @@ function generateMockHtml({ brief, theme, themeName }) {
       .stat-card, .portfolio-card {
         background: var(--color-surface);
         border: 1px solid var(--color-border);
+        color: var(--color-text);
         border-radius: var(--radius);
         padding: 16px;
       }
@@ -394,7 +413,7 @@ function generateMockHtml({ brief, theme, themeName }) {
         display: grid;
         place-items: center;
         background: var(--color-primary);
-        color: #ffffff;
+        color: var(--color-text-on-primary);
         font-weight: 700;
       }
 
@@ -422,7 +441,7 @@ function generateMockHtml({ brief, theme, themeName }) {
         place-items: center;
         border-radius: 14px;
         background: var(--color-primary);
-        color: #ffffff;
+        color: var(--color-text-on-primary);
         min-height: 48px;
         font-weight: 700;
       }
@@ -431,6 +450,7 @@ function generateMockHtml({ brief, theme, themeName }) {
         padding: 18px;
         background: var(--color-surface);
         border: 1px solid var(--color-border);
+        color: var(--color-text);
         border-radius: var(--radius);
       }
 
@@ -440,7 +460,7 @@ function generateMockHtml({ brief, theme, themeName }) {
         padding: 16px 20px;
         border-radius: 999px;
         background: var(--color-primary);
-        color: #ffffff;
+        color: var(--color-text-on-primary);
         text-align: center;
         font-weight: 700;
       }

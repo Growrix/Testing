@@ -56,6 +56,13 @@ Define the exact input and output contracts for the HTML Profile Builder.
 - Must begin with `<!DOCTYPE html>`
 - Must contain `meta name="description"`
 - Must contain Open Graph title and description tags
+- Must not contain unreadable foreground/background combinations in the shipped theme roles
+- Must not reference missing local image assets
+
+### Bundled local assets
+- Every local `assets.logoPath` reference used by the build must be copied into the output bundle
+- Every local `assets.gallery` reference used by the build must be copied into the output bundle
+- Output HTML must reference the bundled output-local asset paths, not source-root-only paths
 
 ### `build-result.json`
 - `status`
@@ -106,8 +113,11 @@ For milestone 1, `model` records the local generation engine identifier and must
 ## Blocking Rules
 - Missing required brief field: block
 - Nonexistent theme mapping: block
+- Theme role contrast failure: block
+- Missing local asset referenced by the brief: block
 - Model call failure: block
 - HTML missing required structure: block
+- HTML referencing missing bundled local assets: block
 - Invented content detected: block
 
 ## Output Path Rules

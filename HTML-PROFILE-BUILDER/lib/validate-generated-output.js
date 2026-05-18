@@ -1,6 +1,8 @@
 import fs from 'node:fs';
+import path from 'node:path';
 
 import { readJsonFile, resolveRootPath, writeJsonFile } from './paths.js';
+import { getThemeAccessibilityChecks, validateTheme } from './theme-contract.js';
 
 function hasValue(value) {
   if (Array.isArray(value)) {
@@ -31,7 +33,15 @@ function includesAll(html, values) {
   return values.every((value) => htmlIncludesValue(html, value));
 }
 
-function validateGeneratedHtml({ brief, html }) {
+function isRemoteAsset(assetPath) {
+  return /^(https?:|data:)/i.test(assetPath);
+}
+
+function getLocalImageSources(html) {
+  return [...html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/gi)].map((match) => match[1]);
+}
+
+function validateGeneratedHtml({ brief, html, theme, outputDirectory }) {
   const checks = [];
   const requiredSectionsRendered = [];
   const omittedSections = [];
@@ -139,6 +149,21 @@ function validateGeneratedHtml({ brief, html }) {
     )
   );
 
+  if (theme) {
+    checks.push(...getThemeAccessibilityChecks(theme));
+  }
+
+  if (outputDirectory) {
+    const localImages = getLocalImageSources(html).filter((source) => !isRemoteAsset(source));
+    checks.push(
+      buildCheck(
+        'local-image-assets',
+        localImages.every((source) => fs.existsSync(path.resolve(outputDirectory, source))),
+        'Every local image source must resolve inside the output bundle.'
+      )
+    );
+  }
+
   const passed = checks.every((check) => check.passed);
 
   return {
@@ -197,7 +222,13 @@ function createBuildResult({ brief, themeName, model, validationResults, buildSt
 function validateOutputBundle({ briefPath, htmlPath, buildResultPath, qaReportPath, themeName, model, buildStartedAt, buildCompletedAt }) {
   const brief = readJsonFile(briefPath);
   const html = fs.readFileSync(htmlPath, 'utf8');
-  const validationResults = validateGeneratedHtml({ brief, html });
+  const theme = validateTheme(readJsonFile(resolveRootPath('themes', `${themeName}.json`)));
+  const validationResults = validateGeneratedHtml({
+    brief,
+    html,
+    theme,
+    outputDirectory: path.dirname(htmlPath)
+  });
   const resultPayload = createBuildResult({
     brief,
     themeName,
