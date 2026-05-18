@@ -227,13 +227,13 @@ function MainNavigation() {
           ))}
         </div>
 
-        <div className="hidden lg:flex items-center gap-3">
-          <a href={`tel:${business.phoneHref}`} className="text-sm font-medium inline-flex items-center gap-1.5">
+        <div className="hidden lg:flex items-center gap-3 shrink-0">
+          <a href={`tel:${business.phoneHref}`} className="hidden 2xl:inline-flex text-sm font-medium items-center gap-1.5">
             <Phone size={14} /> {business.phoneDisplay}
           </a>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 rounded-full text-white text-sm font-medium"
+            className="inline-flex items-center gap-2 rounded-full text-white text-sm font-medium whitespace-nowrap"
             style={{ background: '#FF5B1F', padding: '14px 22px' }}
           >
             Get a free quote <ArrowUpRight size={16} />
@@ -401,36 +401,6 @@ function Footer() {
         </div>
       </div>
 
-      <div
-        className="lg:hidden"
-        style={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          padding: 12,
-          background: '#0A0A0A',
-          borderTop: '1px solid rgba(255,255,255,0.08)',
-          display: 'flex',
-          gap: 8,
-          zIndex: 40,
-        }}
-      >
-        <a
-          href={`tel:${business.phoneHref}`}
-          className="flex-1 justify-center inline-flex items-center gap-2 rounded-full text-white text-sm font-medium border"
-          style={{ borderColor: 'rgba(255,255,255,0.25)', padding: '12px 14px' }}
-        >
-          <Phone size={14} /> Call
-        </a>
-        <Link
-          href="/contact"
-          className="flex-1 justify-center inline-flex items-center gap-2 rounded-full text-white text-sm font-medium"
-          style={{ background: '#FF5B1F', padding: '12px 14px' }}
-        >
-          Get a quote <ArrowUpRight size={14} />
-        </Link>
-      </div>
     </footer>
   );
 }
@@ -440,7 +410,7 @@ export default function SiteChrome({ children }) {
     <div style={{ fontFamily: "'DM Sans', system-ui, sans-serif", color: '#0A0A0A', background: '#F8F5EE' }}>
       <TopBar />
       <MainNavigation />
-      <main className="pb-24 lg:pb-0">{children}</main>
+      <main>{children}</main>
       <Footer />
     </div>
   );

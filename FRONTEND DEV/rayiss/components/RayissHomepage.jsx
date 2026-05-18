@@ -248,11 +248,11 @@ function Navigation() {
           <NavLink href="/reviews">Reviews</NavLink>
         </div>
 
-        <div className="hidden lg:flex items-center gap-3">
-          <a href="tel:1300729477" className="text-sm font-medium flex items-center gap-1.5">
+        <div className="hidden lg:flex items-center gap-3 shrink-0">
+          <a href="tel:1300729477" className="hidden 2xl:flex text-sm font-medium items-center gap-1.5">
             <Phone size={14} /> 1300 729 477
           </a>
-          <a href="/contact" className="btn-primary">Get a free quote <ArrowUpRight size={16} /></a>
+          <a href="/contact" className="btn-primary" style={{ whiteSpace: 'nowrap' }}>Get a free quote <ArrowUpRight size={16} /></a>
         </div>
 
         <button
@@ -1342,19 +1342,6 @@ function Footer() {
         </div>
       </div>
 
-      {/* Sticky mobile CTA */}
-      <div style={{
-        position: 'fixed', bottom: 0, left: 0, right: 0, padding: 12,
-        background: '#0A0A0A', borderTop: '1px solid rgba(255,255,255,0.08)',
-        display: 'flex', gap: 8, zIndex: 40,
-      }} className="lg:hidden">
-        <a href="tel:1300729477" className="btn-ghost-dark flex-1 justify-center" style={{ padding: 12, fontSize: 14 }}>
-          <Phone size={14} /> Call
-        </a>
-        <a href="/contact" className="btn-primary flex-1 justify-center" style={{ padding: 12, fontSize: 14 }}>
-          Get a quote <ArrowUpRight size={14} />
-        </a>
-      </div>
     </footer>
   );
 }
