@@ -1,0 +1,16 @@
+{
+  "name": "dark-luxury",
+  "colorPrimary": "#c8a856",
+  "colorAccent": "#f0ece4",
+  "colorBg": "#0c0b09",
+  "colorSurface": "#111007",
+  "colorText": "#f0ece4",
+  "colorMuted": "rgba(240,236,228,0.55)",
+  "colorBorder": "#1e1c14",
+  "fontHeading": "Cormorant Garamond",
+  "fontBody": "Montserrat",
+  "fontHeadingWeights": "300;600",
+  "fontBodyWeights": "400;600;700",
+  "borderRadius": "6px",
+  "heroGradient": "linear-gradient(135deg, #1c1407 0%, #0c0b09 100%)"
+}

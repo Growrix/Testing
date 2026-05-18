@@ -1,0 +1,16 @@
+{
+  "name": "warm-cafe",
+  "colorPrimary": "#bf6c30",
+  "colorAccent": "#7a3d1c",
+  "colorBg": "#fdf7f2",
+  "colorSurface": "#fef4eb",
+  "colorText": "#2c1810",
+  "colorMuted": "#8a6d58",
+  "colorBorder": "#f0d9c4",
+  "fontHeading": "Playfair Display",
+  "fontBody": "Lato",
+  "fontHeadingWeights": "400;700",
+  "fontBodyWeights": "300;400;700",
+  "borderRadius": "12px",
+  "heroGradient": "linear-gradient(150deg, #bf6c30 0%, #7a3d1c 55%, #4a200e 100%)"
+}

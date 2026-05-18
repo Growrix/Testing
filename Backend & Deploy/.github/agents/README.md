@@ -1,99 +1,65 @@
-# Agent Entry Points (Copilot / VS Code)
+# Agent Lanes
 
-This folder is the public agent surface for VS Code Copilot in this workspace. The picker is intentionally system-scoped:
+This root now exposes one shared frontend entrypoint and two separate frontend-building lanes that converge into the same later backend/deploy phases.
 
-- `[Foundation]` for Foundation-Core runtime work
-- `[Template]` for screenshot-template, import, continuation, and deployment work
-- `[DS]` for DS-native planning and execution
-- `[Meta]` for audit and governance
-- `[Legacy]` for hidden historical factory lanes
+## Shared Frontend Entry
+- `phase1-site-replication.agent.md`
 
-Canonical definitions live in `DOC/agents/`, except `DS_site_planner`, whose canonical source lives in `DS-Planning-Engine/agents/`. Public files stay flat in `.github/agents/` because VS Code documents discovery at this root but does not clearly guarantee recursive subfolder loading.
+Phase 1 remains unchanged. It is the common screenshot-replication entrypoint for both frontend lanes below.
 
----
+## [REPLI SYSTEM] Frontend Lane
+These agents keep the current screenshot-first completion workflow:
+- `phase2-frontend-planning.agent.md`
+- `phase2-frontend-completion.agent.md`
+- `phase3-frontend-polish.agent.md`
 
-## Public systems
+Use this lane when the site should stay rooted in what Phase 1 visibly replicated, and the remaining work is truthful route/state completion plus polish.
 
-### Stable DOC workflow
+## [DOC SYSTEM] Frontend Lane
+These agents start from the same Phase 1 replica but let you reshape the site around your own authored plan:
+- `phase2-doc-system-planning.agent.md`
+- `phase2-doc-system-frontend-dev.agent.md`
+- `phase3-doc-system-polish.agent.md`
 
-`frontend_planner` -> `backend_planner` -> `frontend_developer` / `backend_developer`
+Use this lane when the screenshot provides the starting substrate, but your own plan should redefine route architecture, page composition, content direction, conversion flow, and shared UX surfaces.
 
-Use this for the normal project workflow under `DOC/` and `web/`.
+## Backend & Deploy Lane
+These are additive agents for the imported backend/deploy workflow. They operate against the isolated bundle under `Backend & Deploy/` and do not replace either frontend lane:
+- `phase4-foundation-planning.agent.md`
+- `phase4-foundation-development.agent.md`
+- `phase5-template-import-attach.agent.md`
+- `phase6-post-import-continuation.agent.md`
+- `phase7-template-deployment.agent.md`
 
-### Foundation + template workflow
+Use this lane only after either frontend lane is already complete enough to be imported, attached, continued, and prepared for deployment.
 
-`[Foundation] Planner` -> `[Foundation] Developer` -> `[Template] Import Attacher` -> `[Template] Post-Import Continuation` -> `[Template] Deployment Operator`
+## Meta Lane
+These are system-building agents for the workflow itself:
+- `system-builder.agent.md`
 
-Use this when building or importing templates that attach to Foundation-Core.
+Use this lane when the work is about agent design, lane alignment, governance, supporting files, or system-level drift repair rather than product delivery.
+For large architecture blueprints, this lane now performs module-level readiness classification (`currently_supported`, `requires_extension`, `missing_knowledge`) before any downstream delivery handoff.
+For non-SaaS local automation/tooling blueprints such as Node CLI generators, prompt-driven builders, local dashboards, or file-output systems, this lane must first decide whether the work belongs in a new isolated local system instead of the shared phase1-7/backend lanes.
+When progress depends on user-supplied external accounts, keys, IDs, dashboards, or other off-repo assets, this lane must ask for them with Bangla acquisition instructions.
 
-If the template is screenshot-first rather than import-first, use:
+## Safety Rules
+- Keep Phase 1 unchanged as the shared frontend entrypoint.
+- Choose exactly one frontend-building lane after Phase 1: `[REPLI SYSTEM]` or `[DOC SYSTEM]`.
+- Both frontend lanes must converge into the same later Phase 5, 6, and 7 process.
+- Treat phase4-7 as an opt-in continuation lane.
+- Use the meta lane for system structure work before editing delivery lanes directly.
+- Use an isolated local system instead of the shared lanes when the blueprint is primarily a local automation, CLI, prompt-driven builder, or file-output product.
+- Keep backend/deploy artifacts under `Backend & Deploy/` unless the user explicitly asks to promote them into the main root.
+- Do not mutate source frontend projects in place during phase5 import/attach work.
 
-`[Foundation] Planner` -> `[Foundation] Developer` -> `[Template] Screenshot Frontend Agent`
+## Convergence Contract
+- `[REPLI SYSTEM]` and `[DOC SYSTEM]` are frontend-only alternatives.
+- They must produce the same kind of frontend-complete outcome: a working Next.js project that can enter the existing backend/deploy continuation lane.
+- Phase 5, Phase 6, and Phase 7 stay shared and unchanged.
 
-### DS workflow
+## Selection Guide
+- Choose `[REPLI SYSTEM]` when you want to keep the Phase 1 screenshot-derived site and finish the missing truth behind it.
+- Choose `[DOC SYSTEM]` when you want to use the Phase 1 replica only as a starting base, then rebuild the site around your own authored plan.
+- Choose the Meta lane first when you need to decide whether a blueprint should stay in the shared website/runtime lanes or become an isolated local system.
 
-`[DS] Site Planner` -> `[DS] Frontend Developer`
-
-Use this when the output must be planned and assembled against the DS runtime.
-
-### Meta workflow
-
-`[Meta] System Builder`
-
-Use this for system design, audit, extension, repair, alignment, and documentation across the agentic system itself.
-For large architecture blueprints, `[Meta] System Builder` now emits module-level readiness buckets: `currently_supported`, `requires_extension`, and `missing_knowledge` before lane handoff.
-When execution is blocked on third-party credentials, dashboards, provider IDs, webhooks, or other user-provided assets, `[Meta] System Builder` must emit a Bangla acquisition brief that tells the user where to go and what to collect.
-
----
-
-## Recommended entrypoints
-
-### Stable DOC system
-
-- `frontend_planner`: locked frontend planning bundle
-- `backend_planner`: backend, integrations, security, ops planning
-- `frontend_developer`: frontend implementation in `web/`
-- `backend_developer`: backend implementation outside `web/`
-
-### Foundation + template system
-
-- `[Foundation] Planner`: plan the reusable runtime and attach contract
-- `[Foundation] Developer`: build `Foundation-Core/`
-- `[Template] Screenshot Frontend Agent`: build a screenshot-first template directly into `Templates/`
-- `[Template] Import Attacher`: normalize and attach an imported frontend runtime
-- `[Template] Post-Import Continuation`: close remaining eligible merge gaps after import/attach
-- `[Template] Deployment Operator`: prepare and verify Vercel deployment, env, and subdomain rollout
-
-### DS system
-
-- `[DS] Site Planner`: DS-native planning and gap analysis
-- `[DS] Frontend Developer`: assemble a project-specific DS output clone
-
-### Meta system
-
-- `[Meta] System Builder`: generic system design, audit, extension, repair, and alignment
-
----
-
-## Hidden legacy agents
-
-These remain in the repo for historical benchmarking but are not normal workflow entrypoints and should stay hidden from the picker when possible.
-
-- `[Legacy] Frontend Factory Planner`
-- `[Legacy] Frontend Factory Developer`
-- `frontend_factory_hybrid_developer`
-- `ongoing_execution_orchestrator`
-
----
-
-## Safe folder catalog
-
-Human-readable grouping files live under `.github/agents/_catalog/`. They exist only for navigation and must not be used for agent discovery.
-
----
-
-## Maintenance
-
-- Keep mirrored agent files byte-aligned between their canonical source and `.github/agents/`.
-- Update this README whenever a public agent is added, removed, renamed, hidden, or re-routed.
-- After structural agent changes, refresh `DOC/agents/_index.md` and the `_catalog/` listings in the same change.
+Do not run both frontend lanes on the same site in the same pass.

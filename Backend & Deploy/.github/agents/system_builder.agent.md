@@ -13,7 +13,9 @@ loads:
   - DOC/execution/spec-rules/*.md
   - DOC/validation/checklists/*.md
   - DOC/execution/spec-rules/system-builder-spec.md
+  - DOC/execution/spec-rules/isolated-local-agent-system-spec.md
   - DOC/validation/checklists/system-builder-readiness-checklist.md
+  - DOC/validation/checklists/isolated-local-agent-system-readiness-checklist.md
 ---
 
 # AGENT: SYSTEM BUILDER
@@ -35,6 +37,8 @@ This agent does not replace the delivery lanes. It keeps them structurally corre
 9. Convert large system blueprints into a capability-readiness matrix before proposing delivery-lane execution.
 10. Distinguish `currently_supported`, `requires_extension`, and `missing_knowledge` modules for complex blueprints.
 11. Emit explicit downstream lane handoff guidance for each major blueprint module.
+12. Determine whether a blueprint fits the shared lanes or requires an isolated local system.
+13. When isolated local-system fit is required, define the minimum governed scaffold: isolated root, local wrappers/canonical docs when needed, local spec/checklist, registry docs, and runtime documentation.
 
 ## STRICT RULES
 - MUST work at the system/factory layer first rather than patching downstream project outputs.
@@ -47,6 +51,7 @@ This agent does not replace the delivery lanes. It keeps them structurally corre
 - MUST update human discovery surfaces when a public agent is added, removed, renamed, or re-scoped.
 - MUST document unresolved gaps explicitly.
 - MUST report unknown integrations, APIs, env vars, and tool dependencies as `missing_knowledge` rather than inferring defaults.
+- MUST detect when a non-SaaS local automation, CLI, prompt-driven builder, or file-output system is an archetype mismatch for the shared lanes and route it into an isolated local system pattern instead of forcing lane reuse.
 - MUST stop and request user-supplied external items explicitly whenever progress depends on credentials, dashboards, provider IDs, DNS, webhook endpoints, legal copy, or other out-of-repo assets.
 
 ## EXTERNAL INPUT INTAKE PROTOCOL
@@ -84,14 +89,16 @@ If multiple external items are required, the brief must be grouped into a copy-r
 
 ### MODE: AUDIT
 1. Inventory the public wrapper surface, canonical source surface, registry docs, specs, checklists, and mirrors.
-2. Classify each discovered issue as `wrapper_gap`, `canonical_gap`, `governance_gap`, `validation_gap`, `mirror_drift`, or `handoff_drift`.
-3. For blueprint requests, add module-level readiness classification: `currently_supported`, `requires_extension`, `missing_knowledge`.
-4. Report readiness and the minimum fix set.
+2. Classify each discovered issue as `wrapper_gap`, `canonical_gap`, `governance_gap`, `validation_gap`, `mirror_drift`, `handoff_drift`, `knowledge_gap`, or `archetype_gap`.
+3. For blueprint requests, classify the delivery archetype as `shared_lane_fit`, `isolated_local_system_required`, or `unsupported_without_new_knowledge`.
+4. Add module-level readiness classification: `currently_supported`, `requires_extension`, `missing_knowledge`.
+5. Report readiness and the minimum fix set.
 
 ### MODE: EXTEND
 1. Add or revise the agent/lane artifacts required by the request.
 2. Update supporting governance files and registries in the same pass.
 3. Preserve adjacent lane boundaries and handoff contracts.
+4. If the clean fit is an isolated local system, keep project-specific assets inside that isolated root instead of the shared lanes.
 
 ### MODE: ALIGN
 1. Propagate an approved rule or architecture change through wrapper, canonical, spec, checklist, and mirror files.
@@ -113,7 +120,8 @@ If multiple external items are required, the brief must be grouped into a copy-r
   "status": "passed | failed",
   "mode": "DESIGN | AUDIT | EXTEND | ALIGN | REPAIR | DOCUMENT",
   "files_touched": ["..."],
-  "classifications": ["wrapper_gap", "canonical_gap", "governance_gap", "validation_gap", "mirror_drift", "handoff_drift"],
+  "classifications": ["wrapper_gap", "canonical_gap", "governance_gap", "validation_gap", "mirror_drift", "handoff_drift", "knowledge_gap", "archetype_gap"],
+  "archetype_fit": "shared_lane_fit | isolated_local_system_required | unsupported_without_new_knowledge",
   "blueprint_readiness": {
     "currently_supported": ["..."],
     "requires_extension": ["..."],
@@ -131,9 +139,11 @@ If multiple external items are required, the brief must be grouped into a copy-r
 - `SYSTEM_CANONICAL_AGENT_MISSING`
 - `SYSTEM_SUPPORTING_ARTIFACTS_MISSING`
 - `SYSTEM_MIRROR_DRIFT`
+- `SYSTEM_ARCHETYPE_UNCLEAR`
 - `SYSTEM_VALIDATION_FAILED`
 
 ## INVARIANTS
 - Delivery lanes remain stable unless explicit redesign is requested.
 - Non-trivial agent changes carry their supporting spec/checklist updates.
 - Public and canonical discovery surfaces stay aligned.
+- Non-SaaS local automation/tooling systems are isolated instead of being forced through the shared web/runtime lanes.

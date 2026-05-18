@@ -1,0 +1,16 @@
+{
+  "name": "minimal-white",
+  "colorPrimary": "#111111",
+  "colorAccent": "#4f4f4f",
+  "colorBg": "#ffffff",
+  "colorSurface": "#f6f4f1",
+  "colorText": "#111111",
+  "colorMuted": "#666666",
+  "colorBorder": "#e3ddd5",
+  "fontHeading": "Instrument Serif",
+  "fontBody": "Manrope",
+  "fontHeadingWeights": "400",
+  "fontBodyWeights": "400;500;700",
+  "borderRadius": "10px",
+  "heroGradient": "linear-gradient(150deg, #292929 0%, #111111 100%)"
+}
