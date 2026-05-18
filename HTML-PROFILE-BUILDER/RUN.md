@@ -29,3 +29,19 @@ If you want a Copilot refinement pass, open `outputs/<clientId>/<revision>/copil
 
 Agent order for this isolated root:
 `Phase 1 System Builder` -> `Phase 2 Workflow Architect` -> `Phase 3 Builder Developer` -> `Phase 4 Validator`
+
+Exact agent filenames for that order:
+- `phase-1-html-profile-system-builder.agent.md`
+- `phase-2-html-profile-workflow-architect.agent.md`
+- `phase-3-html-profile-builder-developer.agent.md`
+- `phase-4-html-profile-validator.agent.md`
+
+Normal repeatable build order for one business profile:
+1. Use `phase-1-html-profile-system-builder.agent.md` only when changing the system, docs, or agent lane itself.
+2. Use `phase-2-html-profile-workflow-architect.agent.md` when you need to change the brief contract, prompts, themes, output rules, or milestone scope.
+3. Use `phase-3-html-profile-builder-developer.agent.md` to run or adjust the actual build workflow.
+4. Run `node scripts/form-sync.js --input <raw-brief.json> --output briefs/ready/<client-id>.json` when your source brief is still in raw intake format.
+5. Run `node scripts/build.js --brief briefs/ready/<client-id>.json` to generate the output bundle.
+6. Open `outputs/<clientId>/<revision>/copilot-handoff.md` only if you want a Copilot refinement pass on the generated `profile.html`.
+7. Run `node scripts/validate-output.js --brief outputs/<clientId>/<revision>/input-snapshot.json --html outputs/<clientId>/<revision>/profile.html`.
+8. Use `phase-4-html-profile-validator.agent.md` for the final readiness check, then run `node scripts/approve-qa.js --result outputs/<clientId>/<revision>/build-result.json --by "QA Reviewer" --notes "Ready for delivery"` when the bundle is approved.

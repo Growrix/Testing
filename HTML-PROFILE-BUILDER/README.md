@@ -13,10 +13,10 @@ This root is intentionally separate from the shared website lanes, Foundation la
 - Readiness checklists: `DOC/validation/checklists/`
 
 ## Phase Lane
-- Phase 1: `html-profile-system-builder.agent.md`
-- Phase 2: `html-profile-workflow-architect.agent.md`
-- Phase 3: `html-profile-builder-developer.agent.md`
-- Phase 4: `html-profile-validator.agent.md`
+- Phase 1: `phase-1-html-profile-system-builder.agent.md`
+- Phase 2: `phase-2-html-profile-workflow-architect.agent.md`
+- Phase 3: `phase-3-html-profile-builder-developer.agent.md`
+- Phase 4: `phase-4-html-profile-validator.agent.md`
 
 Default order:
 `Phase 1 System Builder` -> `Phase 2 Workflow Architect` -> `Phase 3 Builder Developer` -> `Phase 4 Validator`

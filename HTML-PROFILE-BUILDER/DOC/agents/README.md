@@ -7,10 +7,10 @@ Public local wrappers live under:
 `.github/agents/`
 
 Canonical local sources:
-- Phase 1: `html_profile_system_builder.agent.md`
-- Phase 2: `html_profile_workflow_architect.agent.md`
-- Phase 3: `html_profile_builder_developer.agent.md`
-- Phase 4: `html_profile_validator.agent.md`
+- Phase 1: `phase-1-html-profile-system-builder.agent.md`
+- Phase 2: `phase-2-html-profile-workflow-architect.agent.md`
+- Phase 3: `phase-3-html-profile-builder-developer.agent.md`
+- Phase 4: `phase-4-html-profile-validator.agent.md`
 
 Execution order:
 `Phase 1 System Builder` -> `Phase 2 Workflow Architect` -> `Phase 3 Builder Developer` -> `Phase 4 Validator`

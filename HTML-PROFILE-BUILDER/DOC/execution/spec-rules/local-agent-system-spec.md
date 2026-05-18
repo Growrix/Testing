@@ -4,16 +4,16 @@
 Define the governed local agent workflow for the isolated `HTML-PROFILE-BUILDER/` root.
 
 ## Public Surface
-- Phase 1: `.github/agents/html-profile-system-builder.agent.md`
-- Phase 2: `.github/agents/html-profile-workflow-architect.agent.md`
-- Phase 3: `.github/agents/html-profile-builder-developer.agent.md`
-- Phase 4: `.github/agents/html-profile-validator.agent.md`
+- Phase 1: `.github/agents/phase-1-html-profile-system-builder.agent.md`
+- Phase 2: `.github/agents/phase-2-html-profile-workflow-architect.agent.md`
+- Phase 3: `.github/agents/phase-3-html-profile-builder-developer.agent.md`
+- Phase 4: `.github/agents/phase-4-html-profile-validator.agent.md`
 
 ## Canonical Surface
-- Phase 1: `DOC/agents/html_profile_system_builder.agent.md`
-- Phase 2: `DOC/agents/html_profile_workflow_architect.agent.md`
-- Phase 3: `DOC/agents/html_profile_builder_developer.agent.md`
-- Phase 4: `DOC/agents/html_profile_validator.agent.md`
+- Phase 1: `DOC/agents/phase-1-html-profile-system-builder.agent.md`
+- Phase 2: `DOC/agents/phase-2-html-profile-workflow-architect.agent.md`
+- Phase 3: `DOC/agents/phase-3-html-profile-builder-developer.agent.md`
+- Phase 4: `DOC/agents/phase-4-html-profile-validator.agent.md`
 
 ## Default Execution Order
 `Phase 1 System Builder` -> `Phase 2 Workflow Architect` -> `Phase 3 Builder Developer` -> `Phase 4 Validator`
