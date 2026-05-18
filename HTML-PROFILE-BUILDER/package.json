@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node scripts/build.js",
     "brief:sync": "node scripts/form-sync.js",
+    "copilot:handoff": "node scripts/build.js",
     "validate:output": "node scripts/validate-output.js",
     "qa:approve": "node scripts/approve-qa.js",
     "qr": "node scripts/qr-generate.js",

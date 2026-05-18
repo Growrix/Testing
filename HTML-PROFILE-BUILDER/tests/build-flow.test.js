@@ -17,15 +17,19 @@ test('buildProfile writes the locked output bundle with the local renderer', asy
   });
 
   const buildResult = readJsonFile(result.buildResultPath);
+  const copilotHandoff = fs.readFileSync(result.copilotHandoffPath, 'utf8');
 
   assert.equal(fs.existsSync(path.join(result.outputDirectory, 'profile.html')), true);
   assert.equal(fs.existsSync(path.join(result.outputDirectory, 'input-snapshot.json')), true);
   assert.equal(fs.existsSync(path.join(result.outputDirectory, 'prompt-bundle.md')), true);
+  assert.equal(fs.existsSync(path.join(result.outputDirectory, 'copilot-handoff.md')), true);
   assert.equal(fs.existsSync(path.join(result.outputDirectory, 'qa-report.md')), true);
   assert.equal(buildResult.status, 'passed');
   assert.equal(buildResult.delivery_class, 'blocked');
   assert.equal(buildResult.manual_qa_pending, true);
   assert.equal(buildResult.model, 'local-template-renderer');
+  assert.match(copilotHandoff, /Phase 3: HTML Profile Builder Developer/);
+  assert.match(copilotHandoff, /profile\.html/);
 });
 
 test('approveQaDelivery promotes a successful build to baseline_prototype', async () => {

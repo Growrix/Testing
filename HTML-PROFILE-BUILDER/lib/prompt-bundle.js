@@ -58,4 +58,33 @@ function buildPromptBundle({ brief, theme, themeName, promptFiles, templateSnipp
   ].join('\n\n');
 }
 
-export { buildPromptBundle, loadPromptFiles, loadTemplateSnippets };
+function buildCopilotHandoff({ brief, themeName, outputHtmlPath, outputDirectory }) {
+  return [
+    '# Copilot Handoff',
+    '',
+    'Use Phase 3: HTML Profile Builder Developer for this refinement pass.',
+    '',
+    '## Target Files',
+    `- Output directory: ${outputDirectory}`,
+    `- HTML file to refine: ${outputHtmlPath}`,
+    '',
+    '## Locked Rules',
+    '- Use only the brief data already captured in input-snapshot.json.',
+    '- Do not invent stats, offers, social links, prices, ratings, testimonials, process steps, or portfolio labels.',
+    '- Keep the file self-contained HTML with CSS inside <style>.',
+    '- Preserve required meta tags, semantic structure, and link rules.',
+    `- Keep the selected theme aligned with ${themeName}.`,
+    '',
+    '## Workflow',
+    '- Read input-snapshot.json, prompt-bundle.md, and the current profile.html.',
+    '- Improve the design quality, spacing, hierarchy, and conversion clarity without breaking the brief contract.',
+    '- Save changes directly into profile.html.',
+    '- Re-run validate-output.js after refinement.',
+    '- Approve QA only after the output is still valid.',
+    '',
+    '## Brief Snapshot',
+    JSON.stringify(brief, null, 2)
+  ].join('\n');
+}
+
+export { buildCopilotHandoff, buildPromptBundle, loadPromptFiles, loadTemplateSnippets };

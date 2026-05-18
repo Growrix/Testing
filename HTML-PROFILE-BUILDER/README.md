@@ -40,5 +40,11 @@ npm install
 npm run verify
 node scripts/form-sync.js --input tests/fixtures/sample-cafe-raw.json --output briefs/ready/brew-and-bean.json
 node scripts/build.js --brief briefs/ready/brew-and-bean.json
+code outputs/brew-and-bean/v1/copilot-handoff.md
 node scripts/approve-qa.js --result outputs/brew-and-bean/v1/build-result.json --by "QA Reviewer" --notes "Ready for delivery"
 ```
+
+## VS Code Workflow
+- Run the tasks from `.vscode/tasks.json` inside `HTML-PROFILE-BUILDER/`.
+- After each build, open `outputs/<clientId>/<revision>/copilot-handoff.md` in VS Code if you want Copilot to do a higher-touch refinement pass on top of the local renderer output.
+- The local renderer produces the first complete HTML file; Copilot can then refine that file inside the editor using the locked brief, theme, and output contract.

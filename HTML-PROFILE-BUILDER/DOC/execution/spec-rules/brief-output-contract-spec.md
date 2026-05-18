@@ -86,6 +86,12 @@ For milestone 1, `model` records the local generation engine identifier and must
 - Theme snapshot
 - Build instruction block
 
+### `copilot-handoff.md`
+- Phase-3 local agent reminder
+- exact target HTML file path
+- exact brief/output rules
+- refinement instructions for VS Code + Copilot use
+
 ### `qa-report.md`
 - Pre-filled checklist path
 - manual approval fields

@@ -28,6 +28,7 @@ One normalized client brief must produce one deterministic build bundle containi
 - one complete mobile-first HTML profile
 - one input snapshot used for the build
 - one prompt bundle used as a generation and design trace
+- one Copilot handoff file for optional editor-side refinement
 - one machine-readable build result manifest
 - one QA report/checklist artifact
 
@@ -183,6 +184,7 @@ outputs/<clientId>/<revision>/
   build-result.json
   input-snapshot.json
   prompt-bundle.md
+  copilot-handoff.md
   qa-report.md
 ```
 
@@ -213,6 +215,13 @@ outputs/<clientId>/<revision>/
 
 In milestone 1, `model` is the local generation engine identifier and must be `local-template-renderer`.
 
+`copilot-handoff.md` must include:
+- target output file path
+- brief and theme usage rules
+- no-hallucination rules
+- phase-3 local agent reference
+- validation reminders before QA approval
+
 Allowed `delivery_class` values:
 - `blocked`
 - `baseline_prototype`
@@ -225,7 +234,7 @@ Milestone 1 may complete as `baseline_prototype` only when all milestone-1 gates
 | Script | Input | Output | Notes |
 |---|---|---|---|
 | `scripts/form-sync.js` | form export or copied raw JSON | `briefs/ready/<clientId>.json` | Normalizes field names and arrays |
-| `scripts/build.js` | normalized brief + prompt files + theme + env | build bundle under `outputs/<clientId>/<revision>/` | Required milestone-1 script |
+| `scripts/build.js` | normalized brief + prompt files + theme | build bundle under `outputs/<clientId>/<revision>/` | Required milestone-1 script |
 | `scripts/validate-output.js` | built html + normalized brief | validation section inside `build-result.json` and `qa-report.md` | Required milestone-1 proof step |
 | `scripts/approve-qa.js` | successful `build-result.json` + reviewer details | approved `build-result.json` and filled `qa-report.md` | Required to move a build above `blocked` |
 | `scripts/qr-generate.js` | hosted URL | QR PNG | Optional |
@@ -259,6 +268,7 @@ Manual QA approval path:
 Copilot role in milestone 1:
 - GitHub Copilot helps build and evolve this system inside VS Code.
 - The runtime itself does not call Copilot or any external AI API.
+- Each build emits `copilot-handoff.md` so VS Code + Copilot can refine the generated HTML inside the editor without breaking the locked contract.
 
 ## 11. Local Agent Surface
 

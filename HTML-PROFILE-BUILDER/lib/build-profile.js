@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import { validateNormalizedBrief } from './brief-contract.js';
 import { generateMockHtml } from './mock-html.js';
-import { buildPromptBundle, loadPromptFiles, loadTemplateSnippets } from './prompt-bundle.js';
+import { buildCopilotHandoff, buildPromptBundle, loadPromptFiles, loadTemplateSnippets } from './prompt-bundle.js';
 import { ensureDirectory, readJsonFile, resolveInputPath, resolveRootPath, writeJsonFile } from './paths.js';
 import { resolveThemeName } from './theme-map.js';
 import { validateOutputBundle } from './validate-generated-output.js';
@@ -34,6 +34,7 @@ async function buildProfile({ briefPath, outputRoot }) {
 
   const snapshotPath = path.join(outputDirectory, 'input-snapshot.json');
   const promptBundlePath = path.join(outputDirectory, 'prompt-bundle.md');
+  const copilotHandoffPath = path.join(outputDirectory, 'copilot-handoff.md');
   const htmlPath = path.join(outputDirectory, 'profile.html');
   const buildResultPath = path.join(outputDirectory, 'build-result.json');
   const qaReportPath = path.join(outputDirectory, 'qa-report.md');
@@ -45,6 +46,16 @@ async function buildProfile({ briefPath, outputRoot }) {
   const usedModel = 'local-template-renderer';
 
   fs.writeFileSync(htmlPath, `${html.trim()}\n`, 'utf8');
+  fs.writeFileSync(
+    copilotHandoffPath,
+    `${buildCopilotHandoff({
+      brief,
+      themeName,
+      outputHtmlPath: htmlPath,
+      outputDirectory
+    })}\n`,
+    'utf8'
+  );
 
   const buildCompletedAt = new Date().toISOString();
   const { buildResult } = validateOutputBundle({
@@ -60,6 +71,7 @@ async function buildProfile({ briefPath, outputRoot }) {
 
   return {
     outputDirectory,
+    copilotHandoffPath,
     htmlPath,
     buildResultPath,
     qaReportPath,

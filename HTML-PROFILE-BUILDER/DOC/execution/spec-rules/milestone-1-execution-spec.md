@@ -16,6 +16,7 @@ From a normalized brief, the system must generate a validated HTML delivery bund
 - `build-result.json`
 - `input-snapshot.json`
 - `prompt-bundle.md`
+- `copilot-handoff.md`
 - `qa-report.md`
 
 ## Execution Rules
