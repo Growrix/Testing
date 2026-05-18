@@ -16,6 +16,7 @@ Define the governed workflow for designing, auditing, extending, repairing, and 
 - Updated registry documentation for any public-surface change
 - A blueprint readiness matrix listing `currently_supported`, `requires_extension`, and `missing_knowledge`
 - Lane handoff mapping from blueprint modules to execution owners
+- A Bangla external-input acquisition brief whenever progress is blocked on user-provided third-party items
 
 ## Change Classes
 Each request or discovered issue must be classified as at least one of:
@@ -37,6 +38,7 @@ Each request or discovered issue must be classified as at least one of:
 - Report unresolved structural drift explicitly; do not imply readiness.
 - For blueprint requests, classify every major module into `currently_supported`, `requires_extension`, or `missing_knowledge` before approving downstream execution.
 - Unknown tools, APIs, integrations, env vars, and operational dependencies must be reported as `knowledge_gap`/`missing_knowledge` rather than assumed.
+- When a missing dependency must be supplied by the user from an external site or dashboard, stop and emit a Bangla acquisition brief with: exact field name, why needed, secret-handling guidance, source site/menu path, what to copy, and fallback if access is missing.
 
 ## Validation
 - The public wrapper must exist in `.github/agents/` with valid frontmatter and a meaningful description.
@@ -45,6 +47,7 @@ Each request or discovered issue must be classified as at least one of:
 - Public registry docs must list newly added or materially changed public agents.
 - Mirror copies must be updated when the same lane is mirrored.
 - Blueprint-module coverage and lane ownership must be explicit for all major modules in scope.
+- External-input blocker messaging must instruct the user in Bangla where to go, what to collect, and whether each value is safe to paste.
 
 ## Failure Modes
 - `SYSTEM_REQUEST_MISSING`

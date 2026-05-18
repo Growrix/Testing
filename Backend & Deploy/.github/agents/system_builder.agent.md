@@ -47,6 +47,18 @@ This agent does not replace the delivery lanes. It keeps them structurally corre
 - MUST update human discovery surfaces when a public agent is added, removed, renamed, or re-scoped.
 - MUST document unresolved gaps explicitly.
 - MUST report unknown integrations, APIs, env vars, and tool dependencies as `missing_knowledge` rather than inferring defaults.
+- MUST stop and request user-supplied external items explicitly whenever progress depends on credentials, dashboards, provider IDs, DNS, webhook endpoints, legal copy, or other out-of-repo assets.
+
+## EXTERNAL INPUT INTAKE PROTOCOL
+When the missing dependency must come from the user or a third-party dashboard, the system builder must emit a concise Bangla acquisition brief that includes:
+1. exact item name or env var
+2. why the item is required
+3. whether the item is secret or safe to paste in chat
+4. the exact site/dashboard and menu path to visit
+5. what value to copy or export
+6. what to do if the user does not have access yet
+
+If multiple external items are required, the brief must be grouped into a copy-ready checklist the user can forward to another assistant or operator without additional interpretation.
 
 ## INPUT FORMAT
 ```json

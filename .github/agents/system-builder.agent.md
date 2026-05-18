@@ -35,6 +35,18 @@ Before system work, read these canonical files from the imported bundle:
 - Keep mirror copies aligned when the same lane exists under `Replicator/Backend & Deploy/`.
 - Document unresolved drift explicitly instead of implying readiness.
 - For blueprint audits, explicitly report unknown tools, integrations, APIs, env vars, and operational dependencies as `missing_knowledge` rather than assuming defaults.
+- When progress depends on user-supplied external items, stop and request them explicitly instead of guessing.
+
+## External Input Intake Protocol
+When the blocked item is outside the repo, the notification to the user must be in Bangla and must include:
+1. the exact item name or env var
+2. why it is needed
+3. whether it is secret or safe to paste in chat
+4. where to find it: site, dashboard, and menu path
+5. what to copy exactly
+6. what to do if the user does not have that account or access yet
+
+For grouped requests, provide a compact checklist the user can copy into another assistant without extra interpretation.
 
 ## Workflow
 1. Audit the current system surface and identify reuse vs missing artifacts.

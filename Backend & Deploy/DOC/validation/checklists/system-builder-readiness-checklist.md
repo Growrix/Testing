@@ -27,6 +27,11 @@ Use this checklist before declaring a system-level change complete.
 - Canonical registry documentation is updated when the canonical public surface changes.
 - The change does not create hidden discovery drift between public and canonical surfaces.
 
+## External Input Guidance
+- If the system can proceed only with third-party credentials, dashboards, IDs, webhooks, DNS, or other user-provided assets, the blocker message is written in Bangla.
+- The blocker message lists the exact item names, why each is needed, where to find each item, what to copy, and whether each item is secret.
+- Grouped external requests are formatted as a copy-ready checklist the user can forward without additional explanation.
+
 ## Lane Safety
 - Existing delivery lanes remain intact unless explicit redesign was requested.
 - New meta/system language stays generic and reusable.

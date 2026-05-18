@@ -42,6 +42,7 @@ Use this when the output must be planned and assembled against the DS runtime.
 
 Use this for system design, audit, extension, repair, alignment, and documentation across the agentic system itself.
 For large architecture blueprints, `[Meta] System Builder` now emits module-level readiness buckets: `currently_supported`, `requires_extension`, and `missing_knowledge` before lane handoff.
+When execution is blocked on third-party credentials, dashboards, provider IDs, webhooks, or other user-provided assets, `[Meta] System Builder` must emit a Bangla acquisition brief that tells the user where to go and what to collect.
 
 ---
 
