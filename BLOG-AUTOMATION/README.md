@@ -21,5 +21,32 @@ Canonical planning document:
 
 Current status:
 - planning updated
-- implementation not started in this root yet
-- agent registry placeholder created for future project-specific lanes
+- local agent system added
+- milestone-1 workspace scaffold added
+
+## Current Structure
+
+- `.github/agents/`: local public agent surface
+- `DOC/`: canonical planning, specs, checklists, runbooks, and ADRs
+- `apps/automation-api/`: milestone-1 API scaffold
+- `packages/`: milestone-1 domain packages
+- `storage/`: schema and seed placeholders
+- `infra/n8n/`: workflow manifest scaffold
+- `tests/`: milestone-1 unit coverage scaffold
+
+## Commands
+
+- `npm install`
+- `npm run typecheck`
+- `npm run test`
+- `npm run build`
+- `npm run verify`
+- `npm run dev:api`
+
+## Delivery Classification
+
+Current classification:
+
+`scaffold_ready_implementation_pending`
+
+This means the isolated root, local agent system, specs, checklist coverage, and initial milestone-1 code scaffold now exist, but the full production feature implementation is still pending.

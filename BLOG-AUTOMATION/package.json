@@ -1,0 +1,33 @@
+{
+  "name": "blog-automation",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "packages/contracts",
+    "packages/shared",
+    "packages/keyword-engine",
+    "packages/blog-planner",
+    "packages/post-creator",
+    "packages/seo-optimizer",
+    "packages/quality-gates",
+    "packages/cms-core",
+    "packages/cms-adapter-sanity",
+    "packages/analytics-engine",
+    "packages/workflow-runtime",
+    "apps/automation-api"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run build",
+    "test": "vitest run",
+    "verify": "npm run build && npm run test",
+    "dev:api": "npm run dev --workspace @blog-automation/automation-api"
+  },
+  "devDependencies": {
+    "@types/express": "^5",
+    "@types/node": "^20",
+    "tsx": "^4",
+    "typescript": "^5",
+    "vitest": "^4"
+  }
+}

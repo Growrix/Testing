@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "workflows": [
+    {
+      "id": "keyword-research",
+      "trigger": "manual_or_schedule",
+      "routes": ["/api/keywords/research/run", "/api/keywords/opportunities"]
+    },
+    {
+      "id": "brief-generation",
+      "trigger": "keyword_approved",
+      "routes": ["/api/briefs/generate", "/api/outlines/generate"]
+    },
+    {
+      "id": "post-creation",
+      "trigger": "brief_approved",
+      "routes": ["/api/posts/create-draft", "/api/seo/optimize", "/api/quality/run"]
+    },
+    {
+      "id": "publish-run",
+      "trigger": "post_approved",
+      "routes": ["/api/publish/draft", "/api/publish/run", "/api/publish/notify-sitemap"]
+    },
+    {
+      "id": "weekly-analytics-sync",
+      "trigger": "weekly_schedule",
+      "routes": ["/api/analytics/sync", "/api/analytics/weekly-report", "/api/analytics/evaluate-refresh"]
+    }
+  ]
+}

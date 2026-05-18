@@ -1,15 +1,25 @@
 # BLOG-AUTOMATION Agent Surface
 
-This folder is reserved for blog-automation-specific agents.
+This folder is the public local agent surface for the isolated blog automation project.
 
-All future agent prompts for this system must stay inside this isolated root rather than the workspace-level `.github/agents/` folder.
+All blog-automation-specific agent prompts must stay inside this root rather than the workspace-level `.github/agents/` folder.
 
-Intended local lanes:
-- `blog-automation-system-builder`: system design, audit, folder governance, and capability alignment inside this root
-- `blog-automation-backend-planner`: API, queue, storage, and integration planning
-- `blog-automation-workflow-architect`: n8n workflows, scheduling, retries, and automation contracts
-- `blog-automation-content-ops-planner`: editorial flow, prompt contracts, review gates, and SEO/content policy
-- `blog-automation-validator`: quality gates, smoke paths, and release readiness
+## Public local lanes
 
-Constraint:
+- `blog-automation-system-builder.agent.md`
+- `blog-automation-backend-planner.agent.md`
+- `blog-automation-workflow-architect.agent.md`
+- `blog-automation-content-ops-planner.agent.md`
+- `blog-automation-validator.agent.md`
+
+## Canonical local sources
+
+Canonical local agent sources live under:
+
+`DOC/agents/`
+
+## Rules
+
 - Do not place blog-automation-specific agents in the workspace root unless the project is intentionally promoted to a shared system.
+- Keep public wrappers and canonical local sources aligned.
+- Keep supporting execution specs and validation checklists aligned with any non-trivial local agent change.
