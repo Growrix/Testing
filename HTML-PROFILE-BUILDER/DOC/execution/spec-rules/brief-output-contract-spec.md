@@ -75,6 +75,8 @@ Define the exact input and output contracts for the HTML Profile Builder.
 - `build_started_at`
 - `build_completed_at`
 
+For milestone 1, `model` records the local generation engine identifier and must be `local-template-renderer`.
+
 ### `input-snapshot.json`
 - Exact normalized brief used for the generation call
 

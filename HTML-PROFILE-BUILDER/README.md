@@ -29,13 +29,16 @@ Default order:
 ## Locked Milestone Outcome
 Milestone 1 is a deterministic local builder that turns one normalized client brief into one validated HTML delivery bundle with traceable build artifacts.
 
+## Runtime Model
+Milestone 1 does not call an external AI API.
+
+GitHub Copilot is used during development inside VS Code to help author and refine the builder, prompts, themes, and templates. The runtime itself is a local deterministic renderer inside this isolated root.
+
 ## Implemented Local Commands
 ```bash
 npm install
 npm run verify
 node scripts/form-sync.js --input tests/fixtures/sample-cafe-raw.json --output briefs/ready/brew-and-bean.json
-node scripts/build.js --brief briefs/ready/brew-and-bean.json --mock
+node scripts/build.js --brief briefs/ready/brew-and-bean.json
 node scripts/approve-qa.js --result outputs/brew-and-bean/v1/build-result.json --by "QA Reviewer" --notes "Ready for delivery"
 ```
-
-Use `--mock` for local structural proof without a live Anthropic key. Remove `--mock` for the real provider-backed build path.

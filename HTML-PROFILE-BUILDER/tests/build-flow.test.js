@@ -8,15 +8,12 @@ import { approveQaDelivery } from '../lib/qa-approval.js';
 import { buildProfile } from '../lib/build-profile.js';
 import { readJsonFile, resolveRootPath } from '../lib/paths.js';
 
-test('buildProfile writes the locked output bundle in mock mode', async () => {
+test('buildProfile writes the locked output bundle with the local renderer', async () => {
   const tempDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'html-profile-builder-'));
 
   const result = await buildProfile({
     briefPath: resolveRootPath('tests', 'fixtures', 'sample-agency-normalized.json'),
-    outputRoot: tempDirectory,
-    useMock: true,
-    modelName: 'mock-local-generator',
-    apiKey: ''
+    outputRoot: tempDirectory
   });
 
   const buildResult = readJsonFile(result.buildResultPath);
@@ -28,6 +25,7 @@ test('buildProfile writes the locked output bundle in mock mode', async () => {
   assert.equal(buildResult.status, 'passed');
   assert.equal(buildResult.delivery_class, 'blocked');
   assert.equal(buildResult.manual_qa_pending, true);
+  assert.equal(buildResult.model, 'local-template-renderer');
 });
 
 test('approveQaDelivery promotes a successful build to baseline_prototype', async () => {
@@ -35,10 +33,7 @@ test('approveQaDelivery promotes a successful build to baseline_prototype', asyn
 
   const result = await buildProfile({
     briefPath: resolveRootPath('tests', 'fixtures', 'sample-cafe-normalized.json'),
-    outputRoot: tempDirectory,
-    useMock: true,
-    modelName: 'mock-local-generator',
-    apiKey: ''
+    outputRoot: tempDirectory
   });
 
   const approved = approveQaDelivery({

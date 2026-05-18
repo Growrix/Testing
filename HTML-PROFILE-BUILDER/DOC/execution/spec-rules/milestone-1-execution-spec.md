@@ -10,7 +10,6 @@ From a normalized brief, the system must generate a validated HTML delivery bund
 - `briefs/ready/<clientId>.json`
 - prompt files under `prompts/`
 - theme files under `themes/`
-- required env var `ANTHROPIC_API_KEY`
 
 ## Required Outputs
 - `profile.html`
@@ -22,6 +21,7 @@ From a normalized brief, the system must generate a validated HTML delivery bund
 ## Execution Rules
 - The build must stop on missing required brief fields.
 - The build must snapshot the exact input payload used for generation.
+- The generator for milestone 1 is the local template renderer, not an external AI API call.
 - The validator must compare the brief against the generated HTML for required fields and forbidden hallucinations.
 - The delivery class must remain `blocked` until manual QA is approved and recorded.
 - Optional deploy and QR helpers are non-blocking and must remain outside the critical path.

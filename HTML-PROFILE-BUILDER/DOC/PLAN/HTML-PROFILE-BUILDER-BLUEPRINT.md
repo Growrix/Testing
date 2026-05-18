@@ -12,7 +12,7 @@ This system is locked as an isolated local builder, not a shared website/runtime
 
 The product is:
 - a Node.js local CLI build system
-- a prompt-driven HTML generator
+- a prompt-and-template-driven local HTML renderer
 - a file-output delivery workflow
 - an optional local-only deploy/QR helper surface
 
@@ -27,7 +27,7 @@ The product is not:
 One normalized client brief must produce one deterministic build bundle containing:
 - one complete mobile-first HTML profile
 - one input snapshot used for the build
-- one prompt bundle used for the model call
+- one prompt bundle used as a generation and design trace
 - one machine-readable build result manifest
 - one QA report/checklist artifact
 
@@ -40,7 +40,7 @@ Milestone 1 includes:
 - brief normalization into a locked per-client JSON contract
 - theme selection by `colorVibe`
 - prompt bundle assembly by `businessType`
-- one-call AI generation using Anthropic Claude
+- deterministic local HTML rendering from the locked brief + theme + section rules
 - HTML structural validation
 - manual QA checklist generation
 - optional QR generation after a successful build
@@ -99,7 +99,6 @@ HTML-PROFILE-BUILDER/
 
 | Input | Required | Type | Notes |
 |---|---|---|---|
-| `ANTHROPIC_API_KEY` | yes | secret env var | Required for build generation |
 | `NETLIFY_TOKEN` | no | secret env var | Optional only for later deploy automation |
 | `prompts/system-prompt.md` | yes | markdown | Shared generation rules |
 | `prompts/<businessType>-prompt.md` | conditional | markdown | Loaded only when a matching file exists |
@@ -212,6 +211,8 @@ outputs/<clientId>/<revision>/
 - `build_started_at`
 - `build_completed_at`
 
+In milestone 1, `model` is the local generation engine identifier and must be `local-template-renderer`.
+
 Allowed `delivery_class` values:
 - `blocked`
 - `baseline_prototype`
@@ -254,6 +255,10 @@ Manual QA approval path:
 - a successful build starts as `delivery_class=blocked`
 - `scripts/approve-qa.js` records reviewer name, approval timestamp, and notes
 - only then may milestone 1 promote the build to `baseline_prototype`
+
+Copilot role in milestone 1:
+- GitHub Copilot helps build and evolve this system inside VS Code.
+- The runtime itself does not call Copilot or any external AI API.
 
 ## 11. Local Agent Surface
 

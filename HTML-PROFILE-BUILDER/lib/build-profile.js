@@ -3,7 +3,6 @@ import path from 'node:path';
 
 import { validateNormalizedBrief } from './brief-contract.js';
 import { generateMockHtml } from './mock-html.js';
-import { requestAnthropicHtml } from './model-client.js';
 import { buildPromptBundle, loadPromptFiles, loadTemplateSnippets } from './prompt-bundle.js';
 import { ensureDirectory, readJsonFile, resolveInputPath, resolveRootPath, writeJsonFile } from './paths.js';
 import { resolveThemeName } from './theme-map.js';
@@ -14,7 +13,7 @@ function readTheme(themeName) {
   return readJsonFile(themePath);
 }
 
-async function buildProfile({ briefPath, outputRoot, useMock, modelName, apiKey }) {
+async function buildProfile({ briefPath, outputRoot }) {
   const buildStartedAt = new Date().toISOString();
   const resolvedBriefPath = resolveInputPath(briefPath);
   const brief = validateNormalizedBrief(readJsonFile(resolvedBriefPath));
@@ -42,24 +41,8 @@ async function buildProfile({ briefPath, outputRoot, useMock, modelName, apiKey 
   writeJsonFile(snapshotPath, brief);
   fs.writeFileSync(promptBundlePath, `${promptBundle}\n`, 'utf8');
 
-  let html;
-  let usedModel = modelName;
-
-  if (useMock) {
-    usedModel = 'mock-local-generator';
-    html = generateMockHtml({ brief, theme, themeName });
-  } else {
-    if (!apiKey) {
-      throw new Error('Missing required env var ANTHROPIC_API_KEY. Set it or run with --mock for local structural validation.');
-    }
-
-    html = await requestAnthropicHtml({
-      apiKey,
-      promptBundle,
-      systemPrompt: promptFiles.systemPrompt,
-      model: modelName
-    });
-  }
+  const html = generateMockHtml({ brief, theme, themeName });
+  const usedModel = 'local-template-renderer';
 
   fs.writeFileSync(htmlPath, `${html.trim()}\n`, 'utf8');
 

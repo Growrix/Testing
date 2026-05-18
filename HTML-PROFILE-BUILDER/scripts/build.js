@@ -16,25 +16,18 @@ function readFlag(args, flagName) {
   return prefixed ? prefixed.split('=').slice(1).join('=') : undefined;
 }
 
-function hasFlag(args, flagName) {
-  return args.includes(flagName);
-}
-
 const args = process.argv.slice(2);
 const briefPath = readFlag(args, '--brief');
 
 if (!briefPath) {
-  console.error('Usage: node scripts/build.js --brief briefs/ready/client.json [--mock] [--output-root outputs]');
+  console.error('Usage: node scripts/build.js --brief briefs/ready/client.json [--output-root outputs]');
   process.exit(1);
 }
 
 try {
   const result = await buildProfile({
     briefPath,
-    outputRoot: readFlag(args, '--output-root'),
-    useMock: hasFlag(args, '--mock'),
-    modelName: process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-5',
-    apiKey: process.env.ANTHROPIC_API_KEY || ''
+    outputRoot: readFlag(args, '--output-root')
   });
 
   console.log(`Build complete: ${result.outputDirectory}`);
