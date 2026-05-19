@@ -25,8 +25,8 @@ const E2E_SEED_PRODUCT = {
   image: null,
 };
 
-async function seedPlaywrightProductIfMissing() {
-  const candidateDataDirectories = new Set<string>([
+function getCandidateDataDirectories() {
+  const directories = new Set<string>([
     path.join(process.cwd(), ".data"),
     path.join(process.cwd(), ".data", "playwright"),
     path.join(process.cwd(), "web", ".data"),
@@ -37,10 +37,14 @@ async function seedPlaywrightProductIfMissing() {
 
   const configuredDataDirectory = process.env.AGENCY_DATA_DIRECTORY?.trim();
   if (configuredDataDirectory) {
-    candidateDataDirectories.add(configuredDataDirectory);
+    directories.add(configuredDataDirectory);
   }
 
-  for (const dataDirectory of candidateDataDirectories) {
+  return Array.from(directories);
+}
+
+async function seedPlaywrightProductIfMissing() {
+  for (const dataDirectory of getCandidateDataDirectories()) {
     const databasePath = path.join(dataDirectory, "agency-db.json");
     await mkdir(dataDirectory, { recursive: true });
 
@@ -74,6 +78,46 @@ async function seedPlaywrightProductIfMissing() {
     await writeFile(databasePath, JSON.stringify(nextDatabase, null, 2), "utf8");
   }
 }
+
+async function cleanupSeededPlaywrightProduct() {
+  for (const dataDirectory of getCandidateDataDirectories()) {
+    const databasePath = path.join(dataDirectory, "agency-db.json");
+
+    let database: Record<string, unknown> = {};
+    try {
+      const content = await readFile(databasePath, "utf8");
+      database = JSON.parse(content) as Record<string, unknown>;
+    } catch {
+      continue;
+    }
+
+    const existingProducts = Array.isArray(database.products) ? database.products : [];
+    const filteredProducts = existingProducts.filter(
+      (product) =>
+        !(
+          typeof product === "object" &&
+          product !== null &&
+          "slug" in product &&
+          (product as { slug?: string }).slug === E2E_SEED_PRODUCT.slug
+        ),
+    );
+
+    if (filteredProducts.length === existingProducts.length) {
+      continue;
+    }
+
+    const nextDatabase = {
+      ...database,
+      products: filteredProducts,
+    };
+
+    await writeFile(databasePath, JSON.stringify(nextDatabase, null, 2), "utf8");
+  }
+}
+
+test.afterAll(async () => {
+  await cleanupSeededPlaywrightProduct();
+});
 
 async function getFirstPublicProductSlug(request: APIRequestContext) {
   const response = await request.get("/api/v1/shop/products");
