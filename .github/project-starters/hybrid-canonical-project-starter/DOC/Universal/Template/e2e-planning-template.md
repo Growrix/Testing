@@ -40,9 +40,9 @@
 - Runtime smoke checks
 
 ## 8. Ordered Backlog
-1. 
-2. 
-3. 
+1.
+2.
+3.
 
 ## 9. Risks And Open Questions
-- 
+-

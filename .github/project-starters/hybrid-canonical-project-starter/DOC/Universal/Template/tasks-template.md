@@ -9,8 +9,8 @@
 - [ ] T001
 
 ## Next Steps
-1. 
-2. 
+1.
+2.
 
 ## Blockers
 - None
