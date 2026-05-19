@@ -42,11 +42,20 @@ For large architecture blueprints, this lane now performs module-level readiness
 For non-SaaS local automation/tooling blueprints such as Node CLI generators, prompt-driven builders, local dashboards, or file-output systems, this lane must first decide whether the work belongs in a new isolated local system instead of the shared phase1-7/backend lanes.
 When progress depends on user-supplied external accounts, keys, IDs, dashboards, or other off-repo assets, this lane must ask for them with Bangla acquisition instructions.
 
+## Core Git Management
+These are root-level Git governance assets for the workspace itself:
+- `github-agent.agent.md`
+
+Use this root agent when the work is about repo targeting, onboarding a new repo, commit or pull or push safety, factory-backup routing, or workspace Git registry updates.
+The canonical support root for this agent lives under `.github/git-workspace-manager/`, and its human-facing owner brief is `.github/Github_Agent.md`.
+This is a core root system for the Testing factory, not an isolated local subsystem.
+
 ## Safety Rules
 - Keep Phase 1 unchanged as the shared frontend entrypoint.
 - Choose exactly one frontend-building lane after Phase 1: `[REPLI SYSTEM]` or `[DOC SYSTEM]`.
 - Both frontend lanes must converge into the same later Phase 5, 6, and 7 process.
 - Treat phase4-7 as an opt-in continuation lane.
+- Use `github-agent.agent.md` for workspace Git operations instead of repurposing frontend or backend agents for repo management.
 - Use the meta lane for system structure work before editing delivery lanes directly.
 - Keep backend/deploy artifacts under `Backend & Deploy/` unless the user explicitly asks to promote them into the main root.
 - Do not mutate source frontend projects in place during phase5 import/attach work.
