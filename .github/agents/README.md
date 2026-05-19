@@ -50,6 +50,12 @@ Use this root agent when the work is about repo targeting, onboarding a new repo
 The canonical support root for this agent lives under `.github/git-workspace-manager/`, and its human-facing owner brief is `.github/Github_Agent.md`.
 This is a core root system for the Testing factory, not an isolated local subsystem.
 
+## Project Wrapper Entries
+These are root-selectable wrappers that delegate to project-local canonical agents:
+- `growrixos-strict-executor.agent.md` -> `On Going DOCS/Growrixos/.github/agents/growrix-strict-executor.agent.md`
+
+Use these wrappers when you need picker visibility from the root surface but want execution behavior to follow the local project agent contract.
+
 ## Safety Rules
 - Keep Phase 1 unchanged as the shared frontend entrypoint.
 - Choose exactly one frontend-building lane after Phase 1: `[REPLI SYSTEM]` or `[DOC SYSTEM]`.
@@ -59,6 +65,7 @@ This is a core root system for the Testing factory, not an isolated local subsys
 - Use the meta lane for system structure work before editing delivery lanes directly.
 - Keep backend/deploy artifacts under `Backend & Deploy/` unless the user explicitly asks to promote them into the main root.
 - Do not mutate source frontend projects in place during phase5 import/attach work.
+- Use project wrapper entries for project delivery roles; do not route project feature work through `github-agent.agent.md`.
 
 ## Convergence Contract
 - `[REPLI SYSTEM]` and `[DOC SYSTEM]` are frontend-only alternatives.
