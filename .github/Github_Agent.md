@@ -41,3 +41,8 @@ It is responsible for protecting repo correctness across the Testing factory by 
 If the request is about which repo to target, whether a commit or push is safe, how to onboard a repo into the workspace registry, or whether a change belongs in the root backup repo versus a project repo, use the Github Agent.
 
 Always resolve the active folder against the folder-to-repo index before push. If a mapped folder targets a different remote than the current git root remote, block direct root push and use the mapped strategy (for example subtree push).
+
+For subtree strategy, run a prefix completeness preflight:
+- count tracked files under the prefix
+- count untracked files under the prefix
+- if untracked > 0, block subtree push and require a full folder mirror sync flow to the target remote branch

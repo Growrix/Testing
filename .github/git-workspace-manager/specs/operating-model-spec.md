@@ -17,6 +17,7 @@ Requirements:
 - resolve active folder against folder-to-repo index before push
 - when folder mapping remote differs from current git root remote, block direct root push
 - use mapped push strategy (direct repo root or subtree) for folder-scoped projects
+- for subtree strategy, run prefix completeness preflight and block when untracked files exist under prefix
 - run Git only against that repo root
 - show commit or pull or push preflight before action
 - do not touch the root backup repo unless explicitly requested in addition
@@ -40,6 +41,7 @@ Requirements:
 - child project task resolving to workspace root
 - folder-mapped project resolving to workspace root
 - folder-mapped remote mismatch on push
+- subtree prefix contains untracked files
 - push requested for a repo with no remote
 - alias path not normalized to canonical path
 - multiple candidate repos for one action
@@ -53,6 +55,7 @@ Requirements:
 - remote summary
 - folder mapping match (yes or no)
 - push strategy (direct or subtree)
+- subtree completeness summary (tracked vs untracked under prefix)
 - requested action
 - decision: allow or block
 - blocking reason when blocked

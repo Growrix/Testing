@@ -11,6 +11,7 @@ This is a core root system for the Testing factory, not an isolated project subs
 - operating model and flow separation
 - repo registry contract
 - folder-to-repo index for folder-scoped projects
+- subtree completeness preflight for folder-scoped push safety
 - readiness checklists
 - seed registry files
 - future internal support docs for repo audit and safety logic

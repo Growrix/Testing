@@ -6,6 +6,7 @@
 - Folder-to-repo index entries resolve to canonical repo ids.
 - Project repos without remotes are marked as no-push until configured.
 - Folder-scoped projects with non-root remotes are blocked from direct root push and have a defined subtree strategy.
+- Subtree strategy includes tracked vs untracked prefix preflight and blocks push when untracked files exist.
 - The policy file blocks workspace-root fallback when a child repo match exists.
 - Factory backup flow and project flow are documented separately.
 - Unknown or newly created repos are treated as blocked until registered.
