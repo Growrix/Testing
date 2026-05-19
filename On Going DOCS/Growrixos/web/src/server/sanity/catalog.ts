@@ -222,14 +222,14 @@ const SANITY_HTML_BUSINESS_PROFILE_TEMPLATES_QUERY = `*[
   _type == "htmlBusinessProfileTemplate" &&
   defined(slug.current) &&
   ($preview || coalesce(published, true) == true)
-] | order(coalesce(featuredRank, 999), coalesce(profileNumber, 999), coalesce(title, name) asc) {
+] | order(coalesce(orderRank, featuredRank, 999), coalesce(profileNumber, 999), coalesce(name, title) asc) {
   "slug": slug.current,
-  "name": coalesce(title, name),
+  "name": coalesce(name, title),
   price,
   livePreviewUrl,
   embeddedPreviewUrl,
-  profileCategoryLabel,
-  profileCategorySlug,
+  "profileCategoryLabel": coalesce(profileCategoryLabel, category),
+  "profileCategorySlug": coalesce(profileCategorySlug, categorySlug),
   profileNumber,
   tag,
   published,
@@ -244,15 +244,15 @@ const SANITY_HTML_BUSINESS_PROFILE_TEMPLATES_QUERY = `*[
   "enhancementPlan": coalesce(enhancementPlan, []),
   "stack": coalesce(stack, []),
   "highlights": coalesce(highlights, []),
-  "htmlTemplateFileUrl": htmlTemplateFile.asset->url,
+  "htmlTemplateFileUrl": coalesce(htmlTemplateFile.asset->url, templateFile.asset->url),
   "deliveryBundleFileUrl": deliveryBundleFile.asset->url,
   "image": {
     "url": previewImage.asset->url,
-    "alt": coalesce(previewImage.alt, previewImageAlt, title)
+    "alt": coalesce(previewImage.alt, previewImageAlt, name, title)
   },
   "gallery": coalesce(gallery, [])[]{
     "url": asset->url,
-    "alt": coalesce(alt, title)
+    "alt": coalesce(alt, name, title)
   }
 }`;
 
@@ -429,12 +429,13 @@ function normalizeHtmlBusinessProfileTemplate(item: SanityHtmlBusinessProfileTem
     return null;
   }
 
-  const profileCategory = normalizeString(item.profileCategoryLabel, "Creative & Marketing");
-  const profileCategorySlug = normalizeString(item.profileCategorySlug, "creative-marketing");
+  const profileCategory = normalizeString(item.profileCategoryLabel, "Creative Business");
+  const profileCategorySlug = normalizeString(item.profileCategorySlug, "creative-business");
   const htmlTemplateUrl = normalizeString(item.htmlTemplateFileUrl) || undefined;
   const livePreviewUrl = normalizeString(item.livePreviewUrl) || htmlTemplateUrl;
   const embeddedPreviewUrl = normalizeString(item.embeddedPreviewUrl) || htmlTemplateUrl;
   const highlights = normalizeKeyValueArray(item.highlights);
+  const normalizedStack = normalizeStringArray(item.stack);
   const gallery = (item.gallery ?? [])
     .map((image) => normalizeImage(image, null))
     .filter((image): image is StockImage => image !== null);
@@ -470,8 +471,8 @@ function normalizeHtmlBusinessProfileTemplate(item: SanityHtmlBusinessProfileTem
     inScope: normalizeStringArray(item.inScope),
     outOfScope: normalizeStringArray(item.outOfScope),
     enhancementPlan: normalizeStringArray(item.enhancementPlan),
-    stack: normalizeStringArray(item.stack).length > 0
-      ? normalizeStringArray(item.stack)
+    stack: normalizedStack.length > 0
+      ? normalizedStack
       : ["HTML5", "CSS3", "JavaScript"],
     highlights,
     image: normalizeImage(item.image, null),

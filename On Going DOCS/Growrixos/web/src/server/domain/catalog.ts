@@ -21,9 +21,11 @@ import {
 } from "@/server/sanity/catalog";
 import {
   deleteSanityCaseStudy,
+  deleteSanityHtmlBusinessProfileTemplate,
   deleteSanityServicePage,
   deleteSanityShopItem,
   upsertSanityCaseStudy,
+  upsertSanityHtmlBusinessProfileTemplate,
   upsertSanityServicePage,
   upsertSanityShopItem,
 } from "@/server/sanity/management";
@@ -104,6 +106,10 @@ function parseUsdPriceToCents(price: string) {
 
 function toHtmlProductSlug(slug: string) {
   return slug.startsWith("html-business-profile-") ? slug : `html-business-profile-${slug}`;
+}
+
+function toSanityHtmlTemplateSlug(slug: string) {
+  return slug.replace(/^html-business-profile-/, "");
 }
 
 function getDefaultHtmlBusinessProfileProducts(): ManagedProductRecord[] {
@@ -406,9 +412,12 @@ export async function deleteManagedService(serviceId: string) {
 }
 
 export async function listManagedProducts() {
-  const cmsProducts = await listSanityShopItems({ preview: true }).catch(() => []);
-  if (cmsProducts.length > 0) {
-    return cmsProducts;
+  const [cmsProducts, cmsHtmlTemplates] = await Promise.all([
+    listSanityShopItems({ preview: true }).catch(() => []),
+    listSanityHtmlBusinessProfileTemplates({ preview: true }).catch(() => []),
+  ]);
+  if (cmsProducts.length > 0 || cmsHtmlTemplates.length > 0) {
+    return mergeCatalogProducts(cmsProducts, cmsHtmlTemplates);
   }
 
   const database = await ensureCatalogSeeded();
@@ -429,7 +438,11 @@ export async function upsertManagedProduct(input: ManagedProductRecord) {
     products: [nextRecord, ...database.products.filter((product) => product.slug !== input.slug)],
   }));
 
-  await upsertSanityShopItem(nextRecord).catch(() => false);
+  if (nextRecord.categorySlug === HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug) {
+    await upsertSanityHtmlBusinessProfileTemplate(nextRecord).catch(() => false);
+  } else {
+    await upsertSanityShopItem(nextRecord).catch(() => false);
+  }
 
   return nextRecord;
 }
@@ -441,7 +454,11 @@ export async function deleteManagedProduct(productSlug: string) {
     products: database.products.filter((product) => product.slug !== productSlug),
   }));
 
-  await deleteSanityShopItem(productSlug).catch(() => false);
+  const htmlSlugCandidates = Array.from(new Set([productSlug, toSanityHtmlTemplateSlug(productSlug)]));
+  await Promise.all([
+    deleteSanityShopItem(productSlug).catch(() => false),
+    ...htmlSlugCandidates.map((slug) => deleteSanityHtmlBusinessProfileTemplate(slug).catch(() => false)),
+  ]);
 }
 
 export async function listManagedPortfolioProjects() {
