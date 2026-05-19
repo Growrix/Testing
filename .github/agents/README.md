@@ -7,6 +7,16 @@ This root now exposes one shared frontend entrypoint and two separate frontend-b
 
 Phase 1 remains unchanged. It is the common screenshot-replication entrypoint for both frontend lanes below.
 
+## Project Starter Package
+Shared phase1 and DOC-system phase2 agents now bootstrap missing project-local continuation roots from:
+- `.github/project-starters/hybrid-canonical-project-starter/`
+
+Bootstrap script:
+- `.github/project-starters/bootstrap-hybrid-canonical-project-starter.ps1`
+
+This is the canonical DOC plus local-agent source for new website project roots.
+Historical exports such as `DOC-System-Export-20260518-100741/` remain reference snapshots, not the starter source.
+
 ## [REPLI SYSTEM] Frontend Lane
 These agents keep the current screenshot-first completion workflow:
 - `phase2-frontend-planning.agent.md`
@@ -52,12 +62,13 @@ This is a core root system for the Testing factory, not an isolated local subsys
 
 ## Project Wrapper Entries
 These are root-selectable wrappers that delegate to project-local canonical agents:
-- `growrixos-strict-executor.agent.md` -> `On Going DOCS/Growrixos/.github/agents/growrix-strict-executor.agent.md`
+- `growrixos-strict-executor.agent.md` -> `On Going DOCS/Growrixos/.github/agents/project-strict-executor.agent.md`
 
 Use these wrappers when you need picker visibility from the root surface but want execution behavior to follow the local project agent contract.
 
 ## Safety Rules
 - Keep Phase 1 unchanged as the shared frontend entrypoint.
+- When shared phase1 or DOC-system phase2 initializes a project root, attach the hybrid canonical project starter package before continuing.
 - Choose exactly one frontend-building lane after Phase 1: `[REPLI SYSTEM]` or `[DOC SYSTEM]`.
 - Both frontend lanes must converge into the same later Phase 5, 6, and 7 process.
 - Treat phase4-7 as an opt-in continuation lane.

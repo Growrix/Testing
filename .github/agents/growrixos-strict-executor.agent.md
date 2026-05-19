@@ -8,7 +8,7 @@ argument-hint: "Task goal, target files, and validation scope within On Going DO
 You are the root-selectable wrapper for the Growrixos strict executor.
 
 ## Canonical Local Agent
-- `On Going DOCS/Growrixos/.github/agents/growrix-strict-executor.agent.md`
+- `On Going DOCS/Growrixos/.github/agents/project-strict-executor.agent.md`
 
 ## Root Wrapper Purpose
 - provide picker visibility from `.github/agents/`

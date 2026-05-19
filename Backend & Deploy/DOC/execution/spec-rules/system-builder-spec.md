@@ -36,6 +36,7 @@ Each request or discovered issue must be classified as at least one of:
 - Reuse existing structures before creating new ones.
 - For any non-trivial public agent change, update the wrapper, canonical source, support files, and registry docs together.
 - Preserve active delivery lanes unless the user explicitly asks to redesign or replace them.
+- When shared frontend lanes depend on a reusable project-local continuation package, the starter package path, bootstrap contract or script, and local agent filenames must be explicit and documented.
 - Classify blueprint fit before handoff: shared-lane fit, isolated local-system fit, or unsupported without new knowledge.
 - Do not force non-SaaS local automation, CLI, prompt-driven builder, or file-output blueprints through the shared phase1-7 or Foundation lanes when an isolated root is the cleaner and safer fit.
 - When an isolated local system is required, use `isolated-local-agent-system-spec.md` and `isolated-local-agent-system-readiness-checklist.md` as the minimum governance pattern.
@@ -50,6 +51,7 @@ Each request or discovered issue must be classified as at least one of:
 - The public wrapper must exist in `.github/agents/` with valid frontmatter and a meaningful description.
 - The canonical agent must exist under both `Backend & Deploy/.github/agents/` and `Backend & Deploy/DOC/agents/`.
 - Supporting governance files must exist for any non-trivial meta agent change.
+- Shared-lane starter bootstrap changes must name the canonical starter source and the bootstrap contract used by shared phase agents.
 - Public registry docs must list newly added or materially changed public agents.
 - Mirror copies must be updated when the same lane is mirrored.
 - Archetype-fit must be explicit before downstream handoff.

@@ -39,5 +39,6 @@ Use this checklist before declaring a system-level change complete.
 
 ## Lane Safety
 - Existing delivery lanes remain intact unless explicit redesign was requested.
+- When shared phase agents can attach project-local continuation surfaces, a concrete starter package source and bootstrap contract are documented.
 - New meta/system language stays generic and reusable.
 - Remaining unresolved gaps are documented explicitly.
