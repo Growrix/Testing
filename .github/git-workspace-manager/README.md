@@ -10,6 +10,7 @@ This is a core root system for the Testing factory, not an isolated project subs
 ## Support Coverage
 - operating model and flow separation
 - repo registry contract
+- folder-to-repo index for folder-scoped projects
 - readiness checklists
 - seed registry files
 - future internal support docs for repo audit and safety logic

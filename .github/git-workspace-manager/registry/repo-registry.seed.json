@@ -44,6 +44,17 @@
       "push_policy": "explicit-manual-only"
     },
     {
+      "id": "agency-growrixos",
+      "name": "Agency",
+      "path": "F:/PROJECTS/testing/On Going DOCS/Growrixos",
+      "role": "project",
+      "operational_source_of_truth": true,
+      "remote": "https://github.com/Growrix/Agency.git",
+      "current_branch": "main",
+      "push_policy": "explicit-manual-only",
+      "notes": "Folder-scoped project inside Testing workspace. Use subtree push from prefix On Going DOCS/Growrixos when no nested .git exists."
+    },
+    {
       "id": "growrix-auto",
       "name": "GrowrixAuto",
       "path": "F:/PROJECTS/testing/FRONTEND DEV/GrowrixAuto",

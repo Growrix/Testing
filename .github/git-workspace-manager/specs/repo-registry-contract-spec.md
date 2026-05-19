@@ -7,6 +7,7 @@ Define the minimum contract for repo tracking files behind the root Github Agent
 - `.github/git-workspace-manager/registry/repo-registry.seed.json`
 - `.github/git-workspace-manager/registry/repo-aliases.seed.json`
 - `.github/git-workspace-manager/registry/repo-policies.seed.json`
+- `.github/git-workspace-manager/registry/folder-repo-index.seed.json`
 
 ## Repo Registry Fields
 Each repo entry must include:
@@ -32,6 +33,15 @@ The policy file must include:
 - `role_policies`
 - `blocking_conditions`
 
+## Folder Repo Index Fields
+Each folder mapping entry must include:
+- `project_id`
+- `folder_path`
+- `canonical_repo_id`
+- `remote`
+- `push_strategy`
+- `subtree_prefix` when `push_strategy` is `subtree`
+
 ## Update Triggers
 Refresh the registry when:
 - a repo is created or cloned
@@ -39,6 +49,7 @@ Refresh the registry when:
 - a remote is added or removed
 - a branch policy changes
 - an alias or junction is introduced or removed
+- a folder-level project is added or re-mapped to a different remote
 
 ## Validation Expectations
 - every canonical repo path exists
@@ -46,3 +57,4 @@ Refresh the registry when:
 - root backup repo is present exactly once
 - no two repo entries share the same canonical path
 - push-disabled repos are not marked as pushable
+- each folder mapping resolves to an existing canonical repo id

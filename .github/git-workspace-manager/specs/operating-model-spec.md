@@ -14,6 +14,9 @@ Use when the task belongs to one project repo.
 
 Requirements:
 - resolve one canonical child repo
+- resolve active folder against folder-to-repo index before push
+- when folder mapping remote differs from current git root remote, block direct root push
+- use mapped push strategy (direct repo root or subtree) for folder-scoped projects
 - run Git only against that repo root
 - show commit or pull or push preflight before action
 - do not touch the root backup repo unless explicitly requested in addition
@@ -30,10 +33,13 @@ Requirements:
 1. explicit project path
 2. active file path
 3. current working directory
-4. registry fallback only when the first three remain unambiguous
+4. folder-to-repo index mapping
+5. registry fallback only when the first four remain unambiguous
 
 ## Hard Blocks
 - child project task resolving to workspace root
+- folder-mapped project resolving to workspace root
+- folder-mapped remote mismatch on push
 - push requested for a repo with no remote
 - alias path not normalized to canonical path
 - multiple candidate repos for one action
@@ -45,6 +51,8 @@ Requirements:
 - role
 - current branch
 - remote summary
+- folder mapping match (yes or no)
+- push strategy (direct or subtree)
 - requested action
 - decision: allow or block
 - blocking reason when blocked

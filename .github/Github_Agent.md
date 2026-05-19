@@ -34,7 +34,10 @@ It is responsible for protecting repo correctness across the Testing factory by 
 - Repo registry contract: `.github/git-workspace-manager/specs/repo-registry-contract-spec.md`
 - Validation checklist: `.github/git-workspace-manager/checklists/operating-readiness-checklist.md`
 - Registry files: `.github/git-workspace-manager/registry/`
+- Folder-to-repo index: `.github/git-workspace-manager/registry/folder-repo-index.seed.json`
 
 ## Rule Of Thumb
 
 If the request is about which repo to target, whether a commit or push is safe, how to onboard a repo into the workspace registry, or whether a change belongs in the root backup repo versus a project repo, use the Github Agent.
+
+Always resolve the active folder against the folder-to-repo index before push. If a mapped folder targets a different remote than the current git root remote, block direct root push and use the mapped strategy (for example subtree push).
