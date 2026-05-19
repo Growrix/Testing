@@ -60,6 +60,13 @@ Use this root agent when the work is about repo targeting, onboarding a new repo
 The canonical support root for this agent lives under `.github/git-workspace-manager/`, and its human-facing owner brief is `.github/Github_Agent.md`.
 This is a core root system for the Testing factory, not an isolated local subsystem.
 
+## Generic SaaS Delivery Entry
+This is the optional one-agent generalist entrypoint for SaaS project work:
+- `senior-saas-developer.agent.md`
+
+Use this root agent when you want one senior developer role that first audits the current project end-to-end, then plans, implements, refactors, debugs, validates, and documents the work across frontend and backend.
+It does not replace the existing phase lanes, project wrappers, or backend/deploy continuation lane. It is a convenience entrypoint for users who want one generic senior builder while still respecting project docs, lane rules, quality gates, and local-only Git discipline.
+
 ## Project Wrapper Entries
 These are root-selectable wrappers that delegate to project-local canonical agents:
 - `growrixos-strict-executor.agent.md` -> `On Going DOCS/Growrixos/.github/agents/project-strict-executor.agent.md`
@@ -73,10 +80,12 @@ Use these wrappers when you need picker visibility from the root surface but wan
 - Both frontend lanes must converge into the same later Phase 5, 6, and 7 process.
 - Treat phase4-7 as an opt-in continuation lane.
 - Use `github-agent.agent.md` for workspace Git operations instead of repurposing frontend or backend agents for repo management.
+- Use `senior-saas-developer.agent.md` when you want one generic senior generalist for project delivery instead of manually selecting separate plan, execution, refactor, and debug roles.
 - Use the meta lane for system structure work before editing delivery lanes directly.
 - Keep backend/deploy artifacts under `Backend & Deploy/` unless the user explicitly asks to promote them into the main root.
 - Do not mutate source frontend projects in place during phase5 import/attach work.
 - Use project wrapper entries for project delivery roles; do not route project feature work through `github-agent.agent.md`.
+- Do not route system-governance work or workspace Git-topology work through `senior-saas-developer.agent.md`.
 
 ## Convergence Contract
 - `[REPLI SYSTEM]` and `[DOC SYSTEM]` are frontend-only alternatives.
@@ -86,5 +95,6 @@ Use these wrappers when you need picker visibility from the root surface but wan
 ## Selection Guide
 - Choose `[REPLI SYSTEM]` when you want to keep the Phase 1 screenshot-derived site and finish the missing truth behind it.
 - Choose `[DOC SYSTEM]` when you want to use the Phase 1 replica only as a starting base, then rebuild the site around your own authored plan.
+- Choose `senior-saas-developer.agent.md` when you want one generic senior SaaS developer to audit the current project first and then decide planning versus execution without manually switching roles.
 
 Do not run both frontend lanes on the same site in the same pass.

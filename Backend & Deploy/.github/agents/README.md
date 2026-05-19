@@ -33,6 +33,13 @@ These are additive agents for the imported backend/deploy workflow. They operate
 
 Use this lane only after either frontend lane is already complete enough to be imported, attached, continued, and prepared for deployment.
 
+## Generic Senior SaaS Delivery Entry
+This optional generic entrypoint sits alongside the shared lanes:
+- `senior_saas_developer.agent.md`
+
+Use this agent when you want one senior generalist to first audit the current project or system end-to-end, then plan, implement, refactor, debug, validate, and document the work across frontend and backend.
+It does not replace `foundation_planner`, `foundation_developer`, or the shared frontend lanes. It is a convenience entrypoint for users who want one generic senior builder while still respecting existing docs, lane boundaries, and quality gates.
+
 ## Meta Lane
 These are system-building agents for the workflow itself:
 - `system-builder.agent.md`
@@ -47,10 +54,12 @@ When progress depends on user-supplied external accounts, keys, IDs, dashboards,
 - Choose exactly one frontend-building lane after Phase 1: `[REPLI SYSTEM]` or `[DOC SYSTEM]`.
 - Both frontend lanes must converge into the same later Phase 5, 6, and 7 process.
 - Treat phase4-7 as an opt-in continuation lane.
+- Use `senior_saas_developer.agent.md` when you want one optional senior generalist entrypoint for project delivery without manually selecting separate plan and execution roles.
 - Use the meta lane for system structure work before editing delivery lanes directly.
 - Use an isolated local system instead of the shared lanes when the blueprint is primarily a local automation, CLI, prompt-driven builder, or file-output product.
 - Keep backend/deploy artifacts under `Backend & Deploy/` unless the user explicitly asks to promote them into the main root.
 - Do not mutate source frontend projects in place during phase5 import/attach work.
+- Do not route system-governance or workspace Git-topology work through `senior_saas_developer.agent.md`.
 
 ## Convergence Contract
 - `[REPLI SYSTEM]` and `[DOC SYSTEM]` are frontend-only alternatives.
@@ -60,6 +69,7 @@ When progress depends on user-supplied external accounts, keys, IDs, dashboards,
 ## Selection Guide
 - Choose `[REPLI SYSTEM]` when you want to keep the Phase 1 screenshot-derived site and finish the missing truth behind it.
 - Choose `[DOC SYSTEM]` when you want to use the Phase 1 replica only as a starting base, then rebuild the site around your own authored plan.
+- Choose `senior_saas_developer.agent.md` when you want one generic senior SaaS developer to audit the current project first and then decide planning versus execution without manually switching roles.
 - Choose the Meta lane first when you need to decide whether a blueprint should stay in the shared website/runtime lanes or become an isolated local system.
 
 Do not run both frontend lanes on the same site in the same pass.
