@@ -1,11 +1,21 @@
 version: 1
 project:
-  name: starter-managed project
-  type: local continuation root
-  status: starter-attached
+  name: CoolPeak Aircon
+  type: Next.js local-service frontend planning root
+  status: canonical-e2e-planning-complete
   canonical_docs_root: DOC/PROJECT PLAN/
   canonical_ai_entrypoint: DOC/PROJECT PLAN/ai-context.yaml
   canonical_human_index: DOC/PROJECT PLAN/README.md
+
+active_artifacts:
+  canonical_e2e_plan: DOC/PROJECT PLAN/coolpeak-aircon-e2e-plan.md
+  downstream_role_docs:
+    - DOC/PROJECT PLAN/Frontend/coolpeak-aircon-frontend-delivery-plan.md
+    - DOC/PROJECT PLAN/API and Data/coolpeak-aircon-data-contract.md
+    - DOC/PROJECT PLAN/Security/coolpeak-aircon-security-plan.md
+    - DOC/PROJECT PLAN/QA/coolpeak-aircon-qa-validation-plan.md
+  shared_contracts:
+    - DOC/PROJECT PLAN/Shared Contracts/coolpeak-aircon-shared-contracts.md
 
 starter_package:
   manifest: starter-manifest.json
@@ -40,7 +50,7 @@ execution_workflow:
     rule: Update the tracker only after the canonical planning docs exist.
 
 runtime_model:
-  frontend_runtime_root: unresolved
+  frontend_runtime_root: FRONTEND DEV/aircon-installer/
   optional_runtime_roots:
     - project root
     - web/
@@ -50,9 +60,16 @@ runtime_model:
     The canonical plan must record the actual runtime roots before implementation
     expands beyond starter bootstrap.
 
+planning_state:
+  frontend_runtime_status: starter-attached-no-next-runtime-yet
+  backend_runtime_status: not-in-scope
+  shared_phase_continuation: phase5-7 compatible frontend target preserved
+
 project_docs:
   master_plan:
     human_entry: DOC/MASTER PLAN/Plan.md
+  canonical_plan:
+    human_entry: DOC/PROJECT PLAN/coolpeak-aircon-e2e-plan.md
   tasks:
     ai_entry: DOC/PROJECT PLAN/Tasks/ai-context.yaml
     human_index: DOC/PROJECT PLAN/Tasks/tasks.md
@@ -85,3 +102,4 @@ core_invariants:
   - Planning artifacts must exist inside DOC/PROJECT PLAN/ before tracker updates.
   - Project-local agents under .github/agents/ own continuation after starter bootstrap.
   - The actual runtime root must be made explicit in planning docs before implementation grows.
+  - Downstream role docs must exist before the tracker is treated as canonical.

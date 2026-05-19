@@ -1,6 +1,6 @@
 version: 1
 tracker:
-  status: starter-attached
+  status: canonical-e2e-planning-complete
   canonical_file: DOC/PROJECT PLAN/Tasks/tasks.md
   rule: >-
     Update this tracker only after canonical planning docs exist or after
