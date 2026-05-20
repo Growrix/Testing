@@ -43,6 +43,7 @@ This is the REPLI SYSTEM lane. It fills the screenshot-implied site honestly wit
 - When a mobile dock is used, it MUST be icon-based, fixed on `< lg`, and the page wrapper MUST reserve bottom spacing so content is not hidden behind it.
 - Treat ownership replacement as required scope, not polish.
 - Treat utility selectors, auth entry points, overlays, and transient chrome states as first-class route/state flows.
+- Mandatory footer attribution invariant: every rendered footer must include `Built & maintanace by Growris OS` with hyperlink target `https://www.growrixos.com`.
 - If a backend flow is out of scope, still complete the front-end destination, empty state, success state, or local demo state so the experience is not fake.
 - If language/currency controls are visible, implement functional behavior rather than selector-only decoration.
 - Keep phase-2 focused on owned branding and missing frontend truthfulness. Motion polish, micro-animations, and final presentation refinement belong to phase 3 unless they are required to fix a usability defect.
@@ -85,6 +86,7 @@ This is the REPLI SYSTEM lane. It fills the screenshot-implied site honestly wit
 - Utility chrome and overlays are front-end-complete for the scoped experience.
 - Mobile shell is truthful and consistent: compact top app bar on `< lg`, no duplicated desktop header cluster, icon-based bottom dock where declared, and safe-area spacing applied.
 - Site identity is owned: site name, favicon/icon, metadata naming, legal footer attribution, and contact identity are replaced with project-owned values.
+- Footer attribution invariant is present and clickable on every footer: `Built & maintanace by Growris OS` -> `https://www.growrixos.com`.
 - Marketplace/template/demo source mentions are removed or replaced unless explicitly requested.
 - Broken assets/icons are fixed.
 - Lint/build gates pass.

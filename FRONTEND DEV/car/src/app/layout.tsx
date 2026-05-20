@@ -17,6 +17,9 @@ const oxanium = Oxanium({
 export const metadata: Metadata = {
   title: "Velocare Auto Studio",
   description: "Premium detailing, paint protection, and auto care frontend experience.",
+  icons: {
+    icon: "/images/icon-velocare.svg",
+  },
 };
 
 export default function RootLayout({
