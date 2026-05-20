@@ -26,6 +26,14 @@ These agents keep the current screenshot-first completion workflow:
 
 Use this lane when the site should stay rooted in what Phase 1 visibly replicated, and the remaining work is truthful route/state completion plus polish.
 
+### [REPLI SYSTEM] Candidate Track
+These candidate agents preserve the locked REPLI baseline while testing earlier deployability and a dedicated Next.js migration step:
+- `phase2-frontend-planning-deployable-candidate.agent.md`
+- `phase2-frontend-completion-deployable-candidate.agent.md`
+- `phase2.5-nextjs-migration-candidate.agent.md`
+
+Use this track when you want to test earlier Vercel plus subdomain deploy readiness before the shared phase-7 lane, or when you want to validate a separate Next.js migration pass without changing the locked REPLI agents.
+
 ## [DOC SYSTEM] Frontend Lane
 These agents start from the same Phase 1 replica but let you reshape the site around your own authored plan:
 - `phase2-doc-system-planning.agent.md`
@@ -99,6 +107,7 @@ Use these wrappers when you need picker visibility from the root surface but wan
 
 ## Selection Guide
 - Choose `[REPLI SYSTEM]` when you want to keep the Phase 1 screenshot-derived site and finish the missing truth behind it.
+- Choose the `[REPLI SYSTEM]` candidate track when you want to test earlier frontend-only Vercel plus subdomain deployment or a separate full Next.js migration step while preserving the locked REPLI baseline.
 - Choose `[DOC SYSTEM]` when you want to use the Phase 1 replica only as a starting base, then rebuild the site around your own authored plan.
 - Inside `[DOC SYSTEM]`, choose `phase2-doc-system-frontend-dev.agent.md` for the standard transformation pass and `phase2.1-doc-system-frontend-dev.agent.md` when the plan requires frontend-specialist execution quality beyond the standard Phase 2 agent.
 - Inside `[DOC SYSTEM]`, choose `phase2.2-doc-system-frontend-specialist.agent.md` when you want a more independent startup-theme builder that stays locked to the target `FRONTEND DEV` root and does not go hunting through unrelated references.
