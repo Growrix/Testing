@@ -10,6 +10,7 @@ This is a core root system for the Testing factory, not an isolated project subs
 ## Support Coverage
 - operating model and flow separation
 - repo registry contract
+- human-readable project-root-to-repo map for operators and agents
 - folder-to-repo index for folder-scoped projects
 - subtree completeness preflight for folder-scoped push safety
 - readiness checklists

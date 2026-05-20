@@ -24,11 +24,41 @@
       "push_strategy": "direct"
     },
     {
+      "project_id": "html-profile-builder",
+      "folder_path": "F:/PROJECTS/testing/HTML-PROFILE-BUILDER",
+      "canonical_repo_id": "html-profile-builder",
+      "remote": null,
+      "push_strategy": "direct"
+    },
+    {
+      "project_id": "aircon-installer",
+      "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/aircon-installer",
+      "canonical_repo_id": "aircon-installer",
+      "remote": null,
+      "push_strategy": "direct"
+    },
+    {
       "project_id": "growrix-auto",
       "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/GrowrixAuto",
       "canonical_repo_id": "growrix-auto",
       "remote": "https://github.com/Growrix/Growrix_Auto.git",
       "push_strategy": "direct"
+    },
+    {
+      "project_id": "lumoria",
+      "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/Lumoria",
+      "canonical_repo_id": "lumoria",
+      "remote": null,
+      "push_strategy": "direct"
+    },
+    {
+      "project_id": "car",
+      "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/car",
+      "canonical_repo_id": "car",
+      "remote": "https://github.com/Growrix/Car.git",
+      "push_strategy": "subtree",
+      "subtree_prefix": "FRONTEND DEV/car",
+      "notes": "Folder-scoped project in the Testing workspace. Split and push this prefix to Car repo."
     },
     {
       "project_id": "rayiss",
@@ -55,6 +85,13 @@
       "project_id": "optilux",
       "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/optilux",
       "canonical_repo_id": "optilux",
+      "remote": null,
+      "push_strategy": "direct"
+    },
+    {
+      "project_id": "plumbing-pro",
+      "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/plumbing-pro",
+      "canonical_repo_id": "plumbing-pro",
       "remote": null,
       "push_strategy": "direct"
     },

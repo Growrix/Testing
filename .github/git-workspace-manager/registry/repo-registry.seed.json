@@ -44,6 +44,17 @@
       "push_policy": "explicit-manual-only"
     },
     {
+      "id": "html-profile-builder",
+      "name": "HTML-PROFILE-BUILDER",
+      "path": "F:/PROJECTS/testing/HTML-PROFILE-BUILDER",
+      "role": "project-local-only",
+      "operational_source_of_truth": true,
+      "remote": null,
+      "current_branch": "main",
+      "push_policy": "no-push-until-remote-configured",
+      "notes": "Top-level local project root inside Testing workspace. Register a remote before any push."
+    },
+    {
       "id": "agency-growrixos",
       "name": "Agency",
       "path": "F:/PROJECTS/testing/On Going DOCS/Growrixos",
@@ -55,6 +66,17 @@
       "notes": "Folder-scoped project inside Testing workspace. Use subtree push from prefix On Going DOCS/Growrixos when no nested .git exists."
     },
     {
+      "id": "aircon-installer",
+      "name": "aircon-installer",
+      "path": "F:/PROJECTS/testing/FRONTEND DEV/aircon-installer",
+      "role": "project-local-only",
+      "operational_source_of_truth": true,
+      "remote": null,
+      "current_branch": "main",
+      "push_policy": "no-push-until-remote-configured",
+      "notes": "Local frontend project root without a configured remote. Push is blocked until a remote is registered."
+    },
+    {
       "id": "growrix-auto",
       "name": "GrowrixAuto",
       "path": "F:/PROJECTS/testing/FRONTEND DEV/GrowrixAuto",
@@ -63,6 +85,28 @@
       "remote": "https://github.com/Growrix/Growrix_Auto.git",
       "current_branch": "main",
       "push_policy": "explicit-manual-only"
+    },
+    {
+      "id": "lumoria",
+      "name": "Lumoria",
+      "path": "F:/PROJECTS/testing/FRONTEND DEV/Lumoria",
+      "role": "project-local-only",
+      "operational_source_of_truth": true,
+      "remote": null,
+      "current_branch": "main",
+      "push_policy": "no-push-until-remote-configured",
+      "notes": "Local frontend project root without a configured remote. Push is blocked until a remote is registered."
+    },
+    {
+      "id": "car",
+      "name": "car",
+      "path": "F:/PROJECTS/testing/FRONTEND DEV/car",
+      "role": "project",
+      "operational_source_of_truth": true,
+      "remote": "https://github.com/Growrix/Car.git",
+      "current_branch": "main",
+      "push_policy": "explicit-manual-only",
+      "notes": "Folder-scoped project inside Testing workspace. Use subtree push from prefix FRONTEND DEV/car when no nested .git exists."
     },
     {
       "id": "nexform-website",
@@ -83,6 +127,17 @@
       "remote": null,
       "current_branch": "main",
       "push_policy": "no-push-until-remote-configured"
+    },
+    {
+      "id": "plumbing-pro",
+      "name": "plumbing-pro",
+      "path": "F:/PROJECTS/testing/FRONTEND DEV/plumbing-pro",
+      "role": "project-local-only",
+      "operational_source_of_truth": true,
+      "remote": null,
+      "current_branch": "main",
+      "push_policy": "no-push-until-remote-configured",
+      "notes": "Nested local git repo without an origin remote. Register a remote before push."
     },
     {
       "id": "rayiss",
