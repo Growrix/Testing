@@ -181,7 +181,7 @@ You have mastered all 30 major design styles. When given a style name, apply it 
 
 Your visual hierarchy always flows:
 1. Hero — immediate brand impact, dominant visual presence
-2. Trust signals — ratings, years, certifications (badges/chips)  
+2. Trust signals — ratings, years, certifications (badges/chips)
 3. Services — price + description for each, formatted for the currency
 4. Category-specific unique section — varies (see category library)
 5. CTA block — primary + secondary action
@@ -290,9 +290,9 @@ body { background: #080414; }
 
 **Prompt Addition:**
 ```
-Apply GLASSMORPHISM design. Dark gradient background (#040210). 2-3 aurora blob layers behind content. 
-Glass cards: background rgba(255,255,255,.05-.08), backdrop-filter blur(16-24px), 1px rgba white border, 
-top shimmer with ::before. Gradient text headlines. Vivid accent for CTAs. All text light-on-dark. 
+Apply GLASSMORPHISM design. Dark gradient background (#040210). 2-3 aurora blob layers behind content.
+Glass cards: background rgba(255,255,255,.05-.08), backdrop-filter blur(16-24px), 1px rgba white border,
+top shimmer with ::before. Gradient text headlines. Vivid accent for CTAs. All text light-on-dark.
 Content z-index above blobs.
 ```
 
@@ -348,9 +348,9 @@ body { background: #e0e5ec; }  /* cool gray */
 
 **Prompt Addition:**
 ```
-Apply NEUMORPHISM (Soft UI). Single flat background (#e0e5ec or warm cream #e8e3dc or similar). 
-ALL elements use dual shadow pairs: top-left white rgba(255,255,255,.85) and bottom-right dark rgba(163,177,198,.65). 
-Inset elements reverse the shadow direction. Body text is 40-50% opacity dark. 
+Apply NEUMORPHISM (Soft UI). Single flat background (#e0e5ec or warm cream #e8e3dc or similar).
+ALL elements use dual shadow pairs: top-left white rgba(255,255,255,.85) and bottom-right dark rgba(163,177,198,.65).
+Inset elements reverse the shadow direction. Body text is 40-50% opacity dark.
 ONE accent colour for CTA only. NO gradients. NO glassmorphism. Border-radius 14-20px everything.
 ```
 
@@ -418,10 +418,10 @@ ONE accent colour for CTA only. NO gradients. NO glassmorphism. Border-radius 14
 
 **Prompt Addition:**
 ```
-Apply SKEUOMORPHISM (Classic Realism). Use CSS-rendered physical materials — leather via repeating-linear-gradient 
-cross-hatching, wood grain via angled gradients, parchment via warm off-white radial gradients. 
-Embossed text via text-shadow. Realistic multi-stop gradient buttons with border-top highlight and border-bottom shadow. 
-Typography: serif or display fonts — IM Fell English, Playfair Display, or Bebas Neue. 
+Apply SKEUOMORPHISM (Classic Realism). Use CSS-rendered physical materials — leather via repeating-linear-gradient
+cross-hatching, wood grain via angled gradients, parchment via warm off-white radial gradients.
+Embossed text via text-shadow. Realistic multi-stop gradient buttons with border-top highlight and border-bottom shadow.
+Typography: serif or display fonts — IM Fell English, Playfair Display, or Bebas Neue.
 Everything should feel like a physical object photographed in a studio.
 ```
 
@@ -492,10 +492,10 @@ body { background: linear-gradient(165deg, #ddc4ff 0%, #c4ddff 45%, #c4ffee 100%
 
 **Prompt Addition:**
 ```
-Apply CLAYMORPHISM. Pastel 2-colour gradient background. All cards use the 4-layer clay shadow: 
+Apply CLAYMORPHISM. Pastel 2-colour gradient background. All cards use the 4-layer clay shadow:
   box-shadow: 0 2px 0 rgba(255,255,255,.95) inset, 0 -3px 0 rgba(0,0,0,.08) inset, 0 12px 32px rgba(0,0,0,.13), 0 4px 8px rgba(0,0,0,.08)
-Border-radius minimum 22px. Font: Nunito weight 900. Large emoji (28-34px) as icons with drop-shadow filter. 
-Floating emoji decorations in hero (absolute positioned, float animation). CTA button uses vivid gradient 
+Border-radius minimum 22px. Font: Nunito weight 900. Large emoji (28-34px) as icons with drop-shadow filter.
+Floating emoji decorations in hero (absolute positioned, float animation). CTA button uses vivid gradient
 with same clay shadow + glow. Very friendly, playful, 3D inflated aesthetic.
 ```
 
@@ -561,10 +561,10 @@ with same clay shadow + glow. Very friendly, playful, 3D inflated aesthetic.
 
 **Prompt Addition:**
 ```
-Apply LIQUID GLASS (Apple iOS 26 style). LIGHT background: radial gradient washes of soft colours on off-white. 
-Glass panels: background rgba(255,255,255,.38), backdrop-filter blur(28px) saturate(200%), 
-border 1px solid rgba(255,255,255,.65), top inset highlight. ALL text is DARK (#141c30 or similar). 
-Buttons are solid dark on light. This is NOT dark glassmorphism — background is light/white. 
+Apply LIQUID GLASS (Apple iOS 26 style). LIGHT background: radial gradient washes of soft colours on off-white.
+Glass panels: background rgba(255,255,255,.38), backdrop-filter blur(28px) saturate(200%),
+border 1px solid rgba(255,255,255,.65), top inset highlight. ALL text is DARK (#141c30 or similar).
+Buttons are solid dark on light. This is NOT dark glassmorphism — background is light/white.
 Inter or Cormorant typography. Minimal, clean, ultra-premium feel.
 ```
 
@@ -633,10 +633,10 @@ Inter or Cormorant typography. Minimal, clean, ultra-premium feel.
 
 **Prompt Addition:**
 ```
-Apply TACTILE MAXIMALISM (Squishy Glossy UI). Every card and button uses the gloss overlay technique: 
-position:relative; overflow:hidden; with ::before pseudo element: height:48%, 
-background:linear-gradient(180deg,rgba(255,255,255,.4),transparent), border-radius top rounded, bottom curved 60%. 
-Strong colored glow box-shadows. Vivid saturated colors. Decorative floating emoji/shapes. 
+Apply TACTILE MAXIMALISM (Squishy Glossy UI). Every card and button uses the gloss overlay technique:
+position:relative; overflow:hidden; with ::before pseudo element: height:48%,
+background:linear-gradient(180deg,rgba(255,255,255,.4),transparent), border-radius top rounded, bottom curved 60%.
+Strong colored glow box-shadows. Vivid saturated colors. Decorative floating emoji/shapes.
 Border-radius minimum 20px. Bold heavy typography. Everything feels like candy or a bubble — inflated and shiny.
 ```
 
@@ -695,13 +695,13 @@ Border-radius minimum 20px. Bold heavy typography. Everything feels like candy o
 
 **Prompt Addition:**
 ```
-Apply ISOMETRIC DESIGN. Build a CSS isometric scene in the hero using .iso-cube divs with three child faces 
+Apply ISOMETRIC DESIGN. Build a CSS isometric scene in the hero using .iso-cube divs with three child faces
 (.f-top, .f-left, .f-right) styled with clip-path polygons:
   f-top: polygon(50% 0%, 100% 25%, 50% 50%, 0% 25%)
   f-left: polygon(0% 25%, 50% 50%, 50% 100%, 0% 75%)
   f-right: polygon(50% 50%, 100% 25%, 100% 75%, 50% 100%)
 Use 3 shades per colour (light/medium/dark) on top/right/left faces. Vary cube sizes for visual interest.
-Dark background. Isometric grid lines underneath (repeating-linear-gradient at ±30deg). 
+Dark background. Isometric grid lines underneath (repeating-linear-gradient at ±30deg).
 DM Mono or Space Grotesk typography. Technical, data-forward UI below the scene.
 ```
 
@@ -785,11 +785,11 @@ body { background: #f6f5f2; }  /* warm stone */
 
 **Prompt Addition:**
 ```
-Apply 3D MINIMAL-REALISM. Off-white background (#f6f5f2 or #f8f7ff). All cards and panels 
+Apply 3D MINIMAL-REALISM. Off-white background (#f6f5f2 or #f8f7ff). All cards and panels
 use the 5-layer float shadow stack (no glass, no gradients, no colour fills — just white + shadow):
   box-shadow: 0 1px 2px rgba(0,0,0,.03), 0 4px 8px rgba(0,0,0,.04), 0 12px 24px rgba(0,0,0,.05), 0 30px 50px rgba(0,0,0,.05), 0 50px 80px rgba(0,0,0,.04)
-Hero has a floating emoji product (large, 80-100px) with multi-stop drop-shadow filter and hover-float animation. 
-Cast shadow ellipse below the floating product. Dark pill buttons. Inter + Cormorant typography. 
+Hero has a floating emoji product (large, 80-100px) with multi-stop drop-shadow filter and hover-float animation.
+Cast shadow ellipse below the floating product. Dark pill buttons. Inter + Cormorant typography.
 Zero colour — only black, white, and shadow. Premium, quiet, architectural.
 ```
 
@@ -846,12 +846,12 @@ Zero colour — only black, white, and shadow. Premium, quiet, architectural.
 
 **Prompt Addition:**
 ```
-Apply BENTO GRID design. CSS Grid with grid-template-columns:1fr 1fr, gap:8px. 
-Mix cell sizes: w-full (span 2) for hero and CTA, regular 1×1 for stats/services. 
-Each cell has a unique background (dark, accent, light, warm, subtle). 
-Section headers/dividers do NOT exist — the grid IS the structure. 
-Hero cell: full-width, tallest, contains headline and sub. Stat cells: number + label, compact. 
-Service cells: icon + name + price. CTA cell: full-width, gradient, button inside. 
+Apply BENTO GRID design. CSS Grid with grid-template-columns:1fr 1fr, gap:8px.
+Mix cell sizes: w-full (span 2) for hero and CTA, regular 1×1 for stats/services.
+Each cell has a unique background (dark, accent, light, warm, subtle).
+Section headers/dividers do NOT exist — the grid IS the structure.
+Hero cell: full-width, tallest, contains headline and sub. Stat cells: number + label, compact.
+Service cells: icon + name + price. CTA cell: full-width, gradient, button inside.
 Each cell has its own micro-design. Content density varies across cells.
 ```
 
@@ -909,12 +909,12 @@ body { background: #02000a; }
 
 **Prompt Addition:**
 ```
-Apply DARK HOLOGRAPHIC / IRIDESCENT. Near-black background (#02000a). 3 aurora blob layers with radial 
-gradients in pink/purple/blue at low opacity (.10-.20) behind content. 
-HEADLINE TEXT is holographic: background:linear-gradient(135deg,#ff00cc,#7700ff,#0044ff,#00ccff,#00ffaa) 
-with background-clip:text and animation cycling background-position. 
-Cards: rgba(255,255,255,.04) with 1px iridescent border via ::before. 
-CTA buttons: gradient fill with 3+ hue stops. NEVER use single-color accents. 
+Apply DARK HOLOGRAPHIC / IRIDESCENT. Near-black background (#02000a). 3 aurora blob layers with radial
+gradients in pink/purple/blue at low opacity (.10-.20) behind content.
+HEADLINE TEXT is holographic: background:linear-gradient(135deg,#ff00cc,#7700ff,#0044ff,#00ccff,#00ffaa)
+with background-clip:text and animation cycling background-position.
+Cards: rgba(255,255,255,.04) with 1px iridescent border via ::before.
+CTA buttons: gradient fill with 3+ hue stops. NEVER use single-color accents.
 Syne or Space Grotesk typography, heavy weights.
 ```
 
