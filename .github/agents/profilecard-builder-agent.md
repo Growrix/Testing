@@ -116,6 +116,16 @@ No SVG files             → inline SVG only if needed
 No images                → CSS art, emoji, and gradients only
 ```
 
+### Encoding Safety For Bulk Edits
+```
+Always force UTF-8 read/write when editing HTML templates in scripts.
+Do NOT rely on default PowerShell Get-Content/Set-Content decoding for emoji-rich HTML.
+Use explicit APIs:
+  [System.IO.File]::ReadAllText(path, [System.Text.Encoding]::UTF8)
+  [System.IO.File]::WriteAllText(path, content, [System.Text.UTF8Encoding]::new($false))
+After any bulk edit, scan for mojibake signatures (e.g., Ã, â€™, ðŸ, �) before committing.
+```
+
 ### CSS Architecture Rules
 ```css
 /* 1. Always mobile-first */
