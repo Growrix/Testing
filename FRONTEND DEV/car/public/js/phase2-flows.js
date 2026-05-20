@@ -768,6 +768,19 @@
     var currentPage = 1;
     var pageSize = 4;
     var totalPages = 1;
+    var wishlistOnlyView = getQuery("view") === "wishlist";
+
+    if (wishlistOnlyView) {
+      var heroHeading = document.querySelector("section.jarallax h1");
+      if (heroHeading) {
+        heroHeading.textContent = "Wishlist";
+      }
+
+      var crumbActive = document.querySelector(".crumb li.active");
+      if (crumbActive) {
+        crumbActive.textContent = "Wishlist";
+      }
+    }
 
     function getActiveCategories() {
       return categoryChecks
@@ -782,10 +795,17 @@
     function applyFilterState() {
       var query = shopSearch.value.trim().toLowerCase();
       var activeCategories = getActiveCategories();
+      var wishlistSlugs = getWishlist();
       var minValue = minInput ? Number(minInput.value || 0) : 0;
       var maxValue = maxInput ? Number(maxInput.value || 999999) : 999999;
 
+      if (wishlistOnlyView) {
+        noResultNode.innerHTML =
+          '<div class="p-4 rounded-1 bg-dark-2 text-center">Your wishlist is empty. Add products with the heart icon to build your shortlist.</div>';
+      }
+
       var filtered = productColumns.filter(function (col) {
+        var slug = col.dataset.productSlug || "";
         var name = col.dataset.productName || "";
         var price = Number(col.dataset.productPrice || 0);
         var category = col.dataset.productCategory || "car_wash";
@@ -793,8 +813,9 @@
         var matchName = !query || name.indexOf(query) !== -1;
         var matchCategory = !activeCategories.length || activeCategories.indexOf(category) !== -1;
         var matchPrice = price >= minValue && price <= maxValue;
+        var matchWishlist = !wishlistOnlyView || wishlistSlugs.indexOf(slug) !== -1;
 
-        return matchName && matchCategory && matchPrice;
+        return matchName && matchCategory && matchPrice && matchWishlist;
       });
 
       totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
@@ -1389,6 +1410,11 @@
         return;
       }
 
+      if (link.classList.contains("de-icon-counter") && link.querySelector('img[src*="heart.svg"]')) {
+        link.setAttribute("href", "shop.html?view=wishlist");
+        return;
+      }
+
       if (text === "reply") {
         link.setAttribute("href", "#comment-form-wrapper");
         return;
@@ -1423,6 +1449,15 @@
     });
   }
 
+  function removeTemplateDemoControls() {
+    ["buy-now", "selector"].forEach(function (id) {
+      var node = document.getElementById(id);
+      if (node) {
+        node.remove();
+      }
+    });
+  }
+
   function applyAppMetadataBranding() {
     if (!document.title || document.title.indexOf("Velocare Auto Studio") !== -1) {
       return;
@@ -1437,6 +1472,7 @@
     }
 
     applyAppMetadataBranding();
+    removeTemplateDemoControls();
     canonicalizeCarListingLinks();
     rewriteServiceLinks();
     rewriteCarLinks();
