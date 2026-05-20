@@ -3,9 +3,10 @@
 This root now exposes one shared frontend entrypoint and two separate frontend-building lanes that converge into the same later backend/deploy phases.
 
 ## Shared Frontend Entry
-- `phase1-site-replication.agent.md`
+- `phase1-site-replication.agent.md` — general-purpose screenshot replication with data-driven architecture emphasis.
+- `phase1.1-pixel-replicator.agent.md` — pixel-perfect focused replicator. Extracts exact design tokens first, builds section by section, and verifies each screenshot before calling done. Use this when visual accuracy is the primary goal.
 
-Phase 1 remains unchanged. It is the common screenshot-replication entrypoint for both frontend lanes below.
+Phase 1 and Phase 1.1 are alternative entrypoints. Use Phase 1.1 when you need the tightest possible visual match to the screenshots. Both feed into the same downstream frontend lanes and backend/deploy phases.
 
 ## Project Starter Package
 Shared phase1 and DOC-system phase2 agents now bootstrap missing project-local continuation roots from:
