@@ -1,0 +1,38 @@
+@import "tailwindcss";
+@import "../../design-tokens.css";
+
+@theme inline {
+  --color-background: var(--lumoria-color-body-bg);
+  --color-foreground: var(--lumoria-color-body-text);
+  --color-primary: var(--lumoria-color-primary);
+  --font-sans: var(--lumoria-font-body);
+  --font-heading: var(--lumoria-font-heading);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--lumoria-color-body-bg);
+  color: var(--lumoria-color-body-text);
+  font-family: var(--lumoria-font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--lumoria-color-secondary);
+  font-family: var(--lumoria-font-heading);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
