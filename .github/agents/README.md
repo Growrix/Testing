@@ -30,10 +30,12 @@ These agents start from the same Phase 1 replica but let you reshape the site ar
 - `phase2-doc-system-planning.agent.md`
 - `phase2-doc-system-frontend-dev.agent.md`
 - `phase2.1-doc-system-frontend-dev.agent.md`
+- `phase2.2-doc-system-frontend-specialist.agent.md`
 - `phase3-doc-system-polish.agent.md`
 
 Use this lane when the screenshot provides the starting substrate, but your own plan should redefine route architecture, page composition, content direction, conversion flow, and shared UX surfaces.
 Use `phase2.1-doc-system-frontend-dev.agent.md` when the authored plan needs a more specialist frontend execution pass: stronger visual direction, more distinctive layout composition, richer interaction and motion craft, and more intentional app-like mobile behavior while keeping the same DOC-system contract.
+Use `phase2.2-doc-system-frontend-specialist.agent.md` when you want an independent frontend-specialist build pass inside a chosen `FRONTEND DEV` root: build the startup theme, shared sections, reusable blocks, and core components directly from the authored brief or plan without scanning unrelated reference-style folders or sibling frontend projects.
 
 ## Backend & Deploy Lane
 These are additive agents for the imported backend/deploy workflow. They operate against the isolated bundle under `Backend & Deploy/` and do not replace either frontend lane:
@@ -98,6 +100,7 @@ Use these wrappers when you need picker visibility from the root surface but wan
 - Choose `[REPLI SYSTEM]` when you want to keep the Phase 1 screenshot-derived site and finish the missing truth behind it.
 - Choose `[DOC SYSTEM]` when you want to use the Phase 1 replica only as a starting base, then rebuild the site around your own authored plan.
 - Inside `[DOC SYSTEM]`, choose `phase2-doc-system-frontend-dev.agent.md` for the standard transformation pass and `phase2.1-doc-system-frontend-dev.agent.md` when the plan requires frontend-specialist execution quality beyond the standard Phase 2 agent.
+- Inside `[DOC SYSTEM]`, choose `phase2.2-doc-system-frontend-specialist.agent.md` when you want a more independent startup-theme builder that stays locked to the target `FRONTEND DEV` root and does not go hunting through unrelated references.
 - Choose `senior-saas-developer.agent.md` when you want one generic senior SaaS developer to audit the current project first and then decide planning versus execution without manually switching roles.
 
 Do not run both frontend lanes on the same site in the same pass.
