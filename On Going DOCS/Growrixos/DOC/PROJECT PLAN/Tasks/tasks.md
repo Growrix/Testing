@@ -61,6 +61,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `CMS`
 - Active tracked sessions:
+  - hardened Supabase `public.app_state` security posture by enabling RLS in `web/supabase/schema.sql`, explicitly blocking `anon`/`authenticated` roles, and updating Supabase integration docs/playbooks to remove obsolete "RLS disabled" guidance after urgent advisor remediation authorization
   - removed public static/mocked shop catalog injection so `/shop`, `/shop/[slug]`, and `/html-business-profiles` now surface published managed records only (CMS + managed catalog records), fixed HTML profile template slug normalization so each live preview resolves to its own template, and changed HTML profile live-preview CTAs to open direct embedded HTML preview URLs instead of the wrapper route
   - added a new HTML Business Profiles delivery slice across web and studio by introducing `/html-business-profiles` preview commerce route, wiring category-aware homepage and services coverage, extending public catalog merging for built-in and Sanity-managed profile templates, adding raw HTML preview API routing, and registering a dedicated Studio schema/desk model (`htmlBusinessProfileTemplate`) for template uploads and shop-surface publication
   - aligned shop slug UX with portfolio media behavior by adding `shopItem.gallery` support in Studio schema and Sanity catalog mapping, rendering a fullscreen screenshot gallery on shop slug pages, and simplifying the key-features area into a readable bullet list style consistent with delivery scope content
