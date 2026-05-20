@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Localized third-party snapshot artifacts:
+    "public/lumoria-assets/**",
+    "public/lumoria-pages/**",
   ]),
 ]);
 

@@ -21,6 +21,17 @@ Your only job in this agent is to match the screenshots exactly. Architecture, d
   - Preserve any existing `DOC/`, `.github/agents/`, `starter-manifest.json`, and `memories/` surfaces.
 - Only use Next.js unless the user explicitly requests a different stack.
 
+## Hard Bans (Never Allowed in Phase 1.1)
+
+- Do NOT implement screenshot replication via full-site proxying, middleware/proxy rewrites, reverse proxies, or runtime pass-through to a live domain.
+- Do NOT leave production page navigation dependent on the source domain.
+- Do NOT embed the source site in iframes/webviews as a substitute for implementation.
+- Do NOT fetch and stream remote page HTML at runtime as the primary rendering mechanism.
+- Do NOT mark replication complete if local pages still contain source-domain canonical URLs or primary navigation links.
+- If any of these are used as temporary debugging steps, they MUST be removed before handoff.
+
+The deliverable must be a local Next.js implementation that renders from local code and local project assets.
+
 ## Step 1 — Visual Extraction (do this before writing any component)
 
 Open every screenshot in the set. For each one, extract and record:
@@ -111,6 +122,15 @@ Run in this exact order:
 3. ESLint — zero lint errors.
 4. Fix everything until the check passes cleanly.
 5. Start dev server — confirm it runs without runtime errors.
+
+Then run Anti-Shortcut Verification:
+1. Confirm there is no active `proxy.ts` or `middleware.ts` performing full-route external rewrites for page rendering.
+2. Confirm app route coverage is real: implemented pages/components exist for the replicated views.
+3. Confirm local navigation integrity by checking rendered localhost HTML:
+  - No canonical URL pointing to the source domain.
+  - No primary nav links pointing to the source domain.
+4. Confirm source assets used by the UI are localized under `public/` unless explicitly documented as third-party CDN dependencies.
+5. If any check fails, Phase 1.1 is NOT complete.
 
 Zero Problems in VS Code is required before handoff.
 
