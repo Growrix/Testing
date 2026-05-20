@@ -15,8 +15,8 @@ const oxanium = Oxanium({
 });
 
 export const metadata: Metadata = {
-  title: "AutoDetail - Replica",
-  description: "Pixel replication of the AutoDetail reference style.",
+  title: "Velocare Auto Studio",
+  description: "Premium detailing, paint protection, and auto care frontend experience.",
 };
 
 export default function RootLayout({

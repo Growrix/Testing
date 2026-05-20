@@ -5,9 +5,9 @@ export default function RoutesPage() {
   return (
     <main className="min-h-screen bg-background-page px-6 py-12 text-text-body">
       <div className="mx-auto max-w-container">
-        <h1 className="font-heading text-4xl text-text-inverse">AutoDetail Routes</h1>
+        <h1 className="font-heading text-4xl text-text-inverse">Velocare Route Index</h1>
         <p className="mt-3 text-sm text-text-muted">
-          This index maps each screenshot target page to its imported HTML route.
+          This index maps the owned public routes for the Velocare frontend experience.
         </p>
         <ul className="mt-8 grid gap-3 md:grid-cols-2">
           {sitePages.map((page) => (
