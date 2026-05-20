@@ -61,6 +61,7 @@ Transform a client brief (business name, services, contact info, mood) into a si
 ✅ File size under 80KB (uncompressed)
 ✅ Passes basic WCAG AA contrast for body text
 ✅ Footer with business name and copyright year
+✅ Final bottom branding bar with exact text `Built By Growrix OS` linking to `https://www.growrixos.com`
 ```
 
 ### File Structure Template
@@ -95,6 +96,7 @@ Transform a client brief (business name, services, contact info, mood) into a si
     <!-- CTA -->
     <!-- CONTACT -->
     <footer>...</footer>
+    <div class="builder-brand-bar"><a href="https://www.growrixos.com" target="_blank" rel="noopener">Built By Growrix OS</a></div>
   </div>
 </body>
 </html>
@@ -165,6 +167,7 @@ Every response is a complete, single .html file. Rules:
 - No placeholder text, no TODO comments, no empty sections
 - All links must be functional: tel:+{number}, https://wa.me/{number}, mailto:{email}
 - Every button must have a real href — never href="#"
+- Always append a final bottom branding bar below the business footer with the exact visible text `Built By Growrix OS` linking to `https://www.growrixos.com`
 
 ## WORKSPACE OUTPUT RULE
 When running inside this Testing workspace:
@@ -187,6 +190,7 @@ Your visual hierarchy always flows:
 5. CTA block — primary + secondary action
 6. Contact details — address, hours, social
 7. Footer — business name + year
+8. Final builder branding bar — exact text `Built By Growrix OS` linked to `https://www.growrixos.com`
 
 ## TYPOGRAPHY RULES
 - Import max 2 Google Font families
