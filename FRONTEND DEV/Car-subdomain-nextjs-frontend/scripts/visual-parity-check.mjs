@@ -84,14 +84,14 @@ for (const viewportConfig of VIEWPORTS) {
     const sourcePage = await context.newPage();
     await sourcePage.goto(`${SOURCE_BASE}${sourceRoute}`, { waitUntil: "load", timeout: 60000 });
     await sourcePage.addStyleTag({ content: STABILIZE_STYLE });
-    await sourcePage.waitForTimeout(1200);
+    await sourcePage.waitForTimeout(300);
     const sourceImage = await sourcePage.screenshot({ fullPage: false, type: "png" });
     await sourcePage.close();
 
     const outputPage = await context.newPage();
     await outputPage.goto(`${OUTPUT_BASE}${outputRoute}`, { waitUntil: "load", timeout: 60000 });
     await outputPage.addStyleTag({ content: STABILIZE_STYLE });
-    await outputPage.waitForTimeout(1200);
+    await outputPage.waitForTimeout(300);
     const outputImage = await outputPage.screenshot({ fullPage: false, type: "png" });
     await outputPage.close();
 
