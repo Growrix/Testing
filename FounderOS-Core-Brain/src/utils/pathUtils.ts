@@ -5,6 +5,14 @@ export function resolveStorageRoot(configValue: string): string {
   if (configValue.trim().length > 0) {
     return expandHome(configValue.trim());
   }
+  return getDefaultStorageRoot();
+}
+
+export function getDefaultStorageRoot(): string {
+  if (process.platform === 'win32') {
+    return path.join('G:\\', 'founderos_core_brain');
+  }
+
   return path.join(os.homedir(), 'founderos_core_brain');
 }
 

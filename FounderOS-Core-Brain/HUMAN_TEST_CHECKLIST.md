@@ -38,7 +38,7 @@ Run the commands below in exact order.
 
 ### Promise 2: Isolated Client and Project Folders
 
-- Folder created at `~/founderos_core_brain/projects/client_acme_plumbing/`.
+- Folder created at `G:\founderos_core_brain\projects\client_acme_plumbing\` when using the default Windows storage root.
 - No unrelated project data appears inside this folder.
 
 ### Promise 3: Durable Machine-Readable Memory
@@ -77,7 +77,7 @@ Fail:
 ## Evidence To Capture
 
 1. Screenshot of each command output in Copilot Chat.
-2. File explorer screenshot of `~/founderos_core_brain/projects/client_acme_plumbing/`.
+2. File explorer screenshot of `G:\founderos_core_brain\projects\client_acme_plumbing\` when using the default Windows storage root.
 3. JSON content screenshots for tasks and decisions files.
 4. Status output screenshot for `/status`.
 

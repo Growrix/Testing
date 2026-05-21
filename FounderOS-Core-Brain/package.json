@@ -62,7 +62,7 @@
         "founderos.storageRoot": {
           "type": "string",
           "default": "",
-          "description": "Storage root for FounderOS memory. Defaults to ~/founderos_core_brain"
+          "description": "Storage root for FounderOS memory. Defaults to G:\\founderos_core_brain on Windows and ~/founderos_core_brain elsewhere"
         },
         "founderos.autoSave": {
           "type": "boolean",

@@ -29,7 +29,8 @@ Use `@founderos` in Copilot Chat.
 
 Default storage root:
 
-- `~/founderos_core_brain`
+- `G:\founderos_core_brain` on Windows
+- `~/founderos_core_brain` on other platforms
 
 Configurable settings:
 

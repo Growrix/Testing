@@ -9,18 +9,19 @@ FounderOS দুই ভাগে চলে:
 - এখানে app-এর code থাকে
 
 2. Data root
-- এই folder: `C:\Users\User\founderos_core_brain`
+- Windows default folder: `G:\founderos_core_brain`
 - এখানে আপনার chats, clients, tasks, decisions, summaries save হয়
 
 সহজ ভাষায়:
 - `FounderOS-Core-Brain` = machine
 - `founderos_core_brain` = machine যা data জমায়
 
-## 2. কেন `C:\Users\User\founderos_core_brain` তৈরি হয়েছে
+## 2. কেন `G:\founderos_core_brain` তৈরি হবে
 
-কারণ app-এর default setting হলো:
+কারণ app-এর current default setting হলো:
 - storageRoot set না থাকলে
-- Windows user home folder-এর ভিতরে `founderos_core_brain` folder use করবে
+- Windows-এ `G:\founderos_core_brain` use করবে
+- অন্য platform-এ home folder-এর ভিতরে `founderos_core_brain` folder use করবে
 
 তাই এটা automatic তৈরি হয়েছে।
 
@@ -59,16 +60,19 @@ Beginner-friendly safe setup:
 1. Code রাখুন:
 - `F:\PROJECTS\testing\FounderOS-Core-Brain`
 
-2. Data রাখুন আলাদা জায়গায়:
+2. Default data path এখন:
+- `G:\founderos_core_brain`
+
+3. যদি custom data path চান:
 - `F:\FounderOS-Data`
 বা
 - `D:\FounderOS-Data`
 
-3. VS Code setting-এ change করুন:
+4. VS Code setting-এ change করুন:
 - `founderos.storageRoot`
 
-Suggested value:
-- `F:\FounderOS-Data`
+Default value on Windows:
+- `G:\founderos_core_brain`
 
 ## 6. Storage root change করার সহজ উপায়
 
@@ -78,7 +82,7 @@ Suggested value:
 2. `Ctrl+,`
 3. Search box-এ লিখুন: `founderos storage root`
 4. value দিন:
-   - `F:\FounderOS-Data`
+  - `G:\founderos_core_brain`
 5. Window reload করুন
 
 ### Option B: Settings JSON
@@ -87,7 +91,7 @@ Settings JSON-এ যোগ করুন:
 
 ```json
 {
-  "founderos.storageRoot": "F:\\FounderOS-Data"
+  "founderos.storageRoot": "G:\\founderos_core_brain"
 }
 ```
 
@@ -121,7 +125,7 @@ Command Palette খুলুন:
 
 Expected:
 - system status table আসবে
-- storage root দেখাবে
+- storage root হিসেবে `G:\founderos_core_brain` দেখাবে
 
 ### Step 4: নিজের test client বানান
 
@@ -262,12 +266,12 @@ Usually reads data only
 - recommended
 
 Recommended real usage path:
-- `founderos.storageRoot = F:\FounderOS-Data`
+- `founderos.storageRoot = G:\founderos_core_brain`
 
 ## 12. Final beginner advice
 
 - `Acme Plumbing` কে sample/test client ভাবুন
 - real কাজের জন্য নতুন client name use করুন
-- data root আলাদা drive-এ move করা ভালো
+- current Windows default এখন `G:\founderos_core_brain`
 - weekly backup রাখুন
 - একেকটা command-এর পর folder দেখুন, তাহলে system বুঝতে সহজ হবে
