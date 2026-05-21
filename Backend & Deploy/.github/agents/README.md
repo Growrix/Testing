@@ -15,6 +15,15 @@ These agents keep the current screenshot-first completion workflow:
 
 Use this lane when the site should stay rooted in what Phase 1 visibly replicated, and the remaining work is truthful route/state completion plus polish.
 
+### [REPLI SYSTEM] Candidate Track
+These candidate agents preserve the locked REPLI baseline while testing earlier deployability and dedicated Next.js migration passes:
+- `phase2-frontend-planning-deployable-candidate.agent.md`
+- `phase2-frontend-completion-deployable-candidate.agent.md`
+- `phase2.5-nextjs-migration-candidate.agent.md`
+- `phase2.6-nextjs-native-completion.agent.md`
+
+Use `phase2.6-nextjs-native-completion.agent.md` when the site is already visually approved but still relies on legacy HTML-backed ownership inside a Next.js shell and must be finished into a pure App Router product without visual drift.
+
 ## [DOC SYSTEM] Frontend Lane
 These agents start from the same Phase 1 replica but let you reshape the site around your own authored plan:
 - `phase2-doc-system-planning.agent.md`
@@ -68,6 +77,7 @@ When progress depends on user-supplied external accounts, keys, IDs, dashboards,
 
 ## Selection Guide
 - Choose `[REPLI SYSTEM]` when you want to keep the Phase 1 screenshot-derived site and finish the missing truth behind it.
+- Inside the `[REPLI SYSTEM]` candidate track, choose `phase2.6-nextjs-native-completion.agent.md` when the runtime already builds and looks correct but primary routes are still legacy HTML-backed and need final ownership migration into pure Next.js.
 - Choose `[DOC SYSTEM]` when you want to use the Phase 1 replica only as a starting base, then rebuild the site around your own authored plan.
 - Choose `senior_saas_developer.agent.md` when you want one generic senior SaaS developer to audit the current project first and then decide planning versus execution without manually switching roles.
 - Choose the Meta lane first when you need to decide whether a blueprint should stay in the shared website/runtime lanes or become an isolated local system.
