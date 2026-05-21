@@ -6,8 +6,9 @@ This root now exposes one shared frontend entrypoint and two separate frontend-b
 - `phase1-site-replication.agent.md`
 - `phase1.1-pixel-replicator.agent.md`
 - `phase1.2-replica-to-nextjs-frontend.agent.md`
+- `phase1.3-replica-to-native-nextjs-frontend.agent.md`
 
-Phase 1 remains unchanged. Phase 1.1 is the pixel-perfect screenshot replication entrypoint. Phase 1.2 is the folder-in / folder-out frontend-only Next.js migration lane for the repeatable workflow: locate the Phase 1.1 replica folder, preserve it as source of truth, and output a separate pixel-locked Next.js App Router project without backend/provider/deployment questions.
+Phase 1 remains unchanged. Phase 1.1 is the pixel-perfect screenshot replication entrypoint. Phase 1.2 is the folder-in / folder-out frontend-only Next.js bridge/parity lane for the repeatable workflow: locate the Phase 1.1 replica folder, preserve it as source of truth, and output a separate pixel-locked Next.js App Router project without backend/provider/deployment questions. Phase 1.3 is the stricter folder-in / native-frontend-out lane for the user's final frontend expectation: a separate pure native Next.js App Router project with pixel parity, reusable components/data/state, native form/action contracts, SEO/tests, no primary HTML injection, no public HTML ownership, and backend/devops handoff readiness.
 
 ## [REPLI SYSTEM] Frontend Lane
 These agents keep the current screenshot-first completion workflow:
@@ -25,6 +26,7 @@ These candidate agents preserve the locked REPLI baseline while testing earlier 
 - `phase2.6-nextjs-native-completion.agent.md`
 
 Use `phase1.2-replica-to-nextjs-frontend.agent.md` before this candidate track when the requested outcome is frontend-only pixel parity from a located replica folder rather than deep production-template completion.
+Use `phase1.3-replica-to-native-nextjs-frontend.agent.md` instead of Phase 1.2 when the requested outcome is a separate pure native Next.js frontend from a located replica folder and bridge shortcuts must block completion.
 Use `phase2.6-nextjs-native-completion.agent.md` when the site is already visually approved but still relies on legacy HTML-backed ownership, generated page dumps, legacy runtime scripts, `.html` route ownership, fake forms, localStorage-only commerce, or missing production flow contracts. This phase must finish the site into a pure production Next.js App Router client template with exact visual parity, canonical routes, reusable shell/sections/data, native lead-gen and commerce contracts, SEO, tests, and legacy retirement.
 
 ## [DOC SYSTEM] Frontend Lane
@@ -67,6 +69,7 @@ When progress depends on user-supplied external accounts, keys, IDs, dashboards,
 ## Safety Rules
 - Keep Phase 1 unchanged as the shared frontend entrypoint.
 - Use Phase 1.2 after Phase 1.1 when the user wants a no-drama frontend-only Next.js pixel migration from a located replica folder.
+- Use Phase 1.3 after Phase 1.1 when the user wants the same folder-in workflow but requires pure native Next.js frontend readiness rather than a bridge or baseline prototype.
 - Choose exactly one frontend-building lane after Phase 1: `[REPLI SYSTEM]` or `[DOC SYSTEM]`.
 - Both frontend lanes must converge into the same later Phase 5, 6, and 7 process.
 - Treat phase4-7 as an opt-in continuation lane.
@@ -86,6 +89,7 @@ When progress depends on user-supplied external accounts, keys, IDs, dashboards,
 ## Selection Guide
 - Choose `[REPLI SYSTEM]` when you want to keep the Phase 1 screenshot-derived site and finish the missing truth behind it.
 - Choose `phase1.2-replica-to-nextjs-frontend.agent.md` when the desired workflow is "I locate the Phase 1.1 replicated folder; the system outputs a pixel-perfect frontend-only Next.js project" and production integrations are out of scope.
+- Choose `phase1.3-replica-to-native-nextjs-frontend.agent.md` when the desired workflow is "I locate the Phase 1.1 replicated folder; the system outputs a pure native, backend/devops handoff-ready Next.js frontend" and bridge outputs must be blocked instead of accepted.
 - Inside the `[REPLI SYSTEM]` candidate track, choose `phase2.6-nextjs-native-completion.agent.md` when the runtime already builds and looks correct but the project still needs final production-template migration: canonical App Router ownership, reusable component/data architecture, native lead-gen and commerce flows, SEO, tests, and explicit retirement of HTML/legacy/script ownership.
 - Choose `[DOC SYSTEM]` when you want to use the Phase 1 replica only as a starting base, then rebuild the site around your own authored plan.
 - Choose `senior_saas_developer.agent.md` when you want one generic senior SaaS developer to audit the current project first and then decide planning versus execution without manually switching roles.

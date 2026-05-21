@@ -6,9 +6,11 @@ This root now exposes one shared frontend entrypoint and two separate frontend-b
 - `phase1-site-replication.agent.md` - general-purpose screenshot replication with data-driven architecture emphasis.
 - `phase1.1-pixel-replicator.agent.md` - pixel-perfect focused replicator. Extracts exact design tokens first, builds section by section, and verifies each screenshot before calling done. Use this when visual accuracy is the primary goal.
 - `phase1.2-replica-to-nextjs-frontend.agent.md` - folder-in / folder-out frontend-only migrator. Use immediately after Phase 1.1 when you want to point at the replicated folder and receive a separate pixel-locked Next.js App Router output without backend, provider, deployment, or production-flow questions.
+- `phase1.3-replica-to-native-nextjs-frontend.agent.md` - folder-in / native-frontend-out migrator. Use immediately after Phase 1.1 when you need a separate pure native Next.js App Router frontend with pixel parity, reusable components/data/state, native form/action contracts, SEO/tests, no primary HTML injection, no public HTML ownership, and backend/devops handoff readiness.
 
 Phase 1 and Phase 1.1 are alternative entrypoints. Use Phase 1.1 when you need the tightest possible visual match to the screenshots. Both feed into the same downstream frontend lanes and backend/deploy phases.
 Phase 1.2 is the default next step when the user goal is simply: locate the Phase 1.1 replica folder, preserve it as source of truth, and generate a frontend-only pixel-perfect Next.js project. It must not ask optional "if you want" follow-up questions for executable migration work.
+Phase 1.3 is the default next step when the user goal is stricter: locate the Phase 1.1 replica folder and generate a separate pure native Next.js frontend that is ready for backend/devops work without accepting bridge ownership as complete.
 
 ## Project Starter Package
 Shared phase1 and DOC-system phase2 agents now bootstrap missing project-local continuation roots from:
@@ -37,6 +39,7 @@ These candidate agents preserve the locked REPLI baseline while testing earlier 
 
 Use this track when you want to test earlier Vercel plus subdomain deploy readiness before the shared phase-7 lane, or when you want to validate a separate Next.js migration and production-template completion pass without changing the locked REPLI agents.
 Use `phase1.2-replica-to-nextjs-frontend.agent.md` before this candidate track when the current pain point is not production-template architecture, but the simpler repeatable task: Phase 1.1 replica folder in, separate frontend-only pixel-perfect Next.js project out.
+Use `phase1.3-replica-to-native-nextjs-frontend.agent.md` instead of Phase 1.2 when the current pain point is the stricter repeatable task: Phase 1.1 replica folder in, separate pure native Next.js frontend out, with bridge shortcuts forbidden at completion.
 Use `phase2.6-nextjs-native-completion.agent.md` when the site is already visually approved but still relies on legacy HTML-backed ownership, generated page dumps, legacy runtime scripts, `.html` route ownership, fake forms, localStorage-only commerce, or missing production flow contracts. This phase must produce a pure Next.js App Router client template with exact visual parity, canonical routes, reusable shell/sections/data, native lead-gen and commerce contracts, SEO, tests, and legacy retirement.
 
 ## [DOC SYSTEM] Frontend Lane
@@ -97,6 +100,7 @@ Use these wrappers when you need picker visibility from the root surface but wan
 ## Safety Rules
 - Keep Phase 1 unchanged as the shared frontend entrypoint.
 - Use Phase 1.2 after Phase 1.1 when the user wants a no-drama frontend-only Next.js pixel migration from a located replica folder.
+- Use Phase 1.3 after Phase 1.1 when the user wants the same folder-in workflow but requires pure native Next.js frontend readiness rather than a bridge or baseline prototype.
 - When shared phase1 or DOC-system phase2 initializes a project root, attach the hybrid canonical project starter package before continuing.
 - Choose exactly one frontend-building lane after Phase 1: `[REPLI SYSTEM]` or `[DOC SYSTEM]`.
 - Both frontend lanes must converge into the same later Phase 5, 6, and 7 process.
@@ -118,6 +122,7 @@ Use these wrappers when you need picker visibility from the root surface but wan
 ## Selection Guide
 - Choose `[REPLI SYSTEM]` when you want to keep the Phase 1 screenshot-derived site and finish the missing truth behind it.
 - Choose `phase1.2-replica-to-nextjs-frontend.agent.md` when the desired workflow is "I locate the Phase 1.1 replicated folder; the system outputs a pixel-perfect frontend-only Next.js project" and production integrations are out of scope.
+- Choose `phase1.3-replica-to-native-nextjs-frontend.agent.md` when the desired workflow is "I locate the Phase 1.1 replicated folder; the system outputs a pure native, backend/devops handoff-ready Next.js frontend" and bridge outputs must be blocked instead of accepted.
 - Choose the `[REPLI SYSTEM]` candidate track when you want to test earlier frontend-only Vercel plus subdomain deployment or a separate full Next.js migration step while preserving the locked REPLI baseline.
 - Inside the `[REPLI SYSTEM]` candidate track, choose `phase2.6-nextjs-native-completion.agent.md` when the runtime already builds and looks correct but the project still needs final production-template migration: canonical App Router ownership, reusable component/data architecture, native lead-gen and commerce flows, SEO, tests, and explicit retirement of HTML/legacy/script ownership.
 - Choose `[DOC SYSTEM]` when you want to use the Phase 1 replica only as a starting base, then rebuild the site around your own authored plan.
