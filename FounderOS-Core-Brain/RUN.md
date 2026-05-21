@@ -43,3 +43,8 @@ npm run package
 @founderos /tasks
 @founderos /status
 ```
+
+## Human Acceptance Pack
+
+- Human runtime checklist: `HUMAN_TEST_CHECKLIST.md`
+- Production readiness report: `PRODUCTION_READINESS_REPORT.md`
