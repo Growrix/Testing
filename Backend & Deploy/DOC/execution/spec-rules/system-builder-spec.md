@@ -17,6 +17,7 @@ Define the governed workflow for designing, auditing, extending, repairing, and 
 - An explicit archetype-fit decision: `shared_lane_fit`, `isolated_local_system_required`, or `unsupported_without_new_knowledge`
 - A blueprint readiness matrix listing `currently_supported`, `requires_extension`, and `missing_knowledge`
 - Lane handoff mapping from blueprint modules to execution owners
+- Explicit delegation to `agent-builder-modes2.agent.md` when the request is primarily blueprint-first single-file `agent.md` authoring rather than shared-governance change
 - When required, an isolated local-system scaffold plan that references `isolated-local-agent-system-spec.md` and `isolated-local-agent-system-readiness-checklist.md`
 - A Bangla external-input acquisition brief whenever progress is blocked on user-provided third-party items
 
@@ -36,6 +37,7 @@ Each request or discovered issue must be classified as at least one of:
 - Reuse existing structures before creating new ones.
 - For any non-trivial public agent change, update the wrapper, canonical source, support files, and registry docs together.
 - Preserve active delivery lanes unless the user explicitly asks to redesign or replace them.
+- If the request is mainly to think through an agent or system and then generate one final `agent.md` file without changing the shared system surface, delegate to `agent-builder-modes2.agent.md` after any needed system-routing decision is made.
 - When shared frontend lanes depend on a reusable project-local continuation package, the starter package path, bootstrap contract or script, and local agent filenames must be explicit and documented.
 - Classify blueprint fit before handoff: shared-lane fit, isolated local-system fit, or unsupported without new knowledge.
 - Do not force non-SaaS local automation, CLI, prompt-driven builder, or file-output blueprints through the shared phase1-7 or Foundation lanes when an isolated root is the cleaner and safer fit.
@@ -54,6 +56,7 @@ Each request or discovered issue must be classified as at least one of:
 - Shared-lane starter bootstrap changes must name the canonical starter source and the bootstrap contract used by shared phase agents.
 - Public registry docs must list newly added or materially changed public agents.
 - Mirror copies must be updated when the same lane is mirrored.
+- The System Builder prompt must explicitly route blueprint-first single-file `agent.md` authoring to `agent-builder-modes2.agent.md` when shared-system changes are not required.
 - Archetype-fit must be explicit before downstream handoff.
 - If `isolated_local_system_required` is selected, the generic isolated-local-system spec/checklist or project-local equivalents must be referenced.
 - Blueprint-module coverage and lane ownership must be explicit for all major modules in scope.

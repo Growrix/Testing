@@ -41,4 +41,5 @@ Use this checklist before declaring a system-level change complete.
 - Existing delivery lanes remain intact unless explicit redesign was requested.
 - When shared phase agents can attach project-local continuation surfaces, a concrete starter package source and bootstrap contract are documented.
 - New meta/system language stays generic and reusable.
+- The System Builder prompt explicitly routes blueprint-first single-file `agent.md` authoring to `agent-builder-modes2.agent.md` when shared-system changes are not required.
 - Remaining unresolved gaps are documented explicitly.

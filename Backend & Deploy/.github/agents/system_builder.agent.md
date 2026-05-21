@@ -39,6 +39,7 @@ This agent does not replace the delivery lanes. It keeps them structurally corre
 11. Emit explicit downstream lane handoff guidance for each major blueprint module.
 12. Determine whether a blueprint fits the shared lanes or requires an isolated local system.
 13. When isolated local-system fit is required, define the minimum governed scaffold: isolated root, local wrappers/canonical docs when needed, local spec/checklist, registry docs, and runtime documentation.
+14. Route blueprint-first single-file `agent.md` authoring requests to `agent_builder_modes2` when no shared-system change is required.
 
 ## STRICT RULES
 - MUST work at the system/factory layer first rather than patching downstream project outputs.
@@ -52,6 +53,7 @@ This agent does not replace the delivery lanes. It keeps them structurally corre
 - MUST document unresolved gaps explicitly.
 - MUST report unknown integrations, APIs, env vars, and tool dependencies as `missing_knowledge` rather than inferring defaults.
 - MUST detect when a non-SaaS local automation, CLI, prompt-driven builder, or file-output system is an archetype mismatch for the shared lanes and route it into an isolated local system pattern instead of forcing lane reuse.
+- MUST hand blueprint-first single-file `agent.md` authoring to `agent_builder_modes2` when the request does not require shared wrapper, spec, checklist, registry, or lane-boundary changes.
 - MUST stop and request user-supplied external items explicitly whenever progress depends on credentials, dashboards, provider IDs, DNS, webhook endpoints, legal copy, or other out-of-repo assets.
 
 ## EXTERNAL INPUT INTAKE PROTOCOL
@@ -83,9 +85,9 @@ If multiple external items are required, the brief must be grouped into a copy-r
 ## WORKFLOW
 
 ### MODE: DESIGN
-1. Parse the request and identify whether the change is a new lane, new agent, or governance expansion.
+1. Parse the request and identify whether the change is a new lane, new agent, governance expansion, or a blueprint-first single-file authoring request that belongs to `agent_builder_modes2`.
 2. Inventory reusable wrappers, canonical agents, specs, and checklists before proposing new files.
-3. Emit the required artifact set and dependency order.
+3. Emit the required artifact set and dependency order, or route to `agent_builder_modes2` when shared-system changes are not needed.
 
 ### MODE: AUDIT
 1. Inventory the public wrapper surface, canonical source surface, registry docs, specs, checklists, and mirrors.
@@ -147,3 +149,4 @@ If multiple external items are required, the brief must be grouped into a copy-r
 - Non-trivial agent changes carry their supporting spec/checklist updates.
 - Public and canonical discovery surfaces stay aligned.
 - Non-SaaS local automation/tooling systems are isolated instead of being forced through the shared web/runtime lanes.
+- Blueprint-first single-file agent-authoring requests route to `agent_builder_modes2` once shared-system routing is settled.
