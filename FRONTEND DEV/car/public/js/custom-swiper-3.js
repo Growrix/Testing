@@ -1,32 +1,50 @@
-const de_swiper = new Swiper('.swiper', {
+(function () {
+  function initSwiper() {
+    if (typeof Swiper === "undefined" || !document.querySelector(".swiper")) {
+      return false;
+    }
 
-  autoplay: {
-     delay: 3000,
-     disableOnInteraction: false
-   },
+    new Swiper(".swiper", {
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      // Optional parameters
+      effect: "slide", // cards, coverflow, cube, fade, flip, slide
+      slidesPerView: 1,
+      loop: true,
+      speed: 1200,
+      mousewheel: false,
+      watchSlidesProgress: true,
+      parallax: true,
+      spaceBetween: -1,
+      // If we need pagination
+      pagination: {
+        el: ".swiper-pagination",
+        type: "fraction",
+      },
+      // Navigation arrows
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      watchSlidesProgress: true,
+    });
 
-  // Optional parameters
-  effect: "slide", // cards, coverflow, cube, fade, flip, slide 
-  slidesPerView: 1,
-  loop: true,
-  speed: 1200,
-  mousewheel: false,
-  watchSlidesProgress: true,
-  parallax: true,
-  spaceBetween: -1,
+    return true;
+  }
 
-  // If we need pagination
-   pagination: {
-      el: ".swiper-pagination",
-      type: "fraction",
-    },
+  let attempts = 0;
+  const maxAttempts = 40;
 
-  // Navigation arrows
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
+  function attemptInit() {
+    if (initSwiper() || attempts >= maxAttempts) {
+      return;
+    }
 
-  watchSlidesProgress: true
+    attempts += 1;
+    setTimeout(attemptInit, 100);
+  }
 
-});
+  attemptInit();
+})();
