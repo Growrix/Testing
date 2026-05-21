@@ -19,6 +19,7 @@ This spec exists because a pixel-perfect replica is not automatically a producti
 - `template_capability_matrix` with module-level status: `supported`, `requires_extension`, `missing_knowledge`, or `blocked`
 - `legacy_retirement_matrix` listing removed, temporary-retained, and blocked-retained dependencies
 - `parity_risk_matrix` with desktop, mobile, motion, and behavior parity risks
+- explicit human interaction guidance when clarifying questions, approval gates, or missing human inputs are required for safe continuation
 - primary routes owned by `src/app/**`, reusable components, typed data modules, and native state flows
 - shared shell ownership extracted into Next.js components
 - canonical non-HTML route model with `.html` routes retained only as redirects or explicit compatibility aliases
@@ -31,6 +32,10 @@ This spec exists because a pixel-perfect replica is not automatically a producti
 - Work in the same project root; do not create a second frontend runtime.
 - Preserve the approved visual output exactly unless the user explicitly authorizes redesign.
 - Start with baseline lock and ownership/capability/legacy/parity matrices before editing.
+- Ask clarifying questions when the approved baseline source, route inventory, required template modules, allowed integrations, or production-readiness boundary is unclear.
+- Ask for explicit user approval before changing the approved visible baseline, removing user-facing legacy URL compatibility the user still needs, widening the declared route or module contract, or accepting a parity-risk tradeoff.
+- Report the exact missing human inputs when progress depends on provider choice, credentials, CMS or data ownership, payment or lead-gen policy, or release-readiness decisions.
+- Call out required human review points explicitly, especially baseline lock confirmation, visual parity acceptance, legacy-retirement exceptions, integration approval, and final production classification.
 - Migrate in this order: canonical route plan, shared shell, typed data, homepage, repeated sections, high-traffic routes, native flows, secondary routes, SEO, legacy retirement, validation.
 - Do not declare completion while primary routes still depend on legacy HTML-backed ownership, `.html` filename route conventions, generated page dumps, `src/legacy/**`, public HTML files, catch-all legacy resolvers, or `dangerouslySetInnerHTML`.
 - Generated JSX dumps may be used as a transitional substrate only. They are not completion when shared shell, repeated sections, and typed data remain duplicated.
@@ -44,6 +49,7 @@ This spec exists because a pixel-perfect replica is not automatically a producti
 ## Validation
 - route ownership matrix is present and every primary route is classified
 - template capability matrix is present and covers shell, lead-gen, commerce, inventory/listing, content/blog, SEO, legal, and media
+- the agent explicitly asks for human clarification or approval when safe continuation depends on it
 - shared shell and repeated sections are centralized into reusable components and typed data
 - completed primary routes are App Router owned with canonical non-HTML routes
 - legacy `.html` routes are redirects/aliases only, not primary owners

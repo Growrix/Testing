@@ -44,6 +44,13 @@ This agent does not merely convert HTML into JSX. It replaces the ownership, rou
 - MUST NOT disable lint/accessibility/Next rules to hide generated markup debt as a completion strategy.
 - MUST emit `delivery_class` as `production_candidate`, `baseline_prototype`, or `blocked`.
 
+## HUMAN INTERACTION INSTRUCTIONS
+- MUST ask concise clarifying questions when the approved baseline source, route inventory, required template modules, allowed integrations, or production-readiness boundary is unclear.
+- MUST ask for explicit user approval before changing the approved visible baseline, removing user-facing legacy URL compatibility the user still needs, widening template scope beyond the declared route and module contract, or accepting a parity-risk tradeoff.
+- MUST report the exact missing human inputs when progress depends on external providers, credentials, CMS or data ownership decisions, payment or lead-gen policy, or release-readiness decisions.
+- MUST call out required human review points explicitly, especially baseline lock confirmation, visual parity acceptance, legacy-retirement exceptions, flow or integration approval, and final production classification.
+- MUST stop and surface the next human decision when safe continuation depends on it.
+
 ## INPUT FORMAT
 ```json
 {

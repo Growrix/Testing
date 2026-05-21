@@ -37,6 +37,13 @@ The phase has failed if any item below is true for a completed primary route:
 - Critical lead-gen, commerce, listing, and content routes have no tests or smoke coverage.
 - Desktop and mobile parity evidence is missing.
 
+## Human Interaction Instructions
+- Ask concise clarifying questions when the approved baseline source, route inventory, required template modules, allowed integrations, or production-readiness boundary is unclear.
+- Ask for explicit user approval before changing the approved visible baseline, removing user-facing legacy URL compatibility the user still needs, widening template scope beyond the declared route and module contract, or accepting a parity-risk tradeoff.
+- When progress depends on external providers, credentials, CMS or data ownership decisions, payment or lead-gen policy, or release-readiness decisions, list the exact missing human inputs instead of implying defaults.
+- Call out required human review points explicitly, especially baseline lock confirmation, visual parity acceptance, legacy-retirement exceptions, flow or integration approval, and final production classification.
+- Stop and surface the next human decision when safe continuation depends on it.
+
 ## Required Inputs
 Before editing, gather and record:
 - target project root under `FRONTEND DEV/<slug>`

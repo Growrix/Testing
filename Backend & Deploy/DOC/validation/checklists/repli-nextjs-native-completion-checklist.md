@@ -9,6 +9,7 @@
 
 ## Baseline And Audits
 - [ ] The approved visual baseline is recorded before editing.
+- [ ] The agent explicitly asks for human clarification or approval when baseline, route, module, integration, or production-boundary decisions are unclear.
 - [ ] Full public route inventory exists.
 - [ ] Full navigation inventory exists.
 - [ ] `route_ownership_matrix` exists and classifies every primary route.
