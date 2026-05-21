@@ -48,3 +48,4 @@ npm run package
 
 - Human runtime checklist: `HUMAN_TEST_CHECKLIST.md`
 - Production readiness report: `PRODUCTION_READINESS_REPORT.md`
+- Beginner guide in Bangla: `BEGINNER_GUIDE_BN.md`
