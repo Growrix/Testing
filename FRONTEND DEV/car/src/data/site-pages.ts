@@ -13,9 +13,63 @@ export const sitePages: SitePage[] = [
     module: "shell",
   },
   {
+    title: "Homepage 2",
+    href: "/homepage-2",
+    summary: "Baseline homepage variant 2.",
+    module: "shell",
+  },
+  {
+    title: "Homepage 3",
+    href: "/homepage-3",
+    summary: "Baseline homepage variant 3.",
+    module: "shell",
+  },
+  {
+    title: "Homepage 4",
+    href: "/homepage-4",
+    summary: "Baseline homepage variant 4.",
+    module: "shell",
+  },
+  {
+    title: "Homepage 5",
+    href: "/homepage-5",
+    summary: "Baseline homepage variant 5.",
+    module: "shell",
+  },
+  {
+    title: "Homepage 6",
+    href: "/homepage-6",
+    summary: "Baseline homepage variant 6.",
+    module: "shell",
+  },
+  {
+    title: "Homepage 7",
+    href: "/homepage-7",
+    summary: "Baseline homepage variant 7.",
+    module: "shell",
+  },
+  {
+    title: "Homepage 8",
+    href: "/homepage-8",
+    summary: "Baseline homepage variant 8.",
+    module: "shell",
+  },
+  {
     title: "Services",
     href: "/services",
     summary: "Service catalog with native detail routes.",
+    module: "lead_gen",
+  },
+  {
+    title: "Services 2",
+    href: "/services-2",
+    summary: "Baseline services variant style 2.",
+    module: "lead_gen",
+  },
+  {
+    title: "Services 3",
+    href: "/services-3",
+    summary: "Baseline services variant style 3.",
     module: "lead_gen",
   },
   {
@@ -85,6 +139,12 @@ export const sitePages: SitePage[] = [
     module: "inventory_listing",
   },
   {
+    title: "Vehicle List Alt",
+    href: "/car-list",
+    summary: "Baseline alternate vehicle list layout.",
+    module: "inventory_listing",
+  },
+  {
     title: "Vehicle Detail",
     href: "/listing/bmw-x5",
     summary: "Listing detail page with inquiry form contract.",
@@ -112,6 +172,18 @@ export const sitePages: SitePage[] = [
     title: "Gallery",
     href: "/gallery",
     summary: "Unified gallery route for all gallery variants.",
+    module: "content",
+  },
+  {
+    title: "Gallery Carousel",
+    href: "/gallery-carousel",
+    summary: "Baseline gallery carousel variant.",
+    module: "content",
+  },
+  {
+    title: "Gallery Slider",
+    href: "/gallery-slider",
+    summary: "Baseline gallery slider variant.",
     module: "content",
   },
   {

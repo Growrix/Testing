@@ -1,4 +1,5 @@
-import type { ReactNode } from "react";
+import { isValidElement, type ReactNode } from "react";
+import { BaselineContent, type BaselineContentProps } from "@/components/site/baseline-content";
 import { SiteHeader } from "@/components/site/header";
 import { SiteFooter } from "@/components/site/footer";
 
@@ -19,6 +20,11 @@ type PageShellProps = {
  *      └─ footer
  */
 export function PageShell({ children }: PageShellProps) {
+  const baselineHtml =
+    isValidElement<BaselineContentProps>(children) && children.type === BaselineContent
+      ? children.props.html
+      : null;
+
   return (
     <div id="wrapper">
       <a href="#" id="back-to-top" aria-label="Back to top" />
@@ -30,10 +36,14 @@ export function PageShell({ children }: PageShellProps) {
       <SiteHeader />
 
       {/* content begin */}
-      <div className="no-bottom no-top" id="content">
-        <div id="top" />
-        {children}
-      </div>
+      {baselineHtml ? (
+        <div className="no-bottom no-top" id="content" dangerouslySetInnerHTML={{ __html: baselineHtml }} />
+      ) : (
+        <div className="no-bottom no-top" id="content">
+          <div id="top" />
+          {children}
+        </div>
+      )}
       {/* content end */}
 
       <SiteFooter />

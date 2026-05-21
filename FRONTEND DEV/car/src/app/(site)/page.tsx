@@ -1,13 +1,12 @@
-import { HomeParityContent } from "@/components/site/parity-home";
+﻿import { BaselineFilePage } from "@/components/site/baseline-file-page";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
   title: "Home",
   pathname: "/",
-  description:
-    "Production-ready Next.js template for automotive detailing services, product commerce, and inventory listing flows.",
+  description: "Baseline index page parity.",
 });
 
 export default function HomePage() {
-  return <HomeParityContent />;
+  return <BaselineFilePage fileName="index.html" />;
 }

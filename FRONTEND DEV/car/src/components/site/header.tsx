@@ -67,21 +67,21 @@ export function SiteHeader() {
                     <Link className="menu-item" href={routes.home}>Home</Link>
                     <ul>
                       <li><Link href={routes.home}>Homepage 1</Link></li>
-                      <li><Link href={routes.home}>Homepage 2</Link></li>
-                      <li><Link href={routes.home}>Homepage 3</Link></li>
-                      <li><Link href={routes.home}>Homepage 4</Link></li>
-                      <li><Link href={routes.home}>Homepage 5</Link></li>
-                      <li><Link href={routes.home}>Homepage 6</Link></li>
-                      <li><Link href={routes.home}>Homepage 7</Link></li>
-                      <li><Link href={routes.home}>New: Homepage 8</Link></li>
+                      <li><Link href={routes.home2}>Homepage 2</Link></li>
+                      <li><Link href={routes.home3}>Homepage 3</Link></li>
+                      <li><Link href={routes.home4}>Homepage 4</Link></li>
+                      <li><Link href={routes.home5}>Homepage 5</Link></li>
+                      <li><Link href={routes.home6}>Homepage 6</Link></li>
+                      <li><Link href={routes.home7}>Homepage 7</Link></li>
+                      <li><Link href={routes.home8}>New: Homepage 8</Link></li>
                     </ul>
                   </li>
                   <li>
                     <Link className="menu-item" href={routes.services}>Services</Link>
                     <ul>
                       <li><Link href={routes.services}>All Services Style 1</Link></li>
-                      <li><Link href={routes.services}>All Services Style 2</Link></li>
-                      <li><Link href={routes.services}>All Services Style 3</Link></li>
+                      <li><Link href={routes.services2}>All Services Style 2</Link></li>
+                      <li><Link href={routes.services3}>All Services Style 3</Link></li>
                       <li><Link href={routes.serviceDetail(services[0]?.slug ?? "exterior-hand-wash-wax")}>Service Single</Link></li>
                       <li><Link href={routes.faq}>FAQ</Link></li>
                     </ul>
@@ -111,8 +111,8 @@ export function SiteHeader() {
                     <a className="menu-item" href="#">Gallery</a>
                     <ul>
                       <li><Link href={routes.gallery}>Gallery Filter</Link></li>
-                      <li><Link href={routes.gallery}>Gallery Carousel</Link></li>
-                      <li><Link href={routes.gallery}>Gallery Slider</Link></li>
+                      <li><Link href={routes.galleryCarousel}>Gallery Carousel</Link></li>
+                      <li><Link href={routes.gallerySlider}>Gallery Slider</Link></li>
                     </ul>
                   </li>
                   <li>
