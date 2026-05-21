@@ -1,48 +1,14 @@
-"use client";
-
 import Link from "next/link";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { useMemo, useState } from "react";
-import { siteConfig } from "@/data/site";
+import { siteConfig, services } from "@/data/site";
 import { routes } from "@/lib/routes";
-import { useShop } from "@/components/commerce/shop-state";
 
-type NavItem = {
-  label: string;
-  href: string;
-};
-
-const primaryNav: NavItem[] = [
-  { label: "Home", href: routes.home },
-  { label: "Services", href: routes.services },
-  { label: "Shop", href: routes.shop },
-  { label: "Listing", href: routes.listing },
-  { label: "Blog", href: routes.blog },
-  { label: "Contact", href: routes.contact },
-];
-
-function isActive(pathname: string, href: string) {
-  if (href === routes.home) {
-    return pathname === routes.home;
-  }
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
-
+/**
+ * Pixel-perfect mirror of baseline `Car-subdomain/public/index.html` header.
+ * Uses plain `<img>` and the full baseline mega-menu so designesia.js can
+ * attach jQuery dropdown / menu-btn / btn-extra behaviour without any DOM
+ * divergence. Internal links resolve to canonical Next.js routes.
+ */
 export function SiteHeader() {
-  const pathname = usePathname();
-  const { cartCount, wishlistCount } = useShop();
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const navLinks = useMemo(
-    () =>
-      primaryNav.map((item) => ({
-        ...item,
-        active: isActive(pathname, item.href),
-      })),
-    [pathname],
-  );
-
   return (
     <header className="transparent">
       <div id="topbar">
@@ -53,7 +19,7 @@ export function SiteHeader() {
                 <div className="d-flex">
                   <div className="topbar-widget">
                     <Link href={routes.appointment}>
-                      <Image src="/images/svg-white/bell.svg" alt="Promo" width={16} height={16} />
+                      <img src="/images/svg-white/bell.svg" alt="" />
                       Book this week and get 15% off your first detailing package.
                     </Link>
                   </div>
@@ -61,13 +27,13 @@ export function SiteHeader() {
                 <div className="d-flex">
                   <div className="topbar-widget me-5">
                     <a href={siteConfig.phoneHref}>
-                      <Image src="/images/svg-white/phone.svg" alt="Phone" width={16} height={16} />
+                      <img src="/images/svg-white/phone.svg" alt="" />
                       Call us: {siteConfig.phone}
                     </a>
                   </div>
                   <div className="topbar-widget">
                     <a href={siteConfig.emailHref}>
-                      <Image src="/images/svg-white/envelope.svg" alt="Email" width={16} height={16} />
+                      <img src="/images/svg-white/envelope.svg" alt="" />
                       Message us: {siteConfig.email}
                     </a>
                   </div>
@@ -84,24 +50,80 @@ export function SiteHeader() {
           <div className="col-md-12">
             <div className="de-flex sm-pt10">
               <div className="de-flex-col">
+                {/* logo begin */}
                 <div id="logo">
                   <Link href={routes.home}>
-                    <Image className="logo-main" src="/images/logo-velocare.svg" alt={siteConfig.name} width={224} height={54} />
-                    <Image className="logo-mobile" src="/images/logo-velocare-mobile.svg" alt={siteConfig.shortName} width={160} height={40} />
+                    <img className="logo-main" src="/images/logo-velocare.svg" alt={siteConfig.name} />
+                    <img className="logo-mobile" src="/images/logo-velocare-mobile.svg" alt={siteConfig.shortName} />
                   </Link>
                 </div>
+                {/* logo end */}
               </div>
 
               <div className="de-flex-col header-col-mid">
-                <ul id="mainmenu" className={menuOpen ? "show" : ""}>
-                  {navLinks.map((item) => (
-                    <li key={item.href}>
-                      <Link className={item.active ? "active" : ""} href={item.href}>
-                        {item.label}
-                      </Link>
-                    </li>
-                  ))}
+                {/* mainmenu begin */}
+                <ul id="mainmenu">
+                  <li>
+                    <Link className="menu-item" href={routes.home}>Home</Link>
+                    <ul>
+                      <li><Link href={routes.home}>Homepage 1</Link></li>
+                      <li><Link href={routes.home}>Homepage 2</Link></li>
+                      <li><Link href={routes.home}>Homepage 3</Link></li>
+                      <li><Link href={routes.home}>Homepage 4</Link></li>
+                      <li><Link href={routes.home}>Homepage 5</Link></li>
+                      <li><Link href={routes.home}>Homepage 6</Link></li>
+                      <li><Link href={routes.home}>Homepage 7</Link></li>
+                      <li><Link href={routes.home}>New: Homepage 8</Link></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <Link className="menu-item" href={routes.services}>Services</Link>
+                    <ul>
+                      <li><Link href={routes.services}>All Services Style 1</Link></li>
+                      <li><Link href={routes.services}>All Services Style 2</Link></li>
+                      <li><Link href={routes.services}>All Services Style 3</Link></li>
+                      <li><Link href={routes.serviceDetail(services[0]?.slug ?? "exterior-hand-wash-wax")}>Service Single</Link></li>
+                      <li><Link href={routes.faq}>FAQ</Link></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a className="menu-item" href="#">Pages</a>
+                    <ul>
+                      <li><Link href={routes.about}>About Us</Link></li>
+                      <li><Link href={routes.gallery}>Gallery</Link></li>
+                      <li><Link href={routes.blog}>Blog</Link></li>
+                      <li><Link href={routes.team}>Our Team</Link></li>
+                      <li><Link href={routes.careers}>Careers</Link></li>
+                      <li><Link href={routes.testimonials}>Testimonials</Link></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <Link className="menu-item" href={routes.shop}>Shop</Link>
+                  </li>
+                  <li>
+                    <a className="menu-item" href="#">Listing</a>
+                    <ul>
+                      <li><Link href={routes.listing}>Car Listing</Link></li>
+                      <li><Link href={routes.listingDetail("bmw-x5")}>Car Single</Link></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a className="menu-item" href="#">Gallery</a>
+                    <ul>
+                      <li><Link href={routes.gallery}>Gallery Filter</Link></li>
+                      <li><Link href={routes.gallery}>Gallery Carousel</Link></li>
+                      <li><Link href={routes.gallery}>Gallery Slider</Link></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a className="menu-item" href="#">Workshop</a>
+                    <ul>
+                      <li><Link href={routes.locations}>Locations</Link></li>
+                      <li><Link href={routes.contact}>Contact</Link></li>
+                    </ul>
+                  </li>
                 </ul>
+                {/* mainmenu end */}
               </div>
 
               <div className="de-flex-col">
@@ -109,22 +131,12 @@ export function SiteHeader() {
                   <Link href={routes.appointment} className="btn-main fx-slide hover-white">
                     <span>Make Appointment</span>
                   </Link>
-                  <button
-                    id="menu-btn"
-                    type="button"
-                    aria-label="Toggle menu"
-                    onClick={() => setMenuOpen((value) => !value)}
-                  />
+                  <span id="menu-btn" />
                 </div>
-                <div className="d-flex align-items-center gap-3 ms-3">
-                  <Link className="de-icon-counter" href={routes.wishlist}>
-                    <Image src="/images/ui/heart.svg" alt="Wishlist" width={22} height={22} />
-                    <span className="d-counter">{wishlistCount}</span>
-                  </Link>
-                  <Link className="de-icon-counter" href={routes.cart}>
-                    <Image src="/images/ui/cart.svg" alt="Cart" width={22} height={22} />
-                    <span className="d-counter">{cartCount}</span>
-                  </Link>
+
+                <div id="btn-extra">
+                  <span />
+                  <span />
                 </div>
               </div>
             </div>

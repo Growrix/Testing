@@ -14,6 +14,20 @@ export default defineConfig([
       "jsx-a11y/alt-text": "off",
     },
   },
+  {
+    files: [
+      "src/components/site/parity-home.tsx",
+      "src/components/site/header.tsx",
+      "src/components/site/footer.tsx",
+      "src/components/site/page-shell.tsx",
+    ],
+    rules: {
+      "@next/next/no-html-link-for-pages": "off",
+      "@next/next/no-img-element": "off",
+      "react/no-unescaped-entities": "off",
+      "jsx-a11y/alt-text": "off",
+    },
+  },
   globalIgnores([
     ".next/**",
     "out/**",
