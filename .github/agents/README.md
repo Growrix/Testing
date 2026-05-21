@@ -61,8 +61,11 @@ Use this lane only after either frontend lane is already complete enough to be i
 ## Meta Lane
 These are system-building agents for the workflow itself:
 - `system-builder.agent.md`
+- `agent-builder-modes2.agent.md`
 
 Use this lane when the work is about agent design, lane alignment, governance, supporting files, or system-level drift repair rather than product delivery.
+Use `agent-builder-modes2.agent.md` when you want a specialist two-stage authoring workflow that first produces a blueprint and then emits one ready-to-use `agent.md` file.
+Use `system-builder.agent.md` when the request changes the shared agent system itself: wrappers, canonical sources, specs, checklists, registries, or lane boundaries.
 For large architecture blueprints, this lane now performs module-level readiness classification (`currently_supported`, `requires_extension`, `missing_knowledge`) before any downstream delivery handoff.
 For non-SaaS local automation/tooling blueprints such as Node CLI generators, prompt-driven builders, local dashboards, or file-output systems, this lane must first decide whether the work belongs in a new isolated local system instead of the shared phase1-7/backend lanes.
 When progress depends on user-supplied external accounts, keys, IDs, dashboards, or other off-repo assets, this lane must ask for them with Bangla acquisition instructions.
@@ -97,6 +100,7 @@ Use these wrappers when you need picker visibility from the root surface but wan
 - Use `github-agent.agent.md` for workspace Git operations instead of repurposing frontend or backend agents for repo management.
 - Use `senior-saas-developer.agent.md` when you want one generic senior generalist for project delivery instead of manually selecting separate plan, execution, refactor, and debug roles.
 - Use the meta lane for system structure work before editing delivery lanes directly.
+- Use `agent-builder-modes2.agent.md` when the goal is to design an agent in Mode 1 and output one final `agent.md` in Mode 2 without changing shared governance.
 - Keep backend/deploy artifacts under `Backend & Deploy/` unless the user explicitly asks to promote them into the main root.
 - Do not mutate source frontend projects in place during phase5 import/attach work.
 - Use project wrapper entries for project delivery roles; do not route project feature work through `github-agent.agent.md`.
@@ -115,5 +119,6 @@ Use these wrappers when you need picker visibility from the root surface but wan
 - Inside `[DOC SYSTEM]`, choose `phase2-doc-system-frontend-dev.agent.md` for the standard transformation pass and `phase2.1-doc-system-frontend-dev.agent.md` when the plan requires frontend-specialist execution quality beyond the standard Phase 2 agent.
 - Inside `[DOC SYSTEM]`, choose `phase2.2-doc-system-frontend-specialist.agent.md` when you want a more independent startup-theme builder that stays locked to the target `FRONTEND DEV` root and does not go hunting through unrelated references.
 - Choose `senior-saas-developer.agent.md` when you want one generic senior SaaS developer to audit the current project first and then decide planning versus execution without manually switching roles.
+- Choose `agent-builder-modes2.agent.md` when you want a blueprint-first agent-authoring workflow that ends in one ready-to-use `agent.md` file.
 
 Do not run both frontend lanes on the same site in the same pass.

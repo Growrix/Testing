@@ -52,8 +52,11 @@ It does not replace `foundation_planner`, `foundation_developer`, or the shared 
 ## Meta Lane
 These are system-building agents for the workflow itself:
 - `system-builder.agent.md`
+- `agent-builder-modes2.agent.md`
 
 Use this lane when the work is about agent design, lane alignment, governance, supporting files, or system-level drift repair rather than product delivery.
+Use `agent-builder-modes2.agent.md` when you want a specialist two-stage authoring workflow that first produces a blueprint and then emits one ready-to-use `agent.md` file.
+Use `system-builder.agent.md` when the request changes the shared agent system itself: wrappers, canonical sources, specs, checklists, registries, or lane boundaries.
 For large architecture blueprints, this lane now performs module-level readiness classification (`currently_supported`, `requires_extension`, `missing_knowledge`) before any downstream delivery handoff.
 For non-SaaS local automation/tooling blueprints such as Node CLI generators, prompt-driven builders, local dashboards, or file-output systems, this lane must first decide whether the work belongs in a new isolated local system instead of the shared phase1-7/backend lanes.
 When progress depends on user-supplied external accounts, keys, IDs, dashboards, or other off-repo assets, this lane must ask for them with Bangla acquisition instructions.
@@ -65,6 +68,7 @@ When progress depends on user-supplied external accounts, keys, IDs, dashboards,
 - Treat phase4-7 as an opt-in continuation lane.
 - Use `senior_saas_developer.agent.md` when you want one optional senior generalist entrypoint for project delivery without manually selecting separate plan and execution roles.
 - Use the meta lane for system structure work before editing delivery lanes directly.
+- Use `agent-builder-modes2.agent.md` when the goal is to design an agent in Mode 1 and output one final `agent.md` in Mode 2 without changing shared governance.
 - Use an isolated local system instead of the shared lanes when the blueprint is primarily a local automation, CLI, prompt-driven builder, or file-output product.
 - Keep backend/deploy artifacts under `Backend & Deploy/` unless the user explicitly asks to promote them into the main root.
 - Do not mutate source frontend projects in place during phase5 import/attach work.
@@ -80,6 +84,7 @@ When progress depends on user-supplied external accounts, keys, IDs, dashboards,
 - Inside the `[REPLI SYSTEM]` candidate track, choose `phase2.6-nextjs-native-completion.agent.md` when the runtime already builds and looks correct but primary routes are still legacy HTML-backed and need final ownership migration into pure Next.js.
 - Choose `[DOC SYSTEM]` when you want to use the Phase 1 replica only as a starting base, then rebuild the site around your own authored plan.
 - Choose `senior_saas_developer.agent.md` when you want one generic senior SaaS developer to audit the current project first and then decide planning versus execution without manually switching roles.
+- Choose `agent-builder-modes2.agent.md` when you want a blueprint-first agent-authoring workflow that ends in one ready-to-use `agent.md` file.
 - Choose the Meta lane first when you need to decide whether a blueprint should stay in the shared website/runtime lanes or become an isolated local system.
 
 Do not run both frontend lanes on the same site in the same pass.
