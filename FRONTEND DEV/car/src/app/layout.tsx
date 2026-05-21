@@ -3,6 +3,7 @@
 import type { Metadata } from "next";
 import { Manrope, Oxanium } from "next/font/google";
 import { siteConfig } from "@/data/site";
+import { VendorScripts } from "@/components/site/vendor-scripts";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -62,6 +63,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="/css/datepicker.css" />
       </head>
       <body className={`${manrope.variable} ${oxanium.variable} dark-scheme`}>
+        <VendorScripts />
         {children}
       </body>
     </html>

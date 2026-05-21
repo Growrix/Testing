@@ -22,5 +22,6 @@ export default defineConfig([
     "public/**",
     "DOC/**",
     "memories/**",
+    "Car-subdomain/**",
   ]),
 ]);
