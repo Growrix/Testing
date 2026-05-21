@@ -11,7 +11,7 @@ export default function NotFound() {
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Link
-            href="/index.html"
+            href="/"
             className="rounded-lg border border-white/10 bg-background-surface px-5 py-3 font-medium text-text-inverse transition-colors hover:bg-background-elevated"
           >
             Go to Home

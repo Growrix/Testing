@@ -1,5 +1,8 @@
+/* eslint-disable @next/next/no-css-tags */
+
 import type { Metadata } from "next";
 import { Manrope, Oxanium } from "next/font/google";
+import { LegacyRuntime } from "@/components/legacy/legacy-runtime";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -29,7 +32,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${manrope.variable} ${oxanium.variable}`}>{children}</body>
+      <head>
+        <base href="/" />
+        <link rel="stylesheet" href="/css/bootstrap.min.css" id="bootstrap" />
+        <link rel="stylesheet" href="/css/plugins.css" />
+        <link rel="stylesheet" href="/css/swiper.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/colors/scheme-1.css" id="colors" />
+        <link rel="stylesheet" href="/css/custom-swiper-1.css" />
+        <link rel="stylesheet" href="/css/datepicker.css" />
+      </head>
+      <body className={`${manrope.variable} ${oxanium.variable} dark-scheme`}>
+        {children}
+        <LegacyRuntime />
+      </body>
     </html>
   );
 }
