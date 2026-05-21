@@ -4,6 +4,7 @@
 Define the governed local agent workflow for the isolated `BLOG-AUTOMATION/` root.
 
 ## Public Surface
+- `.github/agents/blog-automation-core.agent.md`
 - `.github/agents/blog-automation-system-builder.agent.md`
 - `.github/agents/blog-automation-backend-planner.agent.md`
 - `.github/agents/blog-automation-workflow-architect.agent.md`
@@ -11,6 +12,7 @@ Define the governed local agent workflow for the isolated `BLOG-AUTOMATION/` roo
 - `.github/agents/blog-automation-validator.agent.md`
 
 ## Canonical Surface
+- `DOC/agents/blog_automation_core.agent.md`
 - `DOC/agents/blog_automation_system_builder.agent.md`
 - `DOC/agents/blog_automation_backend_planner.agent.md`
 - `DOC/agents/blog_automation_workflow_architect.agent.md`
@@ -19,8 +21,10 @@ Define the governed local agent workflow for the isolated `BLOG-AUTOMATION/` roo
 
 ## Required Supporting Files
 - `DOC/PLAN/BLOG-AUTOMATION-BLUEPRINT.md`
+- `DOC/execution/spec-rules/core-agent-spec.md`
 - `DOC/execution/spec-rules/milestone-1-execution-spec.md`
 - `DOC/execution/spec-rules/workflow-contract-spec.md`
+- `DOC/validation/checklists/core-agent-readiness-checklist.md`
 - `DOC/validation/checklists/local-agent-readiness-checklist.md`
 - `DOC/validation/checklists/milestone-1-readiness-checklist.md`
 - `DOC/validation/checklists/content-governance-checklist.md`

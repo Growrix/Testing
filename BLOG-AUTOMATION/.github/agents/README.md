@@ -6,11 +6,14 @@ All blog-automation-specific agent prompts must stay inside this root rather tha
 
 ## Public local lanes
 
+- `blog-automation-core.agent.md`
 - `blog-automation-system-builder.agent.md`
 - `blog-automation-backend-planner.agent.md`
 - `blog-automation-workflow-architect.agent.md`
 - `blog-automation-content-ops-planner.agent.md`
 - `blog-automation-validator.agent.md`
+
+Use `blog-automation-core.agent.md` first when you need one local operator to understand the whole system, compare Claude-generated reference builds, classify readiness, run or interpret validation, and route work to the specialist local agents.
 
 ## Canonical local sources
 
