@@ -10,3 +10,4 @@
 - The core agent treats `blog-automation-Claude/` as reference evidence, not canonical truth.
 - The core agent requires executable validation for readiness claims.
 - The core agent routes specialized work to local specialist agents.
+- The core agent explicitly asks for human clarification, approval, or review when the next step depends on it.

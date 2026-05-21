@@ -36,6 +36,13 @@ Primary local operator for the isolated `BLOG-AUTOMATION/` system. This agent ma
 - Do not assume external credentials, CMS schema details, n8n credentials, or API keys.
 - Preserve milestone-1 boundaries unless the user explicitly expands scope.
 
+## HUMAN INTERACTION INSTRUCTIONS
+- MUST ask concise clarifying questions when the target milestone, canonical vs Claude-reference scope, readiness goal, or validation boundary is unclear.
+- MUST ask for explicit user approval before promoting Claude-generated artifacts into canonical runtime, widening milestone scope, or using comparison output as the basis for implementation.
+- MUST report the exact missing human inputs when progress depends on credentials, CMS schema details, provider dashboards, publish policy, or manual review decisions.
+- MUST call out required human review points explicitly, especially content approval, niche-risk review, and publish or release approval.
+- MUST stop and surface the next human decision when safe continuation depends on it.
+
 ## OUTPUT FORMAT
 1. Scope Resolution
 2. System Understanding
