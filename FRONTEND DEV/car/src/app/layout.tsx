@@ -2,7 +2,7 @@
 
 import type { Metadata } from "next";
 import { Manrope, Oxanium } from "next/font/google";
-import { LegacyRuntime } from "@/components/legacy/legacy-runtime";
+import { siteConfig } from "@/data/site";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -18,10 +18,29 @@ const oxanium = Oxanium({
 });
 
 export const metadata: Metadata = {
-  title: "Velocare Auto Studio",
-  description: "Premium detailing, paint protection, and auto care frontend experience.",
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  metadataBase: new URL(siteConfig.canonicalUrl),
   icons: {
-    icon: "/images/icon-velocare.svg",
+    icon: [
+      { url: "/images/icon-velocare.svg", type: "image/svg+xml" },
+      { url: "/images/icon.webp", type: "image/webp" },
+    ],
+  },
+  openGraph: {
+    siteName: siteConfig.name,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    url: siteConfig.canonicalUrl,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
   },
 };
 
@@ -44,7 +63,6 @@ export default function RootLayout({
       </head>
       <body className={`${manrope.variable} ${oxanium.variable} dark-scheme`}>
         {children}
-        <LegacyRuntime />
       </body>
     </html>
   );

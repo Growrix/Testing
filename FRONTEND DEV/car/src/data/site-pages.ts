@@ -1,163 +1,183 @@
 export type SitePage = {
   title: string;
   href: string;
-  screenshot: string;
+  summary: string;
+  module: "shell" | "lead_gen" | "commerce" | "inventory_listing" | "content" | "seo" | "legal";
 };
 
 export const sitePages: SitePage[] = [
   {
-    title: "Homepage 1",
-    href: "/index.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-index-html-2026-05-16-02_20_13.png",
-  },
-  {
-    title: "Homepage 2",
-    href: "/homepage-2.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-homepage-2-html-2026-05-16-02_21_34.png",
-  },
-  {
-    title: "Homepage 3",
-    href: "/homepage-3.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-homepage-3-html-2026-05-16-02_22_19.png",
-  },
-  {
-    title: "Homepage 4",
-    href: "/homepage-4.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-homepage-4-html-2026-05-16-02_22_50.png",
-  },
-  {
-    title: "Homepage 5",
-    href: "/homepage-5.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-homepage-5-html-2026-05-16-02_23_23.png",
-  },
-  {
-    title: "Homepage 6",
-    href: "/homepage-6.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-homepage-6-html-2026-05-16-02_23_57.png",
-  },
-  {
-    title: "Homepage 7",
-    href: "/homepage-7.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-homepage-7-html-2026-05-16-02_24_24.png",
-  },
-  {
-    title: "Homepage 8",
-    href: "/homepage-8.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-homepage-8-html-2026-05-16-02_25_27.png",
+    title: "Home",
+    href: "/",
+    summary: "Shared shell and parity-preserved homepage composition.",
+    module: "shell",
   },
   {
     title: "Services",
-    href: "/services.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-services-html-2026-05-16-02_26_08.png",
+    href: "/services",
+    summary: "Service catalog with native detail routes.",
+    module: "lead_gen",
   },
   {
-    title: "Services 2",
-    href: "/services-2.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-services-2-html-2026-05-16-02_26_31.png",
-  },
-  {
-    title: "Services 3",
-    href: "/services-3.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-services-3-html-2026-05-16-02_26_55.png",
-  },
-  {
-    title: "Service Single",
-    href: "/service-single.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-service-single-html-2026-05-16-02_27_18.png",
-  },
-  {
-    title: "FAQ",
-    href: "/faq.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-faq-html-2026-05-16-02_27_56.png",
-  },
-  {
-    title: "About",
-    href: "/about.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-about-html-2026-05-16-02_28_21.png",
-  },
-  {
-    title: "Gallery Filter",
-    href: "/gallery.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-gallery-html-2026-05-16-02_28_48.png",
-  },
-  {
-    title: "Gallery Carousel",
-    href: "/gallery-carousel.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-gallery-carousel-html-2026-05-16-02_33_06.png",
-  },
-  {
-    title: "Gallery Slider",
-    href: "/gallery-slider.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-gallery-html-2026-05-16-02_32_37.png",
-  },
-  {
-    title: "Blog",
-    href: "/blog.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-blog-html-2026-05-16-02_29_12.png",
-  },
-  {
-    title: "Blog Single",
-    href: "/blog-single.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-blog-html-2026-05-16-02_29_12.png",
-  },
-  {
-    title: "Team",
-    href: "/team.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-team-html-2026-05-16-02_29_35.png",
-  },
-  {
-    title: "Careers",
-    href: "/careers.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-careers-html-2026-05-16-02_30_15.png",
-  },
-  {
-    title: "Testimonials",
-    href: "/testimonials.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-testimonials-html-2026-05-16-02_30_47.png",
-  },
-  {
-    title: "Shop",
-    href: "/shop.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-shop-html-2026-05-16-02_31_09.png",
-  },
-  {
-    title: "Shop Product Single",
-    href: "/shop-product-single.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-shop-html-2026-05-16-02_31_09.png",
-  },
-  {
-    title: "Car Listing",
-    href: "/car-listing.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-car-listing-html-2026-05-16-02_31_34.png",
-  },
-  {
-    title: "Car Single",
-    href: "/car-single.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-car-single-html-2026-05-16-02_32_09.png",
-  },
-  {
-    title: "Locations",
-    href: "/locations.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-locations-html-2026-05-16-02_33_57.png",
+    title: "Service Detail",
+    href: "/services/ceramic-coating-protection",
+    summary: "Typed service content and route-param ownership.",
+    module: "lead_gen",
   },
   {
     title: "Contact",
-    href: "/contact.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-contact-html-2026-05-16-02_34_18.png",
+    href: "/contact",
+    summary: "Validated contact form through API route handler.",
+    module: "lead_gen",
   },
   {
     title: "Appointment",
-    href: "/appointment.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-contact-html-2026-05-16-02_34_18.png",
+    href: "/appointment",
+    summary: "Booking form with required service/date/time states.",
+    module: "lead_gen",
   },
   {
-    title: "Terms and Conditions",
-    href: "/terms.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-contact-html-2026-05-16-02_34_18.png",
+    title: "Careers",
+    href: "/careers",
+    summary: "Career apply flow with truthful not-configured delivery contract.",
+    module: "lead_gen",
+  },
+  {
+    title: "Shop",
+    href: "/shop",
+    summary: "Native product listing, filters, and search state.",
+    module: "commerce",
+  },
+  {
+    title: "Product Detail",
+    href: "/shop/premium-microfiber-cleaning-towel",
+    summary: "Param route for detail view, quantity controls, and cart/wishlist actions.",
+    module: "commerce",
+  },
+  {
+    title: "Cart",
+    href: "/shop/cart",
+    summary: "Cart module with quantity, remove, empty, and summary states.",
+    module: "commerce",
+  },
+  {
+    title: "Wishlist",
+    href: "/shop/wishlist",
+    summary: "Wishlist module with add-to-cart transition.",
+    module: "commerce",
+  },
+  {
+    title: "Checkout",
+    href: "/shop/checkout",
+    summary: "Checkout entry with explicit not-configured payment and fulfillment status.",
+    module: "commerce",
+  },
+  {
+    title: "Checkout Success",
+    href: "/shop/checkout/success",
+    summary: "Order request confirmation route.",
+    module: "commerce",
+  },
+  {
+    title: "Vehicle Listing",
+    href: "/listing",
+    summary: "Inventory listing with type filtering states.",
+    module: "inventory_listing",
+  },
+  {
+    title: "Vehicle Detail",
+    href: "/listing/bmw-x5",
+    summary: "Listing detail page with inquiry form contract.",
+    module: "inventory_listing",
+  },
+  {
+    title: "Blog",
+    href: "/blog",
+    summary: "Content list module with slug routing.",
+    module: "content",
+  },
+  {
+    title: "Blog Detail",
+    href: "/blog/ceramic-coating-benefits-what-every-car-owner-should-know",
+    summary: "Post detail with validated comment/contact form surface.",
+    module: "content",
+  },
+  {
+    title: "FAQ",
+    href: "/faq",
+    summary: "Support and product/service frequently asked questions.",
+    module: "content",
+  },
+  {
+    title: "Gallery",
+    href: "/gallery",
+    summary: "Unified gallery route for all gallery variants.",
+    module: "content",
+  },
+  {
+    title: "About",
+    href: "/about",
+    summary: "Brand mission and template intent narrative.",
+    module: "content",
+  },
+  {
+    title: "Team",
+    href: "/team",
+    summary: "Team roster route.",
+    module: "content",
+  },
+  {
+    title: "Testimonials",
+    href: "/testimonials",
+    summary: "Testimonials and social proof route.",
+    module: "content",
+  },
+  {
+    title: "Locations",
+    href: "/locations",
+    summary: "Workshop location directory.",
+    module: "content",
+  },
+  {
+    title: "Sitemap",
+    href: "/sitemap.xml",
+    summary: "SEO sitemap for route discoverability.",
+    module: "seo",
+  },
+  {
+    title: "Robots",
+    href: "/robots.txt",
+    summary: "Crawler policy with sitemap declaration.",
+    module: "seo",
   },
   {
     title: "Privacy Policy",
-    href: "/privacy.html",
-    screenshot: "screencapture-madebydesignesia-themes-autodetail-contact-html-2026-05-16-02_34_18.png",
+    href: "/privacy",
+    summary: "Privacy policy route.",
+    module: "legal",
+  },
+  {
+    title: "Terms and Conditions",
+    href: "/terms",
+    summary: "Terms route.",
+    module: "legal",
+  },
+  {
+    title: "Support",
+    href: "/support",
+    summary: "Customer support route.",
+    module: "legal",
+  },
+  {
+    title: "Shipping Policy",
+    href: "/shipping",
+    summary: "Shipping policy route with explicit integration dependency.",
+    module: "legal",
+  },
+  {
+    title: "Returns Policy",
+    href: "/returns",
+    summary: "Returns policy route with explicit integration dependency.",
+    module: "legal",
   },
 ];
