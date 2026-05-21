@@ -33,8 +33,8 @@ These candidate agents preserve the locked REPLI baseline while testing earlier 
 - `phase2.5-nextjs-migration-candidate.agent.md`
 - `phase2.6-nextjs-native-completion.agent.md`
 
-Use this track when you want to test earlier Vercel plus subdomain deploy readiness before the shared phase-7 lane, or when you want to validate a separate Next.js migration pass without changing the locked REPLI agents.
-Use `phase2.6-nextjs-native-completion.agent.md` when the site is already visually approved but still relies on legacy HTML-backed ownership inside a Next.js shell and you want a pure Next.js App Router product with exact visual parity.
+Use this track when you want to test earlier Vercel plus subdomain deploy readiness before the shared phase-7 lane, or when you want to validate a separate Next.js migration and production-template completion pass without changing the locked REPLI agents.
+Use `phase2.6-nextjs-native-completion.agent.md` when the site is already visually approved but still relies on legacy HTML-backed ownership, generated page dumps, legacy runtime scripts, `.html` route ownership, fake forms, localStorage-only commerce, or missing production flow contracts. This phase must produce a pure Next.js App Router client template with exact visual parity, canonical routes, reusable shell/sections/data, native lead-gen and commerce contracts, SEO, tests, and legacy retirement.
 
 ## [DOC SYSTEM] Frontend Lane
 These agents start from the same Phase 1 replica but let you reshape the site around your own authored plan:
@@ -114,7 +114,7 @@ Use these wrappers when you need picker visibility from the root surface but wan
 ## Selection Guide
 - Choose `[REPLI SYSTEM]` when you want to keep the Phase 1 screenshot-derived site and finish the missing truth behind it.
 - Choose the `[REPLI SYSTEM]` candidate track when you want to test earlier frontend-only Vercel plus subdomain deployment or a separate full Next.js migration step while preserving the locked REPLI baseline.
-- Inside the `[REPLI SYSTEM]` candidate track, choose `phase2.6-nextjs-native-completion.agent.md` when the runtime already builds and looks correct but primary routes are still legacy HTML-backed and need final ownership migration into pure Next.js.
+- Inside the `[REPLI SYSTEM]` candidate track, choose `phase2.6-nextjs-native-completion.agent.md` when the runtime already builds and looks correct but the project still needs final production-template migration: canonical App Router ownership, reusable component/data architecture, native lead-gen and commerce flows, SEO, tests, and explicit retirement of HTML/legacy/script ownership.
 - Choose `[DOC SYSTEM]` when you want to use the Phase 1 replica only as a starting base, then rebuild the site around your own authored plan.
 - Inside `[DOC SYSTEM]`, choose `phase2-doc-system-frontend-dev.agent.md` for the standard transformation pass and `phase2.1-doc-system-frontend-dev.agent.md` when the plan requires frontend-specialist execution quality beyond the standard Phase 2 agent.
 - Inside `[DOC SYSTEM]`, choose `phase2.2-doc-system-frontend-specialist.agent.md` when you want a more independent startup-theme builder that stays locked to the target `FRONTEND DEV` root and does not go hunting through unrelated references.

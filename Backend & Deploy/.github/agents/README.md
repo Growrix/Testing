@@ -22,7 +22,7 @@ These candidate agents preserve the locked REPLI baseline while testing earlier 
 - `phase2.5-nextjs-migration-candidate.agent.md`
 - `phase2.6-nextjs-native-completion.agent.md`
 
-Use `phase2.6-nextjs-native-completion.agent.md` when the site is already visually approved but still relies on legacy HTML-backed ownership inside a Next.js shell and must be finished into a pure App Router product without visual drift.
+Use `phase2.6-nextjs-native-completion.agent.md` when the site is already visually approved but still relies on legacy HTML-backed ownership, generated page dumps, legacy runtime scripts, `.html` route ownership, fake forms, localStorage-only commerce, or missing production flow contracts. This phase must finish the site into a pure production Next.js App Router client template with exact visual parity, canonical routes, reusable shell/sections/data, native lead-gen and commerce contracts, SEO, tests, and legacy retirement.
 
 ## [DOC SYSTEM] Frontend Lane
 These agents start from the same Phase 1 replica but let you reshape the site around your own authored plan:
@@ -81,7 +81,7 @@ When progress depends on user-supplied external accounts, keys, IDs, dashboards,
 
 ## Selection Guide
 - Choose `[REPLI SYSTEM]` when you want to keep the Phase 1 screenshot-derived site and finish the missing truth behind it.
-- Inside the `[REPLI SYSTEM]` candidate track, choose `phase2.6-nextjs-native-completion.agent.md` when the runtime already builds and looks correct but primary routes are still legacy HTML-backed and need final ownership migration into pure Next.js.
+- Inside the `[REPLI SYSTEM]` candidate track, choose `phase2.6-nextjs-native-completion.agent.md` when the runtime already builds and looks correct but the project still needs final production-template migration: canonical App Router ownership, reusable component/data architecture, native lead-gen and commerce flows, SEO, tests, and explicit retirement of HTML/legacy/script ownership.
 - Choose `[DOC SYSTEM]` when you want to use the Phase 1 replica only as a starting base, then rebuild the site around your own authored plan.
 - Choose `senior_saas_developer.agent.md` when you want one generic senior SaaS developer to audit the current project first and then decide planning versus execution without manually switching roles.
 - Choose `agent-builder-modes2.agent.md` when you want a blueprint-first agent-authoring workflow that ends in one ready-to-use `agent.md` file.
