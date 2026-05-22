@@ -77,7 +77,7 @@ These patterns align better with orchestration-first environments (Cursor/LangCh
 
 ## Plan: What to Keep for VS Code + GitHub Copilot vs Other Environments
 
-## A) Keep in VS Code + GitHub Copilot (primary lane)
+### A) Keep in VS Code + GitHub Copilot (primary lane)
 1. `phase3-frontend-polish.agent.md` (after simplification)
 2. `phase4-foundation-planning.agent.md` (schema-driven)
 3. `phase4-foundation-development.agent.md` (split into small bounded tasks)
@@ -92,7 +92,7 @@ These patterns align better with orchestration-first environments (Cursor/LangCh
 - Break each phase into smaller capability tasks (audit-only, implement-only, verify-only).
 - Enforce explicit exit criteria at each phase boundary.
 
-## B) Keep for Cursor / LangChain / OpenClaw (orchestration lane)
+### B) Keep for Cursor / LangChain / OpenClaw (orchestration lane)
 1. `phase1-site-replication.agent.md`
 2. `phase2-frontend-planning.agent.md`
 3. `phase2-frontend-completion.agent.md`
