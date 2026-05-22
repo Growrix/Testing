@@ -1,4 +1,4 @@
-# Agent Anatomy Audit Report (Correction Pass)
+# Agent anatomy Audit Report (Correction Pass)
 
 ## Request Alignment
 You asked for a proper re-check because subphase points like **1.2, 1.3, 2.5, 2.6** were missed.  
