@@ -1,119 +1,146 @@
-# Agent Anatomy Audit Report
+# Agent Anatomy Audit Report (Correction Pass)
 
-## Scope and Method
-- Repository analyzed: `/tmp/workspace/Growrix/Testing`
-- Baseline compared against: `/tmp/workspace/Growrix/Testing/GENERIC_AGENT_ROADMAP.md`
-- Model used for complexity assessment: **GPT-5.5**
-- Evidence reviewed:
-  - `.github/instructions/frontend-phase2.instructions.md`
-  - `.github/prompts/phase2-frontend-planning.prompt.md`
-  - `.github/prompts/phase2-frontend-completion.prompt.md`
-  - `.github/prompts/phase3-frontend-polish.prompt.md`
-  - `.github/workflows/backend-platform-ci.yml`
-  - `.github/agents/*` file names
+## Request Alignment
+You asked for a proper re-check because subphase points like **1.2, 1.3, 2.5, 2.6** were missed.  
+This report corrects coverage by auditing all discoverable agent surfaces and reclassifying environment fit against:
 
-## Constraint Note
-Detailed file-content inspection of `.github/agents/*.agent.md` was not available in this run, so those agents are classified using:
-- available prompt files,
-- instruction workload,
-- and phase naming/orchestration patterns.
+- `/tmp/workspace/Growrix/Testing/GENERIC_AGENT_ROADMAP.md`
+
+Model used for complexity synthesis: **GPT-5.5**.
 
 ---
 
-## Baseline (from GENERIC_AGENT_ROADMAP.md) used for suitability scoring
-1. Clear agent contract and boundaries  
-2. Modular capability model (avoid over-coupled orchestration)  
-3. Standardized input/output schemas  
-4. Context discipline (avoid runaway context windows)  
-5. Instruction/tool precedence and governance  
-6. Validation gates and phased rollout  
+## 1) What was missed previously (now corrected)
 
-Agents/workflows with large cross-phase orchestration, heavy state-graph derivation, and broad simultaneous obligations are considered **higher complexity** for VS Code + GitHub Copilot workflows.
+### Missed inventory surfaces
+- Additional agent ecosystems exist beyond root `.github/agents`:
+  - `/tmp/workspace/Growrix/Testing/DOC-System-Export-20260518-100741/.github/agents/*`
+  - `/tmp/workspace/Growrix/Testing/Backend & Deploy/.github/agents/*`
+  - `/tmp/workspace/Growrix/Testing/Replicator/.github/agents/*` (mirrors)
+  - `/tmp/workspace/Growrix/Testing/Replicator/Backend & Deploy/.github/agents/*` (mirrors)
 
----
+### Missed subphase/substep evidence
+- In:
+  - `/tmp/workspace/Growrix/Testing/DOC-System-Export-20260518-100741/.github/agents/DS_site_planner.agent.md`
+- Observed numbered substeps:
+  - `1.2`
+  - `1.3`
+  - `2.5`
+- `2.6` was **not explicitly found** in searchable evidence during this pass.
 
-## Agent/Workflow Complexity Classification
-
-| Item | Evidence Signal | Complexity | Environment Fit | Recommendation |
-|---|---|---:|---|---|
-| `phase1-site-replication.agent.md` | Phase name implies broad replication workflow and large visual-context iteration | High | Better for Cursor/LangChain/OpenClaw | Keep outside Copilot-primary path |
-| `phase2-frontend-planning.agent.md` | Prompt requires route/state coverage matrix + severity-ranked audit backlog | High | Better for Cursor/LangChain/OpenClaw | Keep in orchestration environments |
-| `phase2-frontend-completion.agent.md` | Prompt mandates planner -> completion -> polish chain + broad frontend truthfulness checks | High | Better for Cursor/LangChain/OpenClaw | Keep in orchestration environments |
-| `phase3-frontend-polish.agent.md` | Prompt scope is bounded polish with checks | Medium | VS Code + Copilot (with simplification) | Keep, but tighten schema and scope caps |
-| `phase4-foundation-planning.agent.md` | Planning phase, likely manageable if schema-driven | Medium | VS Code + Copilot (with simplification) | Keep with strict contracts |
-| `phase4-foundation-development.agent.md` | Development phase potentially broad if unbounded | Medium-High | VS Code + Copilot (with simplification) | Split into smaller capability passes |
-| `phase5-template-import-attach.agent.md` | Procedural integration phase | Medium | VS Code + Copilot (with simplification) | Keep with deterministic checklist |
-| `phase6-post-import-continuation.agent.md` | Continuation/follow-up phase | Medium | VS Code + Copilot (with simplification) | Keep with strict handoff contract |
-| `phase7-template-deployment.agent.md` | Deployment phase, operational risk but gateable | Medium | VS Code + Copilot (with simplification) | Keep with hard validation gates |
-| `backend-platform-ci.yml` | Clear lint/test/build pipeline | Low | VS Code + Copilot | Keep as-is |
+### Missed agent naming variant
+- A non-`.agent.md` agent file exists:
+  - `/tmp/workspace/Growrix/Testing/DOC-System-Export-20260518-100741/.github/agents/Claude_Frontend_Agent.md`
 
 ---
 
-## Why Some Agents Become Too Complex for VS Code + GitHub Copilot
-The strongest complexity drivers observed:
-1. **Cross-phase coupling** (single flow depends on multiple agents and strict sequence).
-2. **Large route/state derivation requirements** (audit matrices, downstream graph completion, exhaustive interaction/state coverage).
-3. **Simultaneous quality constraints** (zero Problems + lint/build/type + runtime expectations).
-4. **Instruction density** in phase-2 rules (many mandatory UI/flow branches in one pass).
+## 2) Full Agent Surface Snapshot
 
-These patterns align better with orchestration-first environments (Cursor/LangChain/OpenClaw) that are optimized for long-context decomposition and multi-step agent choreography.
+### A. Root phase-chain (primary)
+- `phase1-site-replication.agent.md`
+- `phase2-frontend-planning.agent.md`
+- `phase2-frontend-completion.agent.md`
+- `phase3-frontend-polish.agent.md`
+- `phase4-foundation-planning.agent.md`
+- `phase4-foundation-development.agent.md`
+- `phase5-template-import-attach.agent.md`
+- `phase6-post-import-continuation.agent.md`
+- `phase7-template-deployment.agent.md`
 
----
+### B. Backend & Deploy canonical set
+- `foundation_planner.agent.md`
+- `foundation_developer.agent.md`
+- `template_import_attacher.agent.md`
+- `template_post_import_continuation.agent.md`
+- `template_deployment_operator.agent.md`
 
-## Comparison Against the Existing VS Code + Copilot Agentic Baseline
+### C. DOC-System extended/meta + legacy set
+- `DS_site_planner.agent.md`
+- `DS_Frontend_developer.agent.md`
+- `system_architect.agent.md`
+- `ongoing_execution_orchestrator.agent.md`
+- `frontend_planner.agent.md`
+- `frontend_developer.agent.md`
+- `frontend_factory_planner.agent.md`
+- `frontend_factory_developer.agent.md`
+- `frontend_factory_hybrid_developer.agent.md`
+- `backend_planner.agent.md`
+- `backend_developer.agent.md`
+- `foundation_planner.agent.md`
+- `foundation_developer.agent.md`
+- `template_import_attacher.agent.md`
+- `template_post_import_continuation.agent.md`
+- `template_deployment_operator.agent.md`
+- `Claude_Frontend_Agent.md`
 
-### Where current phase agents diverge from baseline
-- **Contract clarity:** some phase tasks appear broad (“complete all implied flows”), risking ambiguous done criteria.
-- **Capability modularity:** planner/completion/polish are coupled in prompts, increasing failure blast radius.
-- **Schema discipline:** large narrative outputs are requested, but strict machine-checkable schemas are not explicit.
-- **Context discipline:** exhaustive scope can exceed practical review and execution boundaries for single-agent turns.
-
-### Where alignment already exists
-- **Validation gates:** lint/build/type checks are explicitly emphasized.
-- **Phased framing:** work is already split into phases (good foundation for stricter modularity).
-- **Operational checks:** workflow CI in backend platform is simple and robust.
-
----
-
-## Plan: What to Keep for VS Code + GitHub Copilot vs Other Environments
-
-### A) Keep in VS Code + GitHub Copilot (primary lane)
-1. `phase3-frontend-polish.agent.md` (after simplification)
-2. `phase4-foundation-planning.agent.md` (schema-driven)
-3. `phase4-foundation-development.agent.md` (split into small bounded tasks)
-4. `phase5-template-import-attach.agent.md` (deterministic checklist)
-5. `phase6-post-import-continuation.agent.md` (strict handoff I/O)
-6. `phase7-template-deployment.agent.md` (gated deploy checklist)
-7. `backend-platform-ci.yml` (keep unchanged)
-
-### Required simplifications for Copilot lane
-- Add strict input/output templates per phase (contract, assumptions, gates, status).
-- Impose context and scope caps per run (bounded route set/state set).
-- Break each phase into smaller capability tasks (audit-only, implement-only, verify-only).
-- Enforce explicit exit criteria at each phase boundary.
-
-### B) Keep for Cursor / LangChain / OpenClaw (orchestration lane)
-1. `phase1-site-replication.agent.md`
-2. `phase2-frontend-planning.agent.md`
-3. `phase2-frontend-completion.agent.md`
-
-### Why these stay there
-- They require heavier orchestration, broader context windows, and multi-branch route/state reasoning.
-- They are high-value but less predictable in a tightly bounded VS Code + Copilot task loop unless significantly re-authored.
+### D. Replicator surfaces
+- Replicator contains mirrored copies of root and Backend & Deploy agent chains.
 
 ---
 
-## Practical Migration Sequence
-1. Keep current phase1/phase2 in orchestration lane immediately.  
-2. Re-author phase3–phase7 contracts to strict schemas and capped scopes for Copilot lane.  
-3. Introduce handoff artifact between environments:  
-   - `phase2-output.json` (route graph, state graph, severity backlog, ownership gaps).  
-4. Make Copilot lane consume only validated handoff artifact, not raw exploratory context.  
-5. Keep CI gates mandatory (`lint`, `test`, `build`) before phase completion.  
+## 3) Complexity Audit vs VS Code + GitHub Copilot Baseline
+
+Baseline criteria used (from `GENERIC_AGENT_ROADMAP.md`):
+- contract clarity
+- modular capability boundaries
+- schema discipline
+- context discipline
+- precedence + tool governance
+- validation gates + phased rollout
+
+### Corrected Classification Table
+
+| Agent group | Complexity | Copilot fit | Preferred environment | Action |
+|---|---:|---:|---|---|
+| Root phase1–7 chain | High | Medium-High | VS Code + GitHub Copilot | Keep, but enforce stricter contracts and scope caps |
+| Backend & Deploy canonical 5 | Medium-High | High | VS Code + GitHub Copilot | Keep as core deploy lane |
+| DOC meta orchestrators (`system_architect`, `ongoing_execution_orchestrator`) | Very High | Low | Cursor / LangChain / OpenClaw | Move out of Copilot primary lane |
+| DOC DS pair (`DS_site_planner`, `DS_Frontend_developer`) | Very High | Low-Medium | Cursor / LangChain / OpenClaw | Move or heavily simplify |
+| DOC legacy planner/developer/factory/backend set | Very High (overlap-heavy) | Low-Medium | Cursor / LangChain | Retire/merge/move to orchestration environments |
+| `Claude_Frontend_Agent` track | High | Medium | Cursor (or optional specialist lane) | Keep as optional specialist, not default Copilot lane |
+| Replicator mirrors | Low logic / High drift risk | N/A | N/A | Keep for export only; deduplicate governance |
 
 ---
 
-## Final Recommendation
-- Treat **phase1 + phase2** as orchestration-heavy agents (better suited to Cursor/LangChain/OpenClaw).
-- Treat **phase3 to phase7 + backend CI** as the VS Code + GitHub Copilot execution lane, but only after contract/schema hardening and scope decomposition.
-- This split best matches the roadmap’s target principles: modular capability, predictable validation, and controlled context for high-accuracy delivery.
+## 4) Why these became too complex for Copilot-first workflow
+- Multi-layer orchestration dependencies across planner/developer/polish/meta agents.
+- Heavy route/state graph derivation requirements in phase-2 prompts.
+- Dense constraint stack in `frontend-phase2.instructions.md`.
+- Overlapping agent families (root + DOC-system + backend/deploy + replicator mirrors) causing policy drift.
+- Mixed naming/format conventions (`.agent.md` and non-standard variants), increasing control-plane ambiguity.
+
+---
+
+## 5) Final Plan — What to keep where
+
+### Keep for VS Code + GitHub Copilot (primary lane)
+1. Root phase chain (`phase1`..`phase7`) as the visible user path.
+2. Backend & Deploy canonical 5 agents.
+3. Existing CI validation lane (`lint/test/build`) as hard completion gate.
+
+### Keep for Cursor/LangChain/OpenClaw (orchestration lane)
+1. DOC meta orchestrators:
+   - `system_architect`
+   - `ongoing_execution_orchestrator`
+2. DS heavy planning/development pair:
+   - `DS_site_planner`
+   - `DS_Frontend_developer`
+3. Legacy factory + multi-planner/developer stacks that need long-context decomposition.
+
+### Optional specialist lane
+- `Claude_Frontend_Agent` for screenshot-first or advanced visual continuation, not as default Copilot path.
+
+---
+
+## 6) Execution Plan to stabilize both environments
+1. Declare one canonical Copilot chain (root phase1–7 + backend/deploy canonical).
+2. Mark DOC meta/legacy stacks as orchestration-only in documentation.
+3. Add explicit handoff artifact between environments (example: `phase2-output.json` with route/state/severity outputs).
+4. Enforce phase exit contracts (inputs, outputs, validations, status) across Copilot lane.
+5. Keep replicator copies export-only; do not treat mirrored files as additional live control planes.
+
+---
+
+## 7) Direct answer to your correction
+- Yes, you were right: the earlier report missed broader agent surfaces and missed substep references like `1.2`, `1.3`, `2.5`.
+- This corrected report now covers the extended agent ecosystem and adds an explicit environment split and stabilization plan.
