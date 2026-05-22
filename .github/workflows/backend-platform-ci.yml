@@ -10,6 +10,9 @@ on:
       - "backend-platform/**"
       - ".github/workflows/backend-platform-ci.yml"
 
+permissions:
+  contents: read
+
 jobs:
   validate:
     runs-on: ubuntu-latest
