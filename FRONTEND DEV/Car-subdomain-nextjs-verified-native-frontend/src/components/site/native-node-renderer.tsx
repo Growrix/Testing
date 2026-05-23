@@ -186,6 +186,27 @@ const buildProps = (tag: string, attrs: Record<string, string>, key: string | nu
     props[normalizedName] = normalizedValue;
   });
 
+  const backgroundImage = attrs["data-bgimage"];
+  const backgroundColor = attrs["data-bgcolor"];
+
+  if (backgroundImage || backgroundColor) {
+    const baseStyle = ((props.style as (CSSProperties & Record<string, string>) | undefined) ?? {});
+    const mergedStyle: CSSProperties & Record<string, string> = { ...baseStyle };
+
+    if (backgroundImage && !mergedStyle.background && !mergedStyle.backgroundImage) {
+      // Preserve legacy visual intent when runtime enhancers are unavailable.
+      mergedStyle.background = backgroundImage;
+      mergedStyle.backgroundSize = mergedStyle.backgroundSize ?? "cover";
+      mergedStyle.backgroundRepeat = mergedStyle.backgroundRepeat ?? "no-repeat";
+    }
+
+    if (backgroundColor && !mergedStyle.backgroundColor) {
+      mergedStyle.backgroundColor = backgroundColor;
+    }
+
+    props.style = mergedStyle;
+  }
+
   return props;
 };
 

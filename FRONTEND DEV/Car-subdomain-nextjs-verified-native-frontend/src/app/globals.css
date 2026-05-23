@@ -23,6 +23,13 @@ body.menu-open {
   overflow: hidden;
 }
 
+/* Prevent fixed legacy loader from blocking first paint if runtime scripts are delayed. */
+#de-loader {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 button.btn-main {
   border: none;
   cursor: pointer;
@@ -53,27 +60,39 @@ a {
 }
 
 /* Fallback for retired owl plugin ownership so hero/content blocks stay visible. */
-.owl-carousel {
+.owl-carousel:not(.owl-loaded) {
   display: block !important;
 }
 
-.owl-carousel .owl-stage {
-  width: 100% !important;
-  transform: none !important;
-}
-
-.owl-carousel .owl-item {
-  display: none;
-  width: 100% !important;
-}
-
-.owl-carousel .owl-item.active,
-.owl-carousel .owl-item:first-child {
+.owl-carousel:not(.owl-loaded) > .item:first-child {
   display: block;
 }
 
+/* Native fallback for 5-column owl strips when JS ownership is unavailable. */
+.owl-carousel.owl-5-cols:not(.owl-loaded) {
+  display: flex !important;
+  flex-wrap: nowrap;
+  gap: 1.25rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x proximity;
+}
+
+.owl-carousel.owl-5-cols:not(.owl-loaded)::-webkit-scrollbar {
+  display: none;
+}
+
+.owl-carousel.owl-5-cols:not(.owl-loaded) > .item {
+  flex: 0 0 calc((100% - 5rem) / 5);
+  min-width: calc((100% - 5rem) / 5);
+  width: auto !important;
+  scroll-snap-align: start;
+}
+
 /* Native fallback for brand logo strips when Owl wrappers are absent. */
-.owl-6.no-alpha.owl-carousel {
+.owl-6.no-alpha.owl-carousel:not(.owl-loaded) {
   display: flex !important;
   flex-wrap: nowrap;
   overflow-x: auto;
@@ -82,18 +101,18 @@ a {
   -ms-overflow-style: none;
 }
 
-.owl-6.no-alpha.owl-carousel::-webkit-scrollbar {
+.owl-6.no-alpha.owl-carousel:not(.owl-loaded)::-webkit-scrollbar {
   display: none;
 }
 
-.owl-6.no-alpha.owl-carousel > img {
+.owl-6.no-alpha.owl-carousel:not(.owl-loaded) > img {
   flex: 0 0 calc(100% / 6);
   max-width: calc(100% / 6);
 }
 
 /* Native fallback for testimonial/review cards when Owl wrappers are absent. */
-.owl-carousel.owl-3-dots,
-.owl-carousel.owl-2-dots {
+.owl-carousel.owl-3-dots:not(.owl-loaded),
+.owl-carousel.owl-2-dots:not(.owl-loaded) {
   display: flex !important;
   flex-wrap: nowrap;
   gap: 1.5rem;
@@ -104,72 +123,94 @@ a {
   scroll-snap-type: x mandatory;
 }
 
-.owl-carousel.owl-3-dots::-webkit-scrollbar,
-.owl-carousel.owl-2-dots::-webkit-scrollbar {
+.owl-carousel.owl-3-dots:not(.owl-loaded)::-webkit-scrollbar,
+.owl-carousel.owl-2-dots:not(.owl-loaded)::-webkit-scrollbar {
   display: none;
 }
 
-.owl-carousel.owl-3-dots > .item,
-.owl-carousel.owl-2-dots > .item {
+.owl-carousel.owl-3-dots:not(.owl-loaded) > .item,
+.owl-carousel.owl-2-dots:not(.owl-loaded) > .item {
   scroll-snap-align: start;
 }
 
-.owl-carousel.owl-3-dots > .item {
+.owl-carousel.owl-3-dots:not(.owl-loaded) > .item {
   flex: 0 0 calc((100% - 3rem) / 3);
   min-width: calc((100% - 3rem) / 3);
 }
 
-.owl-carousel.owl-2-dots > .item {
+.owl-carousel.owl-2-dots:not(.owl-loaded) > .item {
   flex: 0 0 calc((100% - 1.5rem) / 2);
   min-width: calc((100% - 1.5rem) / 2);
 }
 
 @media (max-width: 1199px) {
-  .owl-6.no-alpha.owl-carousel > img {
+  .owl-carousel.owl-5-cols:not(.owl-loaded) > .item {
+    flex-basis: calc((100% - 3.75rem) / 4);
+    min-width: calc((100% - 3.75rem) / 4);
+  }
+
+  .owl-6.no-alpha.owl-carousel:not(.owl-loaded) > img {
     flex-basis: calc(100% / 5);
     max-width: calc(100% / 5);
   }
 }
 
 @media (max-width: 991px) {
-  .owl-6.no-alpha.owl-carousel > img {
+  .owl-carousel.owl-5-cols:not(.owl-loaded) > .item {
+    flex-basis: calc((100% - 2.5rem) / 3);
+    min-width: calc((100% - 2.5rem) / 3);
+  }
+
+  .owl-6.no-alpha.owl-carousel:not(.owl-loaded) > img {
     flex-basis: calc(100% / 4);
     max-width: calc(100% / 4);
   }
 
-  .owl-carousel.owl-3-dots > .item {
+  .owl-carousel.owl-3-dots:not(.owl-loaded) > .item {
     flex-basis: calc((100% - 1.5rem) / 2);
     min-width: calc((100% - 1.5rem) / 2);
   }
 }
 
 @media (max-width: 767px) {
-  .owl-6.no-alpha.owl-carousel > img {
+  .owl-carousel.owl-5-cols:not(.owl-loaded) > .item {
+    flex-basis: calc((100% - 1.25rem) / 2);
+    min-width: calc((100% - 1.25rem) / 2);
+  }
+
+  .owl-6.no-alpha.owl-carousel:not(.owl-loaded) > img {
     flex-basis: calc(100% / 3);
     max-width: calc(100% / 3);
   }
 
-  .owl-carousel.owl-3-dots > .item,
-  .owl-carousel.owl-2-dots > .item {
+  .owl-carousel.owl-3-dots:not(.owl-loaded) > .item,
+  .owl-carousel.owl-2-dots:not(.owl-loaded) > .item {
+    flex-basis: 100%;
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 575px) {
+  .owl-carousel.owl-5-cols:not(.owl-loaded) > .item {
     flex-basis: 100%;
     min-width: 100%;
   }
 }
 
 /* Native fallback for the gallery carousel page where Owl wrappers are absent. */
-#project-single-carousel.owl-3-cols.owl-carousel {
+#project-single-carousel.owl-3-cols.owl-carousel:not(.owl-loaded) {
   display: flex !important;
   flex-wrap: nowrap;
   overflow: hidden;
 }
 
-#project-single-carousel.owl-3-cols.owl-carousel > .item {
+#project-single-carousel.owl-3-cols.owl-carousel:not(.owl-loaded) > .item {
   display: block;
   flex: 0 0 calc(100% / 3);
   max-width: calc(100% / 3);
 }
 
-#project-single-carousel.owl-3-cols.owl-carousel > .item:nth-child(n + 4) {
+#project-single-carousel.owl-3-cols.owl-carousel:not(.owl-loaded) > .item:nth-child(n + 4) {
   display: none;
 }
 
