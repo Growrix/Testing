@@ -7,6 +7,42 @@ type NativeNodeRendererProps = {
   nodes: NativeNode[];
 };
 
+const NAMED_ENTITIES: Record<string, string> = {
+  amp: "&",
+  lt: "<",
+  gt: ">",
+  quot: '"',
+  apos: "'",
+  nbsp: "\u00A0",
+  copy: "\u00A9",
+  reg: "\u00AE",
+  trade: "\u2122",
+  mdash: "\u2014",
+  ndash: "\u2013",
+  hellip: "\u2026",
+  rsquo: "\u2019",
+  lsquo: "\u2018",
+  rdquo: "\u201D",
+  ldquo: "\u201C",
+};
+
+const decodeHtmlEntities = (value: string) => {
+  return value.replace(/&(#x?[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]+);/g, (match, entity: string) => {
+    if (entity.startsWith("#x") || entity.startsWith("#X")) {
+      const parsed = Number.parseInt(entity.slice(2), 16);
+      return Number.isNaN(parsed) ? match : String.fromCodePoint(parsed);
+    }
+
+    if (entity.startsWith("#")) {
+      const parsed = Number.parseInt(entity.slice(1), 10);
+      return Number.isNaN(parsed) ? match : String.fromCodePoint(parsed);
+    }
+
+    const decoded = NAMED_ENTITIES[entity.toLowerCase()];
+    return decoded ?? match;
+  });
+};
+
 const ATTRIBUTE_MAP: Record<string, string> = {
   class: "className",
   for: "htmlFor",
@@ -155,7 +191,7 @@ const buildProps = (tag: string, attrs: Record<string, string>, key: string | nu
 
 const renderNativeNode = (node: NativeNode, key: string): ReactNode => {
   if (node.type === "text") {
-    return node.value;
+    return decodeHtmlEntities(node.value);
   }
 
   if (node.type === "placeholder") {
