@@ -31,7 +31,7 @@ function buildShopHref(filters: FilterState, patch: Partial<FilterState>) {
   if (merged.type) next.set("type", merged.type);
   if (merged.industry) next.set("industry", merged.industry);
   const query = next.toString();
-  return query ? `/shop?${query}` : "/shop";
+  return query ? `/products?${query}` : "/products";
 }
 
 type FilterGroup = {
@@ -156,7 +156,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
                 <p className="font-display text-sm font-semibold tracking-tight">Filters</p>
                 {hasActiveFilter ? (
                   <Link
-                    href="/shop"
+                    href="/products"
                     scroll={false}
                     className="inline-flex items-center gap-1 text-xs text-text-muted hover:text-primary"
                   >
@@ -197,7 +197,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
                   <p className="font-display text-xl tracking-tight">No products match those filters.</p>
                   <p className="mt-2 text-sm text-text-muted">Clear a filter to see more of the catalog.</p>
                   <div className="mt-6 flex justify-center">
-                    <LinkButton href="/shop" size="sm">Reset filters</LinkButton>
+                    <LinkButton href="/products" size="sm">Reset filters</LinkButton>
                   </div>
                 </div>
               ) : (

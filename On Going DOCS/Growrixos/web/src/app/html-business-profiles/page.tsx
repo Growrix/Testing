@@ -113,7 +113,7 @@ export default async function HtmlBusinessProfilesPage({ searchParams }: { searc
             and purchase directly from the shop.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <LinkButton href={`/shop?category=${HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug}`}>
+            <LinkButton href={`/products?category=${HTML_BUSINESS_PROFILE_SHOP_CATEGORY.slug}`}>
               Browse in shop
             </LinkButton>
             <LinkButton href="/services/html-business-profiles" variant="outline">

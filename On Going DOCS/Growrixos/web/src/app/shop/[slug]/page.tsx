@@ -62,8 +62,8 @@ export default async function ShopPreviewPage({ params }: PageProps) {
   const shouldUseEmbeddedPreview = product.categorySlug === "html-business-profiles" && Boolean(product.embeddedPreviewUrl);
   const hasExternalPreview = Boolean(product.livePreviewUrl || product.embeddedPreviewUrl);
   const previewHref = shouldUseEmbeddedPreview
-    ? product.embeddedPreviewUrl ?? product.livePreviewUrl ?? `/shop/${product.slug}#preview`
-    : product.livePreviewUrl ?? product.embeddedPreviewUrl ?? `/shop/${product.slug}#preview`;
+    ? product.embeddedPreviewUrl ?? product.livePreviewUrl ?? `/products/${product.slug}#preview`
+    : product.livePreviewUrl ?? product.embeddedPreviewUrl ?? `/products/${product.slug}#preview`;
   const galleryImages = (product.gallery?.length ?? 0) > 0
     ? product.gallery ?? []
     : product.image
@@ -75,8 +75,8 @@ export default async function ShopPreviewPage({ params }: PageProps) {
       {/* Main product layout */}
       <Section className="pb-10 pt-6 sm:pb-14 sm:pt-8">
         <Container>
-          <Link href="/shop" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
-            <ArrowLeftIcon className="size-4" /> Back to shop
+          <Link href="/products" className="mb-6 inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary">
+            <ArrowLeftIcon className="size-4" /> Back to products
           </Link>
 
           <div className="grid min-w-0 gap-10 lg:grid-cols-[1fr_360px] lg:items-start xl:grid-cols-[1fr_380px]">

@@ -61,7 +61,7 @@ const HOME_TIERS: Tier[] = [
     cadence: "one-time",
     description: "Launch-ready website templates customized for your brand, offer, and conversion flow.",
     features: ["Basic: $500 - $1k", "Standard: $1k - $3k", "Premium: $3k - $10k", "Setup and handoff docs"],
-    cta: { label: "Browse templates", href: "/shop" },
+    cta: { label: "Browse templates", href: "/products" },
   },
   {
     name: "Ready Websites",
@@ -69,7 +69,7 @@ const HOME_TIERS: Tier[] = [
     cadence: "one-time",
     description: "Complete ready-to-deploy websites for teams that need speed without custom-build timelines.",
     features: ["Basic: $1k - $2.5k", "Standard: $2.5k - $5k", "Premium: $5k - $15k", "Optional install support"],
-    cta: { label: "View ready websites", href: "/shop" },
+    cta: { label: "View ready websites", href: "/products" },
     featured: true,
     badge: "Most chosen",
   },
@@ -226,12 +226,12 @@ export default async function Home() {
         <Container>
           <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
             <SectionHeading
-              eyebrow={homeContent?.shopSpotlight?.eyebrow ?? "Shop spotlight"}
+              eyebrow={homeContent?.shopSpotlight?.eyebrow ?? "Product spotlight"}
               title={homeContent?.shopSpotlight?.title ?? "Website templates and ready websites, built to ship."}
               description={homeContent?.shopSpotlight?.description ?? "Website templates from $500 and ready websites from $1k, built from the same systems we use in custom engagements."}
             />
-            <LinkButton href="/shop" variant="outline">
-              Browse the shop <ArrowUpRightIcon className="size-4" />
+            <LinkButton href="/products" variant="outline">
+              Browse products <ArrowUpRightIcon className="size-4" />
             </LinkButton>
           </div>
           <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
@@ -320,14 +320,14 @@ export default async function Home() {
             <SectionHeading
               eyebrow="New service"
               title="HTML Business Profiles - category-based digital products"
-              description="Preview every built HTML business profile by category, then purchase directly from the shop with a clear template-to-checkout path."
+              description="Preview every built HTML business profile by category, then purchase directly from the product catalog with a clear template-to-checkout path."
             />
             <div className="flex flex-wrap gap-3">
               <LinkButton href="/html-business-profiles" variant="outline">
                 Preview all profiles <ArrowUpRightIcon className="size-4" />
               </LinkButton>
-              <LinkButton href="/shop?category=html-business-profiles">
-                Shop category <ArrowRightIcon className="size-4" />
+              <LinkButton href="/products?category=html-business-profiles">
+                Browse category <ArrowRightIcon className="size-4" />
               </LinkButton>
             </div>
           </div>
@@ -389,7 +389,7 @@ export default async function Home() {
                 title={homeContent?.liveSaas?.title ?? "Buy a Live SaaS — Not Just a Template"}
                 description={homeContent?.liveSaas?.description ?? "We don&apos;t just sell templates—we build and launch real, revenue-ready SaaS applications. Explore our live products, interact with them, and experience how they work in real-world conditions. Every application is actively running, designed for real users, and built with business in mind."}
               />
-              <LinkButton href="/shop" variant="outline">
+              <LinkButton href="/products" variant="outline">
                 Explore Live SaaS <ArrowUpRightIcon className="size-4" />
               </LinkButton>
             </div>
@@ -435,7 +435,7 @@ export default async function Home() {
                 Use it. Test it. Validate it. Then make your move with confidence.
               </p>
               <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-                <LinkButton href="/shop">
+                <LinkButton href="/products">
                   Explore All Live SaaS <ArrowRightIcon className="size-4" />
                 </LinkButton>
                 <LinkButton href="/book-appointment" variant="outline">

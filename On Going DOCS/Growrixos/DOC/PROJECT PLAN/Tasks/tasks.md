@@ -5,7 +5,7 @@ machine_readable: true
 tracker_version: 1
 canonical_ai_entrypoint: ai-context.yaml
 canonical_template: DOC/Universal/Template/tasks-template.md
-last_audit_date: 2026-05-02
+last_audit_date: 2026-05-23
 current_state:
   repo_branch_audited: BOT
   frontend_shell: done
@@ -18,11 +18,14 @@ current_state:
   security_implementation: partial
   devops_implementation: partial
   qa_implementation: done
+  product_led_platform_planning: done
+  product_led_platform_implementation: partial
   deployable: false
 release_blockers:
   - Full integrated production release is still blocked by external integrations and content-operations rollout work intentionally deferred in this phase (Stripe live go-live/fulfillment asset pipeline, calendar synchronization, and the now-documented CMS/content operations implementation plan).
   - Customer/subscriber RBAC and protected self-service ownership flows are implemented to a baseline level, but richer policy granularity remains a hardening follow-up.
   - Infrastructure-as-code and external monitoring/alerting stack work are still pending if deployment expands beyond frontend-hosted runtime.
+  - Product-led platform release is blocked until product variants, normalized Supabase transactional schema, private downloads, customer dashboard, lead scoring, Lark notifications, expanded Resend commerce emails, and deeper `/products` conversion UX are implemented and validated.
 phase_sequence:
   - P0-documentation-tracking-alignment
   - P1-frontend-foundation
@@ -33,22 +36,23 @@ phase_sequence:
   - P6-qa-release-gates
   - P7-admin-dashboard-e2e-expansion
   - P8-frontend-cms-content-operations
-next_recommended_phase: P8-frontend-cms-content-operations
+  - P9-product-led-platform-gap-implementation
+next_recommended_phase: P9-product-led-platform-gap-implementation
 next_recommended_tasks:
-  - T041
-  - T042
-  - T043
-  - T044
+  - T045
+  - T047
+  - T048
+  - T049
 phase_status_counts:
   done: 4
-  partial: 5
+  partial: 6
   blocked: 0
   not_started: 0
 task_status_counts:
   done: 29
-  partial: 7
+  partial: 8
   blocked: 0
-  not_started: 8
+  not_started: 15
 ---
 
 # Tasks / Execution Tracker
@@ -61,6 +65,8 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `CMS`
 - Active tracked sessions:
+  - started P9 implementation with canonical `/products` surfaces (`/products`, `/products/[slug]`, `/products/category/[category]`, `/products/bundles`, `/products/free`) while preserving `/shop` compatibility, added `/book` alias routing, switched global navigation and core commerce CTAs to product-led paths, aligned AI/revalidation route references, and validated via lint/build/type/unit/integration/e2e plus web/studio readiness probes
+  - created the canonical product-led platform gap plan from `Ongoing DOCS/Website Plan Growrix OS/websiteplan.md`, audited the existing Next.js/Sanity/Supabase implementation, identified gaps against `/products`, variants, private downloads, customer dashboard, lead scoring, Lark, Resend commerce automation, and admin operations, then materialized the root E2E artifact plus downstream role docs before updating this tracker
   - hardened Supabase `public.app_state` security posture by enabling RLS in `web/supabase/schema.sql`, explicitly blocking `anon`/`authenticated` roles, and updating Supabase integration docs/playbooks to remove obsolete "RLS disabled" guidance after urgent advisor remediation authorization
   - removed public static/mocked shop catalog injection so `/shop`, `/shop/[slug]`, and `/html-business-profiles` now surface published managed records only (CMS + managed catalog records), fixed HTML profile template slug normalization so each live preview resolves to its own template, and changed HTML profile live-preview CTAs to open direct embedded HTML preview URLs instead of the wrapper route
   - added a new HTML Business Profiles delivery slice across web and studio by introducing `/html-business-profiles` preview commerce route, wiring category-aware homepage and services coverage, extending public catalog merging for built-in and Sanity-managed profile templates, adding raw HTML preview API routing, and registering a dedicated Studio schema/desk model (`htmlBusinessProfileTemplate`) for template uploads and shop-surface publication
@@ -177,6 +183,9 @@ phases:
   - id: P8
     name: Frontend CMS Content Operations
     status: partial
+  - id: P9
+    name: Product-Led Platform Gap Implementation
+    status: partial
 ```
 
 ## Phase Overview
@@ -191,6 +200,7 @@ phases:
 | P6 | done | Unit, integration, and browser E2E gates now run with accessibility/security/performance smoke checks and full release-gate execution evidence. |
 | P7 | partial | The CMS/content-operations and admin information architecture is now documented, while implementation for production-grade shop, portfolio, newsletter, and submissions operations remains ahead. |
 | P8 | partial | Shop and portfolio surfaces are now being moved to Sanity-backed loaders and CMS-authored preview metadata, while draft preview and broader route migration remain incomplete. |
+| P9 | partial | Product-led implementation has started with canonical `/products` routing and `/shop` compatibility. Variants, downloads, customer dashboard, lead scoring, Lark, Resend automation, and admin operations remain pending. |
 
 ## Tasks By Phase
 
@@ -289,6 +299,17 @@ phases:
 - [~] T042 Add Sanity schema coverage and normalized view-model mappers for case studies, shop items/categories, service pages, FAQ items, home page, about page, and site settings in `studio/schemaTypes/**` and `web/src/server/sanity/**`.
 - [ ] T043 Implement authenticated draft-mode preview and exact-path revalidation for migrated frontend surfaces in `web/src/app/api/**` and supporting server helpers.
 - [ ] T044 Add frontend CMS validation coverage across unit, integration, and e2e gates for migrated routes, preview, and fallback behavior.
+
+### Phase P9 — Product-Led Platform Gap Implementation
+- [ ] T045 Update shared contracts and route ownership for the product-led platform plan in `DOC/PROJECT PLAN/product-led-platform-gap-e2e-plan.md` and `DOC/PROJECT PLAN/Shared Contracts/product-led-platform-shared-contracts.md`.
+- [~] T046 Add canonical `/products` routes with `/shop` compatibility, product category/bundle/free surfaces, and product-led homepage CTA repositioning.
+  - Current state: canonical `/products` route family, `/shop` compatibility, `/book` alias, and products-first nav/CTA rewiring are implemented; deeper homepage/product-detail conversion UX repositioning remains pending.
+- [ ] T047 Extend Sanity and frontend product models for Standard, Premium, and Done-For-You variants, product FAQs, related products/services, and customization upsells.
+- [ ] T048 Add normalized Supabase transactional schema and APIs for products metadata, product variants, orders, order items, downloads, leads, lead events, service requests, conversations, messages, and licenses.
+- [ ] T049 Implement private download delivery, `/success`, and customer `/dashboard/**` surfaces for products, downloads, orders, support, and appointments.
+- [ ] T050 Implement lead scoring, tracked WhatsApp CTAs, AI qualification writes, service request intake, and Lark hot-lead/purchase notifications.
+- [ ] T051 Extend Resend commerce and lead email automation for purchase confirmation, download links, service request confirmation, and follow-up sequences.
+- [ ] T052 Upgrade admin operations for products/variants, orders, downloads, leads, service requests, notification logs, and product funnel analytics with validation and audit gates.
 
 ## What Is Done Already
 - The public-facing design system, layout shell, and route scaffolding are built.

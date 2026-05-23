@@ -119,8 +119,8 @@ const COPY: Record<
       { title: "App-like mobile UX", description: "Sticky utilities, sheets, and thumb-friendly interactions that feel like product UI." },
     ],
     tiers: [
-      { name: "Template Packs", price: "From $500", cadence: "one-time", description: "Launch-ready website templates customized for your brand, offer, and conversion flow.", features: ["Basic: $500 - $1k", "Standard: $1k - $3k", "Premium: $3k - $10k", "Setup and handoff docs"], cta: { label: "Browse templates", href: "/shop" } },
-      { name: "Ready Websites", price: "From $1k", cadence: "one-time", description: "Complete ready-to-deploy websites for teams that need speed without custom-build timelines.", features: ["Basic: $1k - $2.5k", "Standard: $2.5k - $5k", "Premium: $5k - $15k", "Optional install support"], cta: { label: "View ready websites", href: "/shop" }, featured: true, badge: "Most chosen" },
+      { name: "Template Packs", price: "From $500", cadence: "one-time", description: "Launch-ready website templates customized for your brand, offer, and conversion flow.", features: ["Basic: $500 - $1k", "Standard: $1k - $3k", "Premium: $3k - $10k", "Setup and handoff docs"], cta: { label: "Browse templates", href: "/products" } },
+      { name: "Ready Websites", price: "From $1k", cadence: "one-time", description: "Complete ready-to-deploy websites for teams that need speed without custom-build timelines.", features: ["Basic: $1k - $2.5k", "Standard: $2.5k - $5k", "Premium: $5k - $15k", "Optional install support"], cta: { label: "View ready websites", href: "/products" }, featured: true, badge: "Most chosen" },
       { name: "Custom Build Scope", price: "Discovery-based", cadence: "project pricing", description: "For SaaS applications, mobile launch systems, and MCP or automation work scoped to your goals.", features: ["SaaS applications: custom scope", "Mobile launch systems: custom scope", "MCP and automation: secondary scope", "Final quote after discovery"], cta: { label: "Book discovery call", href: "/book-appointment" } },
     ],
     faq: [
@@ -164,7 +164,7 @@ const COPY: Record<
         cadence: "one-time",
         description: "Pick one profile template based on category and launch quickly with minimal setup.",
         features: ["Single profile template", "Category-aligned structure", "Launch-ready section flow", "Digital delivery"],
-        cta: { label: "Shop single templates", href: "/shop?category=html-business-profiles" },
+        cta: { label: "Shop single templates", href: "/products?category=html-business-profiles" },
       },
       {
         name: "Showcase Bundle",
@@ -203,7 +203,7 @@ const COPY: Record<
       "We build secure, observable Model Context Protocol servers that wrap your APIs, data, and internal tools so agents act with confidence.",
     primaryCta: "Scope an MCP Server",
     secondaryCta: "Browse MCP Products",
-    secondaryHref: "/shop",
+    secondaryHref: "/products",
     builds: [
       { title: "API wrappers", description: "Existing REST/GraphQL APIs exposed as cleanly typed MCP tools." },
       { title: "Internal data tools", description: "Read/write access to internal systems with role-aware permissions." },
@@ -219,7 +219,7 @@ const COPY: Record<
       { title: "Deployable anywhere", description: "Self-host or deploy to your cloud — Cloudflare Workers, Fly, Vercel, or AWS." },
     ],
     tiers: [
-      { name: "Starter MCP", price: "$249", cadence: "one-time", description: "Productized starter with auth, logging, and example tools.", features: ["TypeScript codebase", "Auth + secrets handling", "Example tools", "Deployment guide"], cta: { label: "Buy starter", href: "/shop" } },
+      { name: "Starter MCP", price: "$249", cadence: "one-time", description: "Productized starter with auth, logging, and example tools.", features: ["TypeScript codebase", "Auth + secrets handling", "Example tools", "Deployment guide"], cta: { label: "Buy starter", href: "/products" } },
       { name: "Custom Integration", price: "$8.5k", cadence: "/ project", description: "A focused MCP server scoped around 1–2 systems with secure access.", features: ["Discovery + scoping", "Auth + permission model", "Tool design + tests", "Deployment + handoff"], cta: { label: "Scope an MCP", href: "/book-appointment" }, featured: true, badge: "Most chosen" },
       { name: "Platform Engagement", price: "Custom", description: "Multi-system MCP platform with shared infra, observability, and governance.", features: ["Shared auth layer", "Tool registry", "Audit + governance", "Ongoing support"], cta: { label: "Plan platform", href: "/book-appointment" } },
     ],

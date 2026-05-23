@@ -34,8 +34,8 @@ export function ShopProductCard({ product }: { product: ShopProduct }) {
       : undefined;
   const hasExternalPreview = Boolean(product.livePreviewUrl || product.embeddedPreviewUrl);
   const previewHref = shouldUseEmbeddedPreview
-    ? product.embeddedPreviewUrl ?? product.livePreviewUrl ?? `/shop/${product.slug}`
-    : product.livePreviewUrl ?? product.embeddedPreviewUrl ?? `/shop/${product.slug}`;
+    ? product.embeddedPreviewUrl ?? product.livePreviewUrl ?? `/products/${product.slug}`
+    : product.livePreviewUrl ?? product.embeddedPreviewUrl ?? `/products/${product.slug}`;
 
   return (
     <Card hoverable className="group flex h-full flex-col overflow-hidden p-0">
@@ -76,7 +76,7 @@ export function ShopProductCard({ product }: { product: ShopProduct }) {
 
         {/* Name */}
         <h3 className="line-clamp-2 font-display text-base font-semibold leading-snug tracking-tight text-text">
-          <Link href={`/shop/${product.slug}`} className="hover:text-primary">
+          <Link href={`/products/${product.slug}`} className="hover:text-primary">
             {product.name}
           </Link>
         </h3>
@@ -121,7 +121,7 @@ export function ShopProductCard({ product }: { product: ShopProduct }) {
             Live Preview <ArrowUpRightIcon className="size-3.5" />
           </LinkButton>
         </div>
-        <Link href={`/shop/${product.slug}`} className="text-sm font-medium text-primary hover:underline">
+        <Link href={`/products/${product.slug}`} className="text-sm font-medium text-primary hover:underline">
           View details
         </Link>
       </div>

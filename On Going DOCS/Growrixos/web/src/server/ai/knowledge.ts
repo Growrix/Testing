@@ -31,7 +31,7 @@ const PRICING_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/pricing",
     sourceType: "pricing",
     content:
-      "Template Packs start from $500 one-time. Basic templates: $500–$1k. Standard templates: $1k–$3k. Premium templates: $3k–$10k. All include setup and handoff docs. Browse the shop at /shop.",
+      "Template Packs start from $500 one-time. Basic templates: $500–$1k. Standard templates: $1k–$3k. Premium templates: $3k–$10k. All include setup and handoff docs. Browse products at /products.",
   },
   {
     id: "pricing-ready-websites",
@@ -39,12 +39,12 @@ const PRICING_DOCUMENTS: KnowledgeDocument[] = [
     sourcePath: "/pricing",
     sourceType: "pricing",
     content:
-      "Ready Websites start from $1k one-time. Basic: $1k–$2.5k. Standard: $2.5k–$5k. Premium: $5k–$15k. Optional install support is available. These are the most chosen offer. Browse at /shop.",
+      "Ready Websites start from $1k one-time. Basic: $1k–$2.5k. Standard: $2.5k–$5k. Premium: $5k–$15k. Optional install support is available. These are the most chosen offer. Browse at /products.",
   },
   {
     id: "pricing-html-business-profiles",
     label: "HTML Business Profiles pricing",
-    sourcePath: "/shop?category=html-business-profiles",
+    sourcePath: "/products?category=html-business-profiles",
     sourceType: "pricing",
     content:
       "HTML Business Profiles are category-based digital templates with one-time pricing from $129, with showcase bundles and optional customization upgrades available. Browse previews at /html-business-profiles.",
@@ -146,7 +146,7 @@ const OFFERING_DOCUMENTS: KnowledgeDocument[] = [
   {
     id: "offering-shop-structure",
     label: "Shop structure and categories",
-    sourcePath: "/shop",
+    sourcePath: "/products",
     sourceType: "offering",
     content:
       "The Growrix shop has three main categories: Website Templates (from $500 one-time — basic, standard, premium tiers), HTML Business Profiles (from $129 one-time, category-based templates), and Ready Websites (from $1k one-time — basic, standard, premium tiers). Templates are built with Next.js, React, and Tailwind CSS. Ready websites include TypeScript and optional headless CMS setups in Sanity or Strapi.",
@@ -233,7 +233,7 @@ async function buildDocuments(): Promise<KnowledgeDocument[]> {
   const productDocs = products.map((product) => ({
     id: `product-${product.slug}`,
     label: product.name,
-    sourcePath: `/shop/${product.slug}`,
+    sourcePath: `/products/${product.slug}`,
     sourceType: "product" as const,
     content: `${product.name} costs ${product.price} in category ${product.category}. ${product.teaser} ${product.summary} Audience: ${product.audience}. Includes: ${product.includes.join(", ")}. Stack: ${product.stack.join(", ")}.`,
   }));
