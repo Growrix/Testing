@@ -3,6 +3,7 @@ import { mkdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { beforeEach, describe, it } from "node:test";
 import { resetRuntimeConfigForTests } from "@/server/config/runtime";
+import { listDownloadsByEmail, listLicensesByEmail } from "@/server/domain/downloads";
 import { createOrder, getOrderById, markOrderPaid, updateOrderOperations } from "@/server/domain/orders";
 
 const testEnv = process.env as Record<string, string | undefined>;
@@ -81,6 +82,13 @@ describe("orders domain", () => {
     assert.equal(paid?.payment_status, "succeeded");
     assert.equal(paid?.fulfillment_status, "intake_pending");
     assert.deepEqual(paid?.delivery_urls, []);
+
+    const licenses = await listLicensesByEmail("morgan@example.com");
+    assert.equal(licenses.length, 1);
+    assert.equal(licenses[0]?.order_id, created.order.id);
+
+    const downloads = await listDownloadsByEmail("morgan@example.com");
+    assert.equal(downloads.length, 0);
   });
 
   it("stores selected variant and tier details on order records", async () => {
@@ -163,5 +171,37 @@ describe("orders domain", () => {
 
     const persisted = await getOrderById(created.order.id);
     assert.equal(persisted?.fulfillment_status, "delivered");
+
+    const downloads = await listDownloadsByEmail("jordan@example.com");
+    assert.equal(downloads.length, 1);
+    assert.equal(downloads[0]?.order_id, created.order.id);
+    assert.equal(downloads[0]?.asset_path, "https://downloads.example.com/orders/order-1.zip");
+    assert.equal(downloads[0]?.file_label, "order-1.zip");
+
+    const licenses = await listLicensesByEmail("jordan@example.com");
+    assert.equal(licenses.length, 1);
+  });
+
+  it("does not duplicate entitlements when an order is edited after fulfillment", async () => {
+    const created = await createOrder({
+      product_slug: "legal-practice-website",
+      customer_name: "Dana Buyer",
+      customer_email: "dana@example.com",
+    });
+
+    await markOrderPaid(created.order.id, "pi_test_repeat");
+    await updateOrderOperations(created.order.id, { fulfillment_status: "fulfilling" });
+    await updateOrderOperations(created.order.id, { fulfillment_status: "qa_review" });
+    await updateOrderOperations(created.order.id, {
+      fulfillment_status: "delivered",
+      delivery_urls: ["https://downloads.example.com/orders/order-2.zip"],
+    });
+    await updateOrderOperations(created.order.id, { notes: "Customer confirmed receipt." });
+
+    const downloads = await listDownloadsByEmail("dana@example.com");
+    const licenses = await listLicensesByEmail("dana@example.com");
+
+    assert.equal(downloads.length, 1);
+    assert.equal(licenses.length, 1);
   });
 });

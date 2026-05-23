@@ -11,6 +11,7 @@ import type {
 } from "@/server/data/schema";
 import { readDatabase, writeDatabase } from "@/server/data/store";
 import { getPublicShopProduct } from "@/server/domain/catalog";
+import { syncOrderEntitlements } from "@/server/domain/downloads";
 import { recordAnalyticsEvent, recordAuditLog } from "@/server/logging/observability";
 import { getCheckoutHref } from "@/lib/shop";
 
@@ -179,10 +180,9 @@ export async function createOrder(input: CreateOrderInput) {
   let checkoutUrl: string | null = null;
 
   if (stripe) {
-    const successUrl = new URL("/checkout", runtime.appBaseUrl);
-    successUrl.searchParams.set("product", product.slug);
-    successUrl.searchParams.set("status", "success");
+    const successUrl = new URL("/success", runtime.appBaseUrl);
     successUrl.searchParams.set("order", order.id);
+    successUrl.searchParams.set("product", product.slug);
 
     const checkoutSelection = {
       variantSlug: order.selected_variant_slug,
@@ -377,6 +377,10 @@ export async function markOrderPaid(
     }),
   }));
 
+  if (updatedOrder) {
+    await syncOrderEntitlements(updatedOrder);
+  }
+
   return updatedOrder;
 }
 
@@ -464,6 +468,10 @@ export async function updateOrderOperations(
       return nextOrder;
     }),
   }));
+
+  if (updatedOrder) {
+    await syncOrderEntitlements(updatedOrder);
+  }
 
   return updatedOrder;
 }
