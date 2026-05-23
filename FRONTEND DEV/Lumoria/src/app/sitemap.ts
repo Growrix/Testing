@@ -1,6 +1,9 @@
-import type { NextConfig } from "next";
+import type { MetadataRoute } from "next";
 
-const htmlAliasTargets = [
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+const routePaths = [
+  "/",
   "/about",
   "/blog",
   "/career-listing",
@@ -24,24 +27,13 @@ const htmlAliasTargets = [
   "/with-right-sidebar",
 ];
 
-const nextConfig: NextConfig = {
-  turbopack: {
-    root: "F:/PROJECTS/testing/FRONTEND DEV/Lumoria",
-  },
-  async redirects() {
-    return [
-      {
-        source: "/index.html",
-        destination: "/",
-        permanent: true,
-      },
-      ...htmlAliasTargets.map((target) => ({
-        source: `${target}.html`,
-        destination: target,
-        permanent: true,
-      })),
-    ];
-  },
-};
+export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
 
-export default nextConfig;
+  return routePaths.map((path) => ({
+    url: `${siteUrl}${path}`,
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: path === "/" ? 1 : 0.7,
+  }));
+}

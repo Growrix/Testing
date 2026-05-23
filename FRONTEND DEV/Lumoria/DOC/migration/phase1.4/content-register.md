@@ -1,24 +1,23 @@
 # Content Register
 
-Date: 2026-05-24
+Date: 2026-05-23
 
 ## Content Sources
 - Screenshot references from On Going DOCS/Reference Style/Lumoria
-- Localized HTML snapshots under public/lumoria-pages
-- Localized media and CSS/JS assets under public/lumoria-assets
+- Localized media assets under public/lumoria-assets
+- Legacy localized HTML snapshots retained only as migration evidence under public/lumoria-pages
 
-## Content Ownership
-- Current: HTML snapshot files own page content
-- Target for verified native: typed data modules under src/data and component props
+## Native Typed Content Ownership
+- src/data/site-content.ts now owns:
+  - page route map and page metadata content
+  - navigation and footer link structures
+  - reusable service, team, portfolio, blog, awards, timeline, pricing, and FAQ datasets
+  - contact and flow content contracts
+- src/data/screenshotRoutes.ts remains as screenshot route inventory evidence
 
-## Typed Data Coverage
-- src/data/screenshotRoutes.ts exists for screenshot route list
-- No complete typed content modules for:
-  - navigation
-  - footer columns
-  - service/career datasets
-  - blog listing/detail content
-  - FAQ and pricing content
+## Runtime Ownership Decision
+- Runtime route rendering no longer reads content from HTML snapshot files
+- Runtime content now flows from typed data modules into native components
 
 ## Status
-- Phase 1.4 typed content ownership gate: FAIL
+- Phase 1.4 typed content ownership gate: PASS

@@ -1,22 +1,21 @@
 # Flow Contract Register
 
-Date: 2026-05-24
+Date: 2026-05-23
 
 ## Audited Flows
-- Contact form flow
-- Newsletter/signup surfaces
-- Search interactions
-- Menu and dropdown interactions
-- FAQ accordion interactions
+- Navigation menu (desktop and mobile toggle)
+- FAQ accordion expand and collapse
+- Contact form validation and submit state messaging
+- Route-level CTA interactions
 
-## Current Runtime Behavior
-- Behaviors are preserved from snapshot HTML + legacy scripts
-- No native React state ownership exists for primary interaction graphs
+## Native State Ownership
+- src/components/site/site-header.tsx owns mobile navigation open and close state
+- src/components/site/faq-accordion.tsx owns FAQ disclosure state
+- src/components/site/contact-form.tsx owns input values, validation, and success or error contract
 
-## Contract Gaps
-- No explicit frontend flow contracts for success/error/not-configured states
-- No native validation and submit state model for forms
-- No native state ownership for legacy jQuery-powered widgets
+## Frontend Contract Boundaries
+- Contact form currently implements frontend validation and local success/error messaging only
+- Backend submission endpoint is not configured in this phase and is intentionally declared as a not-configured boundary
 
 ## Status
-- Phase 1.4 flow contract gate: FAIL
+- Phase 1.4 flow contract gate: PASS for frontend-native interaction ownership

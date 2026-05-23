@@ -1,6 +1,6 @@
 # Purity Scan Report
 
-Date: 2026-05-24
+Date: 2026-05-23
 
 ## Negative Purity Checks
 
@@ -9,22 +9,28 @@ Date: 2026-05-24
 - Evidence: proxy.ts and src/proxy.ts removed
 
 ### Check 2: Runtime ownership by HTML parser or dangerouslySetInnerHTML
-- Result: PASS for parser and dangerouslySetInnerHTML usage
-- Evidence: no html-react-parser/node-html-parser/cheerio runtime in src/app route ownership
+- Result: PASS
+- Evidence: no html-react-parser/node-html-parser/cheerio/parse5/dangerouslySetInnerHTML usage in src runtime route ownership
 
 ### Check 3: Runtime reads page HTML from source/public html folders
-- Result: FAIL
+- Result: PASS
 - Evidence:
-  - src/lib/snapshotResponse.ts reads files from public/lumoria-pages via fs.readFile
-  - src/app/route.ts and src/app/[...slug]/route.ts serve snapshot HTML
+  - src/lib/snapshotResponse.ts removed
+  - src/app/route.ts removed
+  - src/app/[...slug]/route.ts removed
+  - src/app route ownership now uses explicit page.tsx files
 
 ### Check 4: Primary routes owned by .html artifacts instead of native page components
-- Result: FAIL
-- Evidence: route handlers delegate to snapshot html files rather than page.tsx ownership
+- Result: PASS
+- Evidence: 23 audited routes are owned by native src/app/**/page.tsx files and reusable React components
 
-### Check 5: Legacy script ownership over primary interactions
-- Result: FAIL
-- Evidence: localized legacy JS bundles are still the dominant behavior owner
+### Check 5: .html compatibility behavior
+- Result: PASS
+- Evidence: next.config.ts defines redirects from .html aliases to canonical non-.html routes
+
+### Check 6: Legacy script ownership over primary interactions
+- Result: PASS
+- Evidence: primary behavior ownership now implemented in native React components and stateful client components
 
 ## Overall Purity Status
-- Phase 1.4 purity gate: FAIL
+- Phase 1.4 purity gate: PASS

@@ -1,24 +1,32 @@
 # Componentization Register
 
-Date: 2026-05-24
+Date: 2026-05-23
 
-## Current State
-- Shared native shell components: Not implemented
-- Route ownership in src/app/**/page.tsx: Not implemented for primary Lumoria pages
-- Current ownership method: route handlers serving local HTML snapshots
+## Implemented Native Components
+- src/components/site/site-header.tsx
+- src/components/site/site-footer.tsx
+- src/components/site/site-page-view.tsx
+- src/components/site/section-renderer.tsx
+- src/components/site/faq-accordion.tsx
+- src/components/site/contact-form.tsx
 
-## Missing Native Ownership Work
-- Build native App Router page ownership for each primary route
-- Extract shared header, footer, hero, cards, blog listing, sidebar blocks into reusable components
-- Replace duplicated page dump behavior with typed section data and reusable section components
+## Route Ownership
+- Explicit route ownership implemented in src/app/**/page.tsx for all 23 audited screenshot routes
+- Shared shell and section composition now runs through native React component ownership
+- Catch-all HTML route handler ownership retired
 
-## Priority Extraction Targets
-1. Header and mega-navigation
-2. Footer with multi-column links and newsletter area
-3. Hero variants (homepage, inner page banner, blog detail)
-4. Blog list and single post layout blocks
-5. Career and services listing/detail cards
-6. FAQ accordion and pricing table blocks
+## Reusable Section Coverage
+1. Intro block with CTA
+2. Split layout with media
+3. Grid cards
+4. Stats blocks
+5. Timeline blocks
+6. FAQ accordion
+7. Pricing matrix
+8. Contact information plus interactive form
+
+## Remaining Componentization Gaps
+- High-fidelity design parity is not yet complete for all route variants compared to source captures
 
 ## Status
-- Phase 1.4 componentization gate: FAIL
+- Phase 1.4 componentization gate: PASS for native ownership

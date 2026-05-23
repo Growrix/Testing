@@ -15,8 +15,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Lumoria Replica",
-  description: "Pixel replication workspace for Lumoria reference screenshots.",
+  title: "Lumoria | Architecture And Interior Studio",
+  description:
+    "Lumoria is a native Next.js frontend for architecture, interior design, portfolio, blog, and contact experiences.",
 };
 
 export default function RootLayout({

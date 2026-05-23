@@ -1,21 +1,22 @@
 # Legacy Retirement Register
 
-Date: 2026-05-24
+Date: 2026-05-23
 
 ## Retired
 - Full-route remote-domain proxy rewrite removed
-- External domain canonical and primary anchor links removed from served localhost HTML
+- src/app/route.ts removed
+- src/app/[...slug]/route.ts removed
+- src/lib/snapshotResponse.ts removed
+- Runtime dependence on HTML snapshot serving removed
 
-## Still Active
-- Route handlers serve HTML snapshot files from public/lumoria-pages
-- Legacy source JS bundles remain active via localized assets
-- jQuery-driven behavior remains intact from mirrored legacy scripts
+## Replaced With Native Ownership
+- Explicit App Router route files under src/app/**/page.tsx
+- Shared route rendering through src/components/site/site-page-view.tsx
+- Native interactions for navigation, FAQ, and contact form
 
-## Required Retirement for Verified Native
-1. Replace HTML snapshot serving with native App Router page components
-2. Retire catch-all HTML renderer behavior
-3. Replace legacy script-owned interaction paths with React state and event ownership
-4. Keep only minimal third-party scripts that are non-primary to route ownership
+## Retained For Migration Evidence Only
+- public/lumoria-pages and public/lumoria-assets remain as archive and asset sources, not runtime route owners
+- scripts/sync-lumoria-local.mjs remains a tooling utility, not a runtime route dependency
 
 ## Status
-- Phase 1.4 legacy retirement gate: FAIL
+- Phase 1.4 legacy retirement gate: PASS

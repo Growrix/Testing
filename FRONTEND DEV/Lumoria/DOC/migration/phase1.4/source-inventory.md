@@ -1,6 +1,6 @@
 # Source Inventory
 
-Date: 2026-05-24
+Date: 2026-05-23
 
 ## Inputs
 - source_root: On Going DOCS/Reference Style/Lumoria
@@ -9,20 +9,25 @@ Date: 2026-05-24
 
 ## Source Assets
 - 23 screenshot captures under On Going DOCS/Reference Style/Lumoria
-- Existing attempt localizes source pages and assets under:
+- Localized static source archive retained for evidence and migration tooling:
   - public/lumoria-pages
   - public/lumoria-assets
 
-## Global Visual Tokens
-- Extracted into design-tokens.css
-- Primary palette includes #C69A59, #161616, #F5F4F2, #585858, #DFDEDC
+## Visual Tokens
+- Global tokens in design-tokens.css
+- Primary palette: #C69A59, #161616, #F5F4F2, #585858, #DFDEDC
 - Typography: Jost and DM Sans
 
-## Current Runtime Ownership
-- App route handlers currently serve HTML snapshots from public/lumoria-pages
-- Catch-all route handler: src/app/[...slug]/route.ts
-- Snapshot loader: src/lib/snapshotResponse.ts
+## Runtime Ownership State
+- Primary routes are now owned by explicit App Router page files under src/app/**/page.tsx
+- Shared render tree and sections are owned by native React components in src/components/site
+- Typed page and section content ownership is in src/data/site-content.ts
+
+## Retired Runtime Paths
+- Removed src/app/route.ts
+- Removed src/app/[...slug]/route.ts
+- Removed src/lib/snapshotResponse.ts
 
 ## Phase 1.4 Risk Summary
-- Strong screenshot parity due snapshot mirroring
-- Fails verified-native ownership because runtime still reads and serves HTML snapshots
+- Native ownership gate is now implemented for all audited screenshot routes
+- Quantitative visual parity threshold evidence is still pending
