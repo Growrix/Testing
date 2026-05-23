@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "sync:lumoria": "node scripts/sync-lumoria-local.mjs"
+    "sync:lumoria": "node scripts/sync-lumoria-local.mjs",
+    "qa:parity": "node scripts/phase14-visual-parity.mjs",
+    "qa:runtime": "node scripts/phase14-runtime-matrix.mjs",
+    "qa:phase14": "npm run qa:parity && npm run qa:runtime"
   },
   "dependencies": {
     "next": "16.2.6",
@@ -15,6 +18,7 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.3",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -22,6 +26,9 @@
     "cheerio": "^1.2.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "pixelmatch": "^7.2.0",
+    "playwright": "^1.60.0",
+    "pngjs": "^7.0.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

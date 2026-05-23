@@ -138,7 +138,7 @@ export function SectionRenderer({ section }: SectionRendererProps) {
               key={item.label}
               className="rounded-2xl border border-white/20 bg-white/5 px-5 py-6"
             >
-              <p className="font-(family-name:--lumoria-font-heading) text-4xl font-semibold text-primary">
+              <p className="font-(family-name:--lumoria-font-heading) text-4xl font-semibold text-white">
                 {item.value}
               </p>
               <p className="mt-2 text-sm text-white/80">{item.label}</p>
@@ -198,7 +198,11 @@ export function SectionRenderer({ section }: SectionRendererProps) {
                   : "border-(--lumoria-color-border) bg-white"
               }`}
             >
-              <p className="text-sm font-semibold uppercase tracking-widest text-primary">
+              <p
+                className={`text-sm font-semibold uppercase tracking-widest ${
+                  plan.featured ? "text-white/90" : "text-primary"
+                }`}
+              >
                 {plan.name}
               </p>
               <p className="mt-3 font-(family-name:--lumoria-font-heading) text-4xl font-semibold">

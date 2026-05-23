@@ -125,7 +125,7 @@ export type SitePage = {
 
 const img = {
   heroOne: "/lumoria-assets/wp-content/uploads/2025/05/home-1-slider-img-1.jpg",
-  heroTwo: "/lumoria-assets/wp-content/uploads/2025/08/home-3-slider-1.jpg",
+  heroTwo: "/lumoria-assets/wp-content/uploads/2025/05/home-3-slider-1.jpg",
   heroThree: "/lumoria-assets/wp-content/uploads/2025/08/full-screen-1.jpg",
   coreValues: "/lumoria-assets/wp-content/uploads/2025/06/Corevalues-img.jpg",
   about: "/lumoria-assets/wp-content/uploads/2025/07/about-bg.jpg",
