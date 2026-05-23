@@ -138,30 +138,48 @@ export default async function Home() {
         <Container width="shell">
           <div className="mx-auto max-w-5xl text-center">
             <div className="signal-rise" style={{ animationDelay: "0ms" }}>
-              <Badge tone="primary" dot>{homeContent?.heroBadge ?? "Websites, SaaS, ready launches"}</Badge>
+              <Badge tone="primary" dot>{homeContent?.heroBadge ?? "Productized SaaS studio + digital marketplace"}</Badge>
             </div>
             <h1
               className="signal-rise mt-5 font-display text-[42px] leading-[1.02] tracking-tight text-balance sm:text-6xl lg:text-7xl"
               style={{ animationDelay: "90ms" }}
             >
-              {homeContent?.heroTitle ?? "Premium Websites, SaaS Solutions, Mobile Apps and Launch Experiences That Stand Out"}
+              {homeContent?.heroTitle ?? "Launch faster with ready-made SaaS templates, AI tools, and custom development support."}
             </h1>
             <p
               className="signal-rise mx-auto mt-6 max-w-3xl text-lg leading-7 text-pretty text-text-muted"
               style={{ animationDelay: "180ms" }}
             >
-              {homeContent?.heroDescription ?? "From premium websites and SaaS apps to mobile launch pages and ready sites, we deliver results that don&apos;t look generic. MCP servers and automation support your roadmap when required."}
+              {homeContent?.heroDescription ?? "Buy production-ready digital products, customize them yourself, or hire GrowrixOS to set up, modify, and scale them for your business."}
             </p>
             <div
               className="signal-rise mt-8 flex flex-wrap items-center justify-center gap-3"
               style={{ animationDelay: "270ms" }}
             >
-              <LinkButton href="/book-appointment" size="lg">
-                Book Appointment <ArrowRightIcon className="size-4" />
+              <LinkButton href="/products" size="lg">
+                Browse Products <ArrowRightIcon className="size-4" />
               </LinkButton>
-              <LinkButton href="/portfolio" variant="outline" size="lg">
-                Explore Portfolio
+              <LinkButton href="/book-appointment" variant="outline" size="lg">
+                Book a Free Consultation
               </LinkButton>
+            </div>
+            <div
+              className="signal-rise mt-4 flex flex-wrap items-center justify-center gap-2"
+              style={{ animationDelay: "320ms" }}
+            >
+              <LinkButton href="/contact" variant="ghost" size="sm">
+                Need Custom Work?
+              </LinkButton>
+              <LinkButton href={WHATSAPP_HREF} variant="ghost" size="sm" target="_blank" rel="noreferrer">
+                Chat on WhatsApp
+              </LinkButton>
+              <ConciergeTriggerButton
+                variant="ghost"
+                size="sm"
+                prompt="I need help choosing between a product purchase and a done-for-you custom build."
+              >
+                Ask AI Assistant
+              </ConciergeTriggerButton>
             </div>
             <p
               className="signal-rise mx-auto mt-6 max-w-2xl font-mono text-xs uppercase tracking-wider text-text-muted"

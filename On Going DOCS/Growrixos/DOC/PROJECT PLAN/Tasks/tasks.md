@@ -65,6 +65,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `CMS`
 - Active tracked sessions:
+  - aligned the homepage hero to the product-led platform plan by updating fallback positioning copy and CTA hierarchy to Browse Products + Book a Free Consultation with supporting actions (Need Custom Work, WhatsApp, Ask AI Assistant), while preserving the existing visual system and validating with lint/build/unit/integration plus Playwright regression rerun
   - implemented Stripe checkout selection metadata propagation by extending checkout query/payload handling and orders APIs to capture variant/tier/fulfillment fields, persisting selection on order and order-item records, attaching metadata/line-item context in Stripe checkout sessions, reconciling selection during webhook payment completion, and extending order-domain plus API integration tests for the new flow
   - started P9 implementation with canonical `/products` surfaces (`/products`, `/products/[slug]`, `/products/category/[category]`, `/products/bundles`, `/products/free`) while preserving `/shop` compatibility, added `/book` alias routing, switched global navigation and core commerce CTAs to product-led paths, aligned AI/revalidation route references, and validated via lint/build/type/unit/integration/e2e plus web/studio readiness probes
   - created the canonical product-led platform gap plan from `Ongoing DOCS/Website Plan Growrix OS/websiteplan.md`, audited the existing Next.js/Sanity/Supabase implementation, identified gaps against `/products`, variants, private downloads, customer dashboard, lead scoring, Lark, Resend commerce automation, and admin operations, then materialized the root E2E artifact plus downstream role docs before updating this tracker
@@ -304,7 +305,7 @@ phases:
 ### Phase P9 — Product-Led Platform Gap Implementation
 - [ ] T045 Update shared contracts and route ownership for the product-led platform plan in `DOC/PROJECT PLAN/product-led-platform-gap-e2e-plan.md` and `DOC/PROJECT PLAN/Shared Contracts/product-led-platform-shared-contracts.md`.
 - [~] T046 Add canonical `/products` routes with `/shop` compatibility, product category/bundle/free surfaces, and product-led homepage CTA repositioning.
-  - Current state: canonical `/products` route family, `/shop` compatibility, `/book` alias, and products-first nav/CTA rewiring are implemented; deeper homepage/product-detail conversion UX repositioning remains pending.
+  - Current state: canonical `/products` route family, `/shop` compatibility, `/book` alias, products-first nav/CTA rewiring, and homepage hero CTA alignment are implemented; deeper product-detail conversion UX repositioning remains pending.
 - [ ] T047 Extend Sanity and frontend product models for Standard, Premium, and Done-For-You variants, product FAQs, related products/services, and customization upsells.
 - [ ] T048 Add normalized Supabase transactional schema and APIs for products metadata, product variants, orders, order items, downloads, leads, lead events, service requests, conversations, messages, and licenses.
 - [ ] T049 Implement private download delivery, `/success`, and customer `/dashboard/**` surfaces for products, downloads, orders, support, and appointments.
