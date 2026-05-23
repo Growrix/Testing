@@ -10,6 +10,15 @@ This root now exposes one shared frontend entrypoint and two separate frontend-b
 - `phase1.4-html-to-verified-native-nextjs-frontend.agent.md`
 - `phase1.5-frontend-production-hardening.agent.md`
 
+### Repli-to-Next.js Lane (Screenshot-First Pure Native)
+Parallel four-agent lane that builds a pure Next.js + React + TypeScript + Tailwind v4 project directly from screenshots, bypassing the HTML intermediate. Pixel parity floor is `<=5%` (the realistic limit for screenshot-only input). Hands off to Phase 1.5, which can tighten to `<=1%` only if a live source URL or HTML reference becomes available.
+- `repli-to-nextjs-phase1.1-design-read.agent.md` - reads screenshots, extracts design tokens, primitive inventory, section inventory, page inventory, motion policy. Writes only `DOC/design-read/`.
+- `repli-to-nextjs-phase1.2-kit-builder.agent.md` - scaffolds Next.js 15 + Tailwind v4 with tokens wired, builds the UI primitive library, exposes `/_dev/kit` preview.
+- `repli-to-nextjs-phase1.3-section-builder.agent.md` - composes the section library from primitives, batched <=8 per work unit, exposes `/_dev/sections/[slug]` previews.
+- `repli-to-nextjs-phase1.4-page-composer-qa.agent.md` - composes public pages from typed data + sections, wires global header/footer/mobile-nav, runs Playwright + pixelmatch parity at `<=5%` per route per viewport. Hands off to Phase 1.5.
+
+Use this lane when the user wants pure native Next.js + React from day one with screenshots as the only input. Use the existing `phase1.1-pixel-replicator.agent.md` HTML lane when the user wants the HTML intermediate or has a live source URL.
+
 Phase 1 remains unchanged. Phase 1.1 is the pixel-perfect screenshot replication entrypoint. Phase 1.2 is the folder-in / folder-out frontend-only Next.js bridge/parity lane for the repeatable workflow: locate the Phase 1.1 replica folder, preserve it as source of truth, and output a separate pixel-locked Next.js App Router project without backend/provider/deployment questions. Phase 1.3 is the stricter folder-in / native-frontend-out lane for the user's final frontend expectation: a separate pure native Next.js App Router project with pixel parity, reusable components/data/state, native form/action contracts, SEO/tests, no primary HTML injection, no public HTML ownership, and backend/devops handoff readiness. Phase 1.4 is the verified HTML/static-template and failed-attempt repair lane: use it when raw HTML pages or an HTML-backed Next.js attempt must become a separate pure native output with route-by-route ownership proof, purity scans, measured parity evidence, and zero Problems.
 Phase 1.5 is the production hardening and backend handoff lane that runs after Phase 1.4. Generic and reusable for any 1.4 output. It tightens visual parity to <=1%, hardens performance and Core Web Vitals, locks SEO and structured data, finalizes accessibility, centralizes the data layer and design tokens, declares the typed backend handoff contract, and optionally packages the project as a marketplace template. It does not implement backend code, providers, or deployment and does not reopen 1.4 ownership decisions.
 
