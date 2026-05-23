@@ -6,6 +6,7 @@ import { readDatabase, writeDatabase } from "@/server/data/store";
 import { recordAnalyticsEvent, recordAuditLog } from "@/server/logging/observability";
 import { recordLeadEvent } from "@/server/domain/leads";
 import { dispatchNotification } from "@/server/domain/notifications";
+import { safeSendServiceRequestConfirmationEmail } from "@/server/domain/commerce-emails";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -127,6 +128,7 @@ export async function createServiceRequest(input: CreateServiceRequestInput): Pr
       relatedServiceRequestId: record.id,
       relatedLeadId: lead.id,
     }),
+    safeSendServiceRequestConfirmationEmail(record),
   ]);
 
   return record;

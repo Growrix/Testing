@@ -12,6 +12,10 @@ import type {
 import { readDatabase, writeDatabase } from "@/server/data/store";
 import { getPublicShopProduct } from "@/server/domain/catalog";
 import { syncOrderEntitlements } from "@/server/domain/downloads";
+import {
+  safeSendDownloadReadyEmail,
+  safeSendPurchaseConfirmationEmail,
+} from "@/server/domain/commerce-emails";
 import { recordAnalyticsEvent, recordAuditLog } from "@/server/logging/observability";
 import { getCheckoutHref } from "@/lib/shop";
 
@@ -379,6 +383,10 @@ export async function markOrderPaid(
 
   if (updatedOrder) {
     await syncOrderEntitlements(updatedOrder);
+    const paidOrder: OrderRecord = updatedOrder;
+    if (paidOrder.payment_status === "succeeded") {
+      await safeSendPurchaseConfirmationEmail(paidOrder);
+    }
   }
 
   return updatedOrder;
@@ -471,6 +479,14 @@ export async function updateOrderOperations(
 
   if (updatedOrder) {
     await syncOrderEntitlements(updatedOrder);
+    const opsOrder: OrderRecord = updatedOrder;
+    if (
+      opsOrder.fulfillment_status === "delivered" &&
+      opsOrder.payment_status === "succeeded" &&
+      opsOrder.delivery_urls.length > 0
+    ) {
+      await safeSendDownloadReadyEmail(opsOrder);
+    }
   }
 
   return updatedOrder;
