@@ -113,11 +113,13 @@
 
 ## Pixel, Runtime, And Accessibility Gates
 - [ ] Desktop output screenshots exist.
-- [ ] Desktop visual diff passes within threshold.
+- [ ] Desktop visual diff <= 0.03 (3%) max ratio per canonical route.
 - [ ] Tablet output screenshots exist when required.
-- [ ] Tablet visual diff passes within threshold when required.
+- [ ] Tablet visual diff <= 0.03 (3%) max ratio per canonical route when required.
 - [ ] Mobile output screenshots exist.
-- [ ] Mobile visual diff passes within threshold.
+- [ ] Mobile visual diff <= 0.03 (3%) max ratio per canonical route.
+- [ ] QA harness `PARITY_THRESHOLD` (or equivalent) is set to `0.03` or stricter for the final validation run.
+- [ ] Any route exceeding `0.03` has a reviewer-named exception entry in `exception-register.md` with cause, scope, and screenshot evidence.
 - [ ] Required sliders/carousels work.
 - [ ] Required animation/parallax/accordion/tab/filter/menu/modal widgets work.
 - [ ] Browser console has no uncaught runtime errors on required routes.

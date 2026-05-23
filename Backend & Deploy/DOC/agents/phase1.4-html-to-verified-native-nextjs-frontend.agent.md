@@ -92,7 +92,7 @@ This agent repairs the failure mode where a generated Next.js app still depends 
 10. Native interaction replacement for menus, tabs, accordions, sliders, filters, galleries, modals, parallax, animations, and route-aware state.
 11. Native frontend contracts for contact, booking, quote, newsletter, listing inquiry, search/filter/sort/cart/checkout-entry, or other visible flows.
 12. Legacy retirement and negative purity scan.
-13. Validation loop: lint, typecheck, build, dev, route smoke, redirects, tests, media, console-error scan, accessibility, desktop/tablet/mobile visual parity, Problems.
+13. Validation loop: lint, typecheck, build, dev, route smoke, redirects, tests, media, console-error scan, accessibility, desktop/tablet/mobile visual parity at <= 0.03 max diff ratio per route per viewport (threshold-raising forbidden; fix at component/CSS/asset/font level), Problems.
 14. Final report with source root, output root, optional attempt root, route count, native conversion evidence, validations, delivery class, commit hash if created, and blockers or remaining gaps.
 
 ## TRANSFERRED VITE-TO-NEXT PATTERNS

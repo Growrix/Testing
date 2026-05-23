@@ -66,6 +66,7 @@ Execute these sections in order. Run the relevant gate after each section before
    - Resolve `frontend_root` and confirm it exists and matches the Phase 1.4 contract.
    - Read `package.json`, `next.config.*`, `tsconfig.json`, `eslint.config.*`, `tailwind.config.*`, existing `DOC/migration/phase1.4/` evidence.
    - Refuse to proceed if 1.4 evidence is missing or `delivery_class` in 1.4 was below `production_candidate`.
+   - Refuse to proceed if the Phase 1.4 parity report shows max diff ratio above `0.03` (3%) on any canonical route. Return the affected routes to Phase 1.4 with `REPLI_P15_P14_DEFECT_DETECTED` instead of accepting a loose baseline. Phase 1.5 tightens an already-3% baseline to <= 0.01; it does not paper over 1.4 parity defects.
 
 2. **Visual Parity Tightening**
    - Confirm the project has Playwright + pixelmatch (or equivalent) QA harness; install if missing.

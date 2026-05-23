@@ -66,8 +66,16 @@ The lane must not report `delivery_class=production_candidate` or `frontend_read
 - jQuery, broad legacy script loaders, global plugin init, or DOM mutation own primary behavior without native React replacement
 - visible forms use fake success, missing PHP endpoints, `action="#"`, or no validation/submitting/success/error/not-configured contract
 - visual parity, route smoke, redirect checks, media checks, console-error checks, accessibility, tests, lint, typecheck, build, dev startup, or Problems gates are skipped without a blocker
+- visual parity max diff ratio exceeds `0.03` (3%) on any canonical route at desktop or mobile (and tablet when applicable) without an explicit, reviewer-named exception in `exception-register.md`
 
 Temporary DOM parsing, HTML reading, or generated JSX may be used only as migration tooling. It must not remain in the output runtime ownership path.
+
+## Parity Threshold (Non-Negotiable)
+The Phase 1.4 parity gate is pinned and must not be loosened to make routes pass.
+- Maximum per-route pixel diff ratio at desktop and mobile: `0.03` (3%).
+- Set the QA harness `PARITY_THRESHOLD` environment variable (or equivalent) to `0.03` or stricter when validating.
+- Fixes must be component, CSS, asset, or font ownership corrections. Raising the threshold is forbidden.
+- Phase 1.5 then tightens the same metric to `0.01` (1%). Phase 1.4 hands off only when the 3% ladder is satisfied.
 
 ## Required Workflow
 1. Intake and path safety.

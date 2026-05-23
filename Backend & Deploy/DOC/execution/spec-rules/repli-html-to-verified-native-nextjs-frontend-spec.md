@@ -165,18 +165,26 @@ The output project must contain a migration evidence folder, normally `DOC/migra
 - canonical route and state
 - desktop baseline screenshot
 - desktop output screenshot
-- desktop diff status
+- desktop diff ratio (must be <= 0.03)
 - tablet baseline screenshot
 - tablet output screenshot
-- tablet diff status
+- tablet diff ratio (must be <= 0.03 when tablet baseline applies)
 - mobile baseline screenshot
 - mobile output screenshot
-- mobile diff status
+- mobile diff ratio (must be <= 0.03)
 - smoke status
 - console-error status
 - media status
 - accessibility status
 - final status
+
+## Parity Threshold (Non-Negotiable)
+The Phase 1.4 visual parity gate is numeric and pinned. It must not be loosened to make routes pass.
+- Maximum per-route pixel diff ratio at desktop and mobile (and tablet when applicable): `0.03` (3%).
+- The QA harness `PARITY_THRESHOLD` environment variable (or equivalent) must be set to `0.03` or stricter when validating Phase 1.4 delivery.
+- Any route whose diff ratio exceeds `0.03` blocks `delivery_class=production_candidate` unless an explicit, reviewer-named exception is recorded in `exception-register.md` with cause, scope, and screenshot evidence.
+- Threshold-raising as a fix is forbidden; fixes must be component, CSS, asset, or font ownership corrections.
+- Phase 1.5 then tightens this threshold to `0.01` (1%) as its own gate. Phase 1.4 hands off only when the 3% ladder is satisfied.
 
 ## Native Purity Gates
 Completed primary routes must not depend on:
@@ -215,7 +223,7 @@ Migration scripts or temporary notes may mention these patterns, but final app r
 - dev server starts from output root
 - route smoke and redirect checks pass for every canonical and compatibility route
 - tests cover critical routes, forms/actions, redirects, not-found, and key interactive states
-- desktop, tablet, and mobile visual parity checks pass or block production classification
+- desktop, tablet, and mobile visual parity checks pass at <= 0.03 max diff ratio per route per viewport, or block production classification
 - accessibility checks pass for key routes and forms
 - VS Code Problems count is zero for output root
 
