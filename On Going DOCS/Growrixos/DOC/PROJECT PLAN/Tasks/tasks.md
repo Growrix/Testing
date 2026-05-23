@@ -65,6 +65,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `CMS`
 - Active tracked sessions:
+  - implemented Stripe checkout selection metadata propagation by extending checkout query/payload handling and orders APIs to capture variant/tier/fulfillment fields, persisting selection on order and order-item records, attaching metadata/line-item context in Stripe checkout sessions, reconciling selection during webhook payment completion, and extending order-domain plus API integration tests for the new flow
   - started P9 implementation with canonical `/products` surfaces (`/products`, `/products/[slug]`, `/products/category/[category]`, `/products/bundles`, `/products/free`) while preserving `/shop` compatibility, added `/book` alias routing, switched global navigation and core commerce CTAs to product-led paths, aligned AI/revalidation route references, and validated via lint/build/type/unit/integration/e2e plus web/studio readiness probes
   - created the canonical product-led platform gap plan from `Ongoing DOCS/Website Plan Growrix OS/websiteplan.md`, audited the existing Next.js/Sanity/Supabase implementation, identified gaps against `/products`, variants, private downloads, customer dashboard, lead scoring, Lark, Resend commerce automation, and admin operations, then materialized the root E2E artifact plus downstream role docs before updating this tracker
   - hardened Supabase `public.app_state` security posture by enabling RLS in `web/supabase/schema.sql`, explicitly blocking `anon`/`authenticated` roles, and updating Supabase integration docs/playbooks to remove obsolete "RLS disabled" guidance after urgent advisor remediation authorization
@@ -250,7 +251,7 @@ phases:
 	- `web/src/app/api/v1/orders/route.ts`
 	- `web/src/app/api/v1/orders/[orderId]/route.ts`
 	- `web/src/app/api/v1/orders/[orderId]/download/route.ts`
-  - Current state: persisted order creation, Stripe checkout handoff, status reads, manual summary download delivery, and webhook handling now exist; production fulfillment assets still need to replace the temporary download summary.
+  - Current state: persisted order creation, Stripe checkout handoff, status reads, manual summary download delivery, and webhook handling now exist; checkout variant/tier/fulfillment selection metadata now flows through order persistence, Stripe session metadata, and webhook payment updates; production fulfillment assets still need to replace the temporary download summary.
 - [~] T019 Implement subscriber and admin APIs plus auth enforcement at:
 	- `web/src/app/api/v1/me/route.ts`
 	- `web/src/app/api/v1/me/update/route.ts`

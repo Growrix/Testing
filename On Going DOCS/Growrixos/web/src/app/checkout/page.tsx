@@ -5,7 +5,7 @@ import { Badge } from "@/components/primitives/Badge";
 import { LinkButton } from "@/components/primitives/Button";
 import { Card } from "@/components/primitives/Card";
 import { Container, Section } from "@/components/primitives/Container";
-import { getCheckoutHref } from "@/lib/shop";
+import { getCheckoutHref, type CheckoutSelection } from "@/lib/shop";
 import { getPublicShopProduct } from "@/server/domain/catalog";
 import { CheckoutExperience } from "./CheckoutExperience";
 
@@ -15,7 +15,14 @@ export const metadata: Metadata = {
 };
 
 type CheckoutPageProps = {
-  searchParams?: Promise<{ product?: string | string[]; status?: string | string[]; order?: string | string[] }>;
+  searchParams?: Promise<{
+    product?: string | string[];
+    status?: string | string[];
+    order?: string | string[];
+    variant?: string | string[];
+    tier?: string | string[];
+    fulfillment?: string | string[];
+  }>;
 };
 
 export default async function CheckoutPage({ searchParams }: CheckoutPageProps) {
@@ -24,6 +31,15 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
   const product = productSlug ? await getPublicShopProduct(productSlug).catch(() => null) : undefined;
   const status = Array.isArray(resolved?.status) ? resolved?.status[0] : resolved?.status;
   const orderId = Array.isArray(resolved?.order) ? resolved?.order[0] : resolved?.order;
+  const selectedVariantSlug = Array.isArray(resolved?.variant) ? resolved?.variant[0] : resolved?.variant;
+  const selectedTierName = Array.isArray(resolved?.tier) ? resolved?.tier[0] : resolved?.tier;
+  const selectedFulfillmentType = Array.isArray(resolved?.fulfillment) ? resolved?.fulfillment[0] : resolved?.fulfillment;
+
+  const selection: CheckoutSelection = {
+    variantSlug: selectedVariantSlug,
+    tierName: selectedTierName,
+    fulfillmentType: selectedFulfillmentType,
+  };
 
   return (
     <Section className="pb-12 pt-12 sm:pb-16 sm:pt-16">
@@ -45,7 +61,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
             </p>
 
             <div className="mt-8">
-              <CheckoutExperience product={product} status={status} orderId={orderId} />
+              <CheckoutExperience product={product} status={status} orderId={orderId} selection={selection} />
             </div>
           </Card>
 
@@ -61,6 +77,15 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
                     </div>
                     <p className="font-display text-2xl tracking-tight">{product.price}</p>
                   </div>
+                  {selectedTierName ? (
+                    <p className="mt-3 text-sm text-text-muted">Tier: {selectedTierName}</p>
+                  ) : null}
+                  {selectedVariantSlug ? (
+                    <p className="mt-1 text-sm text-text-muted">Variant: {selectedVariantSlug}</p>
+                  ) : null}
+                  {selectedFulfillmentType ? (
+                    <p className="mt-1 text-sm text-text-muted">Fulfillment: {selectedFulfillmentType}</p>
+                  ) : null}
                   <p className="mt-4 text-sm leading-6 text-text-muted">{product.summary}</p>
                 </div>
 
@@ -76,7 +101,7 @@ export default async function CheckoutPage({ searchParams }: CheckoutPageProps) 
                   <LinkButton href={`/products/${product.slug}`} variant="outline" fullWidth>
                     Review product details
                   </LinkButton>
-                  <LinkButton href={getCheckoutHref(product)} fullWidth>
+                  <LinkButton href={getCheckoutHref(product, selection)} fullWidth>
                     Refresh this checkout <ArrowUpRightIcon className="size-4" />
                   </LinkButton>
                 </div>

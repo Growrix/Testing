@@ -72,6 +72,9 @@ export type ConversationSessionRecord = {
 export type OrderItemRecord = {
   product_slug: string;
   product_name: string;
+  product_variant_slug?: string;
+  product_tier_name?: string;
+  fulfillment_type?: string;
   quantity: number;
   unit_price_cents: number;
   total_cents: number;
@@ -92,6 +95,9 @@ export type OrderRecord = {
   currency: "USD";
   stripe_checkout_session_id?: string;
   stripe_payment_intent_id?: string;
+  selected_variant_slug?: string;
+  selected_tier_name?: string;
+  selected_fulfillment_type?: string;
   items: OrderItemRecord[];
   delivery_urls: string[];
   notes?: string;

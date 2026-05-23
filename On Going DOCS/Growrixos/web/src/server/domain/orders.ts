@@ -16,6 +16,9 @@ import { getCheckoutHref } from "@/lib/shop";
 
 type CreateOrderInput = {
   product_slug: string;
+  product_variant_slug?: string;
+  product_tier_name?: string;
+  fulfillment_type?: string;
   customer_name: string;
   customer_email: string;
   customer_phone?: string;
@@ -92,6 +95,28 @@ function normalizeNotes(notes: string | undefined) {
   return trimmed ? trimmed : null;
 }
 
+function normalizeSelectionValue(value: string | undefined) {
+  if (value === undefined) {
+    return undefined;
+  }
+
+  const trimmed = value.trim();
+  return trimmed ? trimmed : undefined;
+}
+
+function normalizeVariantSlug(value: string | undefined) {
+  const normalized = normalizeSelectionValue(value);
+  if (!normalized) {
+    return undefined;
+  }
+
+  return normalized
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80);
+}
+
 export async function createOrder(input: CreateOrderInput) {
   if (!input.customer_name.trim()) {
     throw new ApiError("MISSING_REQUIRED_FIELD", 400, "Customer name is required.");
@@ -107,9 +132,15 @@ export async function createOrder(input: CreateOrderInput) {
   }
 
   const unitPriceCents = parseUsdPriceToCents(product.price);
+  const selectedVariantSlug = normalizeVariantSlug(input.product_variant_slug);
+  const selectedTierName = normalizeSelectionValue(input.product_tier_name);
+  const selectedFulfillmentType = normalizeVariantSlug(input.fulfillment_type);
   const orderItem: OrderItemRecord = {
     product_slug: product.slug,
     product_name: product.name,
+    product_variant_slug: selectedVariantSlug,
+    product_tier_name: selectedTierName,
+    fulfillment_type: selectedFulfillmentType,
     quantity: 1,
     unit_price_cents: unitPriceCents,
     total_cents: unitPriceCents,
@@ -130,6 +161,9 @@ export async function createOrder(input: CreateOrderInput) {
     total_cents: unitPriceCents,
     currency: "USD",
     items: [orderItem],
+    selected_variant_slug: selectedVariantSlug,
+    selected_tier_name: selectedTierName,
+    selected_fulfillment_type: selectedFulfillmentType,
     delivery_urls: [],
     notes: input.notes?.trim() || undefined,
     created_at: now,
@@ -145,15 +179,68 @@ export async function createOrder(input: CreateOrderInput) {
   let checkoutUrl: string | null = null;
 
   if (stripe) {
+    const successUrl = new URL("/checkout", runtime.appBaseUrl);
+    successUrl.searchParams.set("product", product.slug);
+    successUrl.searchParams.set("status", "success");
+    successUrl.searchParams.set("order", order.id);
+
+    const checkoutSelection = {
+      variantSlug: order.selected_variant_slug,
+      tierName: order.selected_tier_name,
+      fulfillmentType: order.selected_fulfillment_type,
+    };
+
+    if (checkoutSelection.variantSlug) {
+      successUrl.searchParams.set("variant", checkoutSelection.variantSlug);
+    }
+
+    if (checkoutSelection.tierName) {
+      successUrl.searchParams.set("tier", checkoutSelection.tierName);
+    }
+
+    if (checkoutSelection.fulfillmentType) {
+      successUrl.searchParams.set("fulfillment", checkoutSelection.fulfillmentType);
+    }
+
+    const cancelUrl = new URL(
+      getCheckoutHref(product, checkoutSelection),
+      runtime.appBaseUrl,
+    );
+    cancelUrl.searchParams.set("status", "cancelled");
+
+    const checkoutMetadata: Record<string, string> = {
+      orderId: order.id,
+      productSlug: product.slug,
+    };
+
+    if (order.selected_variant_slug) {
+      checkoutMetadata.variantSlug = order.selected_variant_slug;
+    }
+
+    if (order.selected_tier_name) {
+      checkoutMetadata.tierName = order.selected_tier_name;
+    }
+
+    if (order.selected_fulfillment_type) {
+      checkoutMetadata.fulfillmentType = order.selected_fulfillment_type;
+    }
+
+    const lineItemName = order.selected_tier_name
+      ? `${product.name} - ${order.selected_tier_name}`
+      : product.name;
+    const lineItemDescription = [
+      product.summary,
+      order.selected_fulfillment_type ? `Fulfillment: ${order.selected_fulfillment_type}` : null,
+    ]
+      .filter((value): value is string => Boolean(value))
+      .join(" | ");
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      success_url: `${runtime.appBaseUrl}/checkout?product=${product.slug}&status=success&order=${order.id}`,
-      cancel_url: `${runtime.appBaseUrl}${getCheckoutHref(product)}&status=cancelled`,
+      success_url: successUrl.toString(),
+      cancel_url: cancelUrl.toString(),
       customer_email: order.customer_email,
-      metadata: {
-        orderId: order.id,
-        productSlug: product.slug,
-      },
+      metadata: checkoutMetadata,
       line_items: [
         {
           quantity: 1,
@@ -161,8 +248,8 @@ export async function createOrder(input: CreateOrderInput) {
             currency: "usd",
             unit_amount: unitPriceCents,
             product_data: {
-              name: product.name,
-              description: product.summary,
+              name: lineItemName,
+              description: lineItemDescription,
             },
           },
         },
@@ -190,6 +277,9 @@ export async function createOrder(input: CreateOrderInput) {
       metadata: {
         order_id: order.id,
         product_slug: product.slug,
+        variant_slug: order.selected_variant_slug ?? null,
+        tier_name: order.selected_tier_name ?? null,
+        fulfillment_type: order.selected_fulfillment_type ?? null,
         stripe_ready: Boolean(checkoutUrl),
       },
     }),
@@ -202,6 +292,9 @@ export async function createOrder(input: CreateOrderInput) {
       metadata: {
         order_id: order.id,
         product_slug: product.slug,
+        variant_slug: order.selected_variant_slug ?? null,
+        tier_name: order.selected_tier_name ?? null,
+        fulfillment_type: order.selected_fulfillment_type ?? null,
         stripe_ready: Boolean(checkoutUrl),
       },
     }),
@@ -229,7 +322,21 @@ export async function listOrdersByEmail(email: string) {
   return database.orders.filter((order) => order.customer_email === email.toLowerCase());
 }
 
-export async function markOrderPaid(orderId: string, paymentIntentId?: string): Promise<OrderRecord | null> {
+type StripeCheckoutSelection = {
+  variantSlug?: string;
+  tierName?: string;
+  fulfillmentType?: string;
+};
+
+export async function markOrderPaid(
+  orderId: string,
+  paymentIntentId?: string,
+  selection?: StripeCheckoutSelection,
+): Promise<OrderRecord | null> {
+  const selectedVariantSlug = normalizeVariantSlug(selection?.variantSlug);
+  const selectedTierName = normalizeSelectionValue(selection?.tierName);
+  const selectedFulfillmentType = normalizeVariantSlug(selection?.fulfillmentType);
+
   let updatedOrder: OrderRecord | null = null;
   await writeDatabase((next) => ({
     ...next,
@@ -246,11 +353,24 @@ export async function markOrderPaid(orderId: string, paymentIntentId?: string): 
       const nextFulfillment: OrderFulfillmentStatus =
         order.fulfillment_status === "pending" ? "intake_pending" : order.fulfillment_status;
 
+      const nextVariantSlug = selectedVariantSlug ?? order.selected_variant_slug;
+      const nextTierName = selectedTierName ?? order.selected_tier_name;
+      const nextFulfillmentType = selectedFulfillmentType ?? order.selected_fulfillment_type;
+
       updatedOrder = {
         ...order,
         payment_status: "succeeded",
         fulfillment_status: nextFulfillment,
         stripe_payment_intent_id: paymentIntentId ?? order.stripe_payment_intent_id,
+        selected_variant_slug: nextVariantSlug,
+        selected_tier_name: nextTierName,
+        selected_fulfillment_type: nextFulfillmentType,
+        items: order.items.map((item) => ({
+          ...item,
+          product_variant_slug: nextVariantSlug ?? item.product_variant_slug,
+          product_tier_name: nextTierName ?? item.product_tier_name,
+          fulfillment_type: nextFulfillmentType ?? item.fulfillment_type,
+        })),
       };
 
       return updatedOrder;
@@ -381,14 +501,35 @@ export async function handleStripeWebhook(payload: string, signature: string | n
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
     const orderId = typeof session.metadata?.orderId === "string" ? session.metadata.orderId : null;
+    const variantSlug = typeof session.metadata?.variantSlug === "string"
+      ? session.metadata.variantSlug
+      : undefined;
+    const tierName = typeof session.metadata?.tierName === "string"
+      ? session.metadata.tierName
+      : undefined;
+    const fulfillmentType = typeof session.metadata?.fulfillmentType === "string"
+      ? session.metadata.fulfillmentType
+      : undefined;
+
     if (orderId) {
-      const order = await markOrderPaid(orderId, typeof session.payment_intent === "string" ? session.payment_intent : undefined);
+      const order = await markOrderPaid(
+        orderId,
+        typeof session.payment_intent === "string" ? session.payment_intent : undefined,
+        {
+          variantSlug,
+          tierName,
+          fulfillmentType,
+        },
+      );
       await recordAuditLog({
         level: "info",
         action: "order.payment_succeeded",
         metadata: {
           order_id: orderId,
           stripe_session_id: session.id,
+          variant_slug: order?.selected_variant_slug ?? null,
+          tier_name: order?.selected_tier_name ?? null,
+          fulfillment_type: order?.selected_fulfillment_type ?? null,
           delivery_urls: order?.delivery_urls ?? [],
         },
       });

@@ -83,6 +83,45 @@ describe("orders domain", () => {
     assert.deepEqual(paid?.delivery_urls, []);
   });
 
+  it("stores selected variant and tier details on order records", async () => {
+    const created = await createOrder({
+      product_slug: "legal-practice-website",
+      product_variant_slug: "premium_plus",
+      product_tier_name: "Premium Plus",
+      fulfillment_type: "Done For You",
+      customer_name: "Casey Buyer",
+      customer_email: "casey@example.com",
+    });
+
+    assert.equal(created.order.selected_variant_slug, "premium-plus");
+    assert.equal(created.order.selected_tier_name, "Premium Plus");
+    assert.equal(created.order.selected_fulfillment_type, "done-for-you");
+    assert.equal(created.order.items[0]?.product_variant_slug, "premium-plus");
+    assert.equal(created.order.items[0]?.product_tier_name, "Premium Plus");
+    assert.equal(created.order.items[0]?.fulfillment_type, "done-for-you");
+  });
+
+  it("applies webhook selection metadata when payment completes", async () => {
+    const created = await createOrder({
+      product_slug: "legal-practice-website",
+      customer_name: "Riley Buyer",
+      customer_email: "riley@example.com",
+    });
+
+    const paid = await markOrderPaid(created.order.id, "pi_test_meta", {
+      variantSlug: "enterprise-tier",
+      tierName: "Enterprise",
+      fulfillmentType: "Done For You",
+    });
+
+    assert.equal(paid?.selected_variant_slug, "enterprise-tier");
+    assert.equal(paid?.selected_tier_name, "Enterprise");
+    assert.equal(paid?.selected_fulfillment_type, "done-for-you");
+    assert.equal(paid?.items[0]?.product_variant_slug, "enterprise-tier");
+    assert.equal(paid?.items[0]?.product_tier_name, "Enterprise");
+    assert.equal(paid?.items[0]?.fulfillment_type, "done-for-you");
+  });
+
   it("rejects delivered status when no delivery URL exists", async () => {
     const created = await createOrder({
       product_slug: "legal-practice-website",
