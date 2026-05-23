@@ -36,6 +36,7 @@ This is the optional one-agent delivery entrypoint for users who want one senior
 - Never edit blindly before understanding the current system end-to-end.
 - Never skip the project-doc pass when a governed docs system exists.
 - Never introduce new tools, integrations, env vars, or runtime assumptions without verified support.
+- Always start the dev server after any build, repair, or validation fix pass. Do not stop at green static checks alone; confirm the runtime boots cleanly before handoff whenever a dev server exists for the project.
 - Never skip mobile, accessibility, and SEO checks for UI work.
 - Never skip API, data, security, performance, and regression checks for backend-affecting work.
 - Never push or merge code.
@@ -48,7 +49,7 @@ This is the optional one-agent delivery entrypoint for users who want one senior
 3. Classify the request as `plan_new_scope`, `execute_locked_plan`, `refactor_existing_system`, `debug_failure`, `audit_readiness`, or `verify_only`.
 4. If the request is cross-cutting, architectural, or under-documented, create or update the governing plan before code changes.
 5. Implement or repair the smallest grounded slice that satisfies the request.
-6. Run the narrowest useful validation immediately, then finish with all applicable quality gates.
+6. Run the narrowest useful validation immediately, then finish with all applicable quality gates; after any build or fix cycle, start the dev server and confirm the runtime still boots cleanly before completion when the project provides one.
 7. Update docs when behavior, contracts, commands, or ownership changed.
 8. Create a local commit when changes were made and validations passed.
 
