@@ -16,6 +16,7 @@ import {
   safeSendDownloadReadyEmail,
   safeSendPurchaseConfirmationEmail,
 } from "@/server/domain/commerce-emails";
+import { dispatchNotification } from "@/server/domain/notifications";
 import { recordAnalyticsEvent, recordAuditLog } from "@/server/logging/observability";
 import { getCheckoutHref } from "@/lib/shop";
 
@@ -386,6 +387,31 @@ export async function markOrderPaid(
     const paidOrder: OrderRecord = updatedOrder;
     if (paidOrder.payment_status === "succeeded") {
       await safeSendPurchaseConfirmationEmail(paidOrder);
+      try {
+        await dispatchNotification({
+          kind: "purchase_completed",
+          title: `Purchase completed for order ${paidOrder.order_number}`,
+          payload: {
+            order_id: paidOrder.id,
+            order_number: paidOrder.order_number,
+            customer_email: paidOrder.customer_email,
+            total_cents: paidOrder.total_cents,
+            currency: paidOrder.currency,
+            product_slug: paidOrder.items[0]?.product_slug,
+            fulfillment_status: paidOrder.fulfillment_status,
+          },
+          relatedOrderId: paidOrder.id,
+        });
+      } catch (error) {
+        await recordAuditLog({
+          level: "warning",
+          action: "order.notification_purchase_failed",
+          metadata: {
+            order_id: paidOrder.id,
+            error: error instanceof Error ? error.message : "unknown",
+          },
+        });
+      }
     }
   }
 
@@ -486,6 +512,29 @@ export async function updateOrderOperations(
       opsOrder.delivery_urls.length > 0
     ) {
       await safeSendDownloadReadyEmail(opsOrder);
+      try {
+        await dispatchNotification({
+          kind: "download_issued",
+          title: `Downloads delivered for order ${opsOrder.order_number}`,
+          payload: {
+            order_id: opsOrder.id,
+            order_number: opsOrder.order_number,
+            customer_email: opsOrder.customer_email,
+            delivery_urls: opsOrder.delivery_urls,
+            product_slug: opsOrder.items[0]?.product_slug,
+          },
+          relatedOrderId: opsOrder.id,
+        });
+      } catch (error) {
+        await recordAuditLog({
+          level: "warning",
+          action: "order.notification_download_failed",
+          metadata: {
+            order_id: opsOrder.id,
+            error: error instanceof Error ? error.message : "unknown",
+          },
+        });
+      }
     }
   }
 

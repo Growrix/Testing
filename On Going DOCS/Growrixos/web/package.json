@@ -19,7 +19,8 @@
     "cms:import:inbox": "node ./scripts/import-cms-content.mjs",
     "cms:import:inbox:dry": "node ./scripts/import-cms-content.mjs --dry-run",
     "cms:fix-array-keys": "node ./scripts/fix-sanity-array-keys.mjs",
-    "cms:fix-array-keys:dry": "node ./scripts/fix-sanity-array-keys.mjs --dry-run"
+    "cms:fix-array-keys:dry": "node ./scripts/fix-sanity-array-keys.mjs --dry-run",
+    "db:migrate": "node ./scripts/migrate-supabase.mjs"
   },
   "dependencies": {
     "@axe-core/playwright": "^4.11.0",
