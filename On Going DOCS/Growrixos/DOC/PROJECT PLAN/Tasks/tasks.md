@@ -25,7 +25,7 @@ release_blockers:
   - Full integrated production release is still blocked by external integrations and content-operations rollout work intentionally deferred in this phase (Stripe live go-live/fulfillment asset pipeline, calendar synchronization, and the now-documented CMS/content operations implementation plan).
   - Customer/subscriber RBAC and protected self-service ownership flows are implemented to a baseline level, but richer policy granularity remains a hardening follow-up.
   - Infrastructure-as-code and external monitoring/alerting stack work are still pending if deployment expands beyond frontend-hosted runtime.
-  - Product-led platform release is blocked until product variants, normalized Supabase transactional schema, private downloads, customer dashboard, lead scoring, Lark notifications, expanded Resend commerce emails, and deeper `/products` conversion UX are implemented and validated.
+  - Product-led platform release is blocked until normalized Supabase transactional schema, private downloads, customer dashboard, lead scoring, Lark notifications, expanded Resend commerce emails, and upgraded admin product-led operations are implemented and validated.
 phase_sequence:
   - P0-documentation-tracking-alignment
   - P1-frontend-foundation
@@ -40,19 +40,19 @@ phase_sequence:
 next_recommended_phase: P9-product-led-platform-gap-implementation
 next_recommended_tasks:
   - T045
-  - T047
   - T048
   - T049
+  - T050
 phase_status_counts:
   done: 4
   partial: 6
   blocked: 0
   not_started: 0
 task_status_counts:
-  done: 29
-  partial: 8
+  done: 31
+  partial: 7
   blocked: 0
-  not_started: 15
+  not_started: 14
 ---
 
 # Tasks / Execution Tracker
@@ -65,6 +65,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `CMS`
 - Active tracked sessions:
+  - completed T047 by extending Sanity/product models with tiered variants, FAQ, related product/service links, and customization upsells; updated management/admin persistence; and redesigned product detail conversion UX with Standard/Premium/Done-For-You cards, comparison matrix, tier-aware checkout handoff, and FAQ/related service sections
   - aligned the homepage hero to the product-led platform plan by updating fallback positioning copy and CTA hierarchy to Browse Products + Book a Free Consultation with supporting actions (Need Custom Work, WhatsApp, Ask AI Assistant), while preserving the existing visual system and validating with lint/build/unit/integration plus Playwright regression rerun
   - implemented Stripe checkout selection metadata propagation by extending checkout query/payload handling and orders APIs to capture variant/tier/fulfillment fields, persisting selection on order and order-item records, attaching metadata/line-item context in Stripe checkout sessions, reconciling selection during webhook payment completion, and extending order-domain plus API integration tests for the new flow
   - started P9 implementation with canonical `/products` surfaces (`/products`, `/products/[slug]`, `/products/category/[category]`, `/products/bundles`, `/products/free`) while preserving `/shop` compatibility, added `/book` alias routing, switched global navigation and core commerce CTAs to product-led paths, aligned AI/revalidation route references, and validated via lint/build/type/unit/integration/e2e plus web/studio readiness probes
@@ -202,7 +203,7 @@ phases:
 | P6 | done | Unit, integration, and browser E2E gates now run with accessibility/security/performance smoke checks and full release-gate execution evidence. |
 | P7 | partial | The CMS/content-operations and admin information architecture is now documented, while implementation for production-grade shop, portfolio, newsletter, and submissions operations remains ahead. |
 | P8 | partial | Shop and portfolio surfaces are now being moved to Sanity-backed loaders and CMS-authored preview metadata, while draft preview and broader route migration remain incomplete. |
-| P9 | partial | Product-led implementation has started with canonical `/products` routing and `/shop` compatibility. Variants, downloads, customer dashboard, lead scoring, Lark, Resend automation, and admin operations remain pending. |
+| P9 | partial | Product-led implementation now includes canonical `/products` routing, `/shop` compatibility, and tiered product-detail conversion UX with variant metadata flow. Downloads, customer dashboard, lead scoring, Lark, Resend automation, and admin operations remain pending. |
 
 ## Tasks By Phase
 
@@ -304,9 +305,9 @@ phases:
 
 ### Phase P9 — Product-Led Platform Gap Implementation
 - [ ] T045 Update shared contracts and route ownership for the product-led platform plan in `DOC/PROJECT PLAN/product-led-platform-gap-e2e-plan.md` and `DOC/PROJECT PLAN/Shared Contracts/product-led-platform-shared-contracts.md`.
-- [~] T046 Add canonical `/products` routes with `/shop` compatibility, product category/bundle/free surfaces, and product-led homepage CTA repositioning.
-  - Current state: canonical `/products` route family, `/shop` compatibility, `/book` alias, products-first nav/CTA rewiring, and homepage hero CTA alignment are implemented; deeper product-detail conversion UX repositioning remains pending.
-- [ ] T047 Extend Sanity and frontend product models for Standard, Premium, and Done-For-You variants, product FAQs, related products/services, and customization upsells.
+- [x] T046 Add canonical `/products` routes with `/shop` compatibility, product category/bundle/free surfaces, and product-led homepage CTA repositioning.
+- [x] T047 Extend Sanity and frontend product models for Standard, Premium, and Done-For-You variants, product FAQs, related products/services, and customization upsells.
+  - Current state: Sanity schemas and catalog/management mappers now support tier variants, FAQ, related links, and customization upsells; product detail routes now render tier cards, comparison rows, tier-aware checkout links, FAQ content, and related service cross-links.
 - [ ] T048 Add normalized Supabase transactional schema and APIs for products metadata, product variants, orders, order items, downloads, leads, lead events, service requests, conversations, messages, and licenses.
 - [ ] T049 Implement private download delivery, `/success`, and customer `/dashboard/**` surfaces for products, downloads, orders, support, and appointments.
 - [ ] T050 Implement lead scoring, tracked WhatsApp CTAs, AI qualification writes, service request intake, and Lark hot-lead/purchase notifications.

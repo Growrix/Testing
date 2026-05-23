@@ -427,6 +427,32 @@ export async function listManagedProducts() {
 export async function upsertManagedProduct(input: ManagedProductRecord) {
   const nextRecord = {
     ...input,
+    variants: input.variants
+      ?.map((variant) => ({
+        ...variant,
+        slug: variant.slug.trim(),
+        title: variant.title.trim(),
+        price: variant.price.trim(),
+        includes: variant.includes.filter(Boolean),
+        comparison_points: variant.comparison_points?.filter(Boolean),
+      }))
+      .filter((variant) => variant.slug && variant.title && variant.price && variant.includes.length > 0),
+    faqs: input.faqs
+      ?.map((faq) => ({
+        question: faq.question.trim(),
+        answer: faq.answer.trim(),
+      }))
+      .filter((faq) => faq.question && faq.answer),
+    related_product_slugs: input.related_product_slugs?.filter(Boolean),
+    related_service_slugs: input.related_service_slugs?.filter(Boolean),
+    customization_upsells: input.customization_upsells
+      ?.map((upsell) => ({
+        title: upsell.title.trim(),
+        description: upsell.description.trim(),
+        cta_label: upsell.cta_label.trim(),
+        cta_href: upsell.cta_href.trim(),
+      }))
+      .filter((upsell) => upsell.title && upsell.description && upsell.cta_label && upsell.cta_href),
     includes: input.includes.filter(Boolean),
     stack: input.stack.filter(Boolean),
     highlights: input.highlights.filter((item) => item.label && item.value),

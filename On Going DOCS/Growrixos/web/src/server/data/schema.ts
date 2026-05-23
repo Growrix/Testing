@@ -143,6 +143,31 @@ export type ManagedPortfolioRecord = {
   detail: CaseStudyDetail | null;
 };
 
+export type ProductVariantTierName = "Standard" | "Premium" | "Done-For-You";
+
+export type ProductVariantRecord = {
+  slug: string;
+  tier_name: ProductVariantTierName;
+  title: string;
+  price: string;
+  fulfillment_type: "digital_download" | "hybrid_support" | "done_for_you_service";
+  includes: string[];
+  comparison_points?: string[];
+  recommended?: boolean;
+};
+
+export type ProductFaqRecord = {
+  question: string;
+  answer: string;
+};
+
+export type ProductUpsellRecord = {
+  title: string;
+  description: string;
+  cta_label: string;
+  cta_href: string;
+};
+
 export type ManagedProductRecord = {
   slug: string;
   name: string;
@@ -164,6 +189,11 @@ export type ManagedProductRecord = {
   summary: string;
   audience: string;
   features?: string[];
+  variants?: ProductVariantRecord[];
+  faqs?: ProductFaqRecord[];
+  related_product_slugs?: string[];
+  related_service_slugs?: string[];
+  customization_upsells?: ProductUpsellRecord[];
   previewVariant: PreviewVariant;
   includes: string[];
   inScope?: string[];

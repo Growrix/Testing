@@ -13,6 +13,9 @@ export const htmlBusinessProfileTemplateType = defineType({
   groups: [
     { name: "basics", title: "Basics" },
     { name: "classification", title: "Classification" },
+    { name: "content", title: "Content" },
+    { name: "variants", title: "Variants & Offers" },
+    { name: "relations", title: "FAQ & Relations" },
     { name: "commerce", title: "Commerce" },
     { name: "preview", title: "Preview" },
   ],
@@ -45,8 +48,129 @@ export const htmlBusinessProfileTemplateType = defineType({
       title: "Summary",
       type: "text",
       rows: 4,
-      group: "basics",
+      group: "content",
       validation: (rule) => rule.required().min(12),
+    }),
+    defineField({
+      name: "teaser",
+      title: "Teaser",
+      type: "string",
+      group: "content",
+      validation: (rule) => rule.min(6),
+    }),
+    defineField({
+      name: "audience",
+      title: "Audience",
+      type: "string",
+      group: "content",
+    }),
+    defineField({
+      name: "features",
+      title: "Feature Descriptions",
+      type: "array",
+      group: "content",
+      of: [{ type: "string" }],
+    }),
+    defineField({
+      name: "variants",
+      title: "Product Variants (Standard / Premium / Done-For-You)",
+      type: "array",
+      description: "Optional package tiers for this template.",
+      group: "variants",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "slug", title: "Variant Slug", type: "string", validation: (rule) => rule.required() }),
+            defineField({
+              name: "tierName",
+              title: "Tier Name",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Standard", value: "Standard" },
+                  { title: "Premium", value: "Premium" },
+                  { title: "Done-For-You", value: "Done-For-You" },
+                ],
+              },
+              validation: (rule) => rule.required(),
+            }),
+            defineField({ name: "title", title: "Package Title", type: "string", validation: (rule) => rule.required() }),
+            defineField({ name: "price", title: "Package Price", type: "string", validation: (rule) => rule.required() }),
+            defineField({
+              name: "fulfillmentType",
+              title: "Fulfillment Type",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Digital Download", value: "digital_download" },
+                  { title: "Hybrid Support", value: "hybrid_support" },
+                  { title: "Done For You Service", value: "done_for_you_service" },
+                ],
+              },
+              initialValue: "digital_download",
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "includes",
+              title: "Includes",
+              type: "array",
+              of: [{ type: "string" }],
+              validation: (rule) => rule.required().min(1),
+            }),
+            defineField({ name: "comparisonPoints", title: "Comparison Points (Optional)", type: "array", of: [{ type: "string" }] }),
+            defineField({ name: "recommended", title: "Recommended Tier", type: "boolean", initialValue: false }),
+          ],
+        },
+      ],
+    }),
+    defineField({
+      name: "customizationUpsells",
+      title: "Customization Upsells",
+      type: "array",
+      group: "variants",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "title", title: "Title", type: "string", validation: (rule) => rule.required() }),
+            defineField({ name: "description", title: "Description", type: "text", rows: 3, validation: (rule) => rule.required().min(12) }),
+            defineField({ name: "ctaLabel", title: "CTA Label", type: "string", validation: (rule) => rule.required() }),
+            defineField({ name: "ctaHref", title: "CTA URL", type: "string", validation: (rule) => rule.required() }),
+          ],
+        },
+      ],
+    }),
+    defineField({
+      name: "faqs",
+      title: "Product FAQ",
+      type: "array",
+      group: "relations",
+      of: [
+        {
+          type: "object",
+          fields: [
+            defineField({ name: "question", title: "Question", type: "string", validation: (rule) => rule.required() }),
+            defineField({ name: "answer", title: "Answer", type: "text", rows: 3, validation: (rule) => rule.required() }),
+          ],
+        },
+      ],
+    }),
+    defineField({
+      name: "relatedProductSlugs",
+      title: "Related Product Slugs",
+      type: "array",
+      group: "relations",
+      of: [{ type: "string" }],
+      validation: (rule) => rule.max(6),
+    }),
+    defineField({
+      name: "relatedServiceSlugs",
+      title: "Related Service Slugs",
+      type: "array",
+      group: "relations",
+      of: [{ type: "string" }],
+      validation: (rule) => rule.max(6),
     }),
     defineField({
       name: "category",

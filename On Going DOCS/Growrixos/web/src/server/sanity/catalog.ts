@@ -5,6 +5,9 @@ import type {
   ManagedPortfolioRecord,
   ManagedProductRecord,
   ManagedServiceRecord,
+  ProductFaqRecord,
+  ProductUpsellRecord,
+  ProductVariantRecord,
 } from "@/server/data/schema";
 import type { CaseStudyDetail, StockImage } from "@/lib/site-images";
 import { getSanityClient, isSanityConfigured } from "@/server/sanity/client";
@@ -22,6 +25,29 @@ type SanityKeyValue = {
   label?: string;
   value?: string;
   hint?: string;
+};
+
+type SanityProductVariant = {
+  slug?: string;
+  tierName?: string;
+  title?: string;
+  price?: string;
+  fulfillmentType?: string;
+  includes?: string[];
+  comparisonPoints?: string[];
+  recommended?: boolean;
+};
+
+type SanityFaqItem = {
+  question?: string;
+  answer?: string;
+};
+
+type SanityCustomizationUpsell = {
+  title?: string;
+  description?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
 };
 
 type SanityCaseStudy = {
@@ -74,6 +100,11 @@ type SanityShopItem = {
   summary?: string;
   audience?: string;
   features?: string[];
+  variants?: SanityProductVariant[];
+  faqs?: SanityFaqItem[];
+  relatedProductSlugs?: string[];
+  relatedServiceSlugs?: string[];
+  customizationUpsells?: SanityCustomizationUpsell[];
   previewVariant?: ManagedProductRecord["previewVariant"];
   includes?: string[];
   inScope?: string[];
@@ -110,6 +141,11 @@ type SanityHtmlBusinessProfileTemplate = {
   summary?: string;
   audience?: string;
   features?: string[];
+  variants?: SanityProductVariant[];
+  faqs?: SanityFaqItem[];
+  relatedProductSlugs?: string[];
+  relatedServiceSlugs?: string[];
+  customizationUpsells?: SanityCustomizationUpsell[];
   previewVariant?: ManagedProductRecord["previewVariant"];
   includes?: string[];
   inScope?: string[];
@@ -187,6 +223,28 @@ const SANITY_SHOP_ITEMS_QUERY = `*[
   summary,
   audience,
   "features": coalesce(features, []),
+  "variants": coalesce(variants, [])[]{
+    slug,
+    tierName,
+    title,
+    price,
+    fulfillmentType,
+    "includes": coalesce(includes, []),
+    "comparisonPoints": coalesce(comparisonPoints, []),
+    recommended
+  },
+  "faqs": coalesce(faqs, [])[]{
+    question,
+    answer
+  },
+  "relatedProductSlugs": coalesce(relatedProductSlugs, []),
+  "relatedServiceSlugs": coalesce(relatedServiceSlugs, []),
+  "customizationUpsells": coalesce(customizationUpsells, [])[]{
+    title,
+    description,
+    ctaLabel,
+    ctaHref
+  },
   previewVariant,
   "includes": coalesce(includes, []),
   "inScope": coalesce(inScope, []),
@@ -237,6 +295,28 @@ const SANITY_HTML_BUSINESS_PROFILE_TEMPLATES_QUERY = `*[
   summary,
   audience,
   "features": coalesce(features, []),
+  "variants": coalesce(variants, [])[]{
+    slug,
+    tierName,
+    title,
+    price,
+    fulfillmentType,
+    "includes": coalesce(includes, []),
+    "comparisonPoints": coalesce(comparisonPoints, []),
+    recommended
+  },
+  "faqs": coalesce(faqs, [])[]{
+    question,
+    answer
+  },
+  "relatedProductSlugs": coalesce(relatedProductSlugs, []),
+  "relatedServiceSlugs": coalesce(relatedServiceSlugs, []),
+  "customizationUpsells": coalesce(customizationUpsells, [])[]{
+    title,
+    description,
+    ctaLabel,
+    ctaHref
+  },
   previewVariant,
   "includes": coalesce(includes, []),
   "inScope": coalesce(inScope, []),
@@ -262,6 +342,85 @@ function normalizeString(value: string | undefined, fallback = "") {
 
 function normalizeStringArray(values: string[] | undefined) {
   return (values ?? []).map((value) => value.trim()).filter(Boolean);
+}
+
+function normalizeVariantTierName(value: string | undefined): ProductVariantRecord["tier_name"] {
+  const normalized = normalizeString(value, "Standard").toLowerCase();
+
+  if (normalized === "premium") {
+    return "Premium";
+  }
+
+  if (normalized === "done-for-you" || normalized === "done for you" || normalized === "done_for_you") {
+    return "Done-For-You";
+  }
+
+  return "Standard";
+}
+
+function normalizeVariantFulfillmentType(value: string | undefined): ProductVariantRecord["fulfillment_type"] {
+  const normalized = normalizeString(value, "digital_download")
+    .toLowerCase()
+    .replace(/[^a-z]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+
+  if (normalized === "hybrid_support") {
+    return "hybrid_support";
+  }
+
+  if (normalized === "done_for_you_service" || normalized === "done_for_you") {
+    return "done_for_you_service";
+  }
+
+  return "digital_download";
+}
+
+function normalizeProductVariants(values: SanityProductVariant[] | undefined): ProductVariantRecord[] {
+  const variants = (values ?? [])
+    .map((value, index) => {
+      const tierName = normalizeVariantTierName(value.tierName);
+      const title = normalizeString(value.title, tierName);
+      const price = normalizeString(value.price);
+      const includes = normalizeStringArray(value.includes);
+
+      if (!price || includes.length === 0) {
+        return null;
+      }
+
+      return {
+        slug: normalizeString(value.slug, slugify(tierName, `variant-${index + 1}`)),
+        tier_name: tierName,
+        title,
+        price,
+        fulfillment_type: normalizeVariantFulfillmentType(value.fulfillmentType),
+        includes,
+        comparison_points: normalizeStringArray(value.comparisonPoints),
+        recommended: value.recommended === true ? true : undefined,
+      } satisfies ProductVariantRecord;
+    })
+    .filter((value) => value !== null) as ProductVariantRecord[];
+
+  return Array.from(new Map(variants.map((variant) => [variant.slug, variant])).values());
+}
+
+function normalizeProductFaqs(values: SanityFaqItem[] | undefined): ProductFaqRecord[] {
+  return (values ?? [])
+    .map((value) => ({
+      question: normalizeString(value.question),
+      answer: normalizeString(value.answer),
+    }))
+    .filter((value) => value.question && value.answer);
+}
+
+function normalizeCustomizationUpsells(values: SanityCustomizationUpsell[] | undefined): ProductUpsellRecord[] {
+  return (values ?? [])
+    .map((value) => ({
+      title: normalizeString(value.title),
+      description: normalizeString(value.description),
+      cta_label: normalizeString(value.ctaLabel),
+      cta_href: normalizeString(value.ctaHref),
+    }))
+    .filter((value) => value.title && value.description && value.cta_label && value.cta_href);
 }
 
 function normalizeImage(image: SanityImage | undefined, fallback: StockImage | null) {
@@ -384,6 +543,11 @@ function normalizeProduct(item: SanityShopItem): ManagedProductRecord | null {
   const type = normalizeString(item.type, "Website Product");
   const industry = normalizeString(item.industry, "General");
   const highlights = normalizeKeyValueArray(item.highlights);
+  const variants = normalizeProductVariants(item.variants);
+  const faqs = normalizeProductFaqs(item.faqs);
+  const relatedProductSlugs = normalizeStringArray(item.relatedProductSlugs);
+  const relatedServiceSlugs = normalizeStringArray(item.relatedServiceSlugs);
+  const customizationUpsells = normalizeCustomizationUpsells(item.customizationUpsells);
   const gallery = (item.gallery ?? [])
     .map((image) => normalizeImage(image, null))
     .filter((image): image is StockImage => image !== null);
@@ -409,6 +573,11 @@ function normalizeProduct(item: SanityShopItem): ManagedProductRecord | null {
     summary: normalizeString(item.summary),
     audience: normalizeString(item.audience),
     features: normalizeStringArray(item.features),
+    variants: variants.length > 0 ? variants : undefined,
+    faqs: faqs.length > 0 ? faqs : undefined,
+    related_product_slugs: relatedProductSlugs.length > 0 ? relatedProductSlugs : undefined,
+    related_service_slugs: relatedServiceSlugs.length > 0 ? relatedServiceSlugs : undefined,
+    customization_upsells: customizationUpsells.length > 0 ? customizationUpsells : undefined,
     previewVariant: item.previewVariant ?? "marketing",
     includes: normalizeStringArray(item.includes),
     inScope: normalizeStringArray(item.inScope),
@@ -436,6 +605,11 @@ function normalizeHtmlBusinessProfileTemplate(item: SanityHtmlBusinessProfileTem
   const embeddedPreviewUrl = normalizeString(item.embeddedPreviewUrl) || htmlTemplateUrl;
   const highlights = normalizeKeyValueArray(item.highlights);
   const normalizedStack = normalizeStringArray(item.stack);
+  const variants = normalizeProductVariants(item.variants);
+  const faqs = normalizeProductFaqs(item.faqs);
+  const relatedProductSlugs = normalizeStringArray(item.relatedProductSlugs);
+  const relatedServiceSlugs = normalizeStringArray(item.relatedServiceSlugs);
+  const customizationUpsells = normalizeCustomizationUpsells(item.customizationUpsells);
   const gallery = (item.gallery ?? [])
     .map((image) => normalizeImage(image, null))
     .filter((image): image is StockImage => image !== null);
@@ -466,6 +640,11 @@ function normalizeHtmlBusinessProfileTemplate(item: SanityHtmlBusinessProfileTem
     summary: normalizeString(item.summary, "A digital HTML business profile template available for direct purchase."),
     audience: normalizeString(item.audience, "Businesses that need fast profile website launches."),
     features: normalizeStringArray(item.features),
+    variants: variants.length > 0 ? variants : undefined,
+    faqs: faqs.length > 0 ? faqs : undefined,
+    related_product_slugs: relatedProductSlugs.length > 0 ? relatedProductSlugs : undefined,
+    related_service_slugs: relatedServiceSlugs.length > 0 ? relatedServiceSlugs : undefined,
+    customization_upsells: customizationUpsells.length > 0 ? customizationUpsells : undefined,
     previewVariant: item.previewVariant ?? "marketing",
     includes: normalizeStringArray(item.includes),
     inScope: normalizeStringArray(item.inScope),

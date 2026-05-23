@@ -42,6 +42,72 @@ export async function POST(request: NextRequest) {
       summary: typeof body.summary === "string" ? body.summary : "",
       audience: typeof body.audience === "string" ? body.audience : "",
       features: Array.isArray(body.features) ? body.features.filter((item): item is string => typeof item === "string") : undefined,
+      variants: Array.isArray(body.variants)
+        ? body.variants
+            .filter(
+              (item): item is {
+                slug: string;
+                tier_name: "Standard" | "Premium" | "Done-For-You";
+                title: string;
+                price: string;
+                fulfillment_type: "digital_download" | "hybrid_support" | "done_for_you_service";
+                includes: string[];
+                comparison_points?: string[];
+                recommended?: boolean;
+              } =>
+                Boolean(item) &&
+                typeof item === "object" &&
+                typeof item.slug === "string" &&
+                (item.tier_name === "Standard" || item.tier_name === "Premium" || item.tier_name === "Done-For-You") &&
+                typeof item.title === "string" &&
+                typeof item.price === "string" &&
+                (item.fulfillment_type === "digital_download" ||
+                  item.fulfillment_type === "hybrid_support" ||
+                  item.fulfillment_type === "done_for_you_service") &&
+                Array.isArray(item.includes) &&
+                item.includes.every((entry: unknown) => typeof entry === "string") &&
+                (!Array.isArray(item.comparison_points) ||
+                  item.comparison_points.every((entry: unknown) => typeof entry === "string")) &&
+                (typeof item.recommended === "boolean" || typeof item.recommended === "undefined"),
+            )
+            .map((variant) => ({
+              ...variant,
+              includes: variant.includes.filter(Boolean),
+              comparison_points: variant.comparison_points?.filter(Boolean),
+            }))
+        : undefined,
+      faqs: Array.isArray(body.faqs)
+        ? body.faqs
+            .filter(
+              (item): item is { question: string; answer: string } =>
+                Boolean(item) && typeof item === "object" && typeof item.question === "string" && typeof item.answer === "string",
+            )
+            .map((faq) => ({ question: faq.question, answer: faq.answer }))
+        : undefined,
+      related_product_slugs: Array.isArray(body.related_product_slugs)
+        ? body.related_product_slugs.filter((item): item is string => typeof item === "string")
+        : undefined,
+      related_service_slugs: Array.isArray(body.related_service_slugs)
+        ? body.related_service_slugs.filter((item): item is string => typeof item === "string")
+        : undefined,
+      customization_upsells: Array.isArray(body.customization_upsells)
+        ? body.customization_upsells
+            .filter(
+              (item): item is { title: string; description: string; cta_label: string; cta_href: string } =>
+                Boolean(item) &&
+                typeof item === "object" &&
+                typeof item.title === "string" &&
+                typeof item.description === "string" &&
+                typeof item.cta_label === "string" &&
+                typeof item.cta_href === "string",
+            )
+            .map((upsell) => ({
+              title: upsell.title,
+              description: upsell.description,
+              cta_label: upsell.cta_label,
+              cta_href: upsell.cta_href,
+            }))
+        : undefined,
       previewVariant:
         body.previewVariant === "mcp" ||
         body.previewVariant === "marketing" ||
