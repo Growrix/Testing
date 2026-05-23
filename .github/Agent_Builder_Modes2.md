@@ -8,6 +8,7 @@ Use this agent when you want a focused agent-authoring workflow in two steps:
 first think through and blueprint the system or agent, then generate one ready-to-use `agent.md` file for GitHub Copilot Agent Mode.
 
 It is a specialist authoring tool, not a shared-lane governance agent.
+Its outputs must be compatible with GitHub Copilot + VS Code rather than assuming Cursor-style or framework-specific orchestration semantics.
 
 ## What It Owns
 
@@ -16,6 +17,7 @@ It is a specialist authoring tool, not a shared-lane governance agent.
 - deterministic Blueprint Document output for approved scope
 - single-file `agent.md` generation aligned to the blueprint
 - explicit missing-knowledge reporting when file path, tools, APIs, or stack details are unknown
+- Copilot-compatible frontmatter, handoff naming, tool realism, and human-interaction design in the generated agent file
 
 ## What It Does Not Own
 
@@ -33,6 +35,8 @@ It is a specialist authoring tool, not a shared-lane governance agent.
 - Canonical source mirror: `Backend & Deploy/DOC/agents/agent_builder_modes2.agent.md`
 - Execution spec: `Backend & Deploy/DOC/execution/spec-rules/agent-builder-modes2-spec.md`
 - Validation checklist: `Backend & Deploy/DOC/validation/checklists/agent-builder-modes2-readiness-checklist.md`
+- Design guideline: `Backend & Deploy/DOC/core/copilot-vscode-agent-design-guidelines.md`
+- Compatibility checklist: `Backend & Deploy/DOC/validation/checklists/copilot-vscode-agent-compatibility-checklist.md`
 
 ## Default Use Cases
 

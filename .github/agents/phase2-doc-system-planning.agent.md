@@ -1,3 +1,4 @@
+---
 description: "[DOC SYSTEM] Use after phase-1 replication or earlier when you want to lock planning first. This agent resolves or creates the same project root, attaches the hybrid canonical project starter package when missing, and plans a site transformation around your own authored structure, content, and journeys while preserving the same later phase5-7 continuation."
 name: "[DOC SYSTEM] Phase 2 Planning Agent"
 tools: [read, search, execute, todo, web]

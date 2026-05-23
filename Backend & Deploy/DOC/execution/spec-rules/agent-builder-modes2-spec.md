@@ -1,7 +1,7 @@
 # Agent Builder Modes2 Spec
 
 ## Purpose
-Define the governed behavior for a dedicated two-mode agent-authoring entrypoint that first creates a system or agent blueprint and then generates one ready-to-use `agent.md` file for GitHub Copilot Agent Mode.
+Define the governed behavior for a dedicated two-mode agent-authoring entrypoint that first creates a system or agent blueprint and then generates one ready-to-use `agent.md` file for GitHub Copilot Agent Mode in VS Code.
 
 ## Required Inputs
 - a user request that is either planning-oriented or `agent.md` generation-oriented
@@ -31,7 +31,7 @@ Define the governed behavior for a dedicated two-mode agent-authoring entrypoint
   - `Blueprint complete.`
   - `Review it and make any changes you want.`
   - `When ready, say "Generate agent.md" to produce the VS Code Copilot builder file for this system.`
-- in Mode 2, one complete self-contained ready-to-use `agent.md` file
+- in Mode 2, one complete self-contained ready-to-use `agent.md` file that is compatible with GitHub Copilot + VS Code
 - explicit missing-knowledge reporting when tools, APIs, env vars, packages, hosting targets, or file paths are unknown
 
 ## Execution Rules
@@ -49,6 +49,7 @@ Define the governed behavior for a dedicated two-mode agent-authoring entrypoint
 - In Mode 2, reuse the approved blueprint when it exists.
 - If the user requests Mode 2 without a complete blueprint, ask only for the missing locked decisions needed to finish the file.
 - The generated `agent.md` file must stay aligned with the approved blueprint and must not introduce surprise scope.
+- The generated `agent.md` file must follow `copilot-vscode-agent-design-guidelines.md`.
 - If the destination path is not provided, either ask for it or deliver the file content without claiming that it was written anywhere.
 - Do not turn shared workspace-governance work into an `agent.md` generation task.
 - Shared wrapper changes, canonical-source changes, execution-spec changes, validation-checklist changes, registry updates, or lane-boundary changes must be handed to the System Builder agent instead.
@@ -67,6 +68,7 @@ Define the governed behavior for a dedicated two-mode agent-authoring entrypoint
 - The prompt must explicitly require the exact Blueprint Document sections.
 - The prompt must explicitly constrain Mode 2 to one `agent.md` file unless the user expands scope.
 - The prompt must explicitly defer shared system-governance work to the System Builder agent.
+- The prompt must explicitly enforce GitHub Copilot + VS Code compatibility: valid frontmatter, verified tools, exact handoff filenames, realistic orchestration semantics, and human interaction guidance when required.
 
 ## Failure Modes
 - `AGENT_BUILDER_REQUEST_MISSING`

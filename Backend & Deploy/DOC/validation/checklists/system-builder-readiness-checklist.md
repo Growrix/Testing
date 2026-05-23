@@ -6,6 +6,8 @@ Use this checklist before declaring a system-level change complete.
 - The public wrapper exists under `.github/agents/`.
 - The wrapper frontmatter includes a meaningful `description` and user-invocable metadata when intended.
 - The wrapper language describes system work, not project delivery work.
+- Public agent changes explicitly consider GitHub Copilot + VS Code compatibility: valid frontmatter, exact handoff names, verified tools, and human interaction guidance when needed.
+- The System Builder prompt includes a dedicated human-interaction section for clarifying questions, approval gates, and external-input stop conditions.
 
 ## Canonical Surface
 - The canonical public agent exists under `Backend & Deploy/.github/agents/`.

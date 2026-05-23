@@ -18,6 +18,7 @@ Define the governed workflow for designing, auditing, extending, repairing, and 
 - A blueprint readiness matrix listing `currently_supported`, `requires_extension`, and `missing_knowledge`
 - Lane handoff mapping from blueprint modules to execution owners
 - Explicit delegation to `agent-builder-modes2.agent.md` when the request is primarily blueprint-first single-file `agent.md` authoring rather than shared-governance change
+- A GitHub Copilot + VS Code compatibility verdict for active public-agent surfaces when parser, handoff, tool, or interaction behavior is in scope
 - When required, an isolated local-system scaffold plan that references `isolated-local-agent-system-spec.md` and `isolated-local-agent-system-readiness-checklist.md`
 - A Bangla external-input acquisition brief whenever progress is blocked on user-provided third-party items
 
@@ -38,6 +39,7 @@ Each request or discovered issue must be classified as at least one of:
 - For any non-trivial public agent change, update the wrapper, canonical source, support files, and registry docs together.
 - Preserve active delivery lanes unless the user explicitly asks to redesign or replace them.
 - If the request is mainly to think through an agent or system and then generate one final `agent.md` file without changing the shared system surface, delegate to `agent-builder-modes2.agent.md` after any needed system-routing decision is made.
+- Audit active public-agent surfaces for valid frontmatter, exact handoff filenames, environment-realistic tool declarations, and explicit human interaction guidance when GitHub Copilot + VS Code compatibility is in scope.
 - When shared frontend lanes depend on a reusable project-local continuation package, the starter package path, bootstrap contract or script, and local agent filenames must be explicit and documented.
 - Classify blueprint fit before handoff: shared-lane fit, isolated local-system fit, or unsupported without new knowledge.
 - Do not force non-SaaS local automation, CLI, prompt-driven builder, or file-output blueprints through the shared phase1-7 or Foundation lanes when an isolated root is the cleaner and safer fit.
@@ -57,6 +59,7 @@ Each request or discovered issue must be classified as at least one of:
 - Public registry docs must list newly added or materially changed public agents.
 - Mirror copies must be updated when the same lane is mirrored.
 - The System Builder prompt must explicitly route blueprint-first single-file `agent.md` authoring to `agent-builder-modes2.agent.md` when shared-system changes are not required.
+- The System Builder prompt must explicitly treat invalid frontmatter, ambiguous handoff names, unsupported orchestration assumptions, missing human interaction guidance for decision-heavy agents, and unverified tool declarations as Copilot compatibility defects.
 - Archetype-fit must be explicit before downstream handoff.
 - If `isolated_local_system_required` is selected, the generic isolated-local-system spec/checklist or project-local equivalents must be referenced.
 - Blueprint-module coverage and lane ownership must be explicit for all major modules in scope.

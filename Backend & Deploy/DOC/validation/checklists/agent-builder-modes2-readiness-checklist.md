@@ -15,3 +15,5 @@
 - The prompt explicitly constrains Mode 2 output to one ready-to-use `agent.md` file unless the user expands scope.
 - The prompt explicitly reports unknown tools, APIs, env vars, and target paths instead of guessing.
 - The prompt explicitly defers shared workflow-governance, wrapper, spec, checklist, registry, and lane-boundary changes to `system-builder.agent.md`.
+- The prompt explicitly enforces GitHub Copilot + VS Code compatibility: valid frontmatter, verified tools, exact handoff filenames, realistic orchestration semantics, and human interaction guidance when required.
+- The prompt includes a dedicated human-interaction section covering clarifying questions, approval points, target-path confirmation, and stop conditions.

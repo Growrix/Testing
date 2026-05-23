@@ -1,3 +1,4 @@
+---
 description: "[DOC SYSTEM] Use after DOC-system planning to transform the phase-1 frontend into the authored site plan while keeping the same project root, attaching the hybrid canonical project starter package when missing, and preserving the same shared phase5-7 continuation."
 name: "[DOC SYSTEM] Phase 2 Frontend Dev Agent"
 tools: [read, search, edit, execute, todo, web]

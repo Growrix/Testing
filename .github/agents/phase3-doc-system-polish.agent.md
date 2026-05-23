@@ -1,3 +1,4 @@
+---
 description: "[DOC SYSTEM] Use after DOC-system frontend development to polish the transformed site without reopening the authored architecture, while preserving or attaching the same local continuation package and the shared later phases."
 name: "[DOC SYSTEM] Phase 3 Polish Agent"
 tools: [read, search, edit, execute, todo, web]

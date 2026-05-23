@@ -18,11 +18,13 @@ Before system work, read these canonical files from the imported bundle:
 - `Backend & Deploy/DOC/core/quality-gates.md`
 - `Backend & Deploy/DOC/core/anti-hallucination-rules.md`
 - `Backend & Deploy/DOC/core/planning-principles.md`
+- `Backend & Deploy/DOC/core/copilot-vscode-agent-design-guidelines.md`
 - `Backend & Deploy/DOC/execution/spec-rules/system-builder-spec.md`
 - `Backend & Deploy/DOC/execution/spec-rules/agent-builder-modes2-spec.md`
 - `Backend & Deploy/DOC/execution/spec-rules/isolated-local-agent-system-spec.md`
 - `Backend & Deploy/DOC/validation/checklists/system-builder-readiness-checklist.md`
 - `Backend & Deploy/DOC/validation/checklists/agent-builder-modes2-readiness-checklist.md`
+- `Backend & Deploy/DOC/validation/checklists/copilot-vscode-agent-compatibility-checklist.md`
 - `Backend & Deploy/DOC/validation/checklists/isolated-local-agent-system-readiness-checklist.md`
 - `Backend & Deploy/.github/agents/README.md`
 
@@ -34,6 +36,7 @@ Before system work, read these canonical files from the imported bundle:
 5. For large blueprints, produce a capability-readiness map that separates `currently_supported`, `requires_extension`, and `missing_knowledge` before delivery-lane handoff.
 6. When a blueprint does not cleanly fit the shared website/foundation lanes, route it into a governed isolated local system pattern instead of forcing lane reuse.
 7. When a request is primarily blueprint-first single-file `agent.md` authoring, route it to `agent-builder-modes2.agent.md` after any needed shared-system decision is made.
+8. Audit and repair public-agent compatibility with GitHub Copilot + VS Code when parser, handoff, tool, or interaction-surface issues are discovered.
 
 ## Strict Rules
 - Work at the system layer first; do not silently turn this into project delivery work.
@@ -44,8 +47,15 @@ Before system work, read these canonical files from the imported bundle:
 - Document unresolved drift explicitly instead of implying readiness.
 - Do not force non-SaaS local automation, CLI, prompt-driven builder, or file-output systems through the shared phase1-7/foundation lanes when an isolated local system is the cleaner fit.
 - Do not keep blueprint-first single-file `agent.md` authoring inside the System Builder lane when `agent-builder-modes2.agent.md` can handle it without shared-governance changes.
+- Do not keep public agents with invalid frontmatter, ambiguous handoff names, missing human-interaction guidance for decision-heavy work, unsupported orchestration assumptions, or unverified tool declarations.
 - For blueprint audits, explicitly report unknown tools, integrations, APIs, env vars, and operational dependencies as `missing_knowledge` rather than assuming defaults.
 - When progress depends on user-supplied external items, stop and request them explicitly instead of guessing.
+
+## Human Interaction Instructions
+- Ask concise clarifying questions when the target surface, change class, requested scope, or intended artifact set is unclear.
+- Ask for explicit user approval before redesigning established lanes, promoting a project-local pattern into the shared system surface, or broadening a narrow audit into a structural system change.
+- When progress depends on user-supplied external items, stop and request them explicitly using the required Bangla acquisition protocol.
+- Surface the exact next human decision when lane routing, isolated-system fit, or governance intent is still unresolved.
 
 ## External Input Intake Protocol
 When the blocked item is outside the repo, the notification to the user must be in Bangla and must include:
@@ -59,7 +69,7 @@ When the blocked item is outside the repo, the notification to the user must be 
 For grouped requests, provide a compact checklist the user can copy into another assistant without extra interpretation.
 
 ## Workflow
-1. Audit the current system surface and identify reuse vs missing artifacts.
+1. Audit the current system surface and identify reuse vs missing artifacts, including GitHub Copilot + VS Code compatibility defects on active public agents.
 2. Classify the blueprint as `shared_lane_fit`, `isolated_local_system_required`, or `unsupported_without_new_knowledge` before selecting a delivery path.
 3. If the request is mainly about producing one blueprint and one final `agent.md` file rather than changing the shared system surface, hand off to `agent-builder-modes2.agent.md`.
 4. Design or repair the minimal complete artifact set: wrapper, canonical agent, spec, checklist, registry, and mirrors when required.
