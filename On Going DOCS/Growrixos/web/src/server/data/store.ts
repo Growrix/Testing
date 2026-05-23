@@ -34,6 +34,12 @@ function cloneDefaultDatabase(): DatabaseSchema {
     analytics_events: [...DEFAULT_DATABASE.analytics_events],
     audit_logs: [...DEFAULT_DATABASE.audit_logs],
     newsletter_subscribers: [...DEFAULT_DATABASE.newsletter_subscribers],
+    leads: [...DEFAULT_DATABASE.leads],
+    lead_events: [...DEFAULT_DATABASE.lead_events],
+    service_requests: [...DEFAULT_DATABASE.service_requests],
+    notifications: [...DEFAULT_DATABASE.notifications],
+    downloads: [...DEFAULT_DATABASE.downloads],
+    licenses: [...DEFAULT_DATABASE.licenses],
   };
 }
 

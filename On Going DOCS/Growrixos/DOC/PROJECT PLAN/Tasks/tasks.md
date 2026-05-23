@@ -49,10 +49,10 @@ phase_status_counts:
   blocked: 0
   not_started: 0
 task_status_counts:
-  done: 31
-  partial: 7
+  done: 32
+  partial: 9
   blocked: 0
-  not_started: 14
+  not_started: 11
 ---
 
 # Tasks / Execution Tracker
@@ -65,6 +65,7 @@ task_status_counts:
 	- DOC/PROJECT PLAN/*/README.md
   - current `web/` codebase on `CMS`
 - Active tracked sessions:
+  - completed Slice 1 of the product-led platform completion plan by adding the leads / lead_events / service_requests / notifications / downloads / licenses data layer (`web/src/server/data/schema.ts`, `store.ts`), domain modules (`web/src/server/domain/leads.ts`, `service-requests.ts`, `notifications.ts`), four new public APIs (`/api/v1/events/track`, `/api/v1/leads`, `/api/v1/service-requests`, `/api/v1/cta/whatsapp`), lead-event wiring under a `.catch` warning-audit guard in contact/appointments/AI-concierge flows, Slice 1 lead-domain unit tests, the normalized Supabase SQL (RLS + deny-all + service_role grants + `set_updated_at()` trigger) appended to `web/supabase/schema.sql`, and validated with lint (0/0), `next build` (green, all 4 new routes in route table), `tsx --test` unit (17/17) plus integration (4/4) and Playwright e2e, finalizing Slice 1 shared-contract field lists for Lead/LeadEvent/ServiceRequest/NotificationLog/Download/License in `DOC/PROJECT PLAN/Shared Contracts/product-led-platform-shared-contracts.md` (T045 done; T048 data-layer done with live Supabase migration deferred to Slice 5; T050 events/WhatsApp/AI portions done)
   - completed T047 by extending Sanity/product models with tiered variants, FAQ, related product/service links, and customization upsells; updated management/admin persistence; and redesigned product detail conversion UX with Standard/Premium/Done-For-You cards, comparison matrix, tier-aware checkout handoff, and FAQ/related service sections
   - aligned the homepage hero to the product-led platform plan by updating fallback positioning copy and CTA hierarchy to Browse Products + Book a Free Consultation with supporting actions (Need Custom Work, WhatsApp, Ask AI Assistant), while preserving the existing visual system and validating with lint/build/unit/integration plus Playwright regression rerun
   - implemented Stripe checkout selection metadata propagation by extending checkout query/payload handling and orders APIs to capture variant/tier/fulfillment fields, persisting selection on order and order-item records, attaching metadata/line-item context in Stripe checkout sessions, reconciling selection during webhook payment completion, and extending order-domain plus API integration tests for the new flow
@@ -304,13 +305,16 @@ phases:
 - [ ] T044 Add frontend CMS validation coverage across unit, integration, and e2e gates for migrated routes, preview, and fallback behavior.
 
 ### Phase P9 — Product-Led Platform Gap Implementation
-- [ ] T045 Update shared contracts and route ownership for the product-led platform plan in `DOC/PROJECT PLAN/product-led-platform-gap-e2e-plan.md` and `DOC/PROJECT PLAN/Shared Contracts/product-led-platform-shared-contracts.md`.
+- [x] T045 Update shared contracts and route ownership for the product-led platform plan in `DOC/PROJECT PLAN/product-led-platform-gap-e2e-plan.md` and `DOC/PROJECT PLAN/Shared Contracts/product-led-platform-shared-contracts.md`.
+  - Current state: Finalized field lists for Lead, LeadEvent, ServiceRequest, NotificationLog, Download, and License appended to `DOC/PROJECT PLAN/Shared Contracts/product-led-platform-shared-contracts.md` (Slice 1) to match the live `web/src/server/data/schema.ts` types and the Slice 1 public APIs (`/api/v1/events/track`, `/api/v1/leads`, `/api/v1/service-requests`, `/api/v1/cta/whatsapp`).
 - [x] T046 Add canonical `/products` routes with `/shop` compatibility, product category/bundle/free surfaces, and product-led homepage CTA repositioning.
 - [x] T047 Extend Sanity and frontend product models for Standard, Premium, and Done-For-You variants, product FAQs, related products/services, and customization upsells.
   - Current state: Sanity schemas and catalog/management mappers now support tier variants, FAQ, related links, and customization upsells; product detail routes now render tier cards, comparison rows, tier-aware checkout links, FAQ content, and related service cross-links.
-- [ ] T048 Add normalized Supabase transactional schema and APIs for products metadata, product variants, orders, order items, downloads, leads, lead events, service requests, conversations, messages, and licenses.
+- [~] T048 Add normalized Supabase transactional schema and APIs for products metadata, product variants, orders, order items, downloads, leads, lead events, service requests, conversations, messages, and licenses.
+  - Current state: Slice 1 added the application-level data layer for `leads`, `lead_events`, `service_requests`, `notifications`, `downloads`, and `licenses` in `web/src/server/data/schema.ts` (JSON-backed store with Supabase `app_state` fallback), implemented the corresponding domain modules (`leads`, `service-requests`, `notifications`) and four new public APIs, and appended the normalized Supabase SQL (RLS, deny-all policies, `set_updated_at()` trigger, `service_role`-only grants) for all of the above tables plus `products`, `product_variants`, `orders`, `order_items`, `conversations`, `conversation_messages`, and `notification_log` to `web/supabase/schema.sql`. Live execution of that migration against the Supabase project, plus full backend reads/writes through normalized tables (currently still going through `app_state`), is deferred to Slice 5.
 - [ ] T049 Implement private download delivery, `/success`, and customer `/dashboard/**` surfaces for products, downloads, orders, support, and appointments.
-- [ ] T050 Implement lead scoring, tracked WhatsApp CTAs, AI qualification writes, service request intake, and Lark hot-lead/purchase notifications.
+- [~] T050 Implement lead scoring, tracked WhatsApp CTAs, AI qualification writes, service request intake, and Lark hot-lead/purchase notifications.
+  - Current state: Slice 1 implemented lead scoring with canonical event weights (`web/src/server/domain/leads.ts`), temperature classification with promotion-only Lark notifications, the tracked WhatsApp CTA at `/api/v1/cta/whatsapp` (records `whatsapp_click` event then 302 redirects to `runtime.cta.whatsappHref`), AI concierge optional lead-event writes (`ai_message`), service request intake at `/api/v1/service-requests` with audit + notification, and the public `/api/v1/events/track` ingestion route. Contact, appointments, and concierge flows now emit lead events under a `.catch` warning-audit guard. Resend purchase/funnel automation is owned by T051 and tracked separately.
 - [ ] T051 Extend Resend commerce and lead email automation for purchase confirmation, download links, service request confirmation, and follow-up sequences.
 - [ ] T052 Upgrade admin operations for products/variants, orders, downloads, leads, service requests, notification logs, and product funnel analytics with validation and audit gates.
 

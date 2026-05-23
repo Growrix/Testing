@@ -233,6 +233,166 @@ export type NewsletterSubscriberRecord = {
   source: string;
 };
 
+export type LeadStatus = "new" | "engaged" | "qualified" | "customer" | "lost";
+export type LeadTemperature = "cold" | "warm" | "hot" | "customer";
+export type LeadSource =
+  | "contact_form"
+  | "booking_form"
+  | "newsletter"
+  | "ai_concierge"
+  | "live_chat"
+  | "product_view"
+  | "checkout"
+  | "whatsapp_cta"
+  | "service_request"
+  | "admin_manual";
+
+export type LeadEventType =
+  | "product_view"
+  | "demo_click"
+  | "buy_click"
+  | "checkout_started"
+  | "checkout_completed"
+  | "customization_cta"
+  | "whatsapp_click"
+  | "contact_form"
+  | "booking"
+  | "ai_qualification"
+  | "ai_message"
+  | "download"
+  | "service_request"
+  | "admin_note";
+
+export type LeadEventRecord = {
+  id: string;
+  lead_id: string;
+  event_type: LeadEventType;
+  score_delta: number;
+  route?: string;
+  source?: LeadSource;
+  metadata: Record<string, unknown>;
+  created_at: string;
+};
+
+export type LeadRecord = {
+  id: string;
+  email: string;
+  name?: string;
+  phone?: string;
+  company?: string;
+  status: LeadStatus;
+  temperature: LeadTemperature;
+  score: number;
+  primary_source: LeadSource;
+  last_source: LeadSource;
+  last_route?: string;
+  last_event_type?: LeadEventType;
+  notes?: string;
+  user_id?: string;
+  assigned_to_user_id?: string;
+  related_inquiry_id?: string;
+  related_appointment_id?: string;
+  related_order_ids: string[];
+  related_service_request_ids: string[];
+  conversation_ids: string[];
+  created_at: string;
+  updated_at: string;
+};
+
+export type ServiceRequestStatus =
+  | "new"
+  | "scoping"
+  | "in_progress"
+  | "qa_review"
+  | "delivered"
+  | "cancelled";
+
+export type ServiceRequestRecord = {
+  id: string;
+  request_number: string;
+  lead_id?: string;
+  customer_email: string;
+  customer_name: string;
+  customer_phone?: string;
+  company?: string;
+  product_slug?: string;
+  product_name?: string;
+  variant_slug?: string;
+  variant_tier_name?: string;
+  budget?: string;
+  timeline?: string;
+  brief: string;
+  status: ServiceRequestStatus;
+  assigned_to_user_id?: string;
+  notes?: string;
+  resolution_notes?: string;
+  metadata: Record<string, unknown>;
+  created_at: string;
+  updated_at: string;
+  completed_at?: string;
+};
+
+export type NotificationChannel = "lark" | "resend" | "console";
+export type NotificationKind =
+  | "lead_created"
+  | "lead_hot"
+  | "purchase_completed"
+  | "service_request_created"
+  | "appointment_requested"
+  | "download_issued"
+  | "system";
+export type NotificationStatus = "pending" | "sent" | "failed" | "skipped";
+
+export type NotificationLogRecord = {
+  id: string;
+  channel: NotificationChannel;
+  kind: NotificationKind;
+  status: NotificationStatus;
+  title: string;
+  payload: Record<string, unknown>;
+  related_lead_id?: string;
+  related_order_id?: string;
+  related_service_request_id?: string;
+  error_message?: string;
+  attempt_count: number;
+  delivered_at?: string;
+  created_at: string;
+};
+
+export type DownloadStatus = "issued" | "expired" | "revoked";
+
+export type DownloadRecord = {
+  id: string;
+  order_id: string;
+  user_email: string;
+  user_id?: string;
+  product_slug: string;
+  variant_slug?: string;
+  asset_path: string;
+  file_label?: string;
+  max_downloads: number;
+  download_count: number;
+  status: DownloadStatus;
+  expires_at?: string;
+  last_downloaded_at?: string;
+  created_at: string;
+};
+
+export type LicenseRecord = {
+  id: string;
+  order_id: string;
+  user_email: string;
+  user_id?: string;
+  product_slug: string;
+  variant_slug?: string;
+  license_key: string;
+  license_type: "single_site" | "team" | "agency";
+  status: "active" | "revoked" | "expired";
+  notes?: string;
+  issued_at: string;
+  expires_at?: string;
+};
+
 export type DatabaseSchema = {
   inquiries: ContactInquiryRecord[];
   appointments: AppointmentRecord[];
@@ -245,6 +405,12 @@ export type DatabaseSchema = {
   analytics_events: AnalyticsEventRecord[];
   audit_logs: AuditLogRecord[];
   newsletter_subscribers: NewsletterSubscriberRecord[];
+  leads: LeadRecord[];
+  lead_events: LeadEventRecord[];
+  service_requests: ServiceRequestRecord[];
+  notifications: NotificationLogRecord[];
+  downloads: DownloadRecord[];
+  licenses: LicenseRecord[];
 };
 
 export const DEFAULT_DATABASE: DatabaseSchema = {
@@ -259,4 +425,10 @@ export const DEFAULT_DATABASE: DatabaseSchema = {
   analytics_events: [],
   audit_logs: [],
   newsletter_subscribers: [],
+  leads: [],
+  lead_events: [],
+  service_requests: [],
+  notifications: [],
+  downloads: [],
+  licenses: [],
 };
