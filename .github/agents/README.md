@@ -99,6 +99,17 @@ For large architecture blueprints, this lane now performs module-level readiness
 For non-SaaS local automation/tooling blueprints such as Node CLI generators, prompt-driven builders, local dashboards, or file-output systems, this lane must first decide whether the work belongs in a new isolated local system instead of the shared phase1-7/backend lanes.
 When progress depends on user-supplied external accounts, keys, IDs, dashboards, or other off-repo assets, this lane must ask for them with Bangla acquisition instructions.
 
+## Task Ledger Governance
+All material project, repo, system, migration, validation, and delivery work must maintain a durable `tasks.md` at the active project root. Agents read or create this ledger before implementation, write ordered phase/task checklists, update status after each material step, and record evidence paths or notes for completed work. Existing legacy trackers such as `DOC/PROJECT PLAN/Tasks/tasks.md` may be read as context, but the canonical forward ledger is `project_root/tasks.md`.
+
+This governance also bans redundant next-step permission questions when the next executable task already exists in `tasks.md`. Agents should execute the next owned task and update the ledger unless progress depends on ambiguous root selection, external inputs, destructive operations, or user-owned product/legal/provider decisions.
+
+Canonical support:
+- `Backend & Deploy/DOC/core/task-ledger-discipline.md`
+- `Backend & Deploy/DOC/execution/spec-rules/task-ledger-discipline-spec.md`
+- `Backend & Deploy/DOC/validation/checklists/task-ledger-discipline-checklist.md`
+- `.github/instructions/task-ledger.instructions.md`
+
 ## Core Git Management
 These are root-level Git governance assets for the workspace itself:
 - `github-agent.agent.md`

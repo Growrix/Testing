@@ -14,6 +14,7 @@ Define the governed workflow for designing, auditing, extending, repairing, and 
 - Updated agent system artifacts at the correct public and canonical locations
 - Supporting governance artifacts for any non-trivial system change
 - Updated registry documentation for any public-surface change
+- Updated task-ledger governance whenever a change affects project execution continuity or anti-redundant-question behavior
 - An explicit archetype-fit decision: `shared_lane_fit`, `isolated_local_system_required`, or `unsupported_without_new_knowledge`
 - A blueprint readiness matrix listing `currently_supported`, `requires_extension`, and `missing_knowledge`
 - Lane handoff mapping from blueprint modules to execution owners
@@ -35,6 +36,7 @@ Each request or discovered issue must be classified as at least one of:
 
 ## Execution Rules
 - Start by inventorying the existing public wrapper, canonical agent, governance, and registry surface.
+- Before material system work, read or create `project_root/tasks.md` and append the active task block in execution order.
 - Reuse existing structures before creating new ones.
 - For any non-trivial public agent change, update the wrapper, canonical source, support files, and registry docs together.
 - Preserve active delivery lanes unless the user explicitly asks to redesign or replace them.
@@ -64,6 +66,7 @@ Each request or discovered issue must be classified as at least one of:
 - If `isolated_local_system_required` is selected, the generic isolated-local-system spec/checklist or project-local equivalents must be referenced.
 - Blueprint-module coverage and lane ownership must be explicit for all major modules in scope.
 - External-input blocker messaging must instruct the user in Bangla where to go, what to collect, and whether each value is safe to paste.
+- Task-ledger validation must pass for material system work: root `tasks.md` exists, active tasks are current, completed tasks have evidence, and no stale `in_progress` remains.
 
 ## Failure Modes
 - `SYSTEM_REQUEST_MISSING`

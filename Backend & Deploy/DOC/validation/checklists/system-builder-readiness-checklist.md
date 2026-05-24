@@ -18,6 +18,14 @@ Use this checklist before declaring a system-level change complete.
 - A non-trivial system change includes or updates its supporting spec/checklist artifacts.
 - The spec defines purpose, inputs, outputs, execution rules, validation, and failure modes.
 - The checklist covers wrapper, canonical, governance, registry, and mirror expectations.
+- Task-ledger impacts are covered when the change affects execution continuity, agent planning behavior, or anti-redundant-question rules.
+
+## Task Ledger
+- The active project root has `tasks.md` before material system edits.
+- The current system-change task block is present in execution order.
+- Completed system-change tasks have evidence paths or evidence notes.
+- No stale `in_progress` task remains after the completed scope.
+- New or materially changed agents are required to use project-root `tasks.md` for durable task tracking.
 
 ## Blueprint Readiness
 - For large blueprints, a module-level readiness matrix exists with `currently_supported`, `requires_extension`, and `missing_knowledge` buckets.
