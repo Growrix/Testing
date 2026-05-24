@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-24T08:28:05.543Z",
+  "generatedAt": "2026-05-24T09:19:03.030Z",
   "parityThreshold": 0.03,
   "sourceBaselineMode": "snapshot-pages",
   "localBaseUrl": "http://localhost:3100",
@@ -9,7 +9,7 @@
     {
       "route": "/",
       "viewport": "desktop",
-      "ratio": 0.182389,
+      "ratio": 0.181883,
       "pass": false,
       "sourceSize": {
         "width": 1512,
@@ -17,7 +17,7 @@
       },
       "localSize": {
         "width": 1512,
-        "height": 9836
+        "height": 9185
       },
       "compareSize": {
         "width": 1512,
@@ -45,7 +45,7 @@
     {
       "route": "/about",
       "viewport": "desktop",
-      "ratio": 0.245688,
+      "ratio": 0.088611,
       "pass": false,
       "sourceSize": {
         "width": 1512,
@@ -53,77 +53,89 @@
       },
       "localSize": {
         "width": 1512,
-        "height": 4619
+        "height": 4377
       },
       "compareSize": {
         "width": 1512,
-        "height": 4441
+        "height": 4377
       }
     },
     {
       "route": "/blog",
       "viewport": "desktop",
-      "ratio": 0.28545,
+      "ratio": 0.058925,
       "pass": false,
       "sourceSize": {
         "width": 1512,
-        "height": 2880
+        "height": 2877
       },
       "localSize": {
         "width": 1512,
-        "height": 2692
+        "height": 2892
       },
       "compareSize": {
         "width": 1512,
-        "height": 2692
+        "height": 2877
       }
     },
     {
       "route": "/career-listing",
       "viewport": "desktop",
-      "ratio": 0.227167,
-      "pass": false,
+      "ratio": 0.010542,
+      "pass": true,
       "sourceSize": {
         "width": 1512,
         "height": 2971
       },
       "localSize": {
         "width": 1512,
-        "height": 2771
+        "height": 2971
       },
       "compareSize": {
         "width": 1512,
-        "height": 2771
+        "height": 2971
       }
     },
     {
       "route": "/contact-us",
       "viewport": "desktop",
-      "error": "page.goto: Timeout 120000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3100/lumoria-pages/contact-us/index.html\", waiting until \"networkidle\"\u001b[22m\n",
-      "pass": false
+      "ratio": 0.103668,
+      "pass": false,
+      "sourceSize": {
+        "width": 1512,
+        "height": 3708
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 3891
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 3708
+      }
     },
     {
       "route": "/core-values",
       "viewport": "desktop",
-      "ratio": 0.282162,
-      "pass": false,
+      "ratio": 0.007142,
+      "pass": true,
       "sourceSize": {
         "width": 1512,
         "height": 3867
       },
       "localSize": {
         "width": 1512,
-        "height": 3666
+        "height": 3867
       },
       "compareSize": {
         "width": 1512,
-        "height": 3666
+        "height": 3867
       }
     },
     {
       "route": "/faq",
       "viewport": "desktop",
-      "ratio": 0.306897,
+      "ratio": 0.286945,
       "pass": false,
       "sourceSize": {
         "width": 1512,
@@ -131,7 +143,7 @@
       },
       "localSize": {
         "width": 1512,
-        "height": 3271
+        "height": 3472
       },
       "compareSize": {
         "width": 1512,
@@ -141,43 +153,43 @@
     {
       "route": "/listings/designing-tomorrows-cities",
       "viewport": "desktop",
-      "ratio": 0.313357,
-      "pass": false,
+      "ratio": 0.000339,
+      "pass": true,
       "sourceSize": {
         "width": 1512,
         "height": 3528
       },
       "localSize": {
         "width": 1512,
-        "height": 3327
+        "height": 3528
       },
       "compareSize": {
         "width": 1512,
-        "height": 3327
+        "height": 3528
       }
     },
     {
       "route": "/our-awards",
       "viewport": "desktop",
-      "ratio": 0.213635,
-      "pass": false,
+      "ratio": 0.006382,
+      "pass": true,
       "sourceSize": {
         "width": 1512,
         "height": 2981
       },
       "localSize": {
         "width": 1512,
-        "height": 2780
+        "height": 2981
       },
       "compareSize": {
         "width": 1512,
-        "height": 2780
+        "height": 2981
       }
     },
     {
       "route": "/our-history",
       "viewport": "desktop",
-      "ratio": 0.199362,
+      "ratio": 0.036774,
       "pass": false,
       "sourceSize": {
         "width": 1512,
@@ -185,17 +197,17 @@
       },
       "localSize": {
         "width": 1512,
-        "height": 4457
+        "height": 4657
       },
       "compareSize": {
         "width": 1512,
-        "height": 4457
+        "height": 4657
       }
     },
     {
       "route": "/our-process",
       "viewport": "desktop",
-      "ratio": 0.22668,
+      "ratio": 0.059213,
       "pass": false,
       "sourceSize": {
         "width": 1512,
@@ -203,17 +215,17 @@
       },
       "localSize": {
         "width": 1512,
-        "height": 3533
+        "height": 3734
       },
       "compareSize": {
         "width": 1512,
-        "height": 3533
+        "height": 3734
       }
     },
     {
       "route": "/our-services",
       "viewport": "desktop",
-      "ratio": 0.151135,
+      "ratio": 0.132879,
       "pass": false,
       "sourceSize": {
         "width": 1512,
@@ -221,7 +233,7 @@
       },
       "localSize": {
         "width": 1512,
-        "height": 7132
+        "height": 7333
       },
       "compareSize": {
         "width": 1512,
@@ -231,61 +243,61 @@
     {
       "route": "/our-team",
       "viewport": "desktop",
-      "ratio": 0.386817,
-      "pass": false,
+      "ratio": 0.00816,
+      "pass": true,
       "sourceSize": {
         "width": 1512,
         "height": 2720
       },
       "localSize": {
         "width": 1512,
-        "height": 2519
+        "height": 2720
       },
       "compareSize": {
         "width": 1512,
-        "height": 2519
+        "height": 2720
       }
     },
     {
       "route": "/portfolio-style-2",
       "viewport": "desktop",
-      "ratio": 0.332659,
-      "pass": false,
+      "ratio": 0.001351,
+      "pass": true,
       "sourceSize": {
         "width": 1512,
         "height": 1875
       },
       "localSize": {
         "width": 1512,
-        "height": 1674
+        "height": 1875
       },
       "compareSize": {
         "width": 1512,
-        "height": 1674
+        "height": 1875
       }
     },
     {
       "route": "/portfolio-style1",
       "viewport": "desktop",
-      "ratio": 0.353388,
-      "pass": false,
+      "ratio": 0.001548,
+      "pass": true,
       "sourceSize": {
         "width": 1512,
         "height": 1762
       },
       "localSize": {
         "width": 1512,
-        "height": 1561
+        "height": 1762
       },
       "compareSize": {
         "width": 1512,
-        "height": 1561
+        "height": 1762
       }
     },
     {
       "route": "/pricing-plan",
       "viewport": "desktop",
-      "ratio": 0.331241,
+      "ratio": 0.222143,
       "pass": false,
       "sourceSize": {
         "width": 1512,
@@ -293,7 +305,7 @@
       },
       "localSize": {
         "width": 1512,
-        "height": 4865
+        "height": 5065
       },
       "compareSize": {
         "width": 1512,
@@ -303,200 +315,524 @@
     {
       "route": "/sustainable-construction-for-long-term-living",
       "viewport": "desktop",
-      "ratio": 0.333594,
-      "pass": false,
+      "ratio": 0.000262,
+      "pass": true,
       "sourceSize": {
         "width": 1512,
         "height": 4568
       },
       "localSize": {
         "width": 1512,
-        "height": 4278
+        "height": 4568
       },
       "compareSize": {
         "width": 1512,
-        "height": 4278
+        "height": 4568
       }
     },
     {
       "route": "/urban-development-for-the-next-generation",
       "viewport": "desktop",
-      "ratio": 0.282938,
-      "pass": false,
+      "ratio": 0.000284,
+      "pass": true,
       "sourceSize": {
         "width": 1512,
         "height": 4211
       },
       "localSize": {
         "width": 1512,
-        "height": 3920
+        "height": 4211
       },
       "compareSize": {
         "width": 1512,
-        "height": 3920
+        "height": 4211
       }
     },
     {
       "route": "/wdt-careers/project-assistant",
       "viewport": "desktop",
-      "error": "page.goto: Page crashed\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3100/lumoria-pages/wdt-careers/project-assistant/index.html\", waiting until \"networkidle\"\u001b[22m\n",
-      "pass": false
+      "ratio": 0.251935,
+      "pass": false,
+      "sourceSize": {
+        "width": 1512,
+        "height": 3410
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 4200
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 3410
+      }
     },
     {
       "route": "/wdt-services/custom-construction",
       "viewport": "desktop",
-      "error": "page.goto: Page crashed\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3100/lumoria-pages/wdt-services/custom-construction/index.html\", waiting until \"networkidle\"\u001b[22m\n",
-      "pass": false
+      "ratio": 0.067614,
+      "pass": false,
+      "sourceSize": {
+        "width": 1512,
+        "height": 4163
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 4350
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 4163
+      }
     },
     {
       "route": "/with-left-sidebar",
       "viewport": "desktop",
-      "error": "page.goto: Page crashed\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3100/lumoria-pages/with-left-sidebar/index.html\", waiting until \"networkidle\"\u001b[22m\n",
-      "pass": false
+      "ratio": 0.0688,
+      "pass": false,
+      "sourceSize": {
+        "width": 1512,
+        "height": 3292
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 3307
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 3292
+      }
     },
     {
       "route": "/with-right-sidebar",
       "viewport": "desktop",
-      "error": "page.goto: Page crashed\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3100/lumoria-pages/with-right-sidebar/index.html\", waiting until \"networkidle\"\u001b[22m\n",
-      "pass": false
+      "ratio": 0.071018,
+      "pass": false,
+      "sourceSize": {
+        "width": 1512,
+        "height": 3292
+      },
+      "localSize": {
+        "width": 1512,
+        "height": 3307
+      },
+      "compareSize": {
+        "width": 1512,
+        "height": 3292
+      }
     },
     {
       "route": "/",
       "viewport": "mobile",
-      "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3100/lumoria-pages/index.html\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3100/lumoria-pages/index.html\", waiting until \"networkidle\"\u001b[22m\n",
-      "pass": false
+      "ratio": 0.162493,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 10466
+      },
+      "localSize": {
+        "width": 390,
+        "height": 13804
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 10466
+      }
     },
     {
       "route": "/404",
       "viewport": "mobile",
-      "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3100/lumoria-pages/404/index.html\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3100/lumoria-pages/404/index.html\", waiting until \"networkidle\"\u001b[22m\n",
-      "pass": false
+      "ratio": 0.005146,
+      "pass": true,
+      "sourceSize": {
+        "width": 390,
+        "height": 844
+      },
+      "localSize": {
+        "width": 390,
+        "height": 844
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 844
+      }
     },
     {
       "route": "/about",
       "viewport": "mobile",
-      "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3100/lumoria-pages/about/index.html\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3100/lumoria-pages/about/index.html\", waiting until \"networkidle\"\u001b[22m\n",
-      "pass": false
+      "ratio": 0.274526,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5100
+      },
+      "localSize": {
+        "width": 390,
+        "height": 6098
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5100
+      }
     },
     {
       "route": "/blog",
       "viewport": "mobile",
-      "error": "page.goto: net::ERR_ABORTED at http://localhost:3100/lumoria-pages/blog/index.html\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3100/lumoria-pages/blog/index.html\", waiting until \"networkidle\"\u001b[22m\n",
-      "pass": false
+      "ratio": 0.086429,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 4554
+      },
+      "localSize": {
+        "width": 390,
+        "height": 5043
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 4554
+      }
     },
     {
       "route": "/career-listing",
       "viewport": "mobile",
-      "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3100/lumoria-pages/career-listing/index.html\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3100/lumoria-pages/career-listing/index.html\", waiting until \"networkidle\"\u001b[22m\n",
-      "pass": false
+      "ratio": 0.043325,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5649
+      },
+      "localSize": {
+        "width": 390,
+        "height": 6124
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5649
+      }
     },
     {
       "route": "/contact-us",
       "viewport": "mobile",
-      "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3100/lumoria-pages/contact-us/index.html\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3100/lumoria-pages/contact-us/index.html\", waiting until \"networkidle\"\u001b[22m\n",
-      "pass": false
+      "ratio": 0.276744,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 3882
+      },
+      "localSize": {
+        "width": 390,
+        "height": 5045
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 3882
+      }
     },
     {
       "route": "/core-values",
       "viewport": "mobile",
-      "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3100/lumoria-pages/core-values/index.html\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3100/lumoria-pages/core-values/index.html\", waiting until \"networkidle\"\u001b[22m\n",
-      "pass": false
+      "ratio": 0.053202,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5272
+      },
+      "localSize": {
+        "width": 390,
+        "height": 5746
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5272
+      }
     },
     {
       "route": "/faq",
       "viewport": "mobile",
-      "error": "page.goto: net::ERR_ABORTED at http://localhost:3100/lumoria-pages/faq/index.html\nCall log:\n\u001b[2m  - navigating to \"http://localhost:3100/lumoria-pages/faq/index.html\", waiting until \"networkidle\"\u001b[22m\n",
-      "pass": false
+      "ratio": 0.348737,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 3987
+      },
+      "localSize": {
+        "width": 390,
+        "height": 6652
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 3987
+      }
     },
     {
       "route": "/listings/designing-tomorrows-cities",
       "viewport": "mobile",
-      "error": "page.goto: Target page, context or browser has been closed",
-      "pass": false
+      "ratio": 0.029118,
+      "pass": true,
+      "sourceSize": {
+        "width": 390,
+        "height": 4723
+      },
+      "localSize": {
+        "width": 390,
+        "height": 5197
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 4723
+      }
     },
     {
       "route": "/our-awards",
       "viewport": "mobile",
-      "error": "page.goto: Target page, context or browser has been closed",
-      "pass": false
+      "ratio": 0.043522,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 4484
+      },
+      "localSize": {
+        "width": 390,
+        "height": 4958
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 4484
+      }
     },
     {
       "route": "/our-history",
       "viewport": "mobile",
-      "error": "page.goto: Target page, context or browser has been closed",
-      "pass": false
+      "ratio": 0.053702,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 4745
+      },
+      "localSize": {
+        "width": 390,
+        "height": 5219
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 4745
+      }
     },
     {
       "route": "/our-process",
       "viewport": "mobile",
-      "error": "page.goto: Target page, context or browser has been closed",
-      "pass": false
+      "ratio": 0.05084,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 3015
+      },
+      "localSize": {
+        "width": 390,
+        "height": 3489
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 3015
+      }
     },
     {
       "route": "/our-services",
       "viewport": "mobile",
-      "error": "page.goto: Target page, context or browser has been closed",
-      "pass": false
+      "ratio": 0.156512,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 10125
+      },
+      "localSize": {
+        "width": 390,
+        "height": 12465
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 10125
+      }
     },
     {
       "route": "/our-team",
       "viewport": "mobile",
-      "error": "page.goto: Target page, context or browser has been closed",
-      "pass": false
+      "ratio": 0.03564,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 6006
+      },
+      "localSize": {
+        "width": 390,
+        "height": 6480
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 6006
+      }
     },
     {
       "route": "/portfolio-style-2",
       "viewport": "mobile",
-      "error": "page.goto: Target page, context or browser has been closed",
-      "pass": false
+      "ratio": 0.077783,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 1741
+      },
+      "localSize": {
+        "width": 390,
+        "height": 2215
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 1741
+      }
     },
     {
       "route": "/portfolio-style1",
       "viewport": "mobile",
-      "error": "page.goto: Target page, context or browser has been closed",
-      "pass": false
+      "ratio": 0.080557,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 1671
+      },
+      "localSize": {
+        "width": 390,
+        "height": 2145
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 1671
+      }
     },
     {
       "route": "/pricing-plan",
       "viewport": "mobile",
-      "error": "page.goto: Target page, context or browser has been closed",
-      "pass": false
+      "ratio": 0.208499,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5874
+      },
+      "localSize": {
+        "width": 390,
+        "height": 8812
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5874
+      }
     },
     {
       "route": "/sustainable-construction-for-long-term-living",
       "viewport": "mobile",
-      "error": "page.goto: Target page, context or browser has been closed",
-      "pass": false
+      "ratio": 0.094062,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5042
+      },
+      "localSize": {
+        "width": 390,
+        "height": 5516
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5042
+      }
     },
     {
       "route": "/urban-development-for-the-next-generation",
       "viewport": "mobile",
-      "error": "page.goto: Target page, context or browser has been closed",
-      "pass": false
+      "ratio": 0.11088,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5625
+      },
+      "localSize": {
+        "width": 390,
+        "height": 6038
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5625
+      }
     },
     {
       "route": "/wdt-careers/project-assistant",
       "viewport": "mobile",
-      "error": "page.goto: Target page, context or browser has been closed",
-      "pass": false
+      "ratio": 0.267688,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5125
+      },
+      "localSize": {
+        "width": 390,
+        "height": 6621
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5125
+      }
     },
     {
       "route": "/wdt-services/custom-construction",
       "viewport": "mobile",
-      "error": "page.goto: Target page, context or browser has been closed",
-      "pass": false
+      "ratio": 0.152745,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5635
+      },
+      "localSize": {
+        "width": 390,
+        "height": 6207
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5635
+      }
     },
     {
       "route": "/with-left-sidebar",
       "viewport": "mobile",
-      "error": "page.goto: Target page, context or browser has been closed",
-      "pass": false
+      "ratio": 0.094358,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5514
+      },
+      "localSize": {
+        "width": 390,
+        "height": 6002
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5514
+      }
     },
     {
       "route": "/with-right-sidebar",
       "viewport": "mobile",
-      "error": "page.goto: Target page, context or browser has been closed",
-      "pass": false
+      "ratio": 0.114401,
+      "pass": false,
+      "sourceSize": {
+        "width": 390,
+        "height": 5557
+      },
+      "localSize": {
+        "width": 390,
+        "height": 5985
+      },
+      "compareSize": {
+        "width": 390,
+        "height": 5557
+      }
     }
   ]
 }
