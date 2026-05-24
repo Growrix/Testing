@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+@import "tailwindcss";
+@import "../../design-tokens.css";
+
+@theme inline {
+  --color-background: var(--color-page-bg);
+  --color-foreground: var(--color-text-body);
+  --font-sans: var(--font-body);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--color-page-bg);
+  color: var(--color-text-body);
+  font-family: var(--font-body);
+}
+
+a {
+  color: inherit;
+}
