@@ -33,6 +33,7 @@ If a governed root exists in the workspace but is missing from both the seed reg
 |---|---|---|---|---|---|
 | `F:/PROJECTS/testing/FRONTEND DEV/aircon-installer` | `aircon-installer` | `none` | `direct` | `local-only` | Local frontend root. Push blocked until a remote is configured. |
 | `F:/PROJECTS/testing/FRONTEND DEV/car` | `car` | `https://github.com/Growrix/Car.git` | `subtree` | `mapped-remote` | Use subtree or full mirror rules from the folder index. |
+| `F:/PROJECTS/testing/FRONTEND DEV/Car-subdomain-nextjs-verified-native-frontend` | `car-subdomain-nextjs-verified-native-frontend` | `https://github.com/Growrix/Car.git` | `subtree` | `mapped-remote` | Use subtree or full mirror rules from the folder index. |
 | `F:/PROJECTS/testing/FRONTEND DEV/GrowrixAuto` | `growrix-auto` | `https://github.com/Growrix/Growrix_Auto.git` | `direct` | `mapped-remote` | Operational source of truth for GrowrixAuto. |
 | `F:/PROJECTS/testing/FRONTEND DEV/Lumoria` | `lumoria` | `none` | `direct` | `local-only` | Local frontend root. Push blocked until a remote is configured. |
 | `F:/PROJECTS/testing/FRONTEND DEV/nexform-website` | `nexform-website` | `none` | `direct` | `local-only` | Local frontend root. Push blocked until a remote is configured. |

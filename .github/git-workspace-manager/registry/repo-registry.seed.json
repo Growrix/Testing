@@ -109,6 +109,17 @@
       "notes": "Folder-scoped project inside Testing workspace. Use subtree push from prefix FRONTEND DEV/car when no nested .git exists."
     },
     {
+      "id": "car-subdomain-nextjs-verified-native-frontend",
+      "name": "Car-subdomain-nextjs-verified-native-frontend",
+      "path": "F:/PROJECTS/testing/FRONTEND DEV/Car-subdomain-nextjs-verified-native-frontend",
+      "role": "project",
+      "operational_source_of_truth": true,
+      "remote": "https://github.com/Growrix/Car.git",
+      "current_branch": "main",
+      "push_policy": "explicit-manual-only",
+      "notes": "Folder-scoped project inside Testing workspace. Use subtree push from prefix FRONTEND DEV/Car-subdomain-nextjs-verified-native-frontend when no nested .git exists."
+    },
+    {
       "id": "nexform-website",
       "name": "nexform-website",
       "path": "F:/PROJECTS/testing/FRONTEND DEV/nexform-website",

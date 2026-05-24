@@ -61,6 +61,15 @@
       "notes": "Folder-scoped project in the Testing workspace. Split and push this prefix to Car repo."
     },
     {
+      "project_id": "car-subdomain-nextjs-verified-native-frontend",
+      "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/Car-subdomain-nextjs-verified-native-frontend",
+      "canonical_repo_id": "car-subdomain-nextjs-verified-native-frontend",
+      "remote": "https://github.com/Growrix/Car.git",
+      "push_strategy": "subtree",
+      "subtree_prefix": "FRONTEND DEV/Car-subdomain-nextjs-verified-native-frontend",
+      "notes": "Folder-scoped project in the Testing workspace. Split and push this prefix to Car repo."
+    },
+    {
       "project_id": "rayiss",
       "folder_path": "F:/PROJECTS/testing/FRONTEND DEV/rayiss",
       "canonical_repo_id": "rayiss",
