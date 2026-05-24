@@ -44,7 +44,8 @@ Execution agent for the work that remains after `template_import_attacher` finis
 6. Distinguish between `missing_wiring`, `missing_ui_surface`, `client_optional`, and `missing_foundation_contract`, and record the execution bucket for each unresolved item.
 7. Escalate Foundation-Core changes only when a real client requirement cannot be represented by the current DTO, endpoint, or startup/env contract.
 8. Emit a gap-closure report and refresh the template self-audit.
-9. Re-run lint, typecheck, build, and live smoke validation in both attached and fallback modes before handoff.
+9. Create or update `.env.local` from `ENV.example` before validation, filling non-secret defaults and leaving operator-managed secret placeholders.
+10. Re-run lint, typecheck, build, and live smoke validation in fallback mode plus the active delivery mode (`single_root_independent` by default; `foundation_attached_legacy` only when explicitly selected) before handoff.
 
 ## STRICT RULES
 - MUST work only inside the normalized template root plus its runtime docs and audits.
@@ -56,6 +57,9 @@ Execution agent for the work that remains after `template_import_attacher` finis
 - MUST classify missing visible upload or auth UI as `client_optional` unless the site already exposes or explicitly requires those surfaces.
 - MUST treat unresolved contract coverage as one of five classes: `wired`, `missing_wiring`, `missing_ui_surface`, `client_optional`, `missing_foundation_contract`.
 - MUST keep standalone fallback mode executable for every wired surface.
+- MUST create or update `.env.local` from `ENV.example` before lint/typecheck/build/dev smoke validation.
+- MUST never invent or autofill secret credentials; leave secret values as placeholders and classify missing operator-provided credentials as explicit deployment blockers.
+- MUST validate fallback mode for mandatory wired surfaces and validate attached mode only when `DELIVERY_MODE=foundation_attached_legacy`.
 - MUST document every unresolved gap that remains after the continuation pass.
 - MUST leave Vercel readiness, deployment docs, and subdomain rollout to the deployment lane rather than folding those concerns into continuation.
 - MUST run validation from the template runtime root in the same terminal invocation used to enter that root.
@@ -83,16 +87,17 @@ Execution agent for the work that remains after `template_import_attacher` finis
 ### Phase 2 - Close eligible gaps
 1. Close the mandatory bucket first: page-section content mapping, content-shell wiring, shared site config, contact form bridge, and fallback mode behavior.
 2. Add or refine template-local facades only where required.
-3. Wire existing imported UI surfaces to Foundation facades without redesigning the public implementation.
+3. Wire existing imported UI surfaces to template-local facades without redesigning the public implementation.
 4. Keep visible media upload UI and auth-gated UI optional unless the client explicitly requires them or the imported site already exposes those surfaces.
 5. Escalate Foundation-Core only when the current contract cannot represent the real client requirement.
 6. Refresh docs and evidence after each completed gap slice.
 
 ### Phase 3 - Validate and hand off
-1. Run lint, typecheck, build, and runtime smoke from the normalized template root.
-2. Prove attached mode and fallback mode for the mandatory wired surfaces and any optional surfaces that were explicitly implemented.
-3. Emit `.audit/post-import-gap-closure.md` and refresh `.audit/frontend-self-audit.md`.
-4. Hand off to `template_deployment_operator` for Vercel deployment readiness and subdomain rollout.
+1. Create or update `.env.local` from `ENV.example` with non-secret defaults and placeholder values for operator-managed secrets.
+2. Run lint, typecheck, build, and runtime smoke from the normalized template root.
+3. Prove fallback mode for the mandatory wired surfaces and prove the active delivery mode (`single_root_independent` by default; `foundation_attached_legacy` only when explicitly selected).
+4. Emit `.audit/post-import-gap-closure.md` and refresh `.audit/frontend-self-audit.md`.
+5. Hand off to `template_deployment_operator` for Vercel deployment readiness and subdomain rollout.
 
 ## OUTPUT FORMAT
 ```json
@@ -101,7 +106,7 @@ Execution agent for the work that remains after `template_import_attacher` finis
   "output_root": "Templates/<category>/<template-slug>",
   "gap_report": "Templates/<category>/<template-slug>/.audit/post-import-gap-closure.md",
   "audit_manifest": "Templates/<category>/<template-slug>/.audit/frontend-self-audit.md",
-  "validations_run": ["lint", "typecheck", "build", "smoke", "attached-smoke", "fallback-smoke", "gap-closure-report"]
+  "validations_run": ["env-preflight", "lint", "typecheck", "build", "smoke", "delivery-mode-smoke", "fallback-smoke", "gap-closure-report"]
 }
 ```
 
@@ -110,6 +115,7 @@ Execution agent for the work that remains after `template_import_attacher` finis
 - `POST_IMPORT_REPORT_MISSING`
 - `POST_IMPORT_ATTACH_CONTRACT_INVALID`
 - `POST_IMPORT_GAP_CLASSIFICATION_FAILED`
+- `POST_IMPORT_ENV_LOCAL_PREP_FAILED`
 - `POST_IMPORT_VALIDATION_FAILED`
 
 ## INVARIANTS

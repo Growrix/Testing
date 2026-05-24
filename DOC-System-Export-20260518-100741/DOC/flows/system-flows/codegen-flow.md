@@ -8,22 +8,9 @@ Convert a LOCKED, validated plan into a complete, runnable SaaS codebase. Codege
 - `validation_report.json.status == "passed"`.
 - `decisions.json` exists.
 - Pre-build checklist passed.
-- For DS-bound runs, canonical DS root is read-only and a run-scoped clone root is resolved before any project-specific writes.
 
 ## EXECUTION PROFILES
 Codegen supports two deterministic execution profiles. The profile is selected from plan scope (no human choice during execution).
-
-### Profile DS — DS-BOUND CLONE EXECUTION
-Use when execution target is a reusable design-system runtime (for example `Frontend-Master_DS`).
-
-Objective: keep canonical DS generic while implementing plan-specific pages/routes/presets in run-scoped clone only.
-
-Order (high level):
-1) Resolve canonical DS root (read-only) + clone destination under `DOC/output/runs/<timestamp>/codegen/<project-slug>/`
-2) Clone canonical DS
-3) Apply plan-specific preset/routes/pages/content to clone only
-4) Run install/dev/verify from clone root
-5) Emit execution evidence; block on canonical mutation or clone runtime failures
 
 ### Profile A — FRONTEND-FIRST
 Use when the run is marketing-heavy and backend complexity is low (for example `plan.backend.database == "none"`).

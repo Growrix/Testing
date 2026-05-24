@@ -50,8 +50,8 @@ export default function NewsletterModal() {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm md:p-6">
-      <div className="relative w-full max-w-5xl overflow-hidden rounded-sm bg-white shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/60 p-3 pt-4 backdrop-blur-sm md:p-6 md:pt-8">
+      <div className="relative w-full max-w-5xl max-h-[calc(100vh-2rem)] overflow-y-auto rounded-sm bg-white shadow-2xl md:max-h-[calc(100vh-4rem)]">
         <button
           aria-label="Close newsletter modal"
           onClick={closeModal}
@@ -62,6 +62,15 @@ export default function NewsletterModal() {
         <div className="grid gap-8 px-6 py-10 md:grid-cols-2 md:px-10 md:py-12">
           <div className="pt-4">
             <h2 className="text-[40px] font-black uppercase leading-none text-[#111]">{t("newsletter.title")}</h2>
+            <label className="mt-5 flex items-center gap-3 text-[15px] text-[#333]">
+              <input
+                type="checkbox"
+                checked={doNotShow}
+                onChange={(event) => setDoNotShow(event.target.checked)}
+                className="h-4 w-4"
+              />
+              {t("newsletter.doNotShow")}
+            </label>
             <p className="mt-8 max-w-xl text-[16px] leading-8 text-[#555]">
               {t("newsletter.description")}
             </p>
@@ -79,15 +88,6 @@ export default function NewsletterModal() {
               </div>
               {subscribed ? <p className="mt-3 text-[14px] font-semibold text-[#1d7a34]">{t("newsletter.subscribed")}</p> : null}
             </form>
-            <label className="mt-6 flex items-center gap-3 text-[15px] text-[#333]">
-              <input
-                type="checkbox"
-                checked={doNotShow}
-                onChange={(event) => setDoNotShow(event.target.checked)}
-                className="h-4 w-4"
-              />
-              {t("newsletter.doNotShow")}
-            </label>
             <div className="mt-8 flex gap-3 text-[#1c1c1c]">
               {socialLinks.map((item) => (
                 <Link

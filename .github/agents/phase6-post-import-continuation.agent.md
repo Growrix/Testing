@@ -33,7 +33,7 @@ Before continuation work, read these canonical files from the imported bundle:
 1. Read the import report, self-audit, manifest, and attach contract.
 2. Classify every unresolved item as `wired`, `missing_wiring`, `missing_ui_surface`, `client_optional`, or `missing_foundation_contract`.
 3. Close the mandatory `must_wire_now` bucket first.
-4. Revalidate attached mode and fallback mode.
+4. Revalidate delivery mode behavior: validate `single_root_independent` (local + fallback) by default, and validate attached mode only when `foundation_attached_legacy` is explicitly selected.
 
 ## Strict Rules
 - Work only inside the normalized template root and its local docs/audits.
@@ -42,14 +42,17 @@ Before continuation work, read these canonical files from the imported bundle:
 - Do not add auth, upload, billing, or analytics UI unless the surface already exists or the user explicitly requests it.
 - Keep Foundation generic and stable; only escalate when a real client requirement cannot be represented by the current contract.
 - Keep standalone fallback mode executable for every wired surface.
+- Create or update `.env.local` from `ENV.example` before runtime validation.
+- Populate non-secret defaults in `.env.local`; keep secret values as operator-managed placeholders.
 - Document all unresolved gaps explicitly.
 
 ## Workflow
 1. Audit the normalized template and classify each unresolved gap.
 2. Close the mandatory bucket: content-shell mapping, shared site config, contact form bridge, and fallback behavior.
 3. Wire existing imported UI surfaces to template-local facades without redesigning the public implementation.
-4. Run lint, typecheck, build, and live smoke validation from the normalized template root.
+4. Create/update `.env.local` from `ENV.example`, then run lint, typecheck, build, and live smoke validation from the normalized template root.
 5. Emit `.audit/post-import-gap-closure.md` and refresh `.audit/frontend-self-audit.md`.
+6. Record unresolved operator-provided env secrets explicitly as deployment blockers, not wiring failures.
 
 ## Output Format
 Use this structure when reporting work:

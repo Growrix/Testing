@@ -1,4 +1,0 @@
-DS system
-
-[DS] Site Planner
-[DS] Frontend Developer

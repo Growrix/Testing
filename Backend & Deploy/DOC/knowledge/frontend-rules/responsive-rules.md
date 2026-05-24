@@ -71,6 +71,15 @@ Per archetype:
 | `ai-product`               | Logo + new-chat              | Yes — Chats / Discover / Account                  |
 | `startup-conversion`       | Logo + single CTA             | No — keep distractions out                        |
 
+### Mobile app-shell chrome contract
+
+- If a mobile bottom dock is present, mobile MUST NOT render the full desktop header/navigation cluster.
+- In that case, the `< lg` top chrome becomes a compact app bar only: brand logo, menu toggle, and optional theme switcher when dual themes exist.
+- The compact mobile app bar MUST stay visually minimal: no duplicated desktop nav row, no stacked promo/header bars, and no wide CTA cluster.
+- Primary route switching on mobile belongs to the bottom dock when one is declared; the menu toggle is for overflow/support navigation, not for replacing the dock.
+- The page wrapper MUST reserve bottom safe-area space so content and CTAs do not hide under the dock.
+- The planner MUST explicitly declare whether the mobile top chrome is `compact_app_bar`, `logo_plus_cta`, or `drawer_toggle_only`.
+
 ## Sheet / drawer / modal rules on mobile
 
 - Filters: bottom sheet with sticky apply/reset.

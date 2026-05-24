@@ -1,0 +1,116 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "HTML Profile: Sync Brief",
+      "type": "shell",
+      "command": "node scripts/form-sync.js --input ${input:rawBriefPath} --output ${input:readyBriefPath}",
+      "options": {
+        "cwd": "${workspaceFolder}/HTML-PROFILE-BUILDER"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "HTML Profile: Build Bundle",
+      "type": "shell",
+      "command": "node scripts/build.js --brief ${input:buildBriefPath}",
+      "options": {
+        "cwd": "${workspaceFolder}/HTML-PROFILE-BUILDER"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "HTML Profile: Validate Output",
+      "type": "shell",
+      "command": "node scripts/validate-output.js --brief ${input:validateBriefPath} --html ${input:validateHtmlPath}",
+      "options": {
+        "cwd": "${workspaceFolder}/HTML-PROFILE-BUILDER"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "HTML Profile: Approve QA",
+      "type": "shell",
+      "command": "node scripts/approve-qa.js --result ${input:qaResultPath} --by \"${input:qaReviewer}\" --notes \"${input:qaNotes}\"",
+      "options": {
+        "cwd": "${workspaceFolder}/HTML-PROFILE-BUILDER"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "HTML Profile: Verify",
+      "type": "shell",
+      "command": "npm run verify",
+      "options": {
+        "cwd": "${workspaceFolder}/HTML-PROFILE-BUILDER"
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "group": "build"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "rawBriefPath",
+      "type": "promptString",
+      "description": "Raw brief path inside HTML-PROFILE-BUILDER",
+      "default": "tests/fixtures/sample-cafe-raw.json"
+    },
+    {
+      "id": "readyBriefPath",
+      "type": "promptString",
+      "description": "Normalized brief output path",
+      "default": "briefs/ready/brew-and-bean.json"
+    },
+    {
+      "id": "buildBriefPath",
+      "type": "promptString",
+      "description": "Normalized brief path to build",
+      "default": "briefs/ready/brew-and-bean.json"
+    },
+    {
+      "id": "validateBriefPath",
+      "type": "promptString",
+      "description": "Input snapshot or normalized brief path",
+      "default": "outputs/brew-and-bean/v1/input-snapshot.json"
+    },
+    {
+      "id": "validateHtmlPath",
+      "type": "promptString",
+      "description": "Generated HTML path",
+      "default": "outputs/brew-and-bean/v1/profile.html"
+    },
+    {
+      "id": "qaResultPath",
+      "type": "promptString",
+      "description": "build-result.json path",
+      "default": "outputs/brew-and-bean/v1/build-result.json"
+    },
+    {
+      "id": "qaReviewer",
+      "type": "promptString",
+      "description": "QA reviewer name",
+      "default": "QA Reviewer"
+    },
+    {
+      "id": "qaNotes",
+      "type": "promptString",
+      "description": "QA approval notes",
+      "default": "Ready for delivery"
+    }
+  ]
+}

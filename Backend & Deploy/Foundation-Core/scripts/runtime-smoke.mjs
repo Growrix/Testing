@@ -1,4 +1,5 @@
 import { spawn } from "node:child_process";
+import fs from "node:fs/promises";
 import net from "node:net";
 import path from "node:path";
 import process from "node:process";
@@ -80,6 +81,8 @@ async function killProcessTree(child) {
 }
 
 async function runSmoke(baseUrl) {
+  const checkResults = [];
+
   const checks = [
     {
       name: "runtime dashboard",
@@ -104,6 +107,21 @@ async function runSmoke(baseUrl) {
       },
     },
     {
+      name: "diagnostics API",
+      method: "GET",
+      path: "/api/diagnostics",
+      assert: async (response) => {
+        const body = await readJson(response);
+        if (
+          response.status !== 200 ||
+          body?.ok !== true ||
+          !body?.data?.readiness?.categorized?.required_for_production
+        ) {
+          throw new Error(`Expected diagnostics 200 with categorized readiness, received ${response.status}.`);
+        }
+      },
+    },
+    {
       name: "auth session API",
       method: "GET",
       path: "/api/auth/session",
@@ -111,6 +129,36 @@ async function runSmoke(baseUrl) {
         const body = await readJson(response);
         if (response.status !== 200 || body?.ok !== true || !body?.data?.mode) {
           throw new Error(`Expected auth session envelope, received ${response.status}.`);
+        }
+      },
+    },
+    {
+      name: "billing checkout auth guard",
+      method: "POST",
+      path: "/api/billing/checkout",
+      body: {
+        offer_key: "starter",
+        success_url: "https://example.com/success",
+        cancel_url: "https://example.com/cancel",
+      },
+      assert: async (response) => {
+        const body = await readJson(response);
+        if (response.status !== 401 || body?.ok !== false || body?.error?.code !== "BILLING_AUTH_REQUIRED") {
+          throw new Error(`Expected billing checkout endpoint to enforce auth, received ${response.status}.`);
+        }
+      },
+    },
+    {
+      name: "billing portal auth guard",
+      method: "POST",
+      path: "/api/billing/portal",
+      body: {
+        return_url: "https://example.com/account",
+      },
+      assert: async (response) => {
+        const body = await readJson(response);
+        if (response.status !== 401 || body?.ok !== false || body?.error?.code !== "BILLING_AUTH_REQUIRED") {
+          throw new Error(`Expected billing portal endpoint to enforce auth, received ${response.status}.`);
         }
       },
     },
@@ -196,6 +244,20 @@ async function runSmoke(baseUrl) {
         }
       },
     },
+    {
+      name: "stripe webhook API fallback",
+      method: "POST",
+      path: "/api/webhooks/stripe",
+      body: {
+        type: "invoice.paid",
+      },
+      assert: async (response) => {
+        const body = await readJson(response);
+        if (response.status !== 503 || body?.ok !== false || body?.error?.code !== "BILLING_NOT_CONFIGURED") {
+          throw new Error(`Expected Stripe webhook endpoint to require configuration, received ${response.status}.`);
+        }
+      },
+    },
   ];
 
   for (const check of checks) {
@@ -208,7 +270,30 @@ async function runSmoke(baseUrl) {
 
     await check.assert(response);
     log(`SMOKE PASS: ${check.name} -> ${response.status}`);
+
+    checkResults.push({
+      name: check.name,
+      status: response.status,
+      path: check.path,
+    });
   }
+
+  return checkResults;
+}
+
+async function writeSmokeEvidence(baseUrl, checks) {
+  const auditDirectory = path.resolve(process.cwd(), ".audit");
+  await fs.mkdir(auditDirectory, { recursive: true });
+
+  const evidencePath = path.resolve(auditDirectory, "runtime-smoke-evidence.json");
+  const evidence = {
+    generatedAt: new Date().toISOString(),
+    baseUrl,
+    checks,
+  };
+
+  await fs.writeFile(evidencePath, JSON.stringify(evidence, null, 2), "utf8");
+  log(`SMOKE EVIDENCE: ${evidencePath}`);
 }
 
 async function main() {
@@ -235,7 +320,8 @@ async function main() {
       log(`Using external Foundation Core server at ${baseUrl}`);
     }
 
-    await runSmoke(baseUrl);
+    const checkResults = await runSmoke(baseUrl);
+    await writeSmokeEvidence(baseUrl, checkResults);
     log(`Foundation runtime smoke passed against ${baseUrl}`);
   } finally {
     await killProcessTree(child);

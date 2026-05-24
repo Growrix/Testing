@@ -1,6 +1,0 @@
-Stable DOC system
-
-frontend_planner
-backend_planner
-frontend_developer
-backend_developer

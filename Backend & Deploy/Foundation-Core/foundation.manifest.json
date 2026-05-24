@@ -6,11 +6,16 @@
   "required_checks": ["lint", "typecheck", "test", "build"],
   "primary_endpoints": [
     "/api/health",
+    "/api/diagnostics",
+    "/api/admin/diagnostics",
     "/api/auth/session",
+    "/api/billing/checkout",
+    "/api/billing/portal",
     "/api/content/pages/home",
     "/api/content/revalidate",
     "/api/forms/contact/submit",
     "/api/media/upload",
-    "/api/preview/enable"
+    "/api/preview/enable",
+    "/api/webhooks/stripe"
   ]
 }

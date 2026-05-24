@@ -1,17 +1,19 @@
 # Template Import Attach Execution Spec
 
 ## Purpose
-Define the governed lane for importing an already-built frontend runtime, normalizing it into the `Templates/` library, and fully merging it with Foundation Core through the existing attach contract without rebuilding the visible UI from scratch.
+Define the governed lane for importing an already-built frontend runtime, normalizing it into the `Templates/` library, and finalizing a single-root independent fullstack deliverable by materializing required backend surfaces from Foundation-Core blueprint assets without rebuilding the visible UI from scratch.
 
 ## Source Of Truth
 - The imported frontend runtime is the source of truth for the visible implementation baseline.
-- `frontend-attach-contract.json` remains the only allowed integration boundary with Foundation Core.
-- The import lane must preserve the imported runtime's public UI unless the user explicitly requests post-import enhancement or completion work.
+- `frontend-attach-contract.json` remains the required integration contract for surface coverage.
+- Foundation-Core remains the reusable blueprint source for backend modules/routes in Phase 5 default mode.
+- The import lane must preserve the imported runtime's public UI unless the user explicitly requests post-import enhancement work.
 
 ## Required Inputs
 - `source_runtime_root`: extracted local path for the imported frontend runtime.
 - `import_manifest`: source name, category, template slug, and any known nested app root.
 - Optional `foundation_attach_contract_path`.
+- Optional `delivery_mode` with default `single_root_independent`.
 - Optional `reference_pack` when the imported runtime also needs screenshot-driven parity validation.
 
 ## Required Output Root
@@ -31,28 +33,35 @@ Define the governed lane for importing an already-built frontend runtime, normal
 
 ## Execution Rules
 - Import the frontend into a fresh runtime root under `Templates/`; do not mutate the source import in place.
-- Strip non-portable baggage from the imported runtime: `.git/`, `.next/`, `node_modules/`, local virtual environments, editor caches, and machine-local logs.
+- Preserve git continuity artifacts from the source runtime by default: `.git/`, `.gitignore`, `.gitattributes`, and `.github/` so exported templates can continue git workflows without re-init.
+- Strip source VCS metadata only when explicitly requested by the user.
+- Strip non-portable baggage from the imported runtime: `.next/`, `node_modules/`, local virtual environments, editor caches, and machine-local logs.
 - Preserve the imported visible UI by default. Cosmetic refactors are forbidden during import normalization.
 - Normalize scripts, env docs, and runtime metadata so the imported copy boots independently from its own root.
-- When Foundation Core is available, attach only through `frontend-attach-contract.json`.
-- Generate same-origin template-local facades for enabled auth, content, forms, media, preview, and health modules.
-- Wire existing imported frontend surfaces to those facades when corresponding UI already exists, especially navigation/site-config, forms, uploads, and session-aware routes.
-- Keep fallback behavior defined for every generated facade so standalone mode remains executable.
+- Default delivery mode is `single_root_independent`.
+- In `single_root_independent` mode, materialize mandatory backend surfaces inside the template root (auth/session, content pages/collections/site-config/revalidate, forms submit, media upload, preview enable, health).
+- In `single_root_independent` mode, Foundation-Core is blueprint input only and not a required external runtime dependency.
+- Do not leave hard runtime dependency on external `FOUNDATION_BASE_URL` in default mode.
+- `foundation_attached_legacy` mode is allowed only when explicitly requested.
+- Wire existing imported frontend surfaces to local template APIs when corresponding UI exists, especially navigation/site-config, forms, uploads, and session-aware routes.
+- Keep fallback behavior defined for every wired surface as resilience coverage.
 - When a repo-default footer attribution is required and no brief override exists, use `Built and Maintained by Growrix OS` linking to `https://www.growrixos.com`.
 - Do not couple the imported runtime to `Frontend-Master_DS/` or `DS-Planning-Engine/`.
 - Do not silently replace imported routes with generic starter routes.
 - Record every file/folder class intentionally excluded during import in `.import/import-report.md`.
+- Record materialized backend surface coverage, delivery mode, `independent_root` status, and `external_runtime_dependency` state in `.import/import-report.md`.
 
 ## Post-Import Continuation
-- Missing pages, copyright cleanup, attribution, content replacement, and enhancement work happen after import normalization.
-- The continuation agent may work against the imported template root only after the import report exists and the template boots.
+- Phase 5 default completion should already produce an independently runnable single-root template.
+- Post-import continuation is optional and reserved for explicit enhancement/polish requests, not mandatory dependency closure.
 
 ## Validation
 - The normalized template must pass lint, typecheck, and build from its own runtime root.
-- After import, attach, or merge work, `npm run dev` must be started from the normalized runtime root using the documented checklist, and live smoke probes must pass before the lane can be declared complete.
-- If Foundation attachment is enabled, attached mode must be proven live and mock fallback must remain runnable.
-- Validation must include at least one real wired backend surface when that surface exists in the imported UI, not only an attach-status route.
-- The import report must record source root, target root, stripped artifacts, attach mode, and any unresolved gaps.
+- After import/finalization work, `npm run dev` must be started from the normalized runtime root using the documented checklist, and live smoke probes must pass before the lane can be declared complete.
+- Validation must include local API smoke coverage for mandatory backend surfaces in the template root.
+- In default mode, validation must prove independent runtime success with no required external Foundation-Core process.
+- If legacy attached mode is explicitly enabled, attached mode must be proven live and fallback must remain runnable.
+- The import report must record source root, target root, stripped artifacts, whether git continuity artifacts were preserved or stripped, delivery mode, `independent_root`, `external_runtime_dependency`, and any unresolved gaps.
 
 ## Failure Modes
 - `IMPORT_SOURCE_ROOT_MISSING`
@@ -60,5 +69,7 @@ Define the governed lane for importing an already-built frontend runtime, normal
 - `IMPORT_TARGET_ALREADY_EXISTS`
 - `IMPORT_PORTABILITY_NORMALIZATION_FAILED`
 - `IMPORT_ATTACH_CONTRACT_INVALID`
+- `IMPORT_BACKEND_MATERIALIZATION_FAILED`
+- `IMPORT_INDEPENDENT_ROOT_VALIDATION_FAILED`
 - `IMPORT_RUNTIME_BOOT_FAILED`
 - `IMPORT_REPORT_MISSING`
