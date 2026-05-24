@@ -1,65 +1,129 @@
-import Image from "next/image";
+import { airconProfile } from "@/data/aircon";
+import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className={styles.page}>
+      <div className={styles.app}>
+        <section className={styles.hero}>
+          <div className={styles.snowflakes} aria-hidden="true">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <span key={index} className={styles.snowflake}>
+                ❄
+              </span>
+            ))}
+          </div>
+          <div className={styles.heroSymbol} aria-hidden="true">
+            ❄️
+          </div>
+          <div className={styles.tempBadge}>
+            <div className={styles.tempValue}>{airconProfile.setTemp}</div>
+            <div className={styles.tempLabel}>Set Temp</div>
+          </div>
+          <h1 className={styles.heroTitle}>
+            {airconProfile.displayName.primary}
+            <span className={styles.accentText}>
+              {airconProfile.displayName.accent}
+            </span>
+            <br />
+            {airconProfile.displayName.secondary}
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+          <p className={styles.heroCopy}>{airconProfile.heroCopy}</p>
+          <p className={styles.heroMeta}>{airconProfile.heroMeta}</p>
+        </section>
+
+        <section className={styles.stats} aria-label="Highlights">
+          {airconProfile.stats.map((stat) => (
+            <div key={`${stat.value}-${stat.label}`} className={styles.stat}>
+              <div className={styles.statValue}>{stat.value}</div>
+              <div className={styles.statLabel}>{stat.label}</div>
+            </div>
+          ))}
+        </section>
+
+        <div className={styles.body}>
+          <section>
+            <h2 className={styles.sectionHeading}>Services</h2>
+            <div className={styles.services}>
+              {airconProfile.services.map((service) => (
+                <article key={service.name} className={styles.serviceCard}>
+                  <div>
+                    <div className={styles.serviceIcon}>{service.icon}</div>
+                    <div className={styles.serviceName}>{service.name}</div>
+                    <div className={styles.serviceDescription}>
+                      {service.description}
+                    </div>
+                    {service.tag ? (
+                      <div className={styles.serviceTag}>{service.tag}</div>
+                    ) : null}
+                  </div>
+                  <div className={styles.servicePrice}>
+                    {service.price}
+                    <span className={styles.serviceSuffix}>{service.suffix}</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section>
+            <h2 className={styles.sectionHeading}>Special Summer Offer</h2>
+            <div className={styles.promoBox}>
+              <h3 className={styles.promoTitle}>{airconProfile.promo.title}</h3>
+              <p className={styles.promoCopy}>{airconProfile.promo.description}</p>
+              <div className={styles.promoPrice}>{airconProfile.promo.price}</div>
+              <div className={styles.promoOld}>
+                {airconProfile.promo.previousPrice}
+              </div>
+              <a className={styles.promoPrimary} href="#contact">
+                {airconProfile.promo.primaryCta}
+              </a>
+              <a className={styles.promoSecondary} href="#contact">
+                {airconProfile.promo.secondaryCta}
+              </a>
+            </div>
+          </section>
+
+          <section>
+            <h2 className={styles.sectionHeading}>Brands We Service</h2>
+            <div className={styles.brandGrid}>
+              {airconProfile.brands.map((brand) => (
+                <div key={brand} className={styles.brand}>
+                  {brand}
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section>
+            <h2 className={styles.sectionHeading}>What&apos;s Included in Every Job</h2>
+            <div className={styles.includedGrid}>
+              {airconProfile.included.map((item) => (
+                <div key={item} className={styles.includedItem}>
+                  {item}
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section id="contact">
+            <h2 className={styles.sectionHeading}>Contact</h2>
+            <div className={styles.contactBox}>
+              {airconProfile.contact.map((item) => (
+                <div key={item.text} className={styles.contactRow}>
+                  <div className={styles.contactIcon}>{item.icon}</div>
+                  <div>{item.text}</div>
+                </div>
+              ))}
+            </div>
+          </section>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <footer className={styles.footer}>{airconProfile.footer}</footer>
+        <div className={styles.builderBar}>
+          <span className={styles.builderText}>{airconProfile.builderBar}</span>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
