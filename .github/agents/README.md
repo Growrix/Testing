@@ -25,6 +25,15 @@ Phase 1.3 is the default next step when the user goal is stricter: locate the Ph
 Phase 1.5 is the production hardening lane that runs after Phase 1.4. It does not redo native ownership; it closes the remaining production gap (parity tightening, performance, SEO/structured data, accessibility, maintainability, scalability, typed backend handoff, optional marketplace packaging) so the frontend is safe to hand off to Phase 4/5/7 without limiting future scaling.
 Phase 1.4 is the stricter repair/verification lane when the input is a raw HTML/static template or when a prior Next.js attempt still relies on HTML files, HTML parsers, public HTML ownership, generated dumps, legacy script behavior, or hidden bridge runtime.
 
+## Rebrand & Industry-Switch Lane
+Two-agent sequential lane that takes a built Next.js site (Phase 1.4 `pages_ready_for_hardening` or Phase 1.5 `hardening_complete`) and rebrands every content surface (text, CTAs, testimonials, images, SEO, brand marks, JSON-LD) — optionally switching industry (car -> plumbing, solar -> agency, etc.) — while keeping theme tokens, components, routing, layout, and motion byte-identical.
+- `rebrand-phase2.1-planner.agent.md` - plan-only. Emits brand bible, industry translation map, content inventory with per-slot char budgets, downloadable image swap plan (industry-keyword queries), SEO + JSON-LD plan, surface-leakage scan, all under `DOC/rebrand/`. Writes nothing into `src/` or `public/`.
+- `rebrand-phase2.2-executor.agent.md` - applies the plan. Downloads industry-matched images into `public/images/` via user-supplied folder, Pexels API, Pixabay API, or workspace stock (no external CDN hotlinks in the final site). Rewrites typed text under per-slot char budgets. Swaps logo, favicon, OG/Twitter share. Updates `manifest.json`, `package.json` (name/description only), JSON-LD, robots, sitemap. Brand-name-substitutes legal pages (no policy rewrites). Runs full validation loop including source-brand + source-industry residual grep and zero-CDN image-source scan.
+
+Default rebrand scope: text + images + brand marks. Color tokens and fonts preserved unless the user explicitly requests a visual rebrand. Legal pages: brand-name substitution only. Image download is download-only — every image lives at `public/images/...` and is recorded with full attribution under `DOC/rebrand/image-attribution.md`. Phase 2.2 refuses to edit components, page composition, layout structure, tokens, or motion; defects there are returned to Phase 1.2 / 1.3 / 1.5.
+
+Use this lane when an already-built screenshot-replicated site needs to be rebranded or repurposed for a different brand or industry without rebuilding theme, components, or UI/UX core.
+
 ## Project Starter Package
 Shared phase1 and DOC-system phase2 agents now bootstrap missing project-local continuation roots from:
 - `.github/project-starters/hybrid-canonical-project-starter/`
