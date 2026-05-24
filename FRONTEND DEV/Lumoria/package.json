@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "generate:snapshots": "node scripts/generate-lumoria-native-snapshots.mjs",
     "sync:lumoria": "node scripts/sync-lumoria-local.mjs",
     "qa:parity": "node scripts/phase14-visual-parity.mjs",
     "qa:runtime": "node scripts/phase14-runtime-matrix.mjs",

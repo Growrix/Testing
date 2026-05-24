@@ -9,6 +9,7 @@ This document defines the canonical system surfaces, roles, domain entities, API
 ## Quick Navigation
 
 - **[AI-first entrypoint](#ai-context)**: `ai-context.yaml`
+- **[Product-led platform contract delta](product-led-platform-shared-contracts.md)**: route, entity, lead, commerce, and integration changes from the 2026-05-23 master plan audit
 - **[System Architecture](#system-architecture)**: surfaces, roles, entities
 - **[API Contract Index](#api-contracts)**: all endpoints
 - **[Integration Inventory](#integrations)**: Stripe, WhatsApp, Calendar, Email, AI, Chat, Analytics

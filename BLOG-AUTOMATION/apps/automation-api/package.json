@@ -11,6 +11,7 @@
     "@blog-automation/analytics-engine": "0.1.0",
     "@blog-automation/blog-planner": "0.1.0",
     "@blog-automation/cms-adapter-sanity": "0.1.0",
+    "@blog-automation/cms-core": "0.1.0",
     "@blog-automation/contracts": "0.1.0",
     "@blog-automation/keyword-engine": "0.1.0",
     "@blog-automation/post-creator": "0.1.0",

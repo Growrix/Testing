@@ -56,6 +56,7 @@ Define the exact input and output contracts for the HTML Profile Builder.
 - Must begin with `<!DOCTYPE html>`
 - Must contain `meta name="description"`
 - Must contain Open Graph title and description tags
+- Must expose the selected layout family on `body[data-layout]`
 - Must not contain unreadable foreground/background combinations in the shipped theme roles
 - Must not reference missing local image assets
 

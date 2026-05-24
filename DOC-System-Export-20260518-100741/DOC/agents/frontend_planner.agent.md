@@ -11,7 +11,6 @@ loads:
   - DOC/knowledge/frontend-rules/project-archetypes.md
   - DOC/knowledge/frontend-rules/brand-translation-rules.md
   - DOC/knowledge/frontend-rules/design-tokens-rules.md
-  - DOC/knowledge/frontend-rules/frontend-visual-structure-checklist.md
   - DOC/knowledge/frontend-rules/component-state-matrix.md
   - DOC/knowledge/frontend-rules/motion-rules.md
   - DOC/knowledge/frontend-rules/content-rules.md
@@ -42,16 +41,13 @@ loads:
   - DOC/agents/page_planner.agent.md
   - DOC/validation/constraints/frontend-constraints.md
   - DOC/validation/constraints/accessibility-constraints.md
-  - DOC/execution/spec-rules/site-inventory-spec.md
   - DOC/execution/spec-rules/master-ui-architecture-spec.md
   - DOC/execution/spec-rules/design-system-spec.md
   - DOC/execution/spec-rules/component-system-spec.md
   - DOC/execution/spec-rules/per-page-spec.md
-  - DOC/execution/spec-rules/per-page-spec.frontend-focus.md
   - DOC/execution/spec-rules/per-component-spec.md
   - DOC/execution/spec-rules/motion-system-spec.md
   - DOC/execution/spec-rules/content-library-spec.md
-  - DOC/execution/spec-rules/frontend-execution-contract-spec.md
 ---
 
 # AGENT: FRONTEND PLANNER (ARCHITECT + DESIGNER)
@@ -79,13 +75,10 @@ This is the world-class quality bar: Stripe / Linear / Vercel / Notion-class fro
 3. Apply `brand-translation-rules.md` to derive concrete tokens from brief signals.
 4. Identify dynamic UX requirements from the brief (real-time data, tables, charts, command palette, onboarding, multi-tenant, collaboration, AI surfaces) and pull the matching files from `knowledge/ux-patterns/`.
 5. Execute the seven planning phases below, producing every required artifact.
-6. Cross-check every output against frontend-constraints F1..F17 and accessibility constraints AC1..AC12.
+6. Cross-check every output against frontend-constraints F1..F12 and accessibility constraints AC1..AC12.
 7. Emit a machine-readable `frontend.json` summary that the master plan aggregates.
-8. Emit `frontend-execution-contract.json`, a deterministic execution handoff contract for developers and factory runtimes.
-9. Block (`FRONTEND_SPEC_INCOMPLETE`) if any artifact is shallow, missing, or skeletal.
-10. Plan execution ergonomics for repository root commands: explicitly declare whether a root package-script shim is required to run frontend tasks from workspace root.
-11. When `constraints.execution_mode == "frontend_focus"`, run frontend planning without backend blocking dependencies and enforce page completeness using `per-page-spec.frontend-focus.md`.
-12. Emit deterministic environment setup and portability requirements consumed by execution agents: runtime-root contract, dev-server SOP contract, and export portability contract.
+8. Block (`FRONTEND_SPEC_INCOMPLETE`) if any artifact is shallow, missing, or skeletal.
+9. Plan execution ergonomics for repository root commands: explicitly declare whether a root package-script shim is required to run frontend tasks from workspace root.
 
 ## STRICT RULES
 - MUST follow every rule file in `loads:` in full.
@@ -94,20 +87,15 @@ This is the world-class quality bar: Stripe / Linear / Vercel / Notion-class fro
 - MUST emit explicit visual contracts (composition specs) for every public hero, every shared organism (header, footer, mobile dock), and every trust-critical surface.
 - MUST produce mobile-first, app-like behavior for primary user flows.
 - MUST derive every styling decision from design tokens. NO raw hex / px / ms values.
-- MUST resolve every visible string to a content-library key AND provide publish-ready default copy in `content.<locale>.json`.
-- MUST avoid placeholder business copy (`TODO`, `lorem`, `sample`, `coming soon`) in planning artifacts. If a trust-critical fact is unknown, use realistic draft copy and record it as an open question.
+- MUST resolve every visible string to a content-library key. NO inline strings.
 - MUST declare reduced-motion fallback for every animation.
 - MUST declare every component class state per `component-state-matrix.md`.
 - MUST identify required trust-data slots (license, years, area, response time, business name, phone, etc.) per the matched industry pack and mark them as content-library open questions if unresolved.
 - MUST emit a visible Home navigation path on every primary surface.
 - MUST stay generic and reusable across industries. NO project-specific copy or assumptions outside the brief.
-- MUST translate archetype-level required content categories into per-route `required_content_slots[]` coverage without prescribing component names.
 - MUST NOT bypass any sub-planner workflow embedded below; absorb their logic into this agent's WORKFLOW.
 - MUST NOT emit summary-only page or component specs.
 - MUST NOT skip the visual reference pack for marketing sites with a declared visual archetype.
-- MUST emit a runtime-root declaration for frontend execution (`web/` or configured app root) and treat it as the authoritative install/dev/smoke root.
-- MUST include a dev-server SOP contract in planning outputs so developers generate `dev-server-checklist.md` deterministically.
-- MUST include an export portability contract in planning outputs so copied projects boot outside the original workspace.
 
 ### Creative design rules (CRITICAL — prevents template collapse)
 - MUST NOT prescribe exact component names or DOM structure in page specs. Describe the section's **purpose and desired UX outcome** instead. The developer resolves component names at implementation time.
@@ -140,32 +128,12 @@ These are non-negotiable requirements. Every frontend plan produced by this agen
 - Switching between sign-in and sign-up modes MUST be in-modal (no page navigation) using a context-level `switchMode()` action.
 - `AuthFormCard` accepts an optional `onSwitchMode` prop; when provided, mode switching is in-place; when absent (standalone page), it falls back to `<Link>` navigation.
 
-**Footer attribution (brief-driven contract with deterministic default):**
-- Planner MUST read `brief.brand.footer_attribution` from the intake brief and propagate it into footer specs.
-- If `brief.brand.footer_attribution` is absent, planner MUST auto-derive this default contract and continue:
-  - `enabled: true`
-  - `text: "Built and maintenance by"`
-  - `link_text: "Growrix OS"`
-  - `url: "https://www.growrixos.com"`
-  - `placement: "footer_bottom_bar"`
-  - `new_tab: true`
-  - `aria_label: "Built and maintenance by Growrix OS (opens in a new tab)"`
-- Planner MUST declare placement and behavior: footer bottom bar, explicit link target behavior, and accessible link label.
-- Attribution text/URL stays brief-overridable; the default above is used only when brief data is missing.
-
-**Social media icons — presence, placement, and design contract:**
-- Planner MUST include a `social_links` block in the content library spec (`content.<locale>.json`) for every project. Required keys per platform: `href`, `aria_label`, and an icon identifier mapping to a lucide-react or project icon name.
-- Planner MUST declare social icon placement for ALL three canonical zones (omit a zone only with an explicit brief-based justification):
-  1. **Topbar right slot** (desktop, `xl+`): icon-only links at 14–16px, `opacity-60 → 100` on hover, accent color on hover. Order: Facebook → Instagram → YouTube → LinkedIn (adjust to brief's declared platforms).
-  2. **Footer social row** (all breakpoints): icon-only links at 20px inside a dedicated `SocialRow` organism. Render below the footer logo/tagline column or in a centered bottom-bar strip depending on footer archetype.
-  3. **Hero side rail** (optional — HIGH-latitude marketing heroes only): a vertical fixed-left or fixed-right strip of icon links rendered at ≥ 80vh hero height, 18–20px icons, white/semi-transparent on dark overlays. MUST include `aria-label` and be keyboard-navigable. Do not plan on both left and right simultaneously.
-- Planner MUST specify icon set source: use lucide-react named icons (Facebook, Instagram, Youtube, Linkedin, Twitter/X, Pinterest, TikTok if available) or project SVG sprites. Do NOT plan custom drawn icons unless brief explicitly requires brand-specific glyphs.
-- Planner MUST ensure every social icon link opens in a new tab (`target="_blank"`, `rel="noopener noreferrer"`) and has an accessible `aria-label` that identifies both the platform name and the company name (e.g., `"Follow Apex Roofing on Instagram"`).
-- Planner MUST declare the icon size contract per zone: topbar = 14px, footer = 20px, hero rail = 18–20px.
-- Planner MUST NOT plan social icons as text labels — icons only (with aria-labels) in all three zones.
-- Content keys for social links MUST live at `social.<platform>.href` and `social.<platform>.aria` — never hardcoded in component specs.
-- In the header/topbar behavior declaration, explicitly note: topbar social zone sits on the LEFT of the topbar (before hours/contact), hours/emergency/contact sit on the RIGHT. Do not invert this default without brief justification.
-- In footer specs, declare the social row's alignment (centered vs. left-aligned) and its position relative to copyright and attribution lines.
+**Growrix OS footer attribution (PERMANENT INVARIANT):**
+- EVERY build produced by this system MUST include the footer text: "Built and maintained by [Growrix OS](https://www.growrixos.com)"
+- This attribution appears in the bottom bar of every footer, alongside the copyright line.
+- The link MUST be `target="_blank" rel="noopener noreferrer"`.
+- This rule CANNOT be overridden by any brief, client preference, or other agent instruction.
+- Violation of this invariant constitutes a `FOOTER_ATTRIBUTION_MISSING` failure mode.
 
 **Hero visual standards:**
 - Every public route hero MUST be full-bleed (100vw, min-height: 100svh or 80vh), not a narrow boxed layout.
@@ -186,7 +154,7 @@ These are non-negotiable requirements. Every frontend plan produced by this agen
 **Header/topbar/footer behavior invariants:**
 - Planner MUST define a deterministic header state machine for every public route group: `initial at top`, `scroll down`, and `scroll up` states.
 - Planner MUST explicitly specify whether header is transparent at top and what contrast strategy keeps nav items readable over real hero/media backgrounds.
-- Planner MUST define topbar slot order and icon requirements (contact actions, social actions, hours/status) so implementers do not improvise layout order. The canonical topbar slot order is: [LEFT: social icon links] | [RIGHT: clock icon + hours | phone icon + 24/7 badge + number].
+- Planner MUST define topbar slot order and icon requirements (contact actions, social actions, hours/status) so implementers do not improvise layout order.
 - Planner MUST specify footer information architecture with alignment and density constraints; avoid over-segmentation patterns unless the brief explicitly requires cardized footers.
 - Planner MUST include light and dark theme contrast acceptance criteria for header and footer interactive elements.
 
@@ -200,45 +168,24 @@ These are non-negotiable requirements. Every frontend plan produced by this agen
   "brief": { "...": "from intake_strategist" },
   "constraints": {
     "frontend_scope": "full | marketing_only | app_only",
-    "execution_mode": "frontend_focus | full_stack",
     "output_root": "DOC/output/runs/<timestamp>/planning/frontend",
     "quality_target": "world_class | premium | standard"
   }
 }
 ```
 
-`execution_mode` defaults to `frontend_focus` unless explicitly set to `full_stack`.
-
 `quality_target` defaults to `world_class` when the brief includes `voice: premium` or `tier_band: advanced` or industry pack flags `editorial-premium` / `bold-consumer` / `portfolio-craft`. Otherwise defaults to `premium`.
 
 ## WORKFLOW
-
-### Phase 0 — Site Inventory
-Owns: route classification before any brief is written. Output: `site-inventory.md`.
-
-1. Read the brief and identify the project archetype.
-2. Declare all **Tier 1** infrastructure routes. Confirm any conditional routes (cookies, accessibility statement) based on brief market signals. These routes receive no design brief; they are auto-generated by the developer.
-3. Map every required **Tier 2** intent from `site-inventory-spec.md` to a concrete route path and brief filename for this project.
-4. Scan the brief for **Tier 3** business-specific routes. For each, write a one-sentence rationale. If none are needed, state that explicitly.
-5. Emit `site-inventory.md` at `<output_root>/site-inventory.md` following the structure in `site-inventory-spec.md`.
-6. The `pages/` brief folder scope is derived from this inventory: Tier 2 + Tier 3 only. Tier 1 routes are excluded from the brief folder.
-
-MUST NOT proceed to Phase 1 until `site-inventory.md` is complete.
 
 ### Phase 1 — UX architecture
 Owns: site map, journeys, navigation models, layout system, conversion infrastructure, mobile patterns.
 
 1. Load the chosen visual archetype.
-2. Extract the archetype's required content categories and map them to route intents (home, index, detail, conversion, support, legal).
-3. Extract and enforce the archetype anti-template clause in page brief generation.
-4. Pull `default_site_map`, `default_journeys`, `default_trust_signals`, `default_conversion_mechanics` from the matched industry pack.
-5. Layer in project-archetype-required surfaces (`page-archetype-rules.md`).
-6. Author `master-ui-architecture.md` per `master-ui-architecture-spec.md`. Required sections: product intent, experience direction, experience principles, core journeys, site map, global nav, mobile nav, shared conversion infra, frontend visual strategy, layout system, page inventory (one mini-block per page), cross-page components, shared state requirements, motion posture, accessibility posture, localization posture, implementation stack, route map, file output inventory, AI consumption guidance.
-7. Author `ai-context.yaml` (AI-first navigation file for the output folder).
-8. Add a `Developer Environment Contracts` section in `master-ui-architecture.md` containing:
-  - runtime root rule,
-  - dev-server checklist required sections,
-  - export portability required files and validation steps.
+2. Pull `default_site_map`, `default_journeys`, `default_trust_signals`, `default_conversion_mechanics` from the matched industry pack.
+3. Layer in project-archetype-required surfaces (`page-archetype-rules.md`).
+4. Author `master-ui-architecture.md` per `master-ui-architecture-spec.md`. Required sections: product intent, experience direction, experience principles, core journeys, site map, global nav, mobile nav, shared conversion infra, frontend visual strategy, layout system, page inventory (one mini-block per page), cross-page components, shared state requirements, motion posture, accessibility posture, localization posture, implementation stack, route map, file output inventory, AI consumption guidance.
+5. Author `ai-context.yaml` (AI-first navigation file for the output folder).
 
 ### Phase 2 — Design system (tokens)
 Owns: color, typography, spacing, radius, shadow, motion, breakpoints, z-index, iconography, imagery.
@@ -270,20 +217,12 @@ Owns: macro effects (section reveal, page transition, modal, drawer, sheet, toas
 4. Emit `motion-system.md` per `motion-system-spec.md`.
 
 ### Phase 5 — Content library
-Owns: every visible string keyed for i18n plus publish-ready draft copy. Errors, validation, SEO, schema.org, trust copy, forbidden-word audit.
+Owns: every visible string keyed for i18n. Errors, validation, SEO, schema.org, trust copy, forbidden-word audit.
 
 1. Collect every content key referenced by master-ui-architecture, component specs (next phase), and page specs (next phase).
-2. Author each key with final-quality draft copy that matches `brief.brand.voice` and `tone`. Honor length budgets.
-3. Ensure copy reads like a completed website (no key-like placeholders in user-facing values).
-4. For unknown client facts, provide realistic draft values and list them in open questions for client replacement.
-5. Audit against `forbidden_words` from the industry pack and brand override. Replace with concrete alternatives or surface as open question.
-6. Materialize footer attribution keys from `brief.brand.footer_attribution` (or the deterministic default if absent):
-  - `footer.attribution.text`
-  - `footer.attribution.link_text`
-  - `footer.attribution.url`
-  - `footer.attribution.aria_label`
-7. If footer attribution is enabled in brief, these keys are mandatory and must be referenced by footer specs.
-8. Emit `content-library.md` (narrative + key index) and `content.<locale>.json` per declared locale.
+2. Author each key with copy that matches `brief.brand.voice` and `tone`. Honor length budgets.
+3. Audit against `forbidden_words` from the industry pack and brand override. Replace with concrete alternatives or surface as open question.
+4. Emit `content-library.md` (narrative + key index) and `content.<locale>.json` per declared locale.
 
 ### Phase 6 — Interaction model + dynamic UX patterns
 Owns: hover / click / scroll / form / commerce / chat / data / mobile; plus the dynamic SaaS UX patterns activated by features.
@@ -291,54 +230,11 @@ Owns: hover / click / scroll / form / commerce / chat / data / mobile; plus the 
 1. For each declared dynamic UX pattern (data tables, charts, command palette, keyboard shortcuts, search, bulk actions, drag-drop, rich text, infinite scroll, list virtualization, URL-synced filters, real-time subscriptions, presence, comments/mentions, AI streaming + citations, multi-tenant org switching, onboarding tours, in-app help, empty states, undo/revert, activity feeds, saved views, notifications inbox, file upload pipelines), pull the rules + skills + spec.
 2. Emit `interaction-matrix.md` mapping interaction class → component → state behavior → keyboard / touch / pointer parity → motion reference.
 
-### Phase 6.5 — Creative latitude + Visual Differentiation Map (REQUIRED)
-Owns: declaring per-surface creative latitude and the visual deltas that prevent template collapse.
+### Phase 7 — Per-page specs
+Owns: section-level composition for every route in the site map.
 
-1. For every route in the site map, declare a `creative_latitude` band: `HIGH` | `MEDIUM` | `LOW`. Defaults from `page-archetype-rules.md`; the project may override.
-2. Author `visual-differentiation-map.md` per `visual-differentiation-map-spec.md`. Required content:
-   - A matrix listing every pair of routes and the visual deltas between them (composition, primary section rhythm, motion temperament, surface stack, content density).
-   - Each cell is non-trivial — "same" or "n/a" cells are forbidden between any two HIGH or MEDIUM latitude routes.
-   - For each route, emit a `visual_signature_hash` (deterministic shorthand of the route's composition + rhythm + motion temperament). No two HIGH-latitude routes may share a hash.
-3. Cross-reference: every per-page brief (Phase 7) MUST cite its corresponding entry in this map.
-
-### Phase 7 — Per-page design briefs (E2E section blueprints)
-Owns: complete section-level design briefs for every route with ready-to-ship draft copy and explicit layout blueprint.
-
-Mode override:
-- If `constraints.execution_mode == "frontend_focus"`, this phase MUST use `per-page-spec.frontend-focus.md` as the governing template.
-- In frontend_focus mode, page inventory stays adaptive to the brief (not fixed), but each chosen page must satisfy minimum section-density by priority (flagship/primary/supporting/utility) to prevent thin or broken outputs.
-
-This is the central anti-template-collapse phase. The planner MUST emit a brief per `per-page-spec.md` with outcome constraints AND a section-by-section implementation blueprint. For each route:
-
-1. Author `pages/<route-slug>.md`. Required content per the new design-brief shape:
-   - **Page definition** — user intent, conversion outcome, primary + secondary CTA, KPI.
-   - **Outcomes (what must be true; not how)** — 3–7 measurable user-truth statements; NO section lists.
-  - **Required content slots** — exhaustive list of content the page must carry, with content keys and category tags.
-  - **Section blueprint (required)** — visual-order section list with, for each section: section purpose, section-level copy draft (headline/subhead/body/cta text), desktop/tablet/mobile layout intent, surface style, and key interaction behavior.
-   - **Forbidden patterns** — what this page MUST NOT do, usually relative to other routes (e.g., "MUST NOT use the same hero composition as `/services`").
-   - **Visual differentiation** — restate deltas vs every other route (cross-link to `visual-differentiation-map.md`).
-   - **Composition guidance per latitude:**
-    - HIGH: list composition primitives (Stack / Cluster / Frame / Surface / Reveal / Grid / MediaFrame / Trail), surface stack pattern, rhythm pattern, asymmetry target, plus a concrete section ordering and layout blueprint.
-     - MEDIUM: list a recommended outline as a starting point; deviation allowed with documented reason.
-     - LOW: specify the standard composition explicitly.
-   - **Motion temperament** — reference `motion-system.md`; state surface mood (`restrained-cinematic` / `alive-energetic` / `calm-precise` / `playful-staccato`) + key moments + reduced-motion fallback per moment + forbidden motion.
-   - **State requirements** — loading skeleton, error fallback, empty / filtered-empty, auth state, network offline.
-   - **Responsive intent (NOT prescription)** — describe intent at each breakpoint.
-   - **SEO + Schema.org** per declared archetype.
-   - **Conversion path** — primary, secondary, exit points.
-   - **Accessibility plan** — landmarks, skip-link, heading outline, ARIA notes, contrast checks, motion-prefers-reduced behaviour.
-   - **Performance plan** — LCP target, hero image plan, route JS budget, client component reasons.
-   - **Data fetching plan** — per-surface data source, cache strategy, failure mode.
-   - **Form plan (if applicable)** — fields, validation, success / error / network states.
-   - **Analytics plan** — typed event list.
-   - **Quality bar scoring** — target_score + per-dimension targets per `quality-bar-scoring.md`.
-   - **Open questions for human.**
-2. Every route's `required_content_slots[]` MUST include the relevant archetype-level required content categories for that route intent.
-3. The brief MUST NOT prescribe React component names, but MUST prescribe section-level layout blueprint and draft copy so implementation needs no redesign pass.
-
-4. Section-level order is required, but it MUST be route-specific and visually differentiated; copy-paste section stacks across routes are forbidden.
-5. Cross-link content keys, motion temperament references, dynamic UX pattern files, differentiation-map entries.
-6. Emit one brief per route under `pages/<route-slug>.md`.
+1. For each route, render `pages/<route-slug>.md` per `per-page-spec.md`. Required: page definition, sections in visual order (each with purpose + content keys + components + data source + interactions + states + responsive + motion + a11y), page-level state requirements, responsive adaptation, SEO + Schema.org JSON-LD where applicable, conversion path, accessibility plan, performance plan, data fetching plan, form plan (where applicable), analytics plan, open questions.
+2. Cross-link content keys, components, motion catalog entries, dynamic UX pattern files.
 
 ### Phase 8 — Visual reference pack
 Owns: hero composition specs, mobile composition specs, asset brief.
@@ -349,7 +245,7 @@ Owns: hero composition specs, mobile composition specs, asset brief.
 4. Emit `visual-reference-pack.md`.
 
 ### Phase 9 — Validation
-1. Evaluate F1..F17 (frontend-constraints) and AC1..AC12 (accessibility-constraints) against every artifact. Each check returns `pass | fail | not-applicable` with evidence.
+1. Evaluate F1..F12 (frontend-constraints) and AC1..AC12 (accessibility-constraints) against every artifact. Each check returns `pass | fail | not-applicable` with evidence.
 2. Cross-check trust-critical slots resolved.
 3. Confirm every page spec has ≥ 7 sections (or `min_sections_exempt: true` with reason).
 4. Confirm content keys referenced match content-library entries.
@@ -357,9 +253,8 @@ Owns: hero composition specs, mobile composition specs, asset brief.
 
 ### Phase 10 — Emit summary + index
 1. Emit `README.md` (human-first index for the output folder).
-2. Derive `project_root_slug` as `kebab-case(brief.brand.name)-website` (e.g., `"Apex Roofing Co."` → `"apex-roofing-website"`). Include it in `frontend.json` so `frontend_developer` reads and applies the correct project root directory name.
-3. Emit `frontend.json` for `plan.json` aggregation.
-4. Mark output `lock_status: PLANNED` when all artifacts pass.
+2. Emit `frontend.json` for `plan.json` aggregation.
+3. Mark output `lock_status: PLANNED` when all artifacts pass.
 
 ## OUTPUT FORMAT
 Output root: `DOC/output/runs/<timestamp>/planning/frontend/` (configurable via `constraints.output_root`).
@@ -378,10 +273,8 @@ Required artifacts:
 ├── content-library.md
 ├── content.<locale>.json               ← one per declared locale
 ├── interaction-matrix.md
-├── visual-differentiation-map.md       ← NEW (Phase 6.5) — prevents template collapse
-├── pages/<route-slug>.md               ← one per route, design-brief shape (outcomes + slots + palette)
+├── pages/<route-slug>.md               ← one per route
 ├── visual-reference-pack.md
-├── frontend-execution-contract.json    ← machine-readable execution handoff
 └── frontend.json                       ← machine-readable summary
 ```
 
@@ -389,14 +282,6 @@ Required artifacts:
 ```json
 {
   "status": "passed | failed",
-  "project_root_slug": "<kebab-case-brand-name>-website",
-  "execution_contract": {
-    "path": "DOC/output/runs/<timestamp>/planning/frontend/frontend-execution-contract.json",
-    "status": "passed | failed",
-    "route_count": 0,
-    "primary_navigation_routes": ["/", "/services", "/contact"],
-    "mobile_bottom_nav_routes": ["/", "/services", "/contact"]
-  },
   "artifacts": {
     "root": "DOC/output/runs/<timestamp>/planning/frontend",
     "count": 0,
@@ -416,14 +301,10 @@ Required artifacts:
 
 ## VALIDATION STEPS
 - Every artifact above exists and is non-skeletal.
-- `frontend-execution-contract.json` exists and passes `frontend-execution-contract-spec.md`.
-- F1..F17 all `passed`.
+- F1..F12 all `passed`.
 - AC1..AC12 all `passed`.
 - No raw color / spacing / motion / radius / shadow values in any spec.
-- Every page and component label resolves to a content key, and every key has publish-ready default copy in `content.<locale>.json`.
-- Every executable route in `site-inventory.md` is represented in `frontend-execution-contract.json.runtime_build_plan.routes`.
-- `frontend-execution-contract.json.runtime_build_plan.routes[]` exactly matches `frontend-execution-contract.json.runtime_composition.routePlans[].routeId`.
-- `frontend-execution-contract.json.shared_surfaces.primary_navigation_routes[]` and `mobile_bottom_nav_routes[]` are explicit and executable.
+- No inline strings in any component or page spec — every visible label is a content key.
 - Every page spec has ≥ 5 sections (marketing flagship ≥ 7).
 - Every animated element has a reduced-motion fallback.
 - Every interactive element has every required state declared.
@@ -434,25 +315,21 @@ Required artifacts:
 - `ThemeSwitcher` component declared in header + mobile toolbar.
 - `MobileBottomNav` (icon tab bar) declared for all `< lg` surfaces.
 - `AuthModal` declared as primary auth surface; `/sign-in` and `/sign-up` pages declared as fallbacks.
-- Footer attribution from `brief.brand.footer_attribution` declared in every footer spec.
-- Archetype required content categories are mapped into per-route required content slots with category tags.
-- Per-route briefs avoid prescribed component names in category coverage blocks.
+- Footer attribution to Growrix OS declared in every footer spec.
 - Every hero spec declares: full-bleed layout, text reveal animation, trust chip contrast tokens, gradient overlay opacity ≥ 0.55.
 
 ## FAILURE MODES
 - `FRONTEND_SPEC_INCOMPLETE` — any artifact shallow or skeletal.
-- `FRONTEND_CONSTRAINT_FAILURE` — any F1..F17 failed.
+- `FRONTEND_CONSTRAINT_FAILURE` — any F1..F12 failed.
 - `ACCESSIBILITY_CONSTRAINT_FAILURE` — any AC1..AC12 failed.
 - `VISUAL_ARCHETYPE_CONFLICT` — brief signals contradict the matrix in `brand-translation-rules.md`.
 - `CONTENT_KEY_UNRESOLVED` — page or component references a key not in the content library.
 - `STALE_BRIEF` — brief not LOCKED.
 - `RAW_VALUE_IN_SPEC` — token discipline violated.
-- `FOOTER_ATTRIBUTION_MISSING` — brief-declared footer attribution absent from any footer spec.
+- `FOOTER_ATTRIBUTION_MISSING` — Growrix OS attribution absent from any footer spec.
 - `DARK_THEME_MISSING` — dark theme token block or ThemeSwitcher absent from design system spec.
 - `MOBILE_NAV_MISSING` — MobileBottomNav (icon tab bar) absent from mobile nav plan.
 - `AUTH_MODAL_MISSING` — AuthModal not declared as primary auth surface.
-- `FRONTEND_EXECUTION_CONTRACT_MISSING` — deterministic execution contract absent or schema-incomplete.
-- `FRONTEND_EXECUTION_ROUTE_DRIFT` — route coverage differs between planning artifacts and execution contract.
 - `HERO_CONTRAST_FAILURE` — trust chip or subtitle contrast not declared against rendered background.
 - `PAGE_SECTION_DENSITY_FAILURE` — any public route has < 5 sections in its spec.
 
@@ -465,10 +342,10 @@ Required artifacts:
 - Output is deterministic given (brief, rules, archetypes, industry packs).
 - Two runs of the same brief produce byte-identical output (after stripping timestamps).
 - The agent absorbs the prior sub-planners (`ux_director`, `design_system_planner`, `component_system_planner`, `motion_planner`, `content_planner`, `interaction_planner`, `page_planner`); those files remain as internal references and are loaded for their detailed rules.
-- Footer attribution is **brief-driven** and must be propagated from intake to planning to implementation without hardcoded vendor defaults.
+- The **Growrix OS footer attribution** is a permanent system-level invariant. No brief, client, or downstream agent can remove it.
 - The **dark theme + ThemeSwitcher**, **MobileBottomNav**, and **AuthModal** infrastructure requirements are mandatory defaults for every project. They may only be opted out with explicit `brief.opt_out` flags and documented business justification.
 
 ## HANDOFF
-After this agent emits `frontend.json` with `status: passed` and a valid `frontend-execution-contract.json`:
+After this agent emits `frontend.json` with `status: passed`:
 - `backend_planner` consumes the brief + the frontend artifacts (specifically the data needs declared in page specs and the component data sources) to plan the backend, integrations, devops, security, qa, performance.
-- `frontend_developer` consumes the entire `<output_root>/` plus `frontend-execution-contract.json` to implement the frontend code.
+- `frontend_developer` consumes the entire `<output_root>/` to implement the frontend code.

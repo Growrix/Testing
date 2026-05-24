@@ -1,60 +1,101 @@
 # Phase 1.4 Live Visual Parity
 
-Generated: 2026-05-23T20:45:43.900Z
+Generated: 2026-05-24T08:28:06.542Z
 PARITY_THRESHOLD: 0.03
-SOURCE_BASE_URL: https://lumoria.wpengine.com
+SOURCE_BASELINE_MODE: snapshot-pages
+SOURCE_BASE_URL: http://localhost:3100/lumoria-pages
 LOCAL_BASE_URL: http://localhost:3100
 
 Total checks: 46
-Successful checks: 46
-Failed checks: 46
-Worst ratio: 0.781430
+Completed checks: 18
+Passing checks: 1
+Failed checks: 45
+Worst ratio: 0.386817
 
 | Route | Viewport | Ratio | Pass | Notes |
 |---|---:|---:|---:|---|
-| / | desktop | 0.474671 | no | source 1512x8700, local 1512x3689, compare 1512x3689 |
-| /404 | desktop | 0.769050 | no | source 1512x8700, local 1512x1228, compare 1512x1228 |
-| /about | desktop | 0.407220 | no | source 1512x8700, local 1512x2733, compare 1512x2733 |
-| /blog | desktop | 0.650524 | no | source 1512x8700, local 1512x1736, compare 1512x1736 |
-| /career-listing | desktop | 0.617185 | no | source 1512x8700, local 1512x1704, compare 1512x1704 |
-| /contact-us | desktop | 0.555241 | no | source 1512x8700, local 1512x1879, compare 1512x1879 |
-| /core-values | desktop | 0.751659 | no | source 1512x8700, local 1512x1376, compare 1512x1376 |
-| /faq | desktop | 0.678527 | no | source 1512x8700, local 1512x1413, compare 1512x1413 |
-| /listings/designing-tomorrows-cities | desktop | 0.781430 | no | source 1512x8700, local 1512x1474, compare 1512x1474 |
-| /our-awards | desktop | 0.678730 | no | source 1512x8700, local 1512x1732, compare 1512x1732 |
-| /our-history | desktop | 0.552749 | no | source 1512x8700, local 1512x2364, compare 1512x2364 |
-| /our-process | desktop | 0.533986 | no | source 1512x8700, local 1512x2034, compare 1512x2034 |
-| /our-services | desktop | 0.639798 | no | source 1512x8700, local 1512x1760, compare 1512x1760 |
-| /our-team | desktop | 0.695653 | no | source 1512x8700, local 1512x1704, compare 1512x1704 |
-| /portfolio-style-2 | desktop | 0.600977 | no | source 1512x8700, local 1512x1760, compare 1512x1760 |
-| /portfolio-style1 | desktop | 0.591858 | no | source 1512x8700, local 1512x2034, compare 1512x2034 |
-| /pricing-plan | desktop | 0.530120 | no | source 1512x8700, local 1512x1803, compare 1512x1803 |
-| /sustainable-construction-for-long-term-living | desktop | 0.714947 | no | source 1512x8700, local 1512x1513, compare 1512x1513 |
-| /urban-development-for-the-next-generation | desktop | 0.698910 | no | source 1512x8576, local 1512x1533, compare 1512x1533 |
-| /wdt-careers/project-assistant | desktop | 0.566005 | no | source 1512x8700, local 1512x1907, compare 1512x1907 |
-| /wdt-services/custom-construction | desktop | 0.567790 | no | source 1512x8700, local 1512x1669, compare 1512x1669 |
-| /with-left-sidebar | desktop | 0.628968 | no | source 1512x8700, local 1512x1668, compare 1512x1668 |
-| /with-right-sidebar | desktop | 0.642676 | no | source 1512x8700, local 1512x1668, compare 1512x1668 |
-| / | mobile | 0.403390 | no | source 390x13344, local 390x8103, compare 390x8103 |
-| /404 | mobile | 0.692869 | no | source 390x13344, local 390x1846, compare 390x1846 |
-| /about | mobile | 0.392995 | no | source 390x13344, local 390x4899, compare 390x4899 |
-| /blog | mobile | 0.605596 | no | source 390x13344, local 390x3178, compare 390x3178 |
-| /career-listing | mobile | 0.622622 | no | source 390x13344, local 390x3030, compare 390x3030 |
-| /contact-us | mobile | 0.490973 | no | source 390x13344, local 390x2815, compare 390x2815 |
-| /core-values | mobile | 0.534742 | no | source 390x13344, local 390x2594, compare 390x2594 |
-| /faq | mobile | 0.600101 | no | source 390x13344, local 390x2135, compare 390x2135 |
-| /listings/designing-tomorrows-cities | mobile | 0.735930 | no | source 390x13344, local 390x2412, compare 390x2412 |
-| /our-awards | mobile | 0.486501 | no | source 390x13344, local 390x3690, compare 390x3690 |
-| /our-history | mobile | 0.510414 | no | source 390x13344, local 390x3802, compare 390x3802 |
-| /our-process | mobile | 0.504930 | no | source 390x13344, local 390x3690, compare 390x3690 |
-| /our-services | mobile | 0.600168 | no | source 390x13372, local 390x3774, compare 390x3774 |
-| /our-team | mobile | 0.540707 | no | source 390x13344, local 390x3578, compare 390x3578 |
-| /portfolio-style-2 | mobile | 0.608381 | no | source 390x13344, local 390x3388, compare 390x3388 |
-| /portfolio-style1 | mobile | 0.615659 | no | source 390x13344, local 390x3388, compare 390x3388 |
-| /pricing-plan | mobile | 0.494459 | no | source 390x13344, local 390x3137, compare 390x3137 |
-| /sustainable-construction-for-long-term-living | mobile | 0.625976 | no | source 390x13344, local 390x2298, compare 390x2298 |
-| /urban-development-for-the-next-generation | mobile | 0.620501 | no | source 390x13344, local 390x2307, compare 390x2307 |
-| /wdt-careers/project-assistant | mobile | 0.551385 | no | source 390x13344, local 390x3203, compare 390x3203 |
-| /wdt-services/custom-construction | mobile | 0.533838 | no | source 390x13344, local 390x2658, compare 390x2658 |
-| /with-left-sidebar | mobile | 0.609416 | no | source 390x13344, local 390x2387, compare 390x2387 |
-| /with-right-sidebar | mobile | 0.623703 | no | source 390x13344, local 390x2355, compare 390x2355 |
+| / | desktop | 0.182389 | no | source 1512x8057, local 1512x9836, compare 1512x8057 |
+| /404 | desktop | 0.001140 | yes | source 1512x982, local 1512x982, compare 1512x982 |
+| /about | desktop | 0.245688 | no | source 1512x4441, local 1512x4619, compare 1512x4441 |
+| /blog | desktop | 0.285450 | no | source 1512x2880, local 1512x2692, compare 1512x2692 |
+| /career-listing | desktop | 0.227167 | no | source 1512x2971, local 1512x2771, compare 1512x2771 |
+| /contact-us | desktop | n/a | no | page.goto: Timeout 120000ms exceeded.
+Call log:
+[2m  - navigating to "http://localhost:3100/lumoria-pages/contact-us/index.html", waiting until "networkidle"[22m
+ |
+| /core-values | desktop | 0.282162 | no | source 1512x3867, local 1512x3666, compare 1512x3666 |
+| /faq | desktop | 0.306897 | no | source 1512x2761, local 1512x3271, compare 1512x2761 |
+| /listings/designing-tomorrows-cities | desktop | 0.313357 | no | source 1512x3528, local 1512x3327, compare 1512x3327 |
+| /our-awards | desktop | 0.213635 | no | source 1512x2981, local 1512x2780, compare 1512x2780 |
+| /our-history | desktop | 0.199362 | no | source 1512x4710, local 1512x4457, compare 1512x4457 |
+| /our-process | desktop | 0.226680 | no | source 1512x3734, local 1512x3533, compare 1512x3533 |
+| /our-services | desktop | 0.151135 | no | source 1512x6661, local 1512x7132, compare 1512x6661 |
+| /our-team | desktop | 0.386817 | no | source 1512x2720, local 1512x2519, compare 1512x2519 |
+| /portfolio-style-2 | desktop | 0.332659 | no | source 1512x1875, local 1512x1674, compare 1512x1674 |
+| /portfolio-style1 | desktop | 0.353388 | no | source 1512x1762, local 1512x1561, compare 1512x1561 |
+| /pricing-plan | desktop | 0.331241 | no | source 1512x3721, local 1512x4865, compare 1512x3721 |
+| /sustainable-construction-for-long-term-living | desktop | 0.333594 | no | source 1512x4568, local 1512x4278, compare 1512x4278 |
+| /urban-development-for-the-next-generation | desktop | 0.282938 | no | source 1512x4211, local 1512x3920, compare 1512x3920 |
+| /wdt-careers/project-assistant | desktop | n/a | no | page.goto: Page crashed
+Call log:
+[2m  - navigating to "http://localhost:3100/lumoria-pages/wdt-careers/project-assistant/index.html", waiting until "networkidle"[22m
+ |
+| /wdt-services/custom-construction | desktop | n/a | no | page.goto: Page crashed
+Call log:
+[2m  - navigating to "http://localhost:3100/lumoria-pages/wdt-services/custom-construction/index.html", waiting until "networkidle"[22m
+ |
+| /with-left-sidebar | desktop | n/a | no | page.goto: Page crashed
+Call log:
+[2m  - navigating to "http://localhost:3100/lumoria-pages/with-left-sidebar/index.html", waiting until "networkidle"[22m
+ |
+| /with-right-sidebar | desktop | n/a | no | page.goto: Page crashed
+Call log:
+[2m  - navigating to "http://localhost:3100/lumoria-pages/with-right-sidebar/index.html", waiting until "networkidle"[22m
+ |
+| / | mobile | n/a | no | page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3100/lumoria-pages/index.html
+Call log:
+[2m  - navigating to "http://localhost:3100/lumoria-pages/index.html", waiting until "networkidle"[22m
+ |
+| /404 | mobile | n/a | no | page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3100/lumoria-pages/404/index.html
+Call log:
+[2m  - navigating to "http://localhost:3100/lumoria-pages/404/index.html", waiting until "networkidle"[22m
+ |
+| /about | mobile | n/a | no | page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3100/lumoria-pages/about/index.html
+Call log:
+[2m  - navigating to "http://localhost:3100/lumoria-pages/about/index.html", waiting until "networkidle"[22m
+ |
+| /blog | mobile | n/a | no | page.goto: net::ERR_ABORTED at http://localhost:3100/lumoria-pages/blog/index.html
+Call log:
+[2m  - navigating to "http://localhost:3100/lumoria-pages/blog/index.html", waiting until "networkidle"[22m
+ |
+| /career-listing | mobile | n/a | no | page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3100/lumoria-pages/career-listing/index.html
+Call log:
+[2m  - navigating to "http://localhost:3100/lumoria-pages/career-listing/index.html", waiting until "networkidle"[22m
+ |
+| /contact-us | mobile | n/a | no | page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3100/lumoria-pages/contact-us/index.html
+Call log:
+[2m  - navigating to "http://localhost:3100/lumoria-pages/contact-us/index.html", waiting until "networkidle"[22m
+ |
+| /core-values | mobile | n/a | no | page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3100/lumoria-pages/core-values/index.html
+Call log:
+[2m  - navigating to "http://localhost:3100/lumoria-pages/core-values/index.html", waiting until "networkidle"[22m
+ |
+| /faq | mobile | n/a | no | page.goto: net::ERR_ABORTED at http://localhost:3100/lumoria-pages/faq/index.html
+Call log:
+[2m  - navigating to "http://localhost:3100/lumoria-pages/faq/index.html", waiting until "networkidle"[22m
+ |
+| /listings/designing-tomorrows-cities | mobile | n/a | no | page.goto: Target page, context or browser has been closed |
+| /our-awards | mobile | n/a | no | page.goto: Target page, context or browser has been closed |
+| /our-history | mobile | n/a | no | page.goto: Target page, context or browser has been closed |
+| /our-process | mobile | n/a | no | page.goto: Target page, context or browser has been closed |
+| /our-services | mobile | n/a | no | page.goto: Target page, context or browser has been closed |
+| /our-team | mobile | n/a | no | page.goto: Target page, context or browser has been closed |
+| /portfolio-style-2 | mobile | n/a | no | page.goto: Target page, context or browser has been closed |
+| /portfolio-style1 | mobile | n/a | no | page.goto: Target page, context or browser has been closed |
+| /pricing-plan | mobile | n/a | no | page.goto: Target page, context or browser has been closed |
+| /sustainable-construction-for-long-term-living | mobile | n/a | no | page.goto: Target page, context or browser has been closed |
+| /urban-development-for-the-next-generation | mobile | n/a | no | page.goto: Target page, context or browser has been closed |
+| /wdt-careers/project-assistant | mobile | n/a | no | page.goto: Target page, context or browser has been closed |
+| /wdt-services/custom-construction | mobile | n/a | no | page.goto: Target page, context or browser has been closed |
+| /with-left-sidebar | mobile | n/a | no | page.goto: Target page, context or browser has been closed |
+| /with-right-sidebar | mobile | n/a | no | page.goto: Target page, context or browser has been closed |

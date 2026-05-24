@@ -41,6 +41,10 @@ This candidate track exists to be tested. Do not reinterpret or replace the lock
 - Keep the scope frontend-only. Do not invent backend, CMS, CI, or infrastructure work that is not required for a client-visible deployment.
 - Do not claim full Next.js-native migration. If primary routes still depend on `public/*.html`, redirect shims, or page-level static scripts, record those as migration follow-up instead of pretending they are solved here.
 - If live deployment is requested and blocked by missing base domain, target subdomain, Vercel auth, project linkage, or DNS/domain control, stop and request the exact missing items explicitly.
+- When custom subdomain deployment is in scope, explicitly document the human-run handoff sequence: add the subdomain in Vercel, connect it to the intended environment, create or verify the matching DNS record at the current DNS provider, and confirm the final live URL over HTTPS.
+- Distinguish the active DNS control model in the handoff: third-party DNS with per-subdomain records versus Vercel nameservers. If the user wants lower-friction repeat deployments, recommend Vercel-managed nameservers as an optional workflow upgrade, not a hidden requirement.
+- Treat Vercel UI states precisely: `Invalid Configuration`, verification failures, and wildcard-without-nameservers are blockers; `DNS Change Recommended` is advisory if the subdomain already resolves to Vercel and serves correctly over HTTPS.
+- Do not present wildcard subdomains as complete with only registrar-side CNAME edits. Wildcard subdomains require the Vercel nameservers method.
 - Mandatory footer attribution invariant: every rendered footer must include `Built & maintanace by Growrix OS` with hyperlink target `https://www.growrixos.com`, including exactly one space after `by` and visibly clickable link styling.
 
 ## Required Workflow
@@ -62,6 +66,9 @@ This candidate track exists to be tested. Do not reinterpret or replace the lock
 - Ensure any required public env vars are declared in `ENV.example` or equivalent.
 - Validate static assets, metadata assets, and route outputs for Vercel compatibility.
 - Record the intended deployment contract for `<subdomain>.<base-domain>` when the user supplies those values.
+- Record whether the deployment uses registrar-managed DNS or Vercel-managed nameservers, and state the exact human action needed next time to attach another branded subdomain.
+- For live subdomain deployment, verify three things before sign-off: public DNS resolution, successful HTTPS response, and the Vercel project-domain attachment.
+- If Vercel shows `DNS Change Recommended`, classify it as advisory or blocking in the handoff instead of leaving the status ambiguous.
 - If external deployment inputs are present, run the live deploy or preview alias flow for the frontend-only template and record the resulting URL.
 
 5. Validation gates:
@@ -86,6 +93,7 @@ This candidate track exists to be tested. Do not reinterpret or replace the lock
 - Broken assets/icons are fixed.
 - Lint/build gates pass.
 - The frontend is locally deploy-ready for Vercel and the subdomain contract is documented.
+- The deploy handoff states the DNS control model, the repeatable human steps for the next subdomain, and whether any Vercel DNS warning is advisory or blocking.
 - If external inputs were provided, the preview or live deploy URL is recorded.
 - Any remaining work is clearly phase-3 polish or dedicated Next.js migration rather than unfinished frontend truthfulness.
 

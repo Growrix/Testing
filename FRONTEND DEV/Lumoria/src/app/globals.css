@@ -1,14 +1,3 @@
-@import "tailwindcss";
-@import "../../design-tokens.css";
-
-@theme inline {
-  --color-background: var(--lumoria-color-body-bg);
-  --color-foreground: var(--lumoria-color-body-text);
-  --color-primary: var(--lumoria-color-primary);
-  --font-sans: var(--lumoria-font-body);
-  --font-heading: var(--lumoria-font-heading);
-}
-
 * {
   box-sizing: border-box;
 }
@@ -17,21 +6,32 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: var(--lumoria-color-body-bg);
-  color: var(--lumoria-color-body-text);
-  font-family: var(--lumoria-font-body);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--lumoria-color-secondary);
-  font-family: var(--lumoria-font-heading);
+/* Force post-load visual state so snapshots do not remain hidden behind legacy overlays. */
+body .pre-loader {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
-a {
-  text-decoration: none;
+body a#back-to-top,
+body .go-to-top,
+body .wdt-go-to-top {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Keep non-revealed background-only animation containers collapsed like source snapshots. */
+.elementor-invisible .animated-slow.e-con.e-child {
+  min-height: 0 !important;
+  height: 0 !important;
+}
+
+/* Source renders a single subtitle frame at rest; suppress duplicate animation frames. */
+.wdt-heading-subtitle-wrapper .wdt-heading-subtitle-animate:not(:first-child) {
+  display: none !important;
 }

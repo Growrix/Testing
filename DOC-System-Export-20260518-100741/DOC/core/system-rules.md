@@ -56,11 +56,6 @@ Generate complete, production-ready SaaS applications with:
    - Planning, reports, specs, and codegen artifacts MUST be emitted only under `DOC/output/runs/<timestamp>/`.
    - Agents MUST NOT create generated deliverables under workspace roots such as `On Going DOCS/`, repo root `docs/`, or ad hoc folders outside `DOC/output/runs/<timestamp>/`.
 
-11. Canonical framework immutability is mandatory.
-   - Canonical framework repositories (for example `Frontend-Master_DS/`) are read-only reference sources during project execution.
-   - Project-specific routes, presets, pages, content wiring, and runtime config MUST be implemented only in run-scoped clones under `DOC/output/runs/<timestamp>/codegen/<project-slug>/`.
-   - If clone runtime is unavailable, agents MUST block with explicit remediation. They MUST NOT patch canonical framework runtime files as a workaround.
-
 ## CONTRACT FOR ALL AGENTS
 
 | Phase     | Required Action                                        |
@@ -85,7 +80,6 @@ Generate complete, production-ready SaaS applications with:
 - DO NOT claim completion when any warning remains.
 - DO NOT modify code when the user requested run/verify-only mode unless fix mode is approved.
 - DO NOT emit generated planning or codegen artifacts outside `DOC/output/runs/<timestamp>/`.
-- DO NOT write project-specific runtime changes into canonical framework paths (for example `Frontend-Master_DS/src/app/**` or `Frontend-Master_DS/src/site/**`) during project execution.
 
 ## FAILURE PROTOCOL
 

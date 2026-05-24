@@ -10,7 +10,11 @@ const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, "..");
 
 const localBaseUrl = (process.env.LOCAL_BASE_URL ?? "http://localhost:3100").replace(/\/$/, "");
-const sourceBaseUrl = (process.env.SOURCE_BASE_URL ?? "https://lumoria.wpengine.com").replace(/\/$/, "");
+const sourceBaselineMode = process.env.SOURCE_BASELINE_MODE ?? "snapshot-pages";
+const sourceBaseUrl = (
+  process.env.SOURCE_BASE_URL
+  ?? (sourceBaselineMode === "snapshot-pages" ? `${localBaseUrl}/lumoria-pages` : "https://lumoria.wpengine.com")
+).replace(/\/$/, "");
 const parityThreshold = Number(process.env.PARITY_THRESHOLD ?? "0.03");
 const saveImages = process.env.SAVE_PARITY_IMAGES === "1";
 
@@ -48,6 +52,35 @@ function composeUrl(baseUrl, routePath) {
   return `${baseUrl}${normalized}`;
 }
 
+function composeSourceUrl(routePath) {
+  if (sourceBaselineMode === "snapshot-pages") {
+    if (routePath === "/") {
+      return `${sourceBaseUrl}/index.html`;
+    }
+
+    const normalized = routePath.startsWith("/") ? routePath : `/${routePath}`;
+    return `${sourceBaseUrl}${normalized}/index.html`;
+  }
+
+  return composeUrl(sourceBaseUrl, routePath);
+}
+
+function ensureExpectedStatus(response, routePath, url, role) {
+  const status = response?.status() ?? null;
+
+  if (status === null) {
+    throw new Error(`${role} navigation missing response for ${url}`);
+  }
+
+  if (role === "source" && sourceBaselineMode === "snapshot-pages" && status >= 400) {
+    throw new Error(`${role} status ${status} for ${url}`);
+  }
+
+  if (routePath !== "/404" && status >= 400) {
+    throw new Error(`${role} status ${status} for ${url}`);
+  }
+}
+
 async function stabilizePage(page) {
   await page.addStyleTag({
     content: `
@@ -57,6 +90,9 @@ async function stabilizePage(page) {
         caret-color: transparent !important;
       }
       html { scroll-behavior: auto !important; }
+      .wdt-heading-subtitle-wrapper .wdt-heading-subtitle-animate:not(:first-child) {
+        display: none !important;
+      }
     `,
   }).catch(() => undefined);
 
@@ -64,10 +100,27 @@ async function stabilizePage(page) {
     if (document?.fonts?.ready) {
       await document.fonts.ready;
     }
+
+    for (const counter of document.querySelectorAll(".wdt-content-counter-number")) {
+      const targetValue = counter.getAttribute("data-to");
+      if (typeof targetValue === "string") {
+        const normalized = targetValue.trim();
+        if (normalized) {
+          counter.textContent = normalized;
+        }
+      }
+    }
+
     window.scrollTo(0, 0);
   }).catch(() => undefined);
 
   await page.waitForTimeout(350);
+}
+
+async function navigateForCapture(page, url) {
+  const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 120000 });
+  await page.waitForLoadState("networkidle", { timeout: 15000 }).catch(() => undefined);
+  return response;
 }
 
 function cropPng(inputPng, width, height) {
@@ -119,16 +172,19 @@ function writeMarkdown(results, outputPath) {
   lines.push("");
   lines.push(`Generated: ${new Date().toISOString()}`);
   lines.push(`PARITY_THRESHOLD: ${parityThreshold}`);
+  lines.push(`SOURCE_BASELINE_MODE: ${sourceBaselineMode}`);
   lines.push(`SOURCE_BASE_URL: ${sourceBaseUrl}`);
   lines.push(`LOCAL_BASE_URL: ${localBaseUrl}`);
   lines.push("");
 
-  const successful = results.filter((item) => !item.error);
+  const completed = results.filter((item) => !item.error);
+  const passing = completed.filter((item) => item.pass);
   const failed = results.filter((item) => item.error || !item.pass);
-  const worst = successful.sort((a, b) => b.ratio - a.ratio)[0];
+  const worst = [...completed].sort((a, b) => b.ratio - a.ratio)[0];
 
   lines.push(`Total checks: ${results.length}`);
-  lines.push(`Successful checks: ${successful.length}`);
+  lines.push(`Completed checks: ${completed.length}`);
+  lines.push(`Passing checks: ${passing.length}`);
   lines.push(`Failed checks: ${failed.length}`);
   lines.push(`Worst ratio: ${worst ? worst.ratio.toFixed(6) : "n/a"}`);
   lines.push("");
@@ -185,11 +241,12 @@ async function run() {
         const localShot = path.join(localDir, `${routeKey}__${viewport.name}.png`);
         const diffShot = path.join(diffDir, `${routeKey}__${viewport.name}.png`);
 
-        const sourceUrl = composeUrl(sourceBaseUrl, route.path);
+        const sourceUrl = composeSourceUrl(route.path);
         const localUrl = composeUrl(localBaseUrl, route.path);
 
         try {
-          await sourcePage.goto(sourceUrl, { waitUntil: "networkidle", timeout: 120000 });
+          const sourceResponse = await navigateForCapture(sourcePage, sourceUrl);
+          ensureExpectedStatus(sourceResponse, route.path, sourceUrl, "source");
           await stabilizePage(sourcePage);
           const sourceBuffer = await sourcePage.screenshot({ fullPage: true });
 
@@ -197,7 +254,8 @@ async function run() {
             fs.writeFileSync(sourceShot, sourceBuffer);
           }
 
-          await localPage.goto(localUrl, { waitUntil: "networkidle", timeout: 120000 });
+          const localResponse = await navigateForCapture(localPage, localUrl);
+          ensureExpectedStatus(localResponse, route.path, localUrl, "local");
           await stabilizePage(localPage);
           const localBuffer = await localPage.screenshot({ fullPage: true });
 
@@ -250,6 +308,7 @@ async function run() {
   const payload = {
     generatedAt: new Date().toISOString(),
     parityThreshold,
+    sourceBaselineMode,
     localBaseUrl,
     sourceBaseUrl,
     overallPass,

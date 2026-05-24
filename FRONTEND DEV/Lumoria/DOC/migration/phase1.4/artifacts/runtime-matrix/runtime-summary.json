@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-23T20:24:44.326Z",
+  "generatedAt": "2026-05-24T09:08:26.283Z",
   "localBaseUrl": "http://localhost:3100",
   "overallPass": true,
   "results": [
@@ -11,9 +11,13 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 3,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -30,9 +34,12 @@
       ],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 2,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "landmark-one-main",
+          "page-has-heading-one"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -47,9 +54,13 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 3,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -64,9 +75,13 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 3,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -81,9 +96,13 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 3,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -98,9 +117,13 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 3,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -115,9 +138,13 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 3,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -132,9 +159,12 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 2,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -149,9 +179,12 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 2,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -166,9 +199,13 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 3,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -183,9 +220,13 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 3,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -200,9 +241,13 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 3,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -217,9 +262,13 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 3,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -234,9 +283,13 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 3,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -251,9 +304,12 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 2,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -268,9 +324,12 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 2,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -285,9 +344,13 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 3,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -302,9 +365,13 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 3,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -319,9 +386,13 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 3,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -336,9 +407,13 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 3,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -353,9 +428,13 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 3,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -370,9 +449,13 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 3,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },
@@ -387,9 +470,13 @@
       "rawConsoleErrors": [],
       "pageErrors": [],
       "axe": {
-        "total": 0,
+        "total": 3,
         "seriousOrCritical": 0,
-        "ids": [],
+        "ids": [
+          "heading-order",
+          "landmark-one-main",
+          "region"
+        ],
         "severeIds": [],
         "severeDetails": []
       },

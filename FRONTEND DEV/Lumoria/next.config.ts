@@ -28,6 +28,18 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: "F:/PROJECTS/testing/FRONTEND DEV/Lumoria",
   },
+  async rewrites() {
+    return [
+      {
+        source: "/wp-content/:path*",
+        destination: "/lumoria-assets/wp-content/:path*",
+      },
+      {
+        source: "/wp-includes/:path*",
+        destination: "/lumoria-assets/wp-includes/:path*",
+      },
+    ];
+  },
   async redirects() {
     return [
       {

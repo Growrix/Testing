@@ -24,6 +24,7 @@ From a normalized brief, the system must generate a validated HTML delivery bund
 - The build must stop on missing required brief fields.
 - The build must snapshot the exact input payload used for generation.
 - The generator for milestone 1 is the local template renderer, not an external AI API call.
+- The renderer must select a layout family that matches the business archetype instead of forcing one generic layout across all business types.
 - The build must copy required local brief assets into the output bundle before writing the final HTML.
 - The validator must compare the brief against the generated HTML for required fields, forbidden hallucinations, theme-role readability, and bundled local asset resolution.
 - The delivery class must remain `blocked` until manual QA is approved and recorded.
@@ -33,6 +34,7 @@ From a normalized brief, the system must generate a validated HTML delivery bund
 - At least two sample briefs from different business types complete successfully.
 - Generated HTML includes required head/meta structure and semantic sections.
 - Artifact bundle is complete for every successful build.
+- Distinct business archetypes produce distinct layout-family outputs rather than one universal page skeleton.
 - Theme role contrast gates pass for every successful build.
 - Local image assets referenced by the output exist inside the output bundle.
 - `build-result.json` records omitted optional sections instead of inventing them.

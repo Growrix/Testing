@@ -7,9 +7,10 @@ Date: 2026-05-24
 - Local routes audited against captured route list
 
 ## Current Observations
-- Local routes now render native React component pages for the full audited route list
-- Canonical route structure and hero/section compositions are in place across desktop and mobile layouts
-- Quantitative parity harness now runs against live source and local app routes for both desktop and mobile
+- Local routes now render native snapshot-owned React nodes for the full audited route list (no runtime HTML parser ownership)
+- Canonical route structure and compatibility redirects are in place across desktop and mobile layouts
+- Quantitative parity harness runs against live source and local app routes for both desktop and mobile
+- Runtime, console, and accessibility gates remain green while parity remains materially above threshold
 
 ## Quantitative Parity
 - Harness: npm run qa:parity
@@ -19,9 +20,10 @@ Date: 2026-05-24
 - Total checks: 46 (23 routes x 2 viewports)
 - Passing checks: 0
 - Failing checks: 46
-- Worst desktop ratio: 0.781430 on /listings/designing-tomorrows-cities
-- Worst mobile ratio: 0.735930 on /listings/designing-tomorrows-cities
-- Best observed ratio: 0.392995 on /about (mobile)
+- Worst desktop ratio: 0.701331 on /404
+- Worst mobile ratio: 0.586839 on /404
+- Best desktop ratio: 0.095650 on /our-services
+- Best mobile ratio: 0.073690 on /pricing-plan
 - Artifacts:
 	- DOC/migration/phase1.4/artifacts/parity-live/parity-summary.json
 	- DOC/migration/phase1.4/artifacts/parity-live/parity-summary.md

@@ -89,6 +89,17 @@ Rationale:
 - A post can move to publish only if content, SEO, citation, duplication, and policy gates pass.
 - Failures must route to a review queue with explicit reasons.
 
+### 2.7 Reuse and delivery model
+- `BLOG-AUTOMATION/` is a reusable product-level automation system.
+- The default operating model is one central BLOG-AUTOMATION service with per-site connectors.
+- Client sites are delivered as separate projects and must not become the permanent home of the automation runtime.
+- The reusable boundary is API + adapter + connector configuration, not source-code embedding into each client site.
+
+### 2.8 Client integration model
+- Every target site must be onboarded through a connector profile.
+- A connector profile owns CMS field mapping, publish mode, revalidation behavior, and site-scoped credentials.
+- Per-client isolated BLOG-AUTOMATION deployments are allowed as an exception path for stronger isolation, but they remain separate from the client site repo.
+
 ---
 
 ## 3. Clarifications Added To Avoid Later Rework
@@ -257,6 +268,9 @@ Constraint:
 - n8n workflows must treat these endpoints as stable contracts.
 - Internal refactors must not break workflow payload expectations.
 
+Additional integration rule:
+- client sites must integrate through connector-aware publish contracts rather than importing low-level BLOG-AUTOMATION runtime code.
+
 ---
 
 ## 7. Workflow State Model
@@ -368,6 +382,14 @@ N8N_*
 NOTIFY_*
 ```
 
+Connector-scoped client settings must also be reserved during implementation, for example:
+
+```text
+CONNECTOR_*
+CLIENT_*
+REVALIDATE_*
+```
+
 ---
 
 ## 11. Agent and Documentation Placement
@@ -424,10 +446,11 @@ Initial intended agent responsibilities:
 These must be answered before we start code generation in this new root:
 
 1. Which niche is the first real target for v1?
-2. Is Sanity definitely the first production CMS, or should WordPress be promoted to v1?
-3. Will v1 publish only after manual approval, or allow auto-publish for low-risk content?
+2. What is the first real client connector target after the core product? Current answer: Growrixos.
+3. Will the first connector start in `draft_only`, `draft_with_human_media_review`, `scheduled_publish_after_approval`, or `auto_publish_low_risk` mode?
 4. What notification target should review failures use first: email, Slack, or dashboard only?
 5. Do you want local-only deployment first, or Docker-first from day one?
+6. What connector registry shape should we lock first for multi-client onboarding?
 
 ---
 
@@ -438,5 +461,8 @@ After this planning pass, the next useful discussion should be implementation pl
 - local agent creation
 - package/app boundary creation order
 - milestone 1 execution spec
+- multi-client operating model
+- connector registry contract
+- first client connector spec
 
 Do not start mixing implementation files into the workspace root.

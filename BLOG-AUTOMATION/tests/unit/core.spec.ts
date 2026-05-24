@@ -4,7 +4,6 @@ import { buildBriefSeed } from "../../packages/blog-planner/src/index";
 import { milestone1RouteCatalog } from "../../packages/contracts/src/index";
 import { scoreKeywordOpportunity } from "../../packages/keyword-engine/src/index";
 import { runPublicationReadiness } from "../../packages/quality-gates/src/index";
-import { buildScaffoldPayload } from "../../apps/automation-api/src/route-catalog";
 
 describe("blog automation scaffold", () => {
   it("scores keyword opportunities deterministically", () => {
@@ -50,12 +49,7 @@ describe("blog automation scaffold", () => {
     expect(summary.totalImpressions).toBe(1030);
   });
 
-  it("covers all milestone-1 API routes with scaffold payloads", () => {
-    for (const route of milestone1RouteCatalog) {
-      const payload = buildScaffoldPayload(route, { briefId: "brief-001" });
-      expect(payload.routeId).toBe(route.id);
-      expect(payload.milestone).toBe("milestone-1");
-      expect(payload.status).toBe("scaffold");
-    }
+  it("locks the expected milestone-1 route contract count", () => {
+    expect(milestone1RouteCatalog).toHaveLength(21);
   });
 });

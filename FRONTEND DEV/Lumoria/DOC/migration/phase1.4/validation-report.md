@@ -3,6 +3,7 @@
 Date: 2026-05-24
 
 ## Commands Executed
+- npm run generate:snapshots
 - npm run lint
 - npm run build
 - npm run dev -- --port 3100
@@ -29,10 +30,13 @@ Date: 2026-05-24
   - Artifact: DOC/migration/phase1.4/artifacts/runtime-matrix/runtime-summary.md
 - Visual parity (qa:parity): FAIL
   - 46/46 checks fail PARITY_THRESHOLD=0.03
+  - Worst observed ratio: 0.701331 on /404 (desktop)
+  - Best observed ratio: 0.073690 on /pricing-plan (mobile)
   - Artifact: DOC/migration/phase1.4/artifacts/parity-live/parity-summary.md
 
 ## Remaining Validation Gaps
 - Visual parity remains out of threshold on all desktop and mobile checks and requires major UI fidelity rework
+- Live source baseline appears materially divergent from route-specific local snapshots in overall page-height/structure, leaving parity blocked under the non-negotiable 0.03 threshold.
 
 ## Status
 - Phase 1.4 validation gate: PARTIAL (technical, purity, runtime, accessibility, and console checks pass; parity gate fails)

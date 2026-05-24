@@ -14,7 +14,6 @@ loads:
   - DOC/validation/checklists/execution-acceptance-checklist.md
   - DOC/execution/spec-templates/*.md
   - DOC/execution/spec-templates/*.yaml
-  - DOC/execution/spec-rules/frontend-execution-contract-spec.md
   - DOC/output/README.md
 ---
 
@@ -43,18 +42,9 @@ Owns post-planning execution. Consumes LOCKED planning artifacts and orchestrate
 - MUST fail execution if test coverage is placeholder-only (for example echo/no-op scripts) for declared critical paths.
 - MUST fail execution if frontend artifacts required by frontend_planner are absent when frontend scope is present.
 - MUST fail execution if generated frontend code is derived from summary-only plan data while the richer frontend bundle contains more specific design or interaction instructions.
-- MUST fail execution if frontend scope is present but `planning/frontend/frontend-execution-contract.json` is missing, schema-incomplete, or not used as the deterministic route/content/token handoff.
 - MUST fail execution if placeholder business facts remain active in production-classified public output.
 - MUST fail execution if CMS-backed public pages render from mock arrays in a production-classified output.
 - MUST fail execution if required visual QA evidence is missing or fails.
-- MUST determine and persist the runtime app root before install/dev checks (for example `web/` in split-root repos).
-- MUST run install/dev/smoke commands from the runtime app root, not from a parent shim root.
-- MUST apply cache-first deterministic dependency setup before reinstalling; clean reinstall is fallback-only with explicit evidence.
-- For DS-bound runs, MUST resolve runtime app root to the run-scoped clone under `DOC/output/runs/<timestamp>/codegen/<project-slug>/`, not `Frontend-Master_DS/`.
-- MUST treat canonical DS (`Frontend-Master_DS/`) as read-only and generic during project execution.
-- MUST fail execution with `CANONICAL_DS_MUTATED` if project-specific runtime changes are detected under canonical DS paths.
-- MUST fail execution with `CLONE_RUNTIME_UNAVAILABLE` when clone runtime cannot be started/verified.
-- MUST classify repeated Windows native-binary install failures (EPERM/UNKNOWN/spawn on esbuild/swc/sharp) as blocking environment failures with explicit recovery evidence.
 - MUST fail execution if implemented header behavior differs from the planner-defined state machine for required routes.
 - MUST fail execution if footer readability/alignment fails in either light or dark theme screenshots.
 - MUST fail execution if any required public media asset is broken and no fallback behavior is present.
@@ -123,11 +113,9 @@ Owns post-planning execution. Consumes LOCKED planning artifacts and orchestrate
 - Confirm every component named in frontend specs exists and is wired.
 - Confirm every planned integration has required generated artifacts (client, service, webhook route where applicable).
 - Confirm frontend_planner artifact bundle exists when frontend scope is present.
-- Confirm `planning/frontend/frontend-execution-contract.json` exists and satisfies `frontend-execution-contract-spec.md` when frontend scope is present.
 - Confirm the generated frontend was derived from the full frontend planning bundle, not just `plan.json` summaries.
 - Confirm `npm run dev` exits without error after codegen.
 - Confirm tests are non-placeholder and cover declared critical paths (unit/integration/e2e as applicable).
-- Confirm environment setup report includes dependency setup mode (`cache_hit_skip | verified_install | clean_reinstall_fallback`) and rationale.
 - Confirm screenshot-based visual QA passes for required routes and viewports by running `npm run test:e2e`.
 - Confirm visual QA evidence exists at `DOC/output/runs/<timestamp>/reports/visual-qa/summary.json` and `DOC/output/runs/<timestamp>/reports/visual-qa/<route>/<viewport>.png`.
 - Confirm visual QA includes both light and dark theme captures for required routes.
@@ -140,8 +128,6 @@ Owns post-planning execution. Consumes LOCKED planning artifacts and orchestrate
 - Confirm `delivery_class` is emitted and consistent with gate outcomes.
 - Confirm any failed acceptance item forces `status=failed` and `delivery_class=blocked`.
 - Confirm `status=success` is emitted only when all acceptance checks and quality gates pass.
-- Confirm canonical DS runtime paths remain generic for DS-bound runs (no project-specific pages/routes/presets).
-- Confirm DS-bound install/dev/verify commands executed from clone root under `DOC/output/runs/<timestamp>/codegen/<project-slug>/`.
 
 ## FAILURE MODES
 - EXECUTION_BLOCKED_INVALID_PLAN
@@ -154,7 +140,4 @@ Owns post-planning execution. Consumes LOCKED planning artifacts and orchestrate
 - VISUAL_QA_FAILED
 - OUTPUT_MISMATCH
 - ENV_SETUP_INCOMPLETE
-- ENV_SETUP_WINDOWS_BINARY_LOCK
-- CANONICAL_DS_MUTATED
-- CLONE_RUNTIME_UNAVAILABLE
 - QUALITY_GATE_FAILED

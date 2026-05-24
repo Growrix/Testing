@@ -249,9 +249,6 @@ function Navigation() {
         </div>
 
         <div className="hidden lg:flex items-center gap-3 shrink-0">
-          <a href="tel:1300729477" className="hidden 2xl:flex text-sm font-medium items-center gap-1.5">
-            <Phone size={14} /> 1300 729 477
-          </a>
           <a href="/contact" className="btn-primary" style={{ whiteSpace: 'nowrap' }}>Get a free quote <ArrowUpRight size={16} /></a>
         </div>
 

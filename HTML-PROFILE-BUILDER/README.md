@@ -31,6 +31,15 @@ Milestone 1 is a deterministic local builder that turns one normalized client br
 
 Successful builds now require readable theme-role contrast and bundled local asset resolution, not only structural HTML validity.
 
+The renderer is now layout-family aware instead of using one generic page skeleton for every business type.
+
+Current layout families:
+- `hospitality-cafe` for cafe and restaurant briefs
+- `agency-command` for agency briefs
+- `editorial-luxury` for photography and salon briefs
+- `retail-shelf` for retail briefs
+- `profile-core` fallback for other supported business types
+
 ## Runtime Model
 Milestone 1 does not call an external AI API.
 
@@ -44,6 +53,14 @@ node scripts/form-sync.js --input tests/fixtures/sample-cafe-raw.json --output b
 node scripts/build.js --brief briefs/ready/brew-and-bean.json
 code outputs/brew-and-bean/v1/copilot-handoff.md
 node scripts/approve-qa.js --result outputs/brew-and-bean/v1/build-result.json --by "QA Reviewer" --notes "Ready for delivery"
+```
+
+Additional sample layout-family proof:
+```bash
+node scripts/form-sync.js --input tests/fixtures/sample-photography-raw.json --output briefs/ready/northlight-studio.json
+node scripts/build.js --brief briefs/ready/northlight-studio.json --output-root outputs/live-run-check
+node scripts/validate-output.js --brief outputs/live-run-check/northlight-studio/v1/input-snapshot.json --html outputs/live-run-check/northlight-studio/v1/profile.html
+node scripts/approve-qa.js --result outputs/live-run-check/northlight-studio/v1/build-result.json --by "QA Reviewer" --notes "Photography editorial layout verified"
 ```
 
 ## VS Code Workflow

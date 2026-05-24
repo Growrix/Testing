@@ -8,7 +8,7 @@ tools:
   - edit
   - execute
   - todo
-user-invocable: false
+user-invocable: true
 ---
 
 # AGENT: ONGOING EXECUTION ORCHESTRATOR
@@ -29,56 +29,15 @@ A generic, reusable execution agent for active projects. This agent converts app
 - Avoid hardcoded values when configuration or content systems exist.
 - Treat failed validation as blocking until fixed.
 - Treat visual regressions (contrast, broken media, alignment drift) as blocking failures for UI work.
-- Treat runtime-root ambiguity as blocking until resolved (install/dev must run from actual app root such as `web/`).
-- Use cache-first deterministic dependency setup before reinstalling; run clean reinstall fallback only when verification or install fails.
-- Treat missing or summary-only frontend handoff as blocking when `planning/frontend/frontend-execution-contract.json` should exist.
-- Always apply deterministic dev-server preflight before startup attempts.
-- For DS-bound runs, treat canonical DS roots (for example `Frontend-Master_DS/`) as read-only and generic.
-- For DS-bound runs, implement project-specific pages/routes/presets only in run-scoped clones under `DOC/output/runs/<timestamp>/codegen/<project-slug>/`.
-- If clone runtime is unavailable, classify as blocker (`CLONE_RUNTIME_UNAVAILABLE`) instead of patching canonical DS.
-- If canonical DS receives project-specific runtime edits, classify as blocker (`CANONICAL_DS_MUTATED`).
-
-## FRONTEND KNOWLEDGE PARITY BASELINE
-This agent must apply the same frontend execution knowledge baseline as the frontend developer entrypoint for regular execution tasks and environment fixes.
-
-Required knowledge references:
-- DOC/core/system-rules.md
-- DOC/core/quality-gates.md
-- DOC/core/anti-hallucination-rules.md
-- DOC/knowledge/frontend-rules/frontend-rules.md
-- DOC/knowledge/frontend-rules/design-tokens-rules.md
-- DOC/knowledge/frontend-rules/component-state-matrix.md
-- DOC/knowledge/frontend-rules/motion-rules.md
-- DOC/knowledge/frontend-rules/content-rules.md
-- DOC/knowledge/frontend-rules/responsive-rules.md
-- DOC/knowledge/frontend-rules/accessibility-rules.md
-- DOC/knowledge/skills/*.md
-- DOC/knowledge/ux-patterns/*.md
-- DOC/validation/constraints/frontend-constraints.md
-- DOC/validation/constraints/accessibility-constraints.md
-- DOC/execution/post-build-environment-setup.md
-- DOC/execution/spec-templates/dev-server-checklist.template.md
-- DOC/execution/spec-templates/export-manifest.template.md
 
 ## REQUIRED EXECUTION FLOW
 1. Gather context: requirements, architecture notes, affected files.
-1.1 For frontend scope, read `planning/frontend/frontend-execution-contract.json` before implementation and treat it as the deterministic runtime handoff.
 2. Define the smallest hypothesis-driven change.
 3. Implement focused edits.
 4. Run narrow validation immediately.
 5. Update docs/specs if behavior or contracts changed.
-5.1 For frontend tasks, ensure `dev-server-checklist.md` and `export-manifest.md` exist in app root (for example `web/`) and reflect current setup.
 6. Run final quality gate checks.
 7. Commit locally with a clear, scoped message.
-
-## DEV SERVER SOP (MANDATORY)
-Before running dev server commands:
-1. Determine runtime app root and run commands there.
-2. Verify dependencies using cache-first policy (fingerprint + lockfile verification). Reinstall only on mismatch/failure.
-3. Verify env files (`ENV.example` and `.env.local` shape) are valid.
-4. Check/clear conflicting processes and port usage.
-5. If on Windows and native binary install fails (esbuild/swc/sharp): stop node processes, remove lockfile + node_modules, reinstall once, then classify blocker with exact error if still failing.
-6. For DS-bound runs, runtime app root MUST be the run-scoped clone root, not canonical DS root.
 
 ## QUALITY GATES
 Run applicable checks in this order:

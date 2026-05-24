@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
-import { DM_Sans, Jost } from "next/font/google";
+import {
+  lumoriaSnapshotBodyAttributesByRoute,
+  lumoriaSnapshotHeadInlineStyles,
+  lumoriaSnapshotHtmlAttributesByRoute,
+  lumoriaSnapshotStylesheetHrefs,
+} from "@/data/lumoria-snapshot-index";
+import { SnapshotRouteDocumentAttributes } from "@/components/site/snapshot-route-document-attributes";
+import { SnapshotRouteAnimationVisibility } from "@/components/site/snapshot-route-animation-visibility";
+import { SnapshotRouteCounterValues } from "@/components/site/snapshot-route-counter-values";
+import { SnapshotRouteAccessibilityFixes } from "@/components/site/snapshot-route-accessibility-fixes";
 import "./globals.css";
-
-const jost = Jost({
-  variable: "--font-jost",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
-
-const dmSans = DM_Sans({
-  variable: "--font-dm-sans",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
 
 export const metadata: Metadata = {
   title: "Lumoria | Architecture And Interior Studio",
@@ -25,12 +22,35 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const defaultHtmlLangCandidate =
+    lumoriaSnapshotHtmlAttributesByRoute["/"]?.lang
+    ?? lumoriaSnapshotHtmlAttributesByRoute["/about"]?.lang
+    ?? "en";
+  const defaultBodyClassNameCandidate =
+    lumoriaSnapshotBodyAttributesByRoute["/"]?.className
+    ?? "";
+  const defaultHtmlLang =
+    typeof defaultHtmlLangCandidate === "string" ? defaultHtmlLangCandidate : "en";
+  const defaultBodyClassName =
+    typeof defaultBodyClassNameCandidate === "string" ? defaultBodyClassNameCandidate : "";
+
   return (
-    <html
-      lang="en"
-      className={`${jost.variable} ${dmSans.variable} h-full antialiased`}
-    >
-      <body className="min-h-full">{children}</body>
+    <html lang={defaultHtmlLang}>
+      <head>
+        {lumoriaSnapshotStylesheetHrefs.map((href) => (
+          <link key={href} rel="stylesheet" href={href} />
+        ))}
+        {lumoriaSnapshotHeadInlineStyles.map((cssText, index) => (
+          <style key={`lumoria-inline-style-${index}`}>{cssText}</style>
+        ))}
+      </head>
+      <body className={defaultBodyClassName}>
+        <SnapshotRouteDocumentAttributes />
+        <SnapshotRouteAnimationVisibility />
+        <SnapshotRouteCounterValues />
+        <SnapshotRouteAccessibilityFixes />
+        {children}
+      </body>
     </html>
   );
 }

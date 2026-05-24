@@ -228,9 +228,6 @@ function MainNavigation() {
         </div>
 
         <div className="hidden lg:flex items-center gap-3 shrink-0">
-          <a href={`tel:${business.phoneHref}`} className="hidden 2xl:inline-flex text-sm font-medium items-center gap-1.5">
-            <Phone size={14} /> {business.phoneDisplay}
-          </a>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 rounded-full text-white text-sm font-medium whitespace-nowrap"

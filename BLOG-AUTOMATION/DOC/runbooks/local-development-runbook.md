@@ -20,3 +20,8 @@ Describe the expected local execution posture for milestone-1 build work.
 3. brief generation route returns a brief payload
 4. quality gate route returns a pass/fail envelope
 5. publish route resolves through the Sanity adapter contract
+
+## Required Request Headers For Protected Routes
+- `x-api-key`
+- `x-correlation-id`
+- `x-idempotency-key` for `POST` routes
